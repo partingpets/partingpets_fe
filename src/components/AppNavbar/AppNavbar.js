@@ -23,7 +23,7 @@ class AppNavbar extends React.Component {
     const buildNavbar = () => {
       if (isAuthed) {
         return (
-          <Nav className="ml-auto" navbar>
+          <Nav className="navBar ml-auto" navbar>
             <NavItem>
               <NavLink tag={RRNavLink} to="/home">
                 <i className="navIcon fas fa-globe fa-2x" />
