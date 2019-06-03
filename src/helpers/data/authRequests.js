@@ -33,6 +33,8 @@ const logoutUser = () => firebase.auth().signOut();
 
 const getCurrentUid = () => firebase.auth().currentUser.uid;
 
+const getCurrentUser = () => firebase.auth().currentUser;
+
 const getCurrentUserJwt = () => firebase
   .auth()
   .currentUser.getIdToken()
@@ -41,6 +43,7 @@ const getCurrentUserJwt = () => firebase
 export default {
   googleAuth,
   logoutUser,
+  getCurrentUser,
   getCurrentUid,
   getCurrentUserJwt,
 };
