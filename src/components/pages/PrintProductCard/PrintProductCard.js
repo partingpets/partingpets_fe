@@ -52,12 +52,12 @@ class PrintProductCard extends React.Component {
       return <span className="col-2"></span>;
     };
     return (
-      <div className="card2 col-3">
-        <h3 className="card-header">{product.name}</h3>
+      <div className="productCard card2 col-3">
+        <img className="productImage" src="http://intuitiveconsumer.com/blog/wp-content/uploads/2015/05/new-product.png" alt={product.name} />
+        <h3 className="product-card-header">{product.name}</h3>
         <div className="card-body" onClick={this.productClick}>
-          {/* <img className="productImage" src={product.imageUrl} alt={product.name} /> */}
           <h4 className="card-text">{product.description}</h4>
-          <h5 className="card-text">{product.unitPrice}</h5>
+          <h5 className="card-text">$ {product.unitPrice}</h5>
           <h6 className="card-text"><i className="fas fa-cart-plus"></i>
             {product.isOnSale}</h6>
         </div>
