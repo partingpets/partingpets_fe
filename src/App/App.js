@@ -8,6 +8,7 @@ import AppNavbar from '../components/AppNavbar/AppNavbar';
 import Auth from '../components/pages/Auth/Auth';
 import Home from '../components/pages/Home/Home';
 import Profile from '../components/pages/Profile/Profile';
+import Partners from '../components/pages/Partners/Partners';
 import authRequests from '../helpers/data/authRequests';
 import connection from '../helpers/data/connection';
 import './App.scss';
