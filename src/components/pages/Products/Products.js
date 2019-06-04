@@ -95,7 +95,9 @@ class Products extends React.Component {
           />
           <button className="addProductBtn" id="addProduct" onClick={this.newProductView}><i class="far fa-plus-square"></i>ADD PRODUCT</button>
         </div>
+        <div className = "productWindow">
         <div className="row justify-content-center">{printProduct}</div>
+        </div>
       </div>
     );
   }

@@ -1,0 +1,48 @@
+.products {
+    margin-top: 10%;
+    font-family: 'Rubik', sans-serif;
+}
+
+.productSearch {
+    width: 50%;
+    margin-left: 20%;
+    border-radius: 12px;
+  }
+  
+  #addProduct {
+  margin-top: 0px !important;
+  margin-left: 10px;
+  }
+  
+  .productWrap {
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    padding: 3%;
+  }
+  
+  .react-search-field-input { 
+    border-radius: 5px;
+  }
+  
+  .react-search-field-button { 
+    border-radius: 5px;
+    background-color: white !important;
+    margin-left: 5px;
+  }
+  
+  .react-search-field {
+   border-radius: 15px;
+   border: none !important;
+  }
+  
+  .fa-plus-square {
+    padding-right: 5px;
+  }
+  
+  .addProductBtn {
+    border-radius: 5px;
+    background-color: rgb(21, 21, 58);
+    color: white;
+  }
+
