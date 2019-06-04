@@ -13,6 +13,7 @@ import {
   DropdownMenu,
   DropdownItem,
 } from 'reactstrap';
+import authRequests from '../../helpers/data/authRequests';
 import './AppNavbar.scss';
 
 import pets from './images/pets_small.png';
@@ -30,6 +31,7 @@ class AppNavbar extends React.Component {
 
   render() {
     const { isAuthed, logoutClickEvent } = this.props;
+    const profileImgUrl = () => authRequests.getCurrentUser().photoURL;
     const buildNavbar = () => {
       if (isAuthed) {
         return (
@@ -54,11 +56,7 @@ class AppNavbar extends React.Component {
               </NavLink> */}
             <UncontrolledDropdown nav inNavbar>
               <DropdownToggle nav caret>
-                <img
-                  className="navIcon profIcon"
-                  src="https://lh6.googleusercontent.com/-GS2eyqC1_Vs/AAAAAAAAAAI/AAAAAAAAAJ8/-TC5Zl53Obs/photo.jpg"
-                  alt="ProfilePic"
-                />
+                <img className="navIcon profIcon" src={profileImgUrl()} alt="ProfilePic" />
                 {/* <i className="navIcon fas fa-paw fa-2x" /> */}
                 {/* Profile */}
               </DropdownToggle>

@@ -3,14 +3,15 @@ import 'firebase/auth';
 import axios from 'axios';
 
 axios.interceptors.request.use(
-  (request) => {
-    const token = sessionStorage.getItem('token');
-
-    if (token != null) {
-      request.headers.Authorization = `Bearer ${token}`;
-    }
-    return request;
-  },
+  request => getCurrentUserJwt()
+    .then(() => {
+      const token = sessionStorage.getItem('token');
+      if (token != null) {
+        request.headers.Authorization = `Bearer ${token}`;
+      }
+      return request;
+    })
+    .catch(error => console.error(error)),
   err => Promise.reject(err),
 );
 

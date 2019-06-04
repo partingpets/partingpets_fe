@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle, Button, CardHeader,
+  Card, CardImg, CardText, CardBody, Button, CardHeader,
 } from 'reactstrap';
 import userRequests from '../../../helpers/data/userRequests';
 import authRequests from '../../../helpers/data/authRequests';
@@ -31,40 +31,40 @@ class Profile extends React.Component {
             <div className="col-sm-4">
               <Card>
                 {/* <CardImg className="profileCardImg" top width="100%" src={fbUserObject.photoURL} alt="Card image cap" /> */}
-                <CardHeader>{`${userObject.firstName} ${userObject.lastName}`}</CardHeader>
+                <CardHeader>
+                  {`${userObject.firstName} ${userObject.lastName}`}
+                  <img className="profileCardImg" src={fbUserObject.photoURL} alt="profile" />
+                </CardHeader>
                 <CardBody>
                   {/* <CardSubtitle>Address:</CardSubtitle> */}
+                  <CardText>{userObject.street}</CardText>
                   <CardText>
-                    <p>{userObject.street}</p>
-                    <p>
-                      {userObject.city} {userObject.state}, {userObject.zipcode}
-                    </p>
+                    {userObject.city} {userObject.state}, {userObject.zipcode}
                   </CardText>
                   <Button>Edit</Button>
                 </CardBody>
               </Card>
             </div>
             <div className="col-sm-8">
+              {/* Move the below into a Pet Component and display it here */}
               <Card>
                 {/* <CardImg className="profileCardImg" top width="100%" src={fbUserObject.photoURL} alt="Card image cap" /> */}
-                <CardHeader>{`${userObject.firstName} ${userObject.lastName}`}</CardHeader>
+                <CardHeader>Fluffy</CardHeader>
                 <div className="col-sm-2">
                   <CardImg
-                    className="profileCardImg"
+                    className="petCardImg"
                     top
                     width="100%"
-                    src={fbUserObject.photoURL}
+                    src="https://i.pinimg.com/736x/b1/d8/fc/b1d8fc33b1f9776195ad201a863bae0f.jpg"
                     alt="Card image cap"
                   />
                 </div>
                 <div className="col-sm-10">
                   <CardBody>
                     {/* <CardSubtitle>Address:</CardSubtitle> */}
+                    <CardText>{userObject.street}</CardText>
                     <CardText>
-                      <p>{userObject.street}</p>
-                      <p>
-                        {userObject.city} {userObject.state}, {userObject.zipcode}
-                      </p>
+                      {userObject.city} {userObject.state}, {userObject.zipcode}
                     </CardText>
                     <Button>Edit</Button>
                   </CardBody>
