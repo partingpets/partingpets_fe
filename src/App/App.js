@@ -86,6 +86,7 @@ class App extends React.Component {
                   <PrivateRoute path="/profile" component={Profile} authed={authed} />
                   <PrivateRoute path="/" component={Home} authed={authed} />
                   <PrivateRoute path="/home" component={Home} authed={authed} />
+                  <PrivateRoute path="/partners" component={Partners} authed={authed} />
                 </Switch>
               </div>
             </div>
