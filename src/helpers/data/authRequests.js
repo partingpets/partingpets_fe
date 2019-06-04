@@ -3,14 +3,15 @@ import 'firebase/auth';
 import axios from 'axios';
 
 axios.interceptors.request.use(
-  (request) => {
-    const token = sessionStorage.getItem('token');
-
-    if (token != null) {
-      request.headers.Authorization = `Bearer ${token}`;
-    }
-    return request;
-  },
+  request => getCurrentUserJwt()
+    .then(() => {
+      const token = sessionStorage.getItem('token');
+      if (token != null) {
+        request.headers.Authorization = `Bearer ${token}`;
+      }
+      return request;
+    })
+    .catch(error => console.error(error)),
   err => Promise.reject(err),
 );
 
@@ -33,6 +34,8 @@ const logoutUser = () => firebase.auth().signOut();
 
 const getCurrentUid = () => firebase.auth().currentUser.uid;
 
+const getCurrentUser = () => firebase.auth().currentUser;
+
 const getCurrentUserJwt = () => firebase
   .auth()
   .currentUser.getIdToken()
@@ -41,6 +44,7 @@ const getCurrentUserJwt = () => firebase
 export default {
   googleAuth,
   logoutUser,
+  getCurrentUser,
   getCurrentUid,
   getCurrentUserJwt,
 };
