@@ -7,6 +7,7 @@ import {
 import AppNavbar from '../components/AppNavbar/AppNavbar';
 import Auth from '../components/pages/Auth/Auth';
 import Home from '../components/pages/Home/Home';
+import Profile from '../components/pages/Profile/Profile';
 import authRequests from '../helpers/data/authRequests';
 import connection from '../helpers/data/connection';
 import './App.scss';
@@ -82,8 +83,9 @@ class App extends React.Component {
               <div className="justify-content-center">
                 <Switch>
                   <PublicRoute path="/auth" component={Auth} authed={authed} />
+                  <PrivateRoute path="/profile" component={Profile} authed={authed} />
                   <PrivateRoute path="/" component={Home} authed={authed} />
-                  {/* <PrivateRoute path="/home" component={Home} authed={authed} /> */}
+                  <PrivateRoute path="/home" component={Home} authed={authed} />
                 </Switch>
               </div>
             </div>

@@ -1,8 +1,19 @@
 import React from 'react';
 import { NavLink as RRNavLink } from 'react-router-dom';
 import {
-  Collapse, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink,
+  Collapse,
+  Nav,
+  Navbar,
+  NavbarBrand,
+  NavbarToggler,
+  NavItem,
+  NavLink,
+  UncontrolledDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
 } from 'reactstrap';
+import authRequests from '../../helpers/data/authRequests';
 import './AppNavbar.scss';
 
 import pets from './images/pets_small.png';
@@ -20,6 +31,7 @@ class AppNavbar extends React.Component {
 
   render() {
     const { isAuthed, logoutClickEvent } = this.props;
+    const profileImgUrl = () => authRequests.getCurrentUser().photoURL;
     const buildNavbar = () => {
       if (isAuthed) {
         return (
@@ -35,16 +47,37 @@ class AppNavbar extends React.Component {
               <NavLink tag={RRNavLink} to="/store">
                 <i className="navIcon fas fa-paw fa-2x" />
                 Store
-                {/* <i className="fas fa-users fa-2x" /> */}
               </NavLink>
             </NavItem>
-            <NavItem>
-              <NavLink tag={RRNavLink} onClick={logoutClickEvent} to="/home">
+            {/* <NavItem> */}
+            {/* <NavLink tag={RRNavLink} onClick={logoutClickEvent} to="/home">
                 <i className="navIcon fas fa-sign-out-alt fa-2x" />
                 Logout
-                {/* <i className="fas fa-users fa-2x" /> */}
-              </NavLink>
-            </NavItem>
+              </NavLink> */}
+            <UncontrolledDropdown nav inNavbar>
+              <DropdownToggle nav caret>
+                <img className="navIcon profIcon" src={profileImgUrl()} alt="ProfilePic" />
+                {/* <i className="navIcon fas fa-paw fa-2x" /> */}
+                {/* Profile */}
+              </DropdownToggle>
+              <DropdownMenu right className="bg-dark">
+                <DropdownItem tag={RRNavLink} className="profBtn nav-link" to="/profile">
+                  <i className="navIcon fas fa-user fa-2x" />
+                  Profile
+                </DropdownItem>
+                <DropdownItem className="profBtn nav-link" to="/orders">
+                  <i className="navIcon fas fa-file-invoice-dollar fa-2x" />
+                  Orders
+                </DropdownItem>
+                <DropdownItem divider />
+                <DropdownItem className="profBtn nav-link" onClick={logoutClickEvent} to="/home">
+                  <i className="navIcon fas fa-sign-out-alt fa-2x" />
+                  Logout
+                </DropdownItem>
+                {/* <DropdownItem>Logout</DropdownItem> */}
+              </DropdownMenu>
+            </UncontrolledDropdown>
+            {/* </NavItem> */}
           </Nav>
         );
       }
@@ -55,8 +88,7 @@ class AppNavbar extends React.Component {
       <div className="AppNavbar">
         <Navbar color="dark" dark expand="md" fixed={'top'}>
           <NavbarBrand tag={RRNavLink} to="/home">
-
-          <img src={pets} classname = "petsNavLogo" alt="pets_logo" />
+            <img src={pets} className="petsNavLogo" alt="pets_logo" />
           </NavbarBrand>
           <NavbarToggler onClick={e => this.toggle(e)} className="navbar-dark" />
           <Collapse isOpen={this.state.isOpen} navbar>
