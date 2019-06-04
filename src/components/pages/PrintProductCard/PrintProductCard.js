@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import clueShape from '../../helpers/propz/productShape';
-import authRequests from '../../helpers/data/authRequests';
+import productShape from '../../../helpers/productProps/productShape';
+import authRequests from '../../../helpers/data/authRequests';
 
 import './PrintProductCard.scss';
 
@@ -55,11 +55,11 @@ class PrintProductCard extends React.Component {
       <div className="card2 col-3">
         <h3 className="card-header">{product.name}</h3>
         <div className="card-body" onClick={this.productClick}>
-          <img className="productImage" src={product.imageUrl} alt={product.name} />
-          <h4 className="card-text">{product.location}</h4>
-          <h5 className="card-text">{product.style}</h5>
+          {/* <img className="productImage" src={product.imageUrl} alt={product.name} /> */}
+          <h4 className="card-text">{product.description}</h4>
+          <h5 className="card-text">{product.unitPrice}</h5>
           <h6 className="card-text"><i className="fas fa-comment-alt"></i>
-            {product.notes}</h6>
+            {product.isOnSale}</h6>
         </div>
         {makeButtons()}
       </div>

@@ -30,7 +30,7 @@ class Products extends React.Component {
   }
 
   deleteSingleProduct = (productId) => {
-    productsData.deleteProduct(productId)
+    productRequests.deleteProduct(productId)
       .then(() => {
         this.getproducts();
       });
