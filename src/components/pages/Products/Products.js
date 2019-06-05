@@ -68,9 +68,25 @@ class Products extends React.Component {
     }
   }
 
+  // Add Product Modal Function //
+  showModal = (e) => {
+    this.setState({
+      hidden: !this.state.hidden,
+      showModal: true,
+    });
+  };
+
+  modalCloseEvent = () => {
+    this.setState({
+      hidden: !this.state.hidden,
+      passProductToEdit: {},
+      showModal: false,
+    });
+};
+
   render() {
     const {
-      filteredProducts,
+      products, isEditing, passProductToEdit,filteredProducts,
     } = this.state;
 
     const printProduct = filteredProducts.map(product => (
@@ -82,6 +98,14 @@ class Products extends React.Component {
         onSelect={this.onSelect}
       />
     ));
+
+    const editFormProps = {
+      passProductToEdit,
+    };
+
+    if (!isEditing) {
+      editFormProps.disabled = true;
+}
 
     return (
       <div className='products mx-auto animated bounceInLeft w-100'>
