@@ -85,7 +85,6 @@ class Products extends React.Component {
 
     return (
       <div className='products mx-auto animated bounceInLeft w-100'>
-        <h2>SEARCH FOR A PRODUCT</h2>
         <div className='productWrap'>
           <SearchField
             placeholder="Search Products By Name or Category"

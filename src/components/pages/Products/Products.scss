@@ -1,13 +1,15 @@
+
+
 .products {
-    margin-top: 10%;
+    margin-top: 8%;
     font-family: 'Rubik', sans-serif;
     text-align: center;
 }
 
 .productSearch {
-    width: 50%;
-    margin-left: 20%;
-    border-radius: 12px;
+    width: 40%;
+    margin-left: 70%;
+    border-radius: 10px;
   }
   
   #addProduct {
@@ -19,7 +21,7 @@
     display: flex;
     flex-flow: row;
     align-items: center;
-    padding: 3%;
+    padding: 1%;
   }
   
   .react-search-field-input { 
@@ -45,5 +47,10 @@
     border-radius: 5px;
     background-color: rgb(21, 21, 58);
     color: white;
+    width: 4%;
+    height: 6%;
+    font-size: 7pt;
+    padding: 4px;
+    text-align: center;
   }
 
