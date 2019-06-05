@@ -8,7 +8,7 @@ class Partners extends React.Component {
     }
 
     getPartners = () => {
-        partnerRequests.getPartners()
+        partnerRequests.getAllPartners()
             .then((partners) => {
                 this.setState({ partners });
                 console.log(partners.data);
@@ -35,7 +35,7 @@ class Partners extends React.Component {
                 <h1>Partners</h1>
                 <ul>{partnersComponents}</ul>
             </div>
-        )
+        );
     }
 }
 

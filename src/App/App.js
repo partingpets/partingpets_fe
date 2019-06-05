@@ -84,10 +84,10 @@ class App extends React.Component {
               <div className="justify-content-center">
                 <Switch>
                   <PublicRoute path="/auth" component={Auth} authed={authed} />
+                  <PrivateRoute path="/partners" component={Partners} authed={authed} />
                   <PrivateRoute path="/profile" component={Profile} authed={authed} />
                   <PrivateRoute path="/" component={Home} authed={authed} />
                   <PrivateRoute path="/home" component={Home} authed={authed} />
-                  <PrivateRoute path="/partners" component={Partners} authed={authed} />
                 </Switch>
               </div>
             </div>
