@@ -6,10 +6,15 @@ import PrintProductCard from '../PrintProductCard/PrintProductCard';
 import productRequests from '../../../helpers/data/productRequests';
 
 import './Products.scss';
+import AddProductModal from '../../AddProductModal/AddProductModal';
 
 class Products extends React.Component {
   state = {
     products: [],
+    showModal: false,
+    isEditing: false,
+    productEditId: '-1',
+    passProductToEdit: {},
     filteredProducts: [],
   }
 
@@ -46,7 +51,7 @@ class Products extends React.Component {
   }
 
   passProductToEdit = (productId) => {
-    this.setState({ editId: productId });
+    this.setState({ productEditId: productId });
     this.props.history.push(`/products/${productId}/edit`);
   }
 
@@ -59,14 +64,39 @@ class Products extends React.Component {
     } else {
       products.forEach((product) => {
         if (product.name.toLowerCase().includes(value.toLowerCase())
-          || product.style.toLowerCase().includes(value.toLowerCase())
-          || product.location.toLowerCase().includes(value.toLowerCase())) {
+          || product.productCategory.toLowerCase().includes(value.toLowerCase())
+          || product.description.toLowerCase().includes(value.toLowerCase())) {
           filteredProducts.push(product);
         }
         this.setState({ filteredProducts });
       });
     }
   }
+
+  formSubmitEvent = (newProduct) => {
+    const { isEditing, productEditId } = this.state;
+    if (isEditing) {
+      productRequests
+        .editProduct(productEditId, newProduct)
+        .then(() => {
+            this.getProducts();
+            this.setState({
+              showModal: false,
+              isEditing: false,
+              productEditId: '-1',
+            });
+        })
+        .catch(error => console.error('There Was An Error Editing Your Parting Pets Product.', error));
+    } else {
+      productRequests
+        .newProduct(newProduct)
+        .then((res) => {
+          this.getProducts();
+          this.setState({ showModal: false });
+        })
+        .catch(error => console.error('There Was An Error Creating Your Parting Pets Product.', error));
+    }
+};
 
   // Add Product Modal Function //
   showModal = (e) => {
@@ -116,8 +146,17 @@ class Products extends React.Component {
             searchText=""
             classNames="productSearch"
           />
-          <button className="addProductBtn" id="addProduct" onClick={this.newProductView}><i class="far fa-plus-square"></i>ADD PRODUCT</button>
+          <button className="addProductBtn" id="addProduct" onClick={this.showModal}><i class="far fa-plus-square"></i>ADD PRODUCT</button>
         </div>
+
+        <AddProductModal
+        showModal={this.state.showModal}
+        onSubmit={this.formSubmitEvent}
+        isEditing={isEditing}
+        {...editFormProps}
+        modalCloseEvent={this.modalCloseEvent}
+        />
+
         <div className = "productWindow">
         <div className="row justify-content-center">{printProduct}</div>
         </div>
