@@ -4,6 +4,7 @@ import {
 } from 'reactstrap';
 import userRequests from '../../../helpers/data/userRequests';
 import authRequests from '../../../helpers/data/authRequests';
+import petRequests from '../../../helpers/data/petRequests';
 import Pets from '../Pets/Pets';
 import './Profile.scss';
 
@@ -11,6 +12,7 @@ class Profile extends React.Component {
   state = {
     userObject: {},
     fbUserObject: {},
+    usersPets: [],
   };
 
   componentDidMount() {
@@ -21,10 +23,26 @@ class Profile extends React.Component {
         fbUserObject: fbUser.providerData[0],
       });
     });
+
+    userRequests.getUserByFbId(fbUser.uid).then((currentUser) => {
+      petRequests.getPetsByUserId(currentUser.id).then((partedPets) => {
+        this.setState({
+          usersPets: partedPets,
+        });
+      });
+    });
   }
 
   render() {
-    const { userObject, fbUserObject } = this.state;
+    const { userObject, fbUserObject, usersPets } = this.state;
+    const singlePetCard = (usersPet => (
+      <Pets
+        key={usersPet.id}
+        Pet={usersPet}
+        />
+    ));
+
+    const pets = usersPets.map(singlePetCard);
 
     return (
       <div className="Profile">
@@ -48,9 +66,7 @@ class Profile extends React.Component {
               </Card>
             </div>
             <div className="col-sm-8">
-              <Pets
-                userObject={userObject}
-                 />
+              {pets}
             </div>
           </div>
         </div>

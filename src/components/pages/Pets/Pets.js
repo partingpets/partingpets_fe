@@ -7,13 +7,12 @@ import './Pets.scss';
 class Pets extends React.Component {
 
   render(){
-    const { userObject } = this.props;
-    console.log(userObject)
+    const { Pet } = this.props;
 
     return(
       <Card>
       {/* <CardImg className="profileCardImg" top width="100%" src={fbUserObject.photoURL} alt="Card image cap" /> */}
-      <CardHeader>Fluffy</CardHeader>
+      <CardHeader>{Pet.name}</CardHeader>
       <div className="col-sm-2">
         <CardImg
           className="petCardImg"
@@ -25,10 +24,15 @@ class Pets extends React.Component {
       </div>
       <div className="col-sm-10">
         <CardBody>
-          {/* <CardSubtitle>Address:</CardSubtitle> */}
-          <CardText>{userObject.street}</CardText>
+          <CardText>{Pet.breed}</CardText>
           <CardText>
-          {userObject.city} {userObject.state}, {userObject.zipcode}
+            Born:  {Pet.dateOfBirth}<br />
+            Died:  {Pet.dateOfDeath}
+          </CardText>
+          <CardText>
+            Final Resting Place: <br />
+            {Pet.burialStreet}, Plot {Pet.burialPlot} <br />
+            {Pet.burialCity}, {Pet.burialState} {Pet.burialZipCode}
           </CardText>
           <Button>Edit</Button>
         </CardBody>
