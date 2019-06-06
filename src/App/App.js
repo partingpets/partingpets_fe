@@ -10,6 +10,7 @@ import Home from '../components/pages/Home/Home';
 import Profile from '../components/pages/Profile/Profile';
 import Partners from '../components/pages/Partners/Partners';
 import authRequests from '../helpers/data/authRequests';
+import userRequests from '../helpers/data/userRequests';
 import connection from '../helpers/data/connection';
 import './App.scss';
 
@@ -37,6 +38,7 @@ class App extends React.Component {
   state = {
     authed: false,
     pendingUser: true,
+    userObject: {},
   };
 
   componentDidMount() {
@@ -49,6 +51,12 @@ class App extends React.Component {
           pendingUser: false,
         });
         authRequests.getCurrentUserJwt();
+        const user = authRequests.getCurrentUser();
+        userRequests.getUserByFbId(user.uid).then((currentUser) => {
+          this.setState({
+            userObject: currentUser,
+          });
+        });
       } else {
         this.setState({
           authed: false,
@@ -63,7 +71,7 @@ class App extends React.Component {
   }
 
   render() {
-    const { authed, pendingUser } = this.state;
+    const { authed, pendingUser, userObject } = this.state;
     const logoutClickEvent = () => {
       authRequests.logoutUser();
       this.setState({
@@ -79,12 +87,12 @@ class App extends React.Component {
       <div className="App">
         <BrowserRouter>
           <React.Fragment>
-            <AppNavbar isAuthed={authed} logoutClickEvent={logoutClickEvent} />
+            <AppNavbar isAuthed={authed} logoutClickEvent={logoutClickEvent} userObject={userObject} />
             <div className="app-content container-fluid">
               <div className="justify-content-center">
                 <Switch>
                   <PublicRoute path="/auth" component={Auth} authed={authed} />
-                  <PrivateRoute path="/profile" component={Profile} authed={authed} />
+                  <PrivateRoute path="/profile" component={Profile} userObject={userObject} authed={authed} />
                   <PrivateRoute path="/partners" component={Partners} authed={authed} />
                   <PrivateRoute path="/" component={Home} authed={authed} />
                   <PrivateRoute path="/home" component={Home} authed={authed} />

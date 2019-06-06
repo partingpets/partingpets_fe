@@ -8,22 +8,21 @@ import './Profile.scss';
 
 class Profile extends React.Component {
   state = {
-    userObject: {},
     fbUserObject: {},
   };
 
   componentDidMount() {
     const fbUser = authRequests.getCurrentUser();
-    userRequests.getUserByFbId(fbUser.uid).then((currentUser) => {
+    userRequests.getUserByFbId(fbUser.uid).then(() => {
       this.setState({
-        userObject: currentUser,
         fbUserObject: fbUser.providerData[0],
       });
     });
   }
 
   render() {
-    const { userObject, fbUserObject } = this.state;
+    const { fbUserObject } = this.state;
+    const { userObject } = this.props;
     return (
       <div className="Profile">
         <div className="container">
