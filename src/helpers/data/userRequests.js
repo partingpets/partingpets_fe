@@ -9,7 +9,9 @@ const getUserByFbId = uid => new Promise((resolve, reject) => {
     .then((result) => {
       resolve(result.data);
     })
-    .catch(error => reject(error));
+    .catch((error) => {
+      reject(error);
+    });
 });
 
 export default {
