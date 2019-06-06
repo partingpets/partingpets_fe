@@ -18,6 +18,8 @@ import authRequests from '../../helpers/data/authRequests';
 import productRequests from '../../helpers/data/productRequests';
 import './AddProductModal.scss';
 
+import pets from '../../components/AppNavbar/images/pets_small.png';
+
 const defaultProduct = {
     name: '',
     price: '',
@@ -35,7 +37,6 @@ class AddProductModal extends React.Component {
         newProduct: defaultProduct,
         descriptionMaxLength: 125,
         descriptionCharCount: 125,
-        isLoading: false,
     };
 
     static propTypes = {
@@ -155,7 +156,8 @@ class AddProductModal extends React.Component {
                     size="lg"
                 >
                     <ModalHeader toggle={e => this.toggle(e)}>
-                        {this.props.isEditing ? 'Edit Product' : 'Add New Product'}
+                    <img src={pets} className="petsModalLogo" alt="pets_logo" />
+                        {this.props.isEditing ? 'EDIT YOUR PARTING PETS PRODUCT' : 'ADD NEW PARTING PETS PRODUCT'}
                     </ModalHeader>
                     <ModalBody>
                         <Form>
@@ -165,7 +167,7 @@ class AddProductModal extends React.Component {
                                         <Label for="title">Product Name</Label>
                                         <Input
                                             className="form-input"
-                                            type="select"
+                                            type="text"
                                             name="name"
                                             id="name"
                                             placeholder="Enter The Name Of Your Product"
@@ -177,7 +179,7 @@ class AddProductModal extends React.Component {
                                 </Col>
                                 <Col md={6}>
                                     <FormGroup>
-                                        <Label for="price">What Is The Price Of Your Product</Label>
+                                        <Label for="price">Product Price</Label>
                                         <Input
                                             className="form-input"
                                             type="number"
@@ -193,10 +195,10 @@ class AddProductModal extends React.Component {
                             <Row form>
                                 <Col md={6}>
                                     <FormGroup>
-                                        <Label for="productCategory">Category</Label>
+                                        <Label for="productCategory">Product Category</Label>
                                         <Input
                                             className="form-input"
-                                            type="text"
+                                            type="select"
                                             name="productCategory"
                                             id="productCategory"
                                             placeholder="Pick A Category"
@@ -207,7 +209,7 @@ class AddProductModal extends React.Component {
                                 </Col>
                                 <Col md={6}>
                                     <FormGroup>
-                                        <Label for="onSale">Is This Product On Sale?</Label>
+                                        <Label for="onSale">On Sale?</Label>
                                         <Input
                                             className="form-input"
                                             type="onSale"
