@@ -33,6 +33,11 @@ class Profile extends React.Component {
     });
   }
 
+  addPetEvent = (e) => {
+    e.preventDefault();
+    // stuff goes here, probably
+  }
+
   render() {
     const { userObject, fbUserObject, usersPets } = this.state;
     const singlePetCard = (usersPet => (
@@ -62,6 +67,7 @@ class Profile extends React.Component {
                     {userObject.city} {userObject.state}, {userObject.zipcode}
                   </CardText>
                   <Button>Edit</Button>
+                  <Button className="btn addPetButton" onClick={this.addPetEvent}>Add Pet</Button>
                 </CardBody>
               </Card>
             </div>
