@@ -1,16 +1,20 @@
 import React from 'react';
 import RegisterForm from '../../RegisterForm/RegisterForm';
 import userRequests from '../../../helpers/data/userRequests';
-import './Home.scss';
 import authRequests from '../../../helpers/data/authRequests';
+import './Home.scss';
 
 class Home extends React.Component {
   state = {
     showModal: false,
+    firebaseId: -1,
   };
 
   componentWillMount() {
     const currentUid = authRequests.getCurrentUid();
+    this.setState({
+      firebaseId: currentUid,
+    });
     userRequests
       .getUserByFbId(currentUid)
       .then()
@@ -37,12 +41,14 @@ class Home extends React.Component {
   };
 
   render() {
+    const { firebaseId } = this.state;
     return (
       <div>
         <RegisterForm
           showModal={this.state.showModal}
           onSubmit={this.formSubmitEvent}
           modalCloseEvent={this.modalCloseEvent}
+          fireBaseId={firebaseId}
         />
       </div>
     );

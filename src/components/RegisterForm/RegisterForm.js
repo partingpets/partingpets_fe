@@ -33,12 +33,12 @@ const defaultUser = {
 class RegisterForm extends React.Component {
   state = {
     modal: false,
+    firebaseId: -1,
     newUser: defaultUser,
     backdrop: 'static',
     isLoading: false,
     suggestResults: [],
     suggestedArray: [],
-    dropdownOpen: false,
     usStates: [],
   };
 
@@ -59,6 +59,7 @@ class RegisterForm extends React.Component {
   componentWillReceiveProps(props) {
     this.setState({
       modal: props.showModal,
+      firebaseId: props.firebaseId,
     });
   }
 
@@ -115,7 +116,7 @@ class RegisterForm extends React.Component {
       .getForwardGeocode(formFill.formattedAddress)
       .then((res) => {
         tempUser.street1 = formFill.addressLine;
-        // tempUser.street2 = formFill.addressLine2;
+        tempUser.street2 = formFill.addressLine2;
         tempUser.city = formFill.locality;
         tempUser.state = formFill.adminDistrict;
         tempUser.zipcode = formFill.postalCode;
