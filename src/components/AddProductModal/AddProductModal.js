@@ -23,9 +23,10 @@ import pets from '../../components/AppNavbar/images/pets_small.png';
 const defaultProduct = {
     name: '',
     price: '',
-    productCategory: '',
+    productCategory: 'Product',
     imgUrl: '',
-    isOnSale: '',
+    categoryId: 0,
+    isOnSale: 'False',
     description: '',
     uid: '',
 };
@@ -35,8 +36,10 @@ class AddProductModal extends React.Component {
         modal: false,
         backdrop: 'static',
         newProduct: defaultProduct,
-        descriptionMaxLength: 125,
-        descriptionCharCount: 125,
+        productCategories: [],
+        productCategoryName: '',
+        descriptionMaxLength: 250,
+        descriptionCharCount: 250,
     };
 
     static propTypes = {
@@ -69,6 +72,14 @@ class AddProductModal extends React.Component {
     }
 
     componentDidMount() {
+        productRequests.getAllProductCategories().then((result) => {
+            this.setState({
+                productCategories: result,
+            });
+        })
+            .catch((err) => {
+                console.error('error with getting Product categories', err)
+            });
     }
 
     componentWillReceiveProps(props) {
@@ -99,28 +110,28 @@ class AddProductModal extends React.Component {
         });
     };
 
-    formfieldTitleState = (name, url, event) => {
+    formFieldCategoryChange = (name, name2, event) => {
         const tempProduct = { ...this.state.newProduct };
-        tempProduct.title = event.target.value;
-        tempProduct.imgUrl = url;
+        name2= event.target.value;
+        tempProduct[name] = event.target.selectedOptions[0].dataset.id;
         this.setState({
             newProduct: tempProduct,
+            productCategoryName: name2,
+
         });
+        
     };
 
+    nameChange = event => this.formFieldStringState('name', event);
 
-    nameChange = (event) => {
-        const { titles } = this.state;
-        const url = titles[event.target.selectedIndex].imgUrl;
-        this.formfieldNameState('name', url, event);
-    };
-
-    priceChange = event => this.formFieldNumberState('price', event);
-
-    productCategoryChange = event => this.formFieldStringState('productCategory', event);
+    priceChange = event => this.formFieldStringState('price', event);
 
     onSaleChange = event => this.formFieldStringState('onSale', event);
 
+    productCategoryChange = event => {
+        this.formFieldCategoryChange('categoryId', 'categoryName', event);
+    };
+    
     descriptionChange = (event) => {
         this.formFieldStringState('description', event);
         this.setState({
@@ -133,7 +144,7 @@ class AddProductModal extends React.Component {
         event.preventDefault();
         const { onSubmit } = this.props;
         const myNewProduct = { ...this.state.newProduct };
-        myNewProduct.uid = authRequests.getCurrentUid();
+        myNewProduct.uid = productRequests.getCurrentUid();
         onSubmit(myNewProduct);
         this.setState({
             newProduct: defaultProduct,
@@ -142,7 +153,7 @@ class AddProductModal extends React.Component {
 
     render() {
         const {
-            descriptionCharCount, descriptionMaxLength, newProduct,
+            descriptionCharCount, descriptionMaxLength, newProduct, productCategories, productCategoryName,
         } = this.state;
         return (
             <div className="AddProductModal">
@@ -156,15 +167,15 @@ class AddProductModal extends React.Component {
                     size="lg"
                 >
                     <ModalHeader toggle={e => this.toggle(e)}>
-                    <img src={pets} className="petsModalLogo" alt="pets_logo" />
+                        <img src={pets} className="petsModalLogo" alt="pets_logo" />
                         {this.props.isEditing ? 'EDIT YOUR PARTING PETS PRODUCT' : 'ADD NEW PARTING PETS PRODUCT'}
                     </ModalHeader>
                     <ModalBody>
                         <Form>
                             <Row form>
-                                <Col md={6}>
+                                <Col md={12}>
                                     <FormGroup>
-                                        <Label for="title">Product Name</Label>
+                                        <Label for="name">Product Name</Label>
                                         <Input
                                             className="form-input"
                                             type="text"
@@ -177,23 +188,25 @@ class AddProductModal extends React.Component {
                                         </Input>
                                     </FormGroup>
                                 </Col>
-                                <Col md={6}>
+                            </Row>
+                            <Row form>
+                                <Col md={5}>
                                     <FormGroup>
                                         <Label for="price">Product Price</Label>
                                         <Input
                                             className="form-input"
-                                            type="number"
-                                            name="number"
+                                            type="text"
+                                            name="price"
                                             id="price"
                                             placeholder="$29.99"
+                                            pattern="^\d+(\.|\,)\d{2}$"
                                             onChange={this.priceChange}
                                             value={newProduct.price}
                                         />
                                     </FormGroup>
                                 </Col>
-                            </Row>
-                            <Row form>
-                                <Col md={6}>
+
+                                <Col md={5}>
                                     <FormGroup>
                                         <Label for="productCategory">Product Category</Label>
                                         <Input
@@ -203,32 +216,43 @@ class AddProductModal extends React.Component {
                                             id="productCategory"
                                             placeholder="Pick A Category"
                                             onChange={this.productCategoryChange}
-                                            value={newProduct.productCategory}
-                                        />
+                                            value={newProduct.productCategoryName}
+                                        >
+                                            {productCategories.map((cat, i) => (
+                                                <option key={i} data-id={cat.id}>{cat.name}</option>
+                                            ))}
+                                            {/* <option key="1">Product</option>
+                                            <option key="2">Service</option> */}
+                                        </Input>
                                     </FormGroup>
                                 </Col>
-                                <Col md={6}>
+                                <Col md={2}>
                                     <FormGroup>
                                         <Label for="onSale">On Sale?</Label>
                                         <Input
                                             className="form-input"
-                                            type="onSale"
+                                            type="select"
                                             name="onSale"
                                             id="onSale"
-                                            placeholder="yes or no?"
+                                            placeholder=""
                                             onChange={this.onSaleChange}
                                             value={newProduct.onSale}
-                                        />
+                                        >
+                                            <option key="1">No</option>
+                                            <option key="2">Yes</option>
+                                        </Input>
                                     </FormGroup>
                                 </Col>
                             </Row>
                             <FormGroup>
                                 <Label for="description">Description</Label>
                                 <Input
-                                    className="form-input"
+                                    className="form-input textArea"
                                     type="textarea"
                                     name="text"
                                     id="description"
+                                    rows="3"
+                                    placeholder="Tell Us About Your Product or Service"
                                     maxLength={descriptionMaxLength}
                                     onChange={this.descriptionChange}
                                     value={newProduct.description}

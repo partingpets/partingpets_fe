@@ -4,9 +4,11 @@ import SearchField from 'react-search-field';
 //import authRequests from '../../../helpers/data/authRequests';
 import PrintProductCard from '../PrintProductCard/PrintProductCard';
 import productRequests from '../../../helpers/data/productRequests';
+import userRequests from '../../../helpers/data/userRequests';
 
 import './Products.scss';
 import AddProductModal from '../../AddProductModal/AddProductModal';
+import authRequests from '../../../helpers/data/authRequests';
 
 class Products extends React.Component {
   state = {
@@ -16,6 +18,7 @@ class Products extends React.Component {
     productEditId: '-1',
     passProductToEdit: {},
     filteredProducts: [],
+    currentUserObj: {},
   }
 
   getProducts = () => {
@@ -31,7 +34,14 @@ class Products extends React.Component {
   };
 
   componentDidMount() {
+    const currentUid = authRequests.getCurrentUid();
     this.getProducts();
+    userRequests.getUserByFbId(currentUid).then((response) => {
+      this.setState({
+        currentUserObj: response,
+      })
+    })
+
   }
 
   deleteSingleProduct = (productId) => {
@@ -79,12 +89,12 @@ class Products extends React.Component {
       productRequests
         .editProduct(productEditId, newProduct)
         .then(() => {
-            this.getProducts();
-            this.setState({
-              showModal: false,
-              isEditing: false,
-              productEditId: '-1',
-            });
+          this.getProducts();
+          this.setState({
+            showModal: false,
+            isEditing: false,
+            productEditId: '-1',
+          });
         })
         .catch(error => console.error('There Was An Error Editing Your Parting Pets Product.', error));
     } else {
@@ -96,7 +106,7 @@ class Products extends React.Component {
         })
         .catch(error => console.error('There Was An Error Creating Your Parting Pets Product.', error));
     }
-};
+  };
 
   // Add Product Modal Function //
   showModal = (e) => {
@@ -112,11 +122,11 @@ class Products extends React.Component {
       passProductToEdit: {},
       showModal: false,
     });
-};
+  };
 
   render() {
     const {
-      products, isEditing, passProductToEdit,filteredProducts,
+      products, isEditing, passProductToEdit, filteredProducts,
     } = this.state;
 
     const printProduct = filteredProducts.map(product => (
@@ -135,7 +145,7 @@ class Products extends React.Component {
 
     if (!isEditing) {
       editFormProps.disabled = true;
-}
+    }
 
     return (
       <div className='products mx-auto animated bounceInLeft w-100'>
@@ -150,15 +160,16 @@ class Products extends React.Component {
         </div>
 
         <AddProductModal
-        showModal={this.state.showModal}
-        onSubmit={this.formSubmitEvent}
-        isEditing={isEditing}
-        {...editFormProps}
-        modalCloseEvent={this.modalCloseEvent}
+          showModal={this.state.showModal}
+          onSubmit={this.formSubmitEvent}
+          userObject={this.currentUserObj}
+          isEditing={isEditing}
+          {...editFormProps}
+          modalCloseEvent={this.modalCloseEvent}
         />
 
-        <div className = "productWindow">
-        <div className="row justify-content-center">{printProduct}</div>
+        <div className="productWindow">
+          <div className="row justify-content-center">{printProduct}</div>
         </div>
       </div>
     );
