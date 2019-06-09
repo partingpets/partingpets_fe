@@ -1,15 +1,18 @@
 import React from 'react';
 import {
-  Card, CardImg, CardText, CardBody, Button, CardHeader,
+  Card, CardText, CardBody, Button, CardHeader,
 } from 'reactstrap';
 import userRequests from '../../../helpers/data/userRequests';
 import authRequests from '../../../helpers/data/authRequests';
+import petRequests from '../../../helpers/data/petRequests';
+import Pets from '../Pets/Pets';
 import './Profile.scss';
 
 class Profile extends React.Component {
   state = {
     userObject: {},
     fbUserObject: {},
+    usersPets: [],
   };
 
   componentDidMount() {
@@ -20,10 +23,27 @@ class Profile extends React.Component {
         fbUserObject: fbUser.providerData[0],
       });
     });
+
+    userRequests.getUserByFbId(fbUser.uid).then((currentUser) => {
+      petRequests.getPetsByUserId(currentUser.id).then((partedPets) => {
+        this.setState({
+          usersPets: partedPets,
+        });
+      });
+    });
   }
 
   render() {
-    const { userObject, fbUserObject } = this.state;
+    const { userObject, fbUserObject, usersPets } = this.state;
+    const singlePetCard = (usersPet => (
+      <Pets
+        key={usersPet.id}
+        Pet={usersPet}
+        />
+    ));
+
+    const pets = usersPets.map(singlePetCard);
+
     return (
       <div className="Profile">
         <div className="container">
@@ -46,30 +66,7 @@ class Profile extends React.Component {
               </Card>
             </div>
             <div className="col-sm-8">
-              {/* Move the below into a Pet Component and display it here */}
-              <Card>
-                {/* <CardImg className="profileCardImg" top width="100%" src={fbUserObject.photoURL} alt="Card image cap" /> */}
-                <CardHeader>Fluffy</CardHeader>
-                <div className="col-sm-2">
-                  <CardImg
-                    className="petCardImg"
-                    top
-                    width="100%"
-                    src="https://i.pinimg.com/736x/b1/d8/fc/b1d8fc33b1f9776195ad201a863bae0f.jpg"
-                    alt="Card image cap"
-                  />
-                </div>
-                <div className="col-sm-10">
-                  <CardBody>
-                    {/* <CardSubtitle>Address:</CardSubtitle> */}
-                    <CardText>{userObject.street}</CardText>
-                    <CardText>
-                      {userObject.city} {userObject.state}, {userObject.zipcode}
-                    </CardText>
-                    <Button>Edit</Button>
-                  </CardBody>
-                </div>
-              </Card>
+              {pets}
             </div>
           </div>
         </div>

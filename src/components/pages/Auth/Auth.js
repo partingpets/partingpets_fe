@@ -21,7 +21,7 @@ class Auth extends React.Component {
     return (
       <div className="Auth mt-5">
         <div className="login d-flex justify-content-center">
-          <GoogleLoginButton onClick={this.googleAuthenticateUser} />
+          <GoogleLoginButton id = "googleBtn" onClick={this.googleAuthenticateUser} />
         </div>
       </div>
     );
