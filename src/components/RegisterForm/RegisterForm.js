@@ -14,6 +14,7 @@ import {
   Row,
 } from 'reactstrap';
 import mapboxRequests from '../../helpers/data/mapBoxRequests';
+import stateRequests from '../../helpers/data/stateRequests';
 import autoSuggest from '../../helpers/data/autoSuggest';
 import './RegisterForm.scss';
 
@@ -53,6 +54,12 @@ class RegisterForm extends React.Component {
     modalCloseEvent();
     this.setState({
       newUser: defaultUser,
+    });
+  }
+
+  componentDidMount() {
+    stateRequests.getAllStates().then((usStates) => {
+      this.setState({ usStates });
     });
   }
 
@@ -144,7 +151,9 @@ class RegisterForm extends React.Component {
   };
 
   render() {
-    const { newUser, isLoading, suggestResults } = this.state;
+    const {
+      newUser, isLoading, suggestResults, usStates,
+    } = this.state;
     return (
       <div className="RegisterForm">
         <Modal
@@ -279,16 +288,16 @@ class RegisterForm extends React.Component {
                     <Label for="state">State</Label>
                     <Input
                       className="form-input"
-                      type="input"
+                      type="select"
                       name="state"
                       id="state"
                       placeholder="Select your State"
                       onChange={this.stateChange}
                       value={newUser.state}
                     >
-                      {/* {usStates.map((state, i) => (
+                      {usStates.map((state, i) => (
                         <option key={i}>{state.name}</option>
-                      ))} */}
+                      ))}
                     </Input>
                   </FormGroup>
                 </Col>
