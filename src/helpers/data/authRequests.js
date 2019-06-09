@@ -6,7 +6,7 @@ axios.interceptors.request.use(
   request => getCurrentUserJwt()
     .then(() => {
       const token = sessionStorage.getItem('token');
-      if (token != null) {
+      if (token != null && request.url.startsWith('https://localhost:44302')) {
         request.headers.Authorization = `Bearer ${token}`;
       }
       return request;
@@ -15,12 +15,7 @@ axios.interceptors.request.use(
   err => Promise.reject(err),
 );
 
-axios.interceptors.response.use(
-  response => response,
-  (errorResponse) => {
-    console.error('Error happened during Authentication');
-  },
-);
+axios.interceptors.response.use(response => response, errorResponse => Promise.reject(errorResponse));
 
 const googleAuth = () => {
   const provider = new firebase.auth.GoogleAuthProvider();
