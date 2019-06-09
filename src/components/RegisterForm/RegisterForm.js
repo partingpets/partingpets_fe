@@ -13,7 +13,6 @@ import {
   ModalHeader,
   Row,
 } from 'reactstrap';
-import mapboxRequests from '../../helpers/data/mapBoxRequests';
 import stateRequests from '../../helpers/data/stateRequests';
 import autoSuggest from '../../helpers/data/autoSuggest';
 import './RegisterForm.scss';
@@ -28,7 +27,6 @@ const defaultUser = {
   city: '',
   state: '',
   zipcode: '',
-  uid: '',
 };
 
 class RegisterForm extends React.Component {
@@ -118,21 +116,14 @@ class RegisterForm extends React.Component {
     const tempUser = { ...this.state.newUser };
     const selectedSuggest = suggestedArray.filter(s => s.address.formattedAddress === name[0]);
     const formFill = selectedSuggest[0].address;
-    // Lets get the Forward GEO for the selected address to popuate the Marker props
-    mapboxRequests
-      .getForwardGeocode(formFill.formattedAddress)
-      .then((res) => {
-        tempUser.street1 = formFill.addressLine;
-        tempUser.street2 = formFill.addressLine2;
-        tempUser.city = formFill.locality;
-        tempUser.state = formFill.adminDistrict;
-        tempUser.zipcode = formFill.postalCode;
-        this.setState({
-          newUser: tempUser,
-        });
-        this.typeahead.getInstance().clear();
-      })
-      .catch(error => console.error('There was an error getting the requested location'));
+    tempUser.street1 = formFill.addressLine;
+    tempUser.city = formFill.locality;
+    tempUser.state = formFill.adminDistrict;
+    tempUser.zipcode = formFill.postalCode;
+    this.setState({
+      newUser: tempUser,
+    });
+    this.typeahead.getInstance().clear();
   };
 
   autoSuggestEvent = (e) => {
@@ -148,6 +139,16 @@ class RegisterForm extends React.Component {
         });
       })
       .catch(error => console.error('There was an issue gettign autosuggest results', error));
+  };
+
+  formSubmit = (event) => {
+    event.preventDefault();
+    const { onSubmit } = this.props;
+    const myNewUser = { ...this.state.newUser };
+    onSubmit(myNewUser);
+    this.setState({
+      newUser: defaultUser,
+    });
   };
 
   render() {
@@ -246,11 +247,11 @@ class RegisterForm extends React.Component {
                   onChange={this.autoSuggestState}
                   value={newUser.street1}
                 />
-                <Label for="street1">Address1</Label>
+                <Label for="street1">Address 1</Label>
                 <Input
                   className="form-input"
                   type="text"
-                  name="address"
+                  name="street1"
                   id="street1"
                   placeholder="1234 Main St"
                   onChange={this.street1Change}
@@ -262,7 +263,7 @@ class RegisterForm extends React.Component {
                 <Input
                   className="form-input"
                   type="text"
-                  name="address2"
+                  name="street2"
                   id="street2"
                   placeholder="Apartment, studio, or floor"
                   onChange={this.street2Change}

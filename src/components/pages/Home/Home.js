@@ -8,6 +8,7 @@ class Home extends React.Component {
   state = {
     showModal: false,
     firebaseId: -1,
+    isEditing: false,
   };
 
   componentWillMount() {
@@ -40,13 +41,44 @@ class Home extends React.Component {
     });
   };
 
+  userFormSubmitEvent = (newUser) => {
+    // const { isEditing, userEditId } = this.state;
+    userRequests.createUser(newUser);
+    this.setState({
+      showModal: false,
+    });
+    // if (isEditing) {
+    //   userRequests
+    //   .createUser(newUser)
+    //     .then(() => {
+    //       this.setState({
+    //           showModal: false,
+    //           isEditing: false,
+    //           campaignEditId: '-1',
+    //         });
+    //       });
+    //     })
+    //     .catch(error => console.error('There was an error editing the campaign', error));
+    // } else {
+    //   userRequests
+    //     .newCampaign(newCampaign)
+    //     .then((res) => {
+    //       newMarker.campaignId = res.data.name;
+    //       markerRequests.newMarker(newMarker);
+    //       this.getMyCampaigns();
+    //       this.setState({ showModal: false });
+    //     })
+    //     .catch(error => console.error('There was an error creating the new Campaign', error));
+    // }
+  };
+
   render() {
     const { firebaseId } = this.state;
     return (
       <div>
         <RegisterForm
           showModal={this.state.showModal}
-          onSubmit={this.formSubmitEvent}
+          onSubmit={this.userFormSubmitEvent}
           modalCloseEvent={this.modalCloseEvent}
           fireBaseId={firebaseId}
         />

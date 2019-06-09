@@ -14,6 +14,9 @@ const getUserByFbId = uid => new Promise((resolve, reject) => {
     });
 });
 
+const createUser = newUser => axios.post(`${petsApiBaseUrl}/api/Users/`, newUser);
+
 export default {
   getUserByFbId,
+  createUser,
 };
