@@ -7,6 +7,7 @@ import {
 import AppNavbar from '../components/AppNavbar/AppNavbar';
 import Auth from '../components/pages/Auth/Auth';
 import Home from '../components/pages/Home/Home';
+import Products from '../components/pages/Products/Products';
 import Profile from '../components/pages/Profile/Profile';
 import Partners from '../components/pages/Partners/Partners';
 import authRequests from '../helpers/data/authRequests';
@@ -94,6 +95,7 @@ class App extends React.Component {
                   <PublicRoute path="/auth" component={Auth} authed={authed} />
                   <PrivateRoute path="/profile" component={Profile} userObject={userObject} authed={authed} />
                   <PrivateRoute path="/partners" component={Partners} authed={authed} />
+                  <PrivateRoute path="/store" component={Products} authed={authed} />
                   <PrivateRoute path="/" component={Home} authed={authed} />
                   <PrivateRoute path="/home" component={Home} authed={authed} />
                 </Switch>
