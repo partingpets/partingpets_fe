@@ -21,7 +21,7 @@ const defaultUser = {
   firstName: '',
   lastName: '',
   email: '',
-  partner: '',
+  partner: 'false',
   street1: '',
   street2: '',
   city: '',
@@ -34,6 +34,7 @@ class RegisterForm extends React.Component {
     modal: false,
     firebaseId: -1,
     newUser: defaultUser,
+    partnerCode: '',
     backdrop: 'static',
     isLoading: false,
     suggestResults: [],
@@ -87,7 +88,7 @@ class RegisterForm extends React.Component {
 
   formFieldBoolState = (name, event) => {
     const tempUser = { ...this.state.newUser };
-    tempUser[name] = event.target.checked;
+    tempUser[name] = event.target.selectedOptions[0].dataset.selection;
     this.setState({
       newUser: tempUser,
     });
@@ -100,6 +101,8 @@ class RegisterForm extends React.Component {
   emailChange = event => this.formFieldStringState('email', event);
 
   partnerChange = event => this.formFieldBoolState('partner', event);
+
+  partnerCodeChange = event => this.formFieldStringState('partnerCode', event);
 
   street1Change = event => this.formFieldStringState('street1', event);
 
@@ -153,7 +156,7 @@ class RegisterForm extends React.Component {
 
   render() {
     const {
-      newUser, isLoading, suggestResults, usStates,
+      newUser, isLoading, suggestResults, usStates, partnerCode,
     } = this.state;
     return (
       <div className="RegisterForm">
@@ -200,7 +203,7 @@ class RegisterForm extends React.Component {
                 </Col>
               </Row>
               <Row form>
-                <Col md={8}>
+                <Col md={6}>
                   <FormGroup>
                     <Label for="email">Email Address</Label>
                     <Input
@@ -215,15 +218,35 @@ class RegisterForm extends React.Component {
                   </FormGroup>
                 </Col>
                 <Col md={2}>
-                  <FormGroup className="partner-check">
-                    <Label for="partner">Partner :</Label>
+                  <FormGroup>
+                    <Label for="partner">Partner</Label>
                     <Input
                       className="form-input"
-                      type="checkbox"
+                      type="select"
                       name="partner"
                       id="partner"
+                      placeholder="Are you a partner"
                       onChange={this.partnerChange}
-                      value={newUser.isPartner}
+                      value={(newUser.partner === 'true') ? 'Yes' : 'No'}
+                    >
+                      <option key="1" data-selection="false">No</option>
+                      <option key="2" data-selection="true">Yes</option>
+                    </Input>
+                  </FormGroup>
+                </Col>
+                <Col md={4}>
+                  <FormGroup>
+                    <Label for="partnerCode">Partner Registration Code</Label>
+                    <Input
+                      disabled={(newUser.partner === 'false') ? 'disabled' : ''}
+                      className="form-input"
+                      type="text"
+                      name="partnerCode"
+                      id="partnerCode"
+                      // disabled={!newUser.partner}
+                      placeholder="dsiu7deiuhe4"
+                      onChange={this.partnerCodeChange}
+                      value={partnerCode}
                     />
                   </FormGroup>
                 </Col>
