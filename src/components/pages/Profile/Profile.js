@@ -43,7 +43,7 @@ class Profile extends React.Component {
         <div className="container">
           <div className="row">
             <div className="col-sm-4">
-              <Card data-uid={userObject.id}>
+              {/* <Card data-uid={userObject.id}>
                 <CardHeader>
                   {`${userObject.firstName} ${userObject.lastName}`}
                   <img className="profileCardImg" src={fbUserObject.photoURL} alt="profile" />
@@ -57,7 +57,7 @@ class Profile extends React.Component {
                   </CardText>
                   <Button>Edit</Button>
                 </CardBody>
-              </Card>
+              </Card> */}
             </div>
             <div className="col-sm-8">{pets}</div>
           </div>
