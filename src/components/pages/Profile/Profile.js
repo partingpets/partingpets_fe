@@ -34,16 +34,16 @@ class Profile extends React.Component {
   render() {
     const { userObject } = this.props;
     const { fbUserObject, usersPets } = this.state;
-    const singlePetCard = usersPet => <Pets key={usersPet.id} Pet={usersPet} />;
+    // const singlePetCard = usersPet => <Pets key={usersPet.id} Pet={usersPet} />;
 
-    const pets = usersPets.map(singlePetCard);
+    // const pets = usersPets.map(singlePetCard);
 
     return (
       <div className="Profile">
         <div className="container">
           <div className="row">
             <div className="col-sm-4">
-              {/* <Card data-uid={userObject.id}>
+               <Card data-uid={userObject.id}>
                 <CardHeader>
                   {`${userObject.firstName} ${userObject.lastName}`}
                   <img className="profileCardImg" src={fbUserObject.photoURL} alt="profile" />
@@ -57,9 +57,9 @@ class Profile extends React.Component {
                   </CardText>
                   <Button>Edit</Button>
                 </CardBody>
-              </Card> */}
+              </Card>
             </div>
-            <div className="col-sm-8">{pets}</div>
+            {/* <div className="col-sm-8">{pets}</div>*/}
           </div>
         </div>
       </div>
