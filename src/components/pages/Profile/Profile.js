@@ -34,9 +34,9 @@ class Profile extends React.Component {
   render() {
     const { userObject } = this.props;
     const { fbUserObject, usersPets } = this.state;
-    // const singlePetCard = usersPet => <Pets key={usersPet.id} Pet={usersPet} />;
+    const singlePetCard = usersPet => <Pets key={usersPet.id} Pet={usersPet} />;
 
-    // const pets = usersPets.map(singlePetCard);
+    const pets = usersPets.map(singlePetCard);
 
     return (
       <div className="Profile">
