@@ -15,12 +15,7 @@ axios.interceptors.request.use(
   err => Promise.reject(err),
 );
 
-axios.interceptors.response.use(
-  response => response,
-  (errorResponse) => {
-    console.error('Error happened during Authentication');
-  },
-);
+axios.interceptors.response.use(response => response, errorResponse => Promise.reject(errorResponse));
 
 const googleAuth = () => {
   const provider = new firebase.auth.GoogleAuthProvider();

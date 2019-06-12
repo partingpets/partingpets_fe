@@ -50,12 +50,6 @@ class AddProductModal extends React.Component {
         modalCloseEvent: PropTypes.func,
     };
 
-    dropToggle() {
-        this.setState(prevState => ({
-            dropdownOpen: !prevState.dropdownOpen,
-        }));
-    }
-
     toggle() {
         this.setState({
             modal: !this.state,
@@ -67,7 +61,6 @@ class AddProductModal extends React.Component {
         modalCloseEvent();
         this.setState({
             newProduct: defaultProduct,
-            passProductToEdit: defaultProduct,
         });
     }
 
@@ -83,11 +76,6 @@ class AddProductModal extends React.Component {
     }
 
     componentWillReceiveProps(props) {
-        if (props.isEditing) {
-            this.setState({
-                newProduct: props.productToEdit,
-            });
-        }
         this.setState({
             modal: props.showModal,
         });
@@ -151,6 +139,7 @@ class AddProductModal extends React.Component {
         });
     };
 
+
     render() {
         const {
             descriptionCharCount, descriptionMaxLength, newProduct, productCategories, productCategoryName,
@@ -199,7 +188,7 @@ class AddProductModal extends React.Component {
                                             name="price"
                                             id="price"
                                             placeholder="$29.99"
-                                            pattern="^\d+(\.|\,)\d{2}$"
+                                            //pattern="^\d+(\.|\,)\d{2}$"
                                             onChange={this.priceChange}
                                             value={newProduct.price}
                                         />
