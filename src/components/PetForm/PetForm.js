@@ -62,23 +62,23 @@ class PetForm extends React.Component {
     });
   };
 
-  nameChange = event => this.formFieldStringState('',event);
+  nameChange = event => this.formFieldStringState('name',event);
 
-  breedChange = event => this.formFieldStringState('',event);
+  breedChange = event => this.formFieldStringState('breed',event);
 
-  dateOfBirthChange = event => this.formFieldStringState('',event);
+  dateOfBirthChange = event => this.formFieldStringState('dateOfBirth',event);
 
-  dateOfDeathChange = event => this.formFieldStringState('',event);
+  dateOfDeathChange = event => this.formFieldStringState('dateOfDeath',event);
 
-  burialStreetChange = event => this.formFieldStringState('',event);
+  burialStreetChange = event => this.formFieldStringState('burialStreet',event);
 
-  burialCityChange = event => this.formFieldStringState('',event);
+  burialCityChange = event => this.formFieldStringState('burialCity',event);
 
-  burialStateChange = event => this.formFieldStringState('',event);
+  burialStateChange = event => this.formFieldStringState('burialState',event);
 
-  burialZipCodeChange = event => this.formFieldStringState('',event);
+  burialZipCodeChange = event => this.formFieldStringState('burialZipCode',event);
 
-  burialPlotChange = event => this.formFieldStringState('',event);
+  burialPlotChange = event => this.formFieldStringState('burialPlot',event);
 
 
   render(){
@@ -92,7 +92,7 @@ class PetForm extends React.Component {
         toggle={togglePetForm}
         onClosed={e => this.modalClosed(e)}
         centered
-        backdrop={this.state.backdrop}
+        backdrop={this.state.backdrop} 
         size="lg"
       >
         <ModalHeader toggle={e => this.toggle(e)}>Pet Registration</ModalHeader>
@@ -129,7 +129,7 @@ class PetForm extends React.Component {
               </Col>
             </Row>
             <Row form>
-              <Col md={8}>
+              <Col md={6}>
                 <FormGroup>
                   <Label for="dateOfBirth">Date Of Birth</Label>
                   <Input
@@ -137,13 +137,13 @@ class PetForm extends React.Component {
                     type="text"
                     name="dateOfBirth"
                     id="dateOfBirth"
-                    placeholder="2000-12-31"
+                    placeholder="yyyy-mm-dd"
                     onChange={this.dateOfBirthChange}
                     value={newPet.dateOfBirth}
                   />
                 </FormGroup>
               </Col>
-              <Col md={2}>
+              <Col md={6}>
                 <FormGroup>
                   <Label for="dateOfDeath">Date Of Death</Label>
                   <Input
@@ -151,6 +151,7 @@ class PetForm extends React.Component {
                     type="text"
                     name="dateOfDeath"
                     id="dateOfDeath"
+                    placeholder="yyyy-mm-dd"
                     onChange={this.dateOfDeathChange}
                     value={newPet.dateOfDeath}
                   />
@@ -206,7 +207,7 @@ class PetForm extends React.Component {
                     type="text"
                     name="burialZipCode"
                     id="burialZipCode"
-                    placeholder=""
+                    placeholder="55555"
                     onChange={this.nameChange}
                     value={newPet.burialZipCode}
                   />
