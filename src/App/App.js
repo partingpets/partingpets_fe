@@ -27,7 +27,6 @@ const PublicRoute = ({ component: Component, authed, ...rest }) => {
 
 const PrivateRoute = ({ component: Component, authed, ...rest }) => {
   // props contains Location, Match, and History
-  let props = {};
   const routeChecker = props => (authed === true ? (
       <Component {...props} />
   ) : (
