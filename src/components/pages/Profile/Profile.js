@@ -6,6 +6,7 @@ import userRequests from '../../../helpers/data/userRequests';
 import authRequests from '../../../helpers/data/authRequests';
 import petRequests from '../../../helpers/data/petRequests';
 import Pets from '../Pets/Pets';
+import PetForm from '../../PetForm/PetForm';
 import './Profile.scss';
 
 class Profile extends React.Component {
@@ -13,7 +14,14 @@ class Profile extends React.Component {
     userObject: {},
     fbUserObject: {},
     usersPets: [],
+    petModal: false,
   };
+
+  togglePetForm = () => {
+    this.setState({
+      petModal: !this.state.petModal,
+    });
+  }
 
   componentDidMount() {
     const fbUser = authRequests.getCurrentUser();
@@ -31,11 +39,6 @@ class Profile extends React.Component {
         });
       });
     });
-  }
-
-  addPetEvent = (e) => {
-    e.preventDefault();
-    // stuff goes here, probably
   }
 
   render() {
@@ -67,7 +70,7 @@ class Profile extends React.Component {
                     {userObject.city} {userObject.state}, {userObject.zipcode}
                   </CardText>
                   <Button>Edit</Button>
-                  <Button className="btn addPetButton" onClick={this.addPetEvent}>Add Pet</Button>
+                  <Button className="btn addPetButton" onClick={this.togglePetForm}>Add Pet</Button>
                 </CardBody>
               </Card>
             </div>
@@ -76,6 +79,11 @@ class Profile extends React.Component {
             </div>
           </div>
         </div>
+        <PetForm 
+          isOpen={this.state.petModal}
+          petModal={this.state.petModal}
+          togglePetForm={this.togglePetForm}
+          />
       </div>
     );
   }

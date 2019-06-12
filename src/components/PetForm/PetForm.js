@@ -28,14 +28,7 @@ const defaultPet = {
 
 class PetForm extends React.Component {
   state= {
-    modal: false,
     newPet: defaultPet,
-  }
-
-  toggle() {
-    this.setState({
-      modal: !this.state,
-    });
   }
 
   modalClosed() {
@@ -90,12 +83,13 @@ class PetForm extends React.Component {
 
   render(){
     const { newPet } = this.state;
+    const { togglePetForm, petModal} = this.props;
     return ( 
       <div className="PetForm">
       <Modal
-        className="form-modal"
-        isOpen={this.state.modal}
-        toggle={e => this.toggle(e)}
+        className="petForm-modal"
+        isOpen={petModal}
+        toggle={togglePetForm}
         onClosed={e => this.modalClosed(e)}
         centered
         backdrop={this.state.backdrop}
