@@ -30,7 +30,7 @@ class AppNavbar extends React.Component {
   }
 
   render() {
-    const { isAuthed, logoutClickEvent } = this.props;
+    const { isAuthed, logoutClickEvent, userObject } = this.props;
     const profileImgUrl = () => authRequests.getCurrentUser().photoURL;
     const buildNavbar = () => {
       if (isAuthed) {
@@ -48,6 +48,18 @@ class AppNavbar extends React.Component {
                 <i className="navIcon fas fa-paw fa-2x" />
                 Store
               </NavLink>
+            </NavItem>
+            <NavItem>
+        { userObject.isPartner ? 
+        <NavLink tag={RRNavLink} to="/partners">
+            <i className="navIcon fas fa-paw fa-2x" />
+            Partners
+        </NavLink>
+        : '' } 
+              {/* <NavLink tag={RRNavLink} to="/partners">
+                <i className="navIcon fas fa-paw fa-2x" />
+                Partners
+              </NavLink> */}
             </NavItem>
             {/* <NavItem> */}
             {/* <NavLink tag={RRNavLink} onClick={logoutClickEvent} to="/home">

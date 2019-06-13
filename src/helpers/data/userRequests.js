@@ -9,9 +9,14 @@ const getUserByFbId = uid => new Promise((resolve, reject) => {
     .then((result) => {
       resolve(result.data);
     })
-    .catch(error => reject(error));
+    .catch((error) => {
+      reject(error);
+    });
 });
+
+const createUser = newUser => axios.post(`${petsApiBaseUrl}/api/Users/`, newUser);
 
 export default {
   getUserByFbId,
+  createUser,
 };

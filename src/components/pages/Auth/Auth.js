@@ -4,13 +4,17 @@ import authRequests from '../../../helpers/data/authRequests';
 import './Auth.scss';
 
 class Auth extends React.Component {
+  state = {
+    showModal: false,
+  };
+
   googleAuthenticateUser = () => {
     authRequests
       .googleAuth()
-      .then(() => {
-        this.props.history.push('/home');
-      })
-      .catch(error => console.error('There was an error loggin in', error));
+      .then()
+      .catch((error) => {
+        console.error('There was an error loggin in', error);
+      });
   };
 
   render() {
