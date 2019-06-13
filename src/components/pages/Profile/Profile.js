@@ -17,7 +17,7 @@ class Profile extends React.Component {
     petModal: false,
   };
 
-  togglePetForm = () => {
+  toggle = () => {
     this.setState({
       petModal: !this.state.petModal,
     });
@@ -70,7 +70,7 @@ class Profile extends React.Component {
                     {userObject.city} {userObject.state}, {userObject.zipcode}
                   </CardText>
                   <Button>Edit</Button>
-                  <Button className="btn addPetButton" onClick={this.togglePetForm}>Add Pet</Button>
+                  <Button className="btn addPetButton" onClick={this.toggle}>Add Pet</Button>
                 </CardBody>
               </Card>
             </div>
@@ -81,8 +81,6 @@ class Profile extends React.Component {
         </div>
         <PetForm 
           isOpen={this.state.petModal}
-          petModal={this.state.petModal}
-          togglePetForm={this.togglePetForm}
           />
       </div>
     );

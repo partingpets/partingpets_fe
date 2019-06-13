@@ -31,17 +31,9 @@ class PetForm extends React.Component {
     newPet: defaultPet,
   }
 
-  modalClosed() {
-    const { modalCloseEvent } = this.props;
-    modalCloseEvent();
+  toggle() {
     this.setState({
       newPet: defaultPet,
-    })
-  }
-
-  componentWillReceiveProps(props) {
-    this.setState({
-      modal: props.showModal,
     });
   }
 
@@ -83,14 +75,12 @@ class PetForm extends React.Component {
 
   render(){
     const { newPet } = this.state;
-    const { togglePetForm, petModal} = this.props;
+    const { isOpen } = this.props;
     return ( 
       <div className="PetForm">
       <Modal
         className="petForm-modal"
-        isOpen={petModal}
-        toggle={togglePetForm}
-        onClosed={e => this.modalClosed(e)}
+        isOpen={isOpen}
         centered
         backdrop={this.state.backdrop} 
         size="lg"
@@ -228,8 +218,6 @@ class PetForm extends React.Component {
                 </FormGroup>
               </Col>
             </Row>
-            <h1>This Modal is still under construction</h1>
-
           </Form>
         </ModalBody>
         <ModalFooter>
