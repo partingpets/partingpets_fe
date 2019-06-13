@@ -73,6 +73,7 @@ class Profile extends React.Component {
         </div>
         <PetForm 
           isOpen={this.state.petModal}
+          toggle={this.toggle}
           />
       </div>
     );

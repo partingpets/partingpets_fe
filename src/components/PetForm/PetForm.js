@@ -32,6 +32,7 @@ class PetForm extends React.Component {
   }
 
   toggle() {
+    this.props.toggle();
     this.setState({
       newPet: defaultPet,
     });
