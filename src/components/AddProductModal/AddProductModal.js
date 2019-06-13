@@ -22,12 +22,11 @@ import pets from '../AppNavbar/images/pets_small.png';
 const defaultProduct = {
   name: '',
   unitPrice: '',
-  productCategory: 'Product',
   imgUrl: '',
   categoryId: 0,
   isOnSale: 'False',
   description: '',
-  uid: '',
+  partnerId: null,
 };
 
 class AddProductModal extends React.Component {
@@ -126,28 +125,15 @@ class AddProductModal extends React.Component {
     });
   };
 
-  //   getProducts = () => {
-  //     productRequests
-  //       .getAllProducts()
-  //       .then((products) => {
-  //         this.setState({ products });
-  //         this.setState({ filteredProducts: products });
-  //       })
-  //       .catch((err) => {
-  //         console.error('error with products GET', err);
-  //       });
-  //   };
-
   formSubmit = (event) => {
     event.preventDefault();
     const { onSubmit, userObject } = this.props;
     const myNewProduct = { ...this.state.newProduct };
-    myNewProduct.uid = userObject.partnerId;
+    myNewProduct.partnerId = userObject.partnerId;
     onSubmit(myNewProduct);
     this.setState({
       newProduct: defaultProduct,
     });
-    // this.getProducts();
   };
 
   render() {

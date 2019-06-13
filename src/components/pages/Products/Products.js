@@ -125,7 +125,6 @@ class Products extends React.Component {
         <AddProductModal
           showModal={this.state.showModal}
           onSubmit={this.productFormSubmitEvent}
-          userObject={this.currentUserObj}
           modalCloseEvent={this.modalCloseEvent}
           userObject={userObject}
         />
