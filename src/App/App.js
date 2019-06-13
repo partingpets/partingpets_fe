@@ -9,6 +9,7 @@ import Auth from '../components/pages/Auth/Auth';
 import Home from '../components/pages/Home/Home';
 import Products from '../components/pages/Products/Products';
 import Profile from '../components/pages/Profile/Profile';
+import Partners from '../components/pages/Partners/Partners';
 import authRequests from '../helpers/data/authRequests';
 import userRequests from '../helpers/data/userRequests';
 import connection from '../helpers/data/connection';
@@ -87,13 +88,14 @@ class App extends React.Component {
       <div className="App">
         <BrowserRouter>
           <React.Fragment>
-            <AppNavbar isAuthed={authed} logoutClickEvent={logoutClickEvent} />
+            <AppNavbar isAuthed={authed} logoutClickEvent={logoutClickEvent} userObject={userObject} />
             <div className="app-content container-fluid">
               <div className="justify-content-center">
                 <Switch>
                   <PublicRoute path="/auth" component={Auth} authed={authed} />
-                  <PrivateRoute path="/store" component={() => <Products userObject={userObject} />} authed={authed} />
-                  <PrivateRoute path="/profile" component={Profile} authed={authed} />
+                  <PrivateRoute path="/profile" component={() => <Profile userObject={userObject} />} authed={authed} />
+                  <PrivateRoute path="/partners" component={() => <Partners userObject={userObject} />} authed={authed} />
+                  <PrivateRoute path="/store" component={() => <Products userObject={userObject} />} authed={authed}  />
                   <PrivateRoute path="/" component={Home} authed={authed} />
                   <PrivateRoute path="/home" component={Home} authed={authed} />
                 </Switch>
