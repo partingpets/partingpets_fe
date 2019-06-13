@@ -17,24 +17,21 @@ const getAllProducts = () => new Promise((resolve, reject) => {
 });
 
 const getAllProductCategories = () => new Promise((resolve, reject) => {
-  axios.get(`${productsApiBaseUrl}/api/products/categories`)
+  axios
+    .get(`${productsApiBaseUrl}/api/products/categories`)
     .then((result) => {
-      console.log(result.data);
       resolve(result.data);
     })
     .catch(error => reject(error));
 });
 
-const createProduct = newProduct =>{
-  newProduct.unitPrice=parseFloat(newProduct.unitPrice);
-  console.log(newProduct);
+const createProduct = (newProduct) => {
   axios.post(`${productsApiBaseUrl}/api/Products/`, newProduct);
-} 
+};
 
 export default {
   getAllProducts,
   getAllProductCategories,
   createProduct,
   getCurrentUid,
-
 };

@@ -13,10 +13,11 @@ class Products extends React.Component {
     showModal: false,
     filteredProducts: [],
     currentUserObj: {},
-  }
+  };
 
   getProducts = () => {
-    productRequests.getAllProducts()
+    productRequests
+      .getAllProducts()
       .then((products) => {
         this.setState({ products });
         this.setState({ filteredProducts: products });
@@ -32,31 +33,28 @@ class Products extends React.Component {
     userRequests.getUserByFbId(currentUid).then((response) => {
       this.setState({
         currentUserObj: response,
-      })
-    })
-
+      });
+    });
   }
 
   deleteSingleProduct = (productId) => {
-    productRequests.deleteProduct(productId)
-      .then(() => {
-        this.getproducts();
-      });
-  }
-
+    productRequests.deleteProduct(productId).then(() => {
+      this.getproducts();
+    });
+  };
 
   newProductView = () => {
     this.props.history.push('/products/new');
-  }
+  };
 
   onSelect = (productId) => {
     this.props.history.push(`/products/${productId}`);
-  }
+  };
 
   passProductToEdit = (productId) => {
     this.setState({ productEditId: productId });
     this.props.history.push(`/products/${productId}/edit`);
-  }
+  };
 
   onChange = (value, event) => {
     const { products } = this.state;
@@ -66,15 +64,17 @@ class Products extends React.Component {
       this.setState({ filteredProducts: products });
     } else {
       products.forEach((product) => {
-        if (product.name.toLowerCase().includes(value.toLowerCase())
+        if (
+          product.name.toLowerCase().includes(value.toLowerCase())
           || product.productCategory.toLowerCase().includes(value.toLowerCase())
-          || product.description.toLowerCase().includes(value.toLowerCase())) {
+          || product.description.toLowerCase().includes(value.toLowerCase())
+        ) {
           filteredProducts.push(product);
         }
         this.setState({ filteredProducts });
       });
     }
-  }
+  };
 
   // Add Product Modal Function //
   showModal = (e) => {
@@ -93,48 +93,49 @@ class Products extends React.Component {
 
   productFormSubmitEvent = (newProduct) => {
     productRequests.createProduct(newProduct);
+    this.getProducts();
     this.setState({
       showModal: false,
     });
-  }
+  };
 
-    render() {
-      const { products, filteredProducts } = this.state;
+  render() {
+    const { filteredProducts } = this.state;
+    const { userObject } = this.props;
 
-      const printProduct = filteredProducts.map(product => (
-        <PrintProductCard
-          key={product.id}
-          product={product}
-          onSelect={this.onSelect}
-        />
-      ));
+    const printProduct = filteredProducts.map(product => (
+      <PrintProductCard key={product.id} product={product} onSelect={this.onSelect} />
+    ));
 
-      return (
-        <div className='products mx-auto animated bounceInLeft w-100'>
-          <div className='productWrap'>
-            <SearchField
-              placeholder="Search Products By Name or Category"
-              onChange={this.onChange}
-              searchText=""
-              classNames="productSearch"
-            />
-            <button className="addProductBtn" id="addProduct" onClick={this.showModal}><i className="far fa-plus-square"></i>ADD PRODUCT</button>
-          </div>
-
-          <AddProductModal
-            showModal={this.state.showModal}
-            onSubmit={this.productFormSubmitEvent}
-            userObject={this.currentUserObj}
-            modalCloseEvent={this.modalCloseEvent}
+    return (
+      <div className="products mx-auto animated bounceInLeft w-100">
+        <div className="productWrap">
+          <SearchField
+            placeholder="Search Products By Name or Category"
+            onChange={this.onChange}
+            searchText=""
+            classNames="productSearch"
           />
-
-          <div className="productWindow">
-            <div className="row justify-content-center">{printProduct}</div>
-          </div>
+          <button className="addProductBtn" id="addProduct" onClick={this.showModal}>
+            <i className="far fa-plus-square" />
+            ADD PRODUCT
+          </button>
         </div>
-      );
-    }
+
+        <AddProductModal
+          showModal={this.state.showModal}
+          onSubmit={this.productFormSubmitEvent}
+          userObject={this.currentUserObj}
+          modalCloseEvent={this.modalCloseEvent}
+          userObject={userObject}
+        />
+
+        <div className="productWindow">
+          <div className="row justify-content-center">{printProduct}</div>
+        </div>
+      </div>
+    );
   }
+}
 
-  export default Products;
-
+export default Products;
