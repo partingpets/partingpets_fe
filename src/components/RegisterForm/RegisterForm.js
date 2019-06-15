@@ -22,6 +22,7 @@ const defaultUser = {
   lastName: '',
   email: '',
   partner: 'false',
+  partnerCode: '',
   street1: '',
   street2: '',
   city: '',
@@ -156,7 +157,7 @@ class RegisterForm extends React.Component {
 
   render() {
     const {
-      newUser, isLoading, suggestResults, usStates, partnerCode,
+      newUser, isLoading, suggestResults, usStates,
     } = this.state;
     return (
       <div className="RegisterForm">
@@ -227,10 +228,14 @@ class RegisterForm extends React.Component {
                       id="partner"
                       placeholder="Are you a partner"
                       onChange={this.partnerChange}
-                      value={(newUser.partner === 'true') ? 'Yes' : 'No'}
+                      value={newUser.partner === 'true' ? 'Yes' : 'No'}
                     >
-                      <option key="1" data-selection="false">No</option>
-                      <option key="2" data-selection="true">Yes</option>
+                      <option key="1" data-selection="false">
+                        No
+                      </option>
+                      <option key="2" data-selection="true">
+                        Yes
+                      </option>
                     </Input>
                   </FormGroup>
                 </Col>
@@ -238,15 +243,15 @@ class RegisterForm extends React.Component {
                   <FormGroup>
                     <Label for="partnerCode">Partner Registration Code</Label>
                     <Input
-                      disabled={(newUser.partner === 'false') ? 'disabled' : ''}
+                      disabled={newUser.partner === 'false' ? 'disabled' : ''}
                       className="form-input"
                       type="text"
                       name="partnerCode"
                       id="partnerCode"
                       // disabled={!newUser.partner}
-                      placeholder="dsiu7deiuhe4"
+                      placeholder="Registration Code"
                       onChange={this.partnerCodeChange}
-                      value={partnerCode}
+                      value={newUser.partnerCode}
                     />
                   </FormGroup>
                 </Col>
