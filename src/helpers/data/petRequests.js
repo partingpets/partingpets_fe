@@ -12,9 +12,9 @@ const getPetsByUserId = uid => new Promise((resolve, reject) => {
     .catch(error => reject(error));
 });
 
-const getAllPets = new Promise((resolve, reject) => {
+const getAllPets = () => new Promise((resolve, reject) => {
   axios
-    .get(`${petsApiBaseUrl}/api/pets/`)
+    .get(`${petsApiBaseUrl}/api/pets`)
     .then((result) => {
       resolve(result.data);
     })
