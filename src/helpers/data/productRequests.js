@@ -16,6 +16,16 @@ const getAllProducts = () => new Promise((resolve, reject) => {
     .catch(error => reject(error));
 });
 
+const getAllProductsByPartnerId = partnerId => new Promise((resolve, reject) => {
+  axios
+    .get(`${productsApiBaseUrl}/api/products/partner/${partnerId}`)
+    .then((result) => {
+      console.log(result.data);
+      resolve(result.data);
+    })
+    .catch(error => reject(error));
+});
+
 const getAllProductCategories = () => new Promise((resolve, reject) => {
   axios
     .get(`${productsApiBaseUrl}/api/products/categories`)
@@ -34,4 +44,5 @@ export default {
   getAllProductCategories,
   createProduct,
   getCurrentUid,
+  getAllProductsByPartnerId,
 };
