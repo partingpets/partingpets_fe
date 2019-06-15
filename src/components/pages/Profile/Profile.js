@@ -22,8 +22,20 @@ class Profile extends React.Component {
     });
   }
 
+  getPartedPets() {
+    const fbUser = authRequests.getCurrentUser();
+    userRequests.getUserByFbId(fbUser.uid).then((currentUser) => {
+      petRequests.getPetsByUserId(currentUser.id).then((partedPets) => {
+        this.setState({
+          usersPets: partedPets,
+        });
+      });
+    });
+  }
+
   petFormSubmitEvent = (pet) => {
     petRequests.createPet(pet);
+    this.getPartedPets();
   }
 
   componentDidMount() {
@@ -33,14 +45,7 @@ class Profile extends React.Component {
         fbUserObject: fbUser.providerData[0],
       });
     });
-
-    userRequests.getUserByFbId(fbUser.uid).then((currentUser) => {
-      petRequests.getPetsByUserId(currentUser.id).then((partedPets) => {
-        this.setState({
-          usersPets: partedPets,
-        });
-      });
-    });
+    this.getPartedPets();
   }
 
   render() {

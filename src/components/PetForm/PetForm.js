@@ -43,8 +43,15 @@ class PetForm extends React.Component {
     const { onSubmit, userObject } = this.props;
     const petSubmit = { ...this.state.newPet };
     petSubmit.userId = userObject.id;
-    onSubmit(petSubmit);
-    this.toggle();
+    if (petSubmit.name && 
+        petSubmit.breed && 
+        petSubmit.dateOfBirth && 
+        petSubmit.dateOfDeath) {
+      onSubmit(petSubmit);
+      this.toggle();
+    } else {
+      alert('You Fucked Up.  Fill out the whole form, d-bag.')
+    }
   }
 
   formFieldStringState = (name, event) => {
