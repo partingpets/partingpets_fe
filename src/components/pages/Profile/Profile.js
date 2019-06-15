@@ -22,6 +22,10 @@ class Profile extends React.Component {
     });
   }
 
+  petFormSubmitEvent = (pet) => {
+    petRequests.createPet(pet);
+  }
+
   componentDidMount() {
     const fbUser = authRequests.getCurrentUser();
     userRequests.getUserByFbId(fbUser.uid).then(() => {
@@ -74,6 +78,8 @@ class Profile extends React.Component {
         <PetForm 
           isOpen={this.state.petModal}
           toggle={this.toggle}
+          onSubmit={this.petFormSubmitEvent}
+          userObject={this.props.userObject}
           />
       </div>
     );

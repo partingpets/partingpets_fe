@@ -38,6 +38,15 @@ class PetForm extends React.Component {
     });
   }
 
+  formSubmit = (e) => {
+    e.preventDefault();
+    const { onSubmit, userObject } = this.props;
+    const petSubmit = { ...this.state.newPet };
+    petSubmit.userId = userObject.id;
+    onSubmit(petSubmit);
+    this.toggle();
+  }
+
   formFieldStringState = (name, event) => {
     event.preventDefault();
     const tempPet = { ...this.state.newPet };
@@ -157,7 +166,7 @@ class PetForm extends React.Component {
                     name="burialStreet"
                     id="burialStreet"
                     placeholder="123 Street Rd"
-                    onChange={this.nameChange}
+                    onChange={this.burialStreetChange}
                     value={newPet.burialStreet}
                   />
                 </FormGroup>
@@ -171,7 +180,7 @@ class PetForm extends React.Component {
                     name="burialCity"
                     id="burialCity"
                     placeholder="Townsville"
-                    onChange={this.nameChange}
+                    onChange={this.burialCityChange}
                     value={newPet.burialCity}
                   />
                 </FormGroup>
@@ -185,7 +194,7 @@ class PetForm extends React.Component {
                     name="burialState"
                     id="burialState"
                     placeholder="North Hampshire"
-                    onChange={this.nameChange}
+                    onChange={this.burialStateChange}
                     value={newPet.burialState}
                   />
                 </FormGroup>
@@ -199,7 +208,7 @@ class PetForm extends React.Component {
                     name="burialZipCode"
                     id="burialZipCode"
                     placeholder="55555"
-                    onChange={this.nameChange}
+                    onChange={this.burialZipCodeChange}
                     value={newPet.burialZipCode}
                   />
                 </FormGroup>
@@ -213,7 +222,7 @@ class PetForm extends React.Component {
                     name="burialPlot"
                     id="burialPlot"
                     placeholder="A-1"
-                    onChange={this.nameChange}
+                    onChange={this.burialPlotChange}
                     value={newPet.burialPlot}
                   />
                 </FormGroup>
