@@ -10,16 +10,14 @@ import './Profile.scss';
 
 class Profile extends React.Component {
   state = {
-    userObject: {},
     fbUserObject: {},
     usersPets: [],
   };
 
   componentDidMount() {
     const fbUser = authRequests.getCurrentUser();
-    userRequests.getUserByFbId(fbUser.uid).then((currentUser) => {
+    userRequests.getUserByFbId(fbUser.uid).then(() => {
       this.setState({
-        userObject: currentUser,
         fbUserObject: fbUser.providerData[0],
       });
     });
@@ -34,7 +32,8 @@ class Profile extends React.Component {
   }
 
   render() {
-    const { userObject, fbUserObject, usersPets } = this.state;
+    const { userObject } = this.props;
+    const { fbUserObject, usersPets } = this.state;
     const singlePetCard = usersPet => <Pets key={usersPet.id} Pet={usersPet} />;
 
     const pets = usersPets.map(singlePetCard);
@@ -44,7 +43,7 @@ class Profile extends React.Component {
         <div className="container">
           <div className="row">
             <div className="col-sm-4">
-              <Card data-uid={userObject.id}>
+               <Card data-uid={userObject.id}>
                 <CardHeader>
                   {`${userObject.firstName} ${userObject.lastName}`}
                   <img className="profileCardImg" src={fbUserObject.photoURL} alt="profile" />
