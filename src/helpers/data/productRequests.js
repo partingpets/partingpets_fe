@@ -6,6 +6,7 @@ const productsApiBaseUrl = apiKeys.petsApi.apiBaseUrl;
 
 const getCurrentUid = () => firebase.auth().currentUser.uid;
 
+// Get All Products For Store Page //
 const getAllProducts = () => new Promise((resolve, reject) => {
   axios
     .get(`${productsApiBaseUrl}/api/products/`)
@@ -16,6 +17,7 @@ const getAllProducts = () => new Promise((resolve, reject) => {
     .catch(error => reject(error));
 });
 
+// Get Products By Partner ID for Partner Page //
 const getAllProductsByPartnerId = partnerId => new Promise((resolve, reject) => {
   axios
     .get(`${productsApiBaseUrl}/api/products/partner/${partnerId}`)
@@ -26,6 +28,7 @@ const getAllProductsByPartnerId = partnerId => new Promise((resolve, reject) => 
     .catch(error => reject(error));
 });
 
+// Get All Product Categories for Product Modal //
 const getAllProductCategories = () => new Promise((resolve, reject) => {
   axios
     .get(`${productsApiBaseUrl}/api/products/categories`)
@@ -35,6 +38,7 @@ const getAllProductCategories = () => new Promise((resolve, reject) => {
     .catch(error => reject(error));
 });
 
+// Create Product Call //
 const createProduct = (newProduct) => {
   axios.post(`${productsApiBaseUrl}/api/Products/`, newProduct);
 };
