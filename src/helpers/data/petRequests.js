@@ -12,6 +12,6 @@ const getPetsByUserId = uid => new Promise((resolve, reject) => {
     .catch(error => reject(error));
 });
 
-export default { 
+export default {
   getPetsByUserId,
 };

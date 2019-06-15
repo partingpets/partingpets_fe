@@ -52,8 +52,8 @@ class App extends React.Component {
           pendingUser: false,
         });
         authRequests.getCurrentUserJwt();
-        const user = authRequests.getCurrentUser();
-        userRequests.getUserByFbId(user.uid).then((currentUser) => {
+        const userId = authRequests.getCurrentUid();
+        userRequests.getUserByFbId(userId).then((currentUser) => {
           this.setState({
             userObject: currentUser,
           });
@@ -94,8 +94,12 @@ class App extends React.Component {
                 <Switch>
                   <PublicRoute path="/auth" component={Auth} authed={authed} />
                   <PrivateRoute path="/profile" component={() => <Profile userObject={userObject} />} authed={authed} />
-                  <PrivateRoute path="/partners" component={() => <Partners userObject={userObject} />} authed={authed} />
-                  <PrivateRoute path="/store" component={() => <Products userObject={userObject} />} authed={authed}  />
+                  <PrivateRoute
+                    path="/partners"
+                    component={() => <Partners userObject={userObject} />}
+                    authed={authed}
+                  />
+                  <PrivateRoute path="/store" component={() => <Products userObject={userObject} />} authed={authed} />
                   <PrivateRoute path="/" component={Home} authed={authed} />
                   <PrivateRoute path="/home" component={Home} authed={authed} />
                 </Switch>

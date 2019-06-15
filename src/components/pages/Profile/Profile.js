@@ -2,38 +2,44 @@ import React from 'react';
 import {
   Card, CardText, CardBody, Button, CardHeader,
 } from 'reactstrap';
-import userRequests from '../../../helpers/data/userRequests';
 import authRequests from '../../../helpers/data/authRequests';
 import petRequests from '../../../helpers/data/petRequests';
 import Pets from '../Pets/Pets';
 import './Profile.scss';
 
 class Profile extends React.Component {
+  // Using this to fix this error: https://stackoverflow.com/a/56537704
+  profileMounted = false;
+
   state = {
-    fbUserObject: {},
+    fbUserImage: '',
     usersPets: [],
   };
 
   componentDidMount() {
-    const fbUser = authRequests.getCurrentUser();
-    userRequests.getUserByFbId(fbUser.uid).then(() => {
-      this.setState({
-        fbUserObject: fbUser.providerData[0],
-      });
-    });
+    this.profileMounted = true;
 
-    userRequests.getUserByFbId(fbUser.uid).then((currentUser) => {
-      petRequests.getPetsByUserId(currentUser.id).then((partedPets) => {
+    if (this.profileMounted) {
+      const fbUser = authRequests.getCurrentUser();
+      this.setState({
+        fbUserImage: fbUser.providerData[0].photoURL,
+      });
+
+      petRequests.getPetsByUserId(this.props.userObject.id).then((partedPets) => {
         this.setState({
           usersPets: partedPets,
         });
       });
-    });
+    }
+  }
+
+  componentWillUnmount() {
+    this.profileMounted = false;
   }
 
   render() {
     const { userObject } = this.props;
-    const { fbUserObject, usersPets } = this.state;
+    const { fbUserImage, usersPets } = this.state;
     const singlePetCard = usersPet => <Pets key={usersPet.id} Pet={usersPet} />;
 
     const pets = usersPets.map(singlePetCard);
@@ -43,10 +49,10 @@ class Profile extends React.Component {
         <div className="container">
           <div className="row">
             <div className="col-sm-4">
-               <Card data-uid={userObject.id}>
+              <Card data-uid={userObject.id}>
                 <CardHeader>
                   {`${userObject.firstName} ${userObject.lastName}`}
-                  <img className="profileCardImg" src={fbUserObject.photoURL} alt="profile" />
+                  <img className="profileCardImg" src={fbUserImage} alt="profile" />
                 </CardHeader>
                 <CardBody>
                   <CardText>{`E-mail: ${userObject.email}`}</CardText>
