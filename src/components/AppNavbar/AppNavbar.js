@@ -50,12 +50,14 @@ class AppNavbar extends React.Component {
               </NavLink>
             </NavItem>
             <NavItem>
-        { userObject.isPartner ? 
-        <NavLink tag={RRNavLink} to="/partners">
-            <i className="navIcon fas fa-paw fa-2x" />
-            Partners
-        </NavLink>
-        : '' } 
+              {userObject.isPartner ? (
+                <NavLink tag={RRNavLink} to="/partners">
+                  <i className="navIcon fas fa-boxes fa-2x" />
+                  My Items
+                </NavLink>
+              ) : (
+                ''
+              )}
               {/* <NavLink tag={RRNavLink} to="/partners">
                 <i className="navIcon fas fa-paw fa-2x" />
                 Partners
