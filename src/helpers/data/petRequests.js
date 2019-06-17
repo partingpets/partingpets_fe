@@ -12,6 +12,9 @@ const getPetsByUserId = uid => new Promise((resolve, reject) => {
     .catch(error => reject(error));
 });
 
+const createPet = pet => axios.post(`${petsApiBaseUrl}/api/pets`, pet);
+
 export default { 
   getPetsByUserId,
+  createPet,
 };
