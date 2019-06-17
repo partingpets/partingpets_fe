@@ -61,6 +61,7 @@ class AddProductModal extends React.Component {
       newProduct: defaultProduct,
     });
   }
+  
 
   componentDidMount() {
     productRequests

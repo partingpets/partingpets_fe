@@ -18,7 +18,7 @@ class Partners extends React.Component {
     userObject: {},
   };
 
-  // Get All Products *Need to refactor By Partner ID* //
+  // Get All Products By Partner ID //
 
   getProducts = () => {
     const { userObject } = this.props;
@@ -77,9 +77,13 @@ class Partners extends React.Component {
     return (
       <div className="products mx-auto animated bounceInLeft w-100">
         <div className="productWrap">
-          <button className="addProductBtn" id="addProduct" onClick={this.showModal}>
+          {/* <button className="addProductBtn" id="addProduct" onClick={this.showModal}>
             <i className="far fa-plus-square" />
             ADD PRODUCT
+          </button> */}
+          <button className="addProductBtn" onClick={this.showModal}>
+            <i className="far fa-plus-square" />
+            ADD NEW ITEM
           </button>
         </div>
 

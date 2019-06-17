@@ -64,7 +64,6 @@ class Products extends React.Component {
       products.forEach((product) => {
         if (
           product.name.toLowerCase().includes(value.toLowerCase())
-          || product.productCategory.toLowerCase().includes(value.toLowerCase())
           || product.description.toLowerCase().includes(value.toLowerCase())
         ) {
           filteredProducts.push(product);
