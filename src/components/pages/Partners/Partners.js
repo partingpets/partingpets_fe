@@ -1,8 +1,4 @@
 import React from 'react';
-// import partnerRequests from '../../../helpers/data/partnerRequests';
-// import PartnerItems from '../PartnerItems/PartnerItems';
-import userRequests from '../../../helpers/data/userRequests';
-import authRequests from '../../../helpers/data/authRequests';
 import AddProductModal from '../../AddProductModal/AddProductModal';
 import productRequests from '../../../helpers/data/productRequests';
 import PrintProductCard from '../PrintProductCard/PrintProductCard';
@@ -59,12 +55,32 @@ class Partners extends React.Component {
   };
 
   productFormSubmitEvent = (newProduct) => {
-    productRequests.createProduct(newProduct);
-    this.getProducts();
-    this.setState({
-      showModal: false,
+    productRequests.createProduct(newProduct).then((result) => {
+      this.getProducts();
+      this.setState({
+        showModal: false,
+      });
     });
   };
+
+  // deleteSingleProduct = (productId) => {
+  //   productRequests.deleteProduct(productId).then(() => {
+  //     this.getproducts();
+  //   });
+  // };
+
+  // newProductView = () => {
+  //   this.props.history.push('/products/new');
+  // };
+
+  // onSelect = (productId) => {
+  //   this.props.history.push(`/products/${productId}`);
+  // };
+
+  // passProductToEdit = (productId) => {
+  //   this.setState({ productEditId: productId });
+  //   this.props.history.push(`/products/${productId}/edit`);
+  // };
 
   render() {
     const { userObject } = this.props;

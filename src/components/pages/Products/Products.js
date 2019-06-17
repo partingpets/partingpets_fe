@@ -35,25 +35,6 @@ class Products extends React.Component {
     });
   }
 
-  // deleteSingleProduct = (productId) => {
-  //   productRequests.deleteProduct(productId).then(() => {
-  //     this.getproducts();
-  //   });
-  // };
-
-  // newProductView = () => {
-  //   this.props.history.push('/products/new');
-  // };
-
-  // onSelect = (productId) => {
-  //   this.props.history.push(`/products/${productId}`);
-  // };
-
-  // passProductToEdit = (productId) => {
-  //   this.setState({ productEditId: productId });
-  //   this.props.history.push(`/products/${productId}/edit`);
-  // };
-
   onChange = (value, event) => {
     const { products } = this.state;
     const filteredProducts = [];
