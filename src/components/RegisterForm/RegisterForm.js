@@ -21,7 +21,7 @@ const defaultUser = {
   firstName: '',
   lastName: '',
   email: '',
-  partner: 'false',
+  isPartner: 'false',
   partnerCode: '',
   street1: '',
   street2: '',
@@ -67,6 +67,7 @@ class RegisterForm extends React.Component {
     this.setState({
       modal: props.showModal,
       firebaseId: props.firebaseId,
+      newUser: props.userToEdit,
     });
   }
 
@@ -101,7 +102,7 @@ class RegisterForm extends React.Component {
 
   emailChange = event => this.formFieldStringState('email', event);
 
-  partnerChange = event => this.formFieldBoolState('partner', event);
+  partnerChange = event => this.formFieldBoolState('isPartner', event);
 
   partnerCodeChange = event => this.formFieldStringState('partnerCode', event);
 
@@ -214,7 +215,7 @@ class RegisterForm extends React.Component {
                       id="userEmail"
                       placeholder="pet_ownwer@luvmypet.com"
                       onChange={this.emailChange}
-                      value={newUser.Email}
+                      value={newUser.email}
                     />
                   </FormGroup>
                 </Col>
@@ -228,7 +229,7 @@ class RegisterForm extends React.Component {
                       id="partner"
                       placeholder="Are you a partner"
                       onChange={this.partnerChange}
-                      value={newUser.partner === 'true' ? 'Yes' : 'No'}
+                      value={newUser.isPartner === 'true' ? 'Yes' : 'No'}
                     >
                       <option key="1" data-selection="false">
                         No
@@ -241,14 +242,13 @@ class RegisterForm extends React.Component {
                 </Col>
                 <Col md={4}>
                   <FormGroup>
-                    <Label for="partnerCode">Partner Registration Code</Label>
+                    <Label for="partnerCode">Partner Code</Label>
                     <Input
-                      disabled={newUser.partner === 'false' ? 'disabled' : ''}
+                      disabled={newUser.isPartner === 'false' ? 'disabled' : ''}
                       className="form-input"
                       type="text"
                       name="partnerCode"
                       id="partnerCode"
-                      // disabled={!newUser.partner}
                       placeholder="Registration Code"
                       onChange={this.partnerCodeChange}
                       value={newUser.partnerCode}

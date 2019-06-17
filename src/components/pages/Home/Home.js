@@ -8,7 +8,7 @@ class Home extends React.Component {
   state = {
     showModal: false,
     firebaseId: -1,
-    isEditing: false,
+    userToEdit: {},
   };
 
   componentWillMount() {
@@ -72,14 +72,34 @@ class Home extends React.Component {
     // }
   };
 
+  editUserItem = (userId) => {
+    const fbUserId = this.props.userObject.firebaseId;
+    userRequests
+      .getUserByFbId(fbUserId)
+      .then((currentUser) => {
+        this.setState({
+          isEditing: true,
+          userToEdit: currentUser,
+        });
+        this.showModal();
+      })
+      .catch(error => console.error(error));
+  };
+  // if(!isEditing) {
+  //   editUserProps.dis
+  // }
+
   render() {
-    const { firebaseId } = this.state;
+    const { firebaseId, isEditing } = this.state;
     return (
       <div>
         <RegisterForm
           showModal={this.state.showModal}
           onSubmit={this.userFormSubmitEvent}
+          isEditing={isEditing}
+          // {...editUserProps}
           modalCloseEvent={this.modalCloseEvent}
+          editForm={this.editUserItem}
           fireBaseId={firebaseId}
         />
       </div>

@@ -54,7 +54,7 @@ class Profile extends React.Component {
   };
 
   editUserItem = (userId) => {
-    const fbUserId = this.props.userObject.firebaseId;
+    const fbUserId = this.props.userObject.fireBaseUid;
     userRequests
       .getUserByFbId(fbUserId)
       .then((currentUser) => {
@@ -69,7 +69,7 @@ class Profile extends React.Component {
 
   render() {
     const { userObject } = this.props;
-    const { fbUserImage, usersPets } = this.state;
+    const { fbUserImage, usersPets, userToEdit } = this.state;
     const singlePetCard = usersPet => <Pets key={usersPet.id} Pet={usersPet} />;
 
     const pets = usersPets.map(singlePetCard);
@@ -79,7 +79,7 @@ class Profile extends React.Component {
         <RegisterForm
           showModal={this.state.showModal}
           onSubmit={this.userFormSubmitEvent}
-          // {...editUserProps}
+          userToEdit ={userToEdit}
           modalCloseEvent={this.modalCloseEvent}
           editForm={this.editUserItem}
           fireBaseId={userObject.fireBaseUid}
@@ -99,7 +99,9 @@ class Profile extends React.Component {
                   <CardText>
                     {userObject.city} {userObject.state}, {userObject.zipcode}
                   </CardText>
-                  <Button id={userObject.id}>Edit</Button>
+                  <Button id={userObject.id} onClick={this.editUserItem}>
+                    Edit
+                  </Button>
                 </CardBody>
               </Card>
             </div>
