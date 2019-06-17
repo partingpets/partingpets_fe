@@ -1,56 +1,54 @@
-
-
 .products {
-    margin-top: 8%;
-    font-family: 'Rubik', sans-serif;
-    text-align: center;
+  margin-top: 6%;
+  font-family: "Rubik", sans-serif;
+  text-align: center;
 }
 
 .productSearch {
-    width: 40%;
-    margin-left: 70%;
-    border-radius: 10px;
-  }
-  
-  #addProduct {
+  width: 40%;
+  margin-left: 70%;
+  border-radius: 10px;
+}
+
+#addProduct {
   margin-top: 0px !important;
   margin-left: 10px;
-  }
-  
-  .productWrap {
-    display: flex;
-    flex-flow: row;
-    align-items: center;
-    padding: 1%;
-  }
-  
-  .react-search-field-input { 
-    border-radius: 5px;
-  }
-  
-  .react-search-field-button { 
-    border-radius: 5px;
-    background-color: white !important;
-    margin-left: 5px;
-  }
-  
-  .react-search-field {
-   border-radius: 15px;
-   border: none !important;
-  }
-  
-  .fa-plus-square {
-    padding-right: 5px;
-  }
-  
-  .addProductBtn {
-    border-radius: 5px;
-    background-color: rgb(21, 21, 58);
-    color: white;
-    width: 4%;
-    height: 6%;
-    font-size: 7pt;
-    padding: 4px;
-    text-align: center;
-  }
+}
 
+.productWrap {
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  padding: 1%;
+}
+
+.react-search-field-input {
+  border-radius: 5px;
+}
+
+.react-search-field-button {
+  border-radius: 5px;
+  background-color: white !important;
+  margin-left: 5px;
+}
+
+.react-search-field {
+  border-radius: 15px;
+  border: none !important;
+}
+
+.fa-plus-square {
+  padding-right: 5px;
+}
+
+.addProductBtn {
+  border-radius: 5px;
+  background-color: rgb(21, 21, 58);
+  color: white;
+  margin-left: 85%;
+  width: 4%;
+  height: 6%;
+  font-size: 7pt;
+  padding: 4px;
+  text-align: center;
+}
