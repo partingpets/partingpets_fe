@@ -93,15 +93,31 @@ class App extends React.Component {
               <div className="justify-content-center">
                 <Switch>
                   <PublicRoute path="/auth" component={Auth} authed={authed} />
-                  <PrivateRoute path="/profile" component={() => <Profile userObject={userObject} />} authed={authed} />
                   <PrivateRoute
-                    path="/partners"
-                    component={() => <Partners userObject={userObject} />}
+                    path="/profile"
+                    component={props => <Profile userObject={userObject} {...props} />}
                     authed={authed}
                   />
-                  <PrivateRoute path="/store" component={() => <Products userObject={userObject} />} authed={authed} />
-                  <PrivateRoute path="/" component={Home} authed={authed} />
-                  <PrivateRoute path="/home" component={Home} authed={authed} />
+                  <PrivateRoute
+                    path="/partners"
+                    component={props => <Partners userObject={userObject} {...props} />}
+                    authed={authed}
+                  />
+                  <PrivateRoute
+                    path="/store"
+                    component={props => <Products userObject={userObject} {...props} />}
+                    authed={authed}
+                  />
+                  <PrivateRoute
+                    path="/"
+                    component={props => <Home userObject={userObject} {...props} />}
+                    authed={authed}
+                  />
+                  <PrivateRoute
+                    path="/home"
+                    component={props => <Home userObject={userObject} {...props} />}
+                    authed={authed}
+                  />
                 </Switch>
               </div>
             </div>

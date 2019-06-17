@@ -2,7 +2,9 @@ import React from 'react';
 import {
   Card, CardText, CardBody, Button, CardHeader,
 } from 'reactstrap';
+import RegisterForm from '../../RegisterForm/RegisterForm';
 import authRequests from '../../../helpers/data/authRequests';
+import userRequests from '../../../helpers/data/userRequests';
 import petRequests from '../../../helpers/data/petRequests';
 import Pets from '../Pets/Pets';
 import './Profile.scss';
@@ -12,12 +14,14 @@ class Profile extends React.Component {
   profileMounted = false;
 
   state = {
+    showModal: false,
+    userToEdit: {},
     fbUserImage: '',
     usersPets: [],
   };
 
   componentDidMount() {
-    this.profileMounted = true;
+    this.profileMounted = !!this.props.userObject.id;
 
     if (this.profileMounted) {
       const fbUser = authRequests.getCurrentUser();
@@ -37,6 +41,32 @@ class Profile extends React.Component {
     this.profileMounted = false;
   }
 
+  showModal = (e) => {
+    this.setState({
+      showModal: true,
+    });
+  };
+
+  modalCloseEvent = () => {
+    this.setState({
+      showModal: false,
+    });
+  };
+
+  editUserItem = (userId) => {
+    const fbUserId = this.props.userObject.firebaseId;
+    userRequests
+      .getUserByFbId(fbUserId)
+      .then((currentUser) => {
+        this.setState({
+          isEditing: true,
+          userToEdit: currentUser,
+        });
+        this.showModal();
+      })
+      .catch(error => console.error(error));
+  };
+
   render() {
     const { userObject } = this.props;
     const { fbUserImage, usersPets } = this.state;
@@ -46,6 +76,14 @@ class Profile extends React.Component {
 
     return (
       <div className="Profile">
+        <RegisterForm
+          showModal={this.state.showModal}
+          onSubmit={this.userFormSubmitEvent}
+          // {...editUserProps}
+          modalCloseEvent={this.modalCloseEvent}
+          editForm={this.editUserItem}
+          fireBaseId={userObject.fireBaseUid}
+        />
         <div className="container">
           <div className="row">
             <div className="col-sm-4">
@@ -61,7 +99,7 @@ class Profile extends React.Component {
                   <CardText>
                     {userObject.city} {userObject.state}, {userObject.zipcode}
                   </CardText>
-                  <Button>Edit</Button>
+                  <Button id={userObject.id}>Edit</Button>
                 </CardBody>
               </Card>
             </div>
