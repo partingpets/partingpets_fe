@@ -35,7 +35,6 @@ class AddProductModal extends React.Component {
     backdrop: 'static',
     newProduct: defaultProduct,
     productCategories: [],
-    productCategoryName: '',
     descriptionMaxLength: 250,
     descriptionCharCount: 250,
   };
@@ -142,7 +141,6 @@ class AddProductModal extends React.Component {
       descriptionMaxLength,
       newProduct,
       productCategories,
-      productCategoryName,
     } = this.state;
     return (
       <div className="AddProductModal">
