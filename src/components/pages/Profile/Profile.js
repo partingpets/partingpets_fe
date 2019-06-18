@@ -14,6 +14,8 @@ class Profile extends React.Component {
     fbUserObject: {},
     usersPets: [],
     petModal: false,
+    isEditingPet: false,
+    petIdToEdit: '-1',
   };
 
   toggle = () => {
@@ -34,9 +36,18 @@ class Profile extends React.Component {
   }
 
   petFormSubmitEvent = (pet) => {
-    petRequests.createPet(pet);
-    this.getPartedPets();
+    const { isEditingPet, petIdToEdit } = this.state;
+    if (isEditingPet) {
+      petRequests.editPet(petIdToEdit, pet);
+      this.getPartedPets();
+      this.setState({ isEditingPet: false, petIdToEdit: '-1' })
+    } else {
+      petRequests.createPet(pet);
+      this.getPartedPets();
+    }
   }
+
+  passPetToEdit = petId => this.setState({ isEditingPet: true, petIdToEdit: petId });
 
   componentDidMount() {
     const fbUser = authRequests.getCurrentUser();
@@ -50,8 +61,17 @@ class Profile extends React.Component {
 
   render() {
     const { userObject } = this.props;
-    const { fbUserObject, usersPets } = this.state;
-    const singlePetCard = usersPet => <Pets key={usersPet.id} Pet={usersPet} />;
+    const { 
+      fbUserObject, 
+      usersPets,
+      isEditingPet,
+      petIdToEdit,
+     } = this.state;
+    const singlePetCard = usersPet => <Pets 
+                                        key={usersPet.id} 
+                                        Pet={usersPet} 
+                                        passPetToEdit={this.passPetToEdit}
+                                        />;
 
     const pets = usersPets.map(singlePetCard);
 
@@ -85,6 +105,8 @@ class Profile extends React.Component {
           toggle={this.toggle}
           onSubmit={this.petFormSubmitEvent}
           userObject={this.props.userObject}
+          isEditingPet={isEditingPet}
+          petIdToEdit={petIdToEdit}
           />
       </div>
     );

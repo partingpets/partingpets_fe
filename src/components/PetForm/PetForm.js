@@ -54,6 +54,17 @@ class PetForm extends React.Component {
     }
   }
 
+  componentDidUpdate(prevProps) {
+    const { isEditingPet, petIdToEdit } = this.props;
+    if (prevProps !== this.props && isEditingPet) {
+      petRequests.getSinglePet(petIdToEdit)
+        .then((thatPetYouJustGot) => {
+          this.setState({ newPet: thatPetYouJustGot.data });
+        })
+        .catch(error => console.error('error with geting the pet you wanted to edit', error));
+    }
+  }
+
   formFieldStringState = (name, event) => {
     event.preventDefault();
     const tempPet = { ...this.state.newPet };
