@@ -1,14 +1,31 @@
 .trash {
   border-radius: 10px;
-  background-color: blue;
+  background-color: rgb(21, 21, 58);
+  color: white;
 }
 
 .pencil {
-  background-color: blue;
   border-radius: 10px;
+  background-color: rgb(21, 21, 58);
+  color: white;
 }
 
 .partner-item-img {
   max-width: 100px;
-  max-height: 200px;
+  max-height: 100px;
+}
+
+.partner-item {
+  text-align: center;
+  vertical-align: middle;
+  font-size: 17px;
+  background: linear-gradient(
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0.1)
+  );
+}
+
+.td {
+  text-align: center;
+  vertical-align: middle;
 }

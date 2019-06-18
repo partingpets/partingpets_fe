@@ -116,12 +116,12 @@ class Partners extends React.Component {
             <thead>
               <tr>
                 <th scope="col">#</th>
-                <th scope="col">Image</th>
-                <th scope="col">Name</th>
-                <th scope="col">Description</th>
-                <th scope="col">Price</th>
-                <th scope="col">Edit</th>
-                <th scope="col">Delete</th>
+                <th scope="col">IMAGE</th>
+                <th scope="col">NAME</th>
+                <th scope="col">DESCRIPTION</th>
+                <th scope="col">PRICE</th>
+                <th scope="col">EDIT</th>
+                <th scope="col">DELETE</th>
               </tr>
             </thead>
             <tbody>{printProduct}</tbody>

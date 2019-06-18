@@ -25,7 +25,7 @@ class PartnerItemTable extends React.Component {
     const { product, index } = this.props;
     const rowNumber = (index + 1).toString();
     return (
-      <tr className="PartnerItem">
+      <tr className="partner-item ml-auto">
         <th scope="row">{rowNumber}</th>
         <td>
           <img className="partner-item-img" src={product.imageUrl} alt="product" />
