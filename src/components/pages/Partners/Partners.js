@@ -86,17 +86,13 @@ class Partners extends React.Component {
     const { userObject } = this.props;
     const { products } = this.state;
 
-    const printProduct = products.map(product => (
-      <PrintProductCard key={product.id} product={product} onSelect={this.onSelect} />
+    const printProduct = products.map((product, index) => (
+      <PrintProductCard key={product.id} index={index} product={product} onSelect={this.onSelect} />
     ));
 
     return (
       <div className="products mx-auto animated bounceInLeft w-100">
         <div className="productWrap">
-          {/* <button className="addProductBtn" id="addProduct" onClick={this.showModal}>
-            <i className="far fa-plus-square" />
-            ADD PRODUCT
-          </button> */}
           <button className="addProductBtn" onClick={this.showModal}>
             <i className="far fa-plus-square" />
             ADD NEW ITEM
