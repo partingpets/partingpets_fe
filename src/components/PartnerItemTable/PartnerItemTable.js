@@ -26,13 +26,15 @@ class PartnerItemTable extends React.Component {
     const rowNumber = (index + 1).toString();
     return (
       <tr className="partner-item ml-auto">
-        <th scope="row">{rowNumber}</th>
+        <th className="header" scope="row">
+          {rowNumber}
+        </th>
         <td>
           <img className="partner-item-img" src={product.imageUrl} alt="product" />
         </td>
-        <td>{product.name}</td>
-        <td>{product.description}</td>
-        <td>{product.unitPrice}</td>
+        <td className="name">{product.name}</td>
+        <td className="description">{product.description}</td>
+        <td className="unit-price">{product.unitPrice}</td>
         <td>
           <button className="pencil" onClick={this.editEvent}>
             <i className="lnr lnr-pencil pencil" />

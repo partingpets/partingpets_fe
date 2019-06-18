@@ -16,16 +16,32 @@
 }
 
 .partner-item {
-  text-align: center;
-  vertical-align: middle;
   font-size: 17px;
   background: linear-gradient(
-    rgba(255, 255, 255, 0.1),
-    rgba(255, 255, 255, 0.1)
+    rgba(255, 255, 255, 0.2),
+    rgba(255, 255, 255, 0.2)
   );
 }
 
-.td {
-  text-align: center;
+.name {
   vertical-align: middle;
+  text-align: center;
+  width: 30%;
+  height: 50px;
+  padding: 10px;
+  font-size: 20px;
+}
+
+.description {
+  vertical-align: middle;
+  text-align: center;
+  width: 30%;
+  height: 50px;
+  padding: 10px;
+  font-size: 15px;
+}
+
+.header {
+  background-color: rgb(21, 21, 58);
+  color: white;
 }
