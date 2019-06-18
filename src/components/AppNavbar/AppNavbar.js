@@ -59,18 +59,16 @@ class AppNavbar extends React.Component {
                 ''
               )}
             </NavItem>
-                {/* if isAdmin is true */}
             <NavItem>
-              {userObject.isPartner ? (
-                <NavLink tag={RRNavLink} to="/partners">
-                  <i className="navIcon fas fa-boxes fa-2x" />
-                  My Items
+              {userObject.isAdmin ? (
+                <NavLink tag={RRNavLink} to="/admin">
+                  <i className="navIcon fas fa-users-cog fa-2x" />
+                  Admin
                 </NavLink>
               ) : (
                 ''
               )}
             </NavItem>
-            
             {/* <NavItem> */}
             {/* <NavLink tag={RRNavLink} onClick={logoutClickEvent} to="/home">
                 <i className="navIcon fas fa-sign-out-alt fa-2x" />
