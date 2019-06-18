@@ -1,13 +1,30 @@
 import React from 'react';
+import { 
+UncontrolledDropdown, 
+DropdownToggle, 
+DropdownMenu, 
+DropdownItem, 
+} from 'reactstrap';
 import './Admin.scss';
 
 class Admin extends React.Component {
     render() {
         return (
-            <div>
-                <h1 className="admin-title">
-                    Admin
-                </h1>
+            <div className="admin-container">
+                <h1>Admin</h1>
+                <UncontrolledDropdown>
+                    <DropdownToggle>
+                        Manage
+                    </DropdownToggle>
+                    <DropdownMenu>
+                        <DropdownItem>
+                            Partners
+                        </DropdownItem>
+                        <DropdownItem>
+                            Users
+                        </DropdownItem>
+                    </DropdownMenu>
+                </UncontrolledDropdown>
             </div>
         );
     }
