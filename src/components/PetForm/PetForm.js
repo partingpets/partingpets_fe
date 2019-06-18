@@ -103,7 +103,14 @@ class PetForm extends React.Component {
 
   render(){
     const { newPet } = this.state;
-    const { isOpen } = this.props;
+    const { isOpen, isEditingPet } = this.props;
+    const formTitle = () => {
+      if (isEditingPet) {
+        return <h2>Edit Pet Information</h2>
+      }
+      return <h2>Pet Registration</h2>
+    }
+
     return ( 
       <div className="PetForm">
       <Modal
@@ -113,7 +120,7 @@ class PetForm extends React.Component {
         backdrop={this.state.backdrop} 
         size="lg"
       >
-        <ModalHeader toggle={e => this.toggle(e)}>Pet Registration</ModalHeader>
+        <ModalHeader toggle={e => this.toggle(e)}>{formTitle()}</ModalHeader>
         <ModalBody>
           <Form>
             <Row form>
