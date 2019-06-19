@@ -23,18 +23,32 @@ componentDidMount() {
     this.getPartners();
 }
 
-deleteOnePartner = (partnerId) => {
+// deleteOnePartner = (partnerId) => {
+//     partnerRequests.deletePartner(partnerId)
+//     .then(() => {
+//         partnerRequests.getAllPartners()
+//         .then((partners) => {
+//             this.setState({ partners });
+//         });
+//     })
+//     .catch((err) => {
+//         console.error('error in deleting the partner', err)
+//     });
+// };
+
+ deleteOnePartner = partnerId => new Promise((resolve, reject) => {
     partnerRequests.deletePartner(partnerId)
-    .then(() => {
-        partnerRequests.getAllPartners()
-        .then((partners) => {
-            this.setState({ partners });
-        });
-    })
-    .catch((err) => {
-        console.error('error in deleting the partner', err)
-    });
-};
+         .then((partners) => {
+            //  partnerRequests.getAllPartners()
+            //  .then((partners) => {
+            //     resolve(partners.data)
+            //     this.setState({ partners });
+            //  })
+            resolve(partners)
+            this.getPartners();
+         })
+         .catch(error => reject(error));
+ });
 
 render() {
     const { partners } = this.state;
