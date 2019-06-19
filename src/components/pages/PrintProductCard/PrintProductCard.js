@@ -12,45 +12,14 @@ class PrintProductCard extends React.Component {
     userObject: PropTypes.object,
   };
 
-  editEvent = (e) => {
-    e.preventDefault();
-    const { passProductToEdit, product } = this.props;
-    passProductToEdit(product.id);
-  };
-
-  deleteEvent = (e) => {
-    e.preventDefault();
-    const { deleteSingleProduct, product } = this.props;
-    deleteSingleProduct(product.id);
-  };
-
   productClick = () => {
     const { product, onSelect } = this.props;
     onSelect(product.id);
   };
 
   render() {
-    const { product, userObject } = this.props;
-    const uid = authRequests.getCurrentUid();
+    const { product } = this.props;
 
-    // const makeButtons = () =>
-    // // if (product.partnerId === userObject.partnerId) {
-    // //   return (
-    // //     <div>
-    // //       <span className="col">
-    // //         <button className="pencil" onClick={this.editEvent}>
-    // //           <i className="fas fa-pencil-alt" />
-    // //         </button>
-    // //       </span>
-    // //       <span className="col">
-    // //         <button className="trash" onClick={this.deleteEvent}>
-    // //           <i class="fas fa-trash" />
-    // //         </button>
-    // //       </span>
-    // //     </div>
-    // //   );
-    // // }
-    //    <span className="col-2" />;
     return (
       <div className="productCard card2 col-2">
         <img className="productImage" src={product.imageUrl} alt={product.name} />
@@ -63,7 +32,6 @@ class PrintProductCard extends React.Component {
             {product.isOnSale}
           </h5>
         </div>
-        {/* {makeButtons()} */}
       </div>
     );
   }

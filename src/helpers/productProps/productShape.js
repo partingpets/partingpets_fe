@@ -7,7 +7,6 @@ const productShape = PropTypes.shape({
   isOnSale: PropTypes.bool.isRequired,
   categoryId: PropTypes.number.isRequired,
   unitPrice: PropTypes.number.isRequired,
-  imageUrl: PropTypes.string.isRequired,
   id: PropTypes.number.isRequired,
 });
 
