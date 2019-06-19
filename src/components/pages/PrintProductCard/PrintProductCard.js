@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import productShape from '../../../helpers/productProps/productShape';
-import authRequests from '../../../helpers/data/authRequests';
 
 import './PrintProductCard.scss';
 
@@ -18,8 +17,7 @@ class PrintProductCard extends React.Component {
   };
 
   render() {
-    const { product, userObject } = this.props;
-    const uid = authRequests.getCurrentUid();
+    const { product } = this.props;
 
     return (
       <div className="productCard card2 col-2">

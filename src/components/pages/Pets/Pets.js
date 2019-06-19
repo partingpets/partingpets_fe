@@ -3,11 +3,26 @@ import {
   Card, CardImg, CardText, CardBody, Button, CardHeader,
 } from 'reactstrap';
 import './Pets.scss';
+import petRequests from '../../../helpers/data/petRequests';
 
 class Pets extends React.Component {
 
   render(){
     const { Pet } = this.props;
+
+    const burialData = () => {
+      if (Pet.burialCity && Pet.burialCity){
+        return (
+          <CardText>
+            Final Resting Place: <br />
+            {Pet.burialStreet} <br />
+            Plot {Pet.burialPlot} <br />
+            {Pet.burialCity}, {Pet.burialState} {Pet.burialZipCode}
+          </CardText>
+        );
+      }
+      return <CardText>Please Edit to add burial location.</CardText>
+    }
 
     return(
       <Card>
@@ -29,11 +44,7 @@ class Pets extends React.Component {
             Born:  {Pet.dateOfBirth}<br />
             Died:  {Pet.dateOfDeath}
           </CardText>
-          <CardText>
-            Final Resting Place: <br />
-            {Pet.burialStreet}, Plot {Pet.burialPlot} <br />
-            {Pet.burialCity}, {Pet.burialState} {Pet.burialZipCode}
-          </CardText>
+          {burialData()}
           <Button>Edit</Button>
         </CardBody>
       </div>

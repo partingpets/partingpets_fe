@@ -22,7 +22,7 @@ import pets from '../AppNavbar/images/pets_small.png';
 const defaultProduct = {
   name: '',
   unitPrice: '',
-  imgUrl: '',
+  imageUrl: '',
   categoryId: 0,
   isOnSale: 'False',
   description: '',

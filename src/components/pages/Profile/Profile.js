@@ -6,13 +6,37 @@ import userRequests from '../../../helpers/data/userRequests';
 import authRequests from '../../../helpers/data/authRequests';
 import petRequests from '../../../helpers/data/petRequests';
 import Pets from '../Pets/Pets';
+import PetForm from '../../PetForm/PetForm';
 import './Profile.scss';
 
 class Profile extends React.Component {
   state = {
     fbUserObject: {},
     usersPets: [],
+    petModal: false,
   };
+
+  toggle = () => {
+    this.setState({
+      petModal: !this.state.petModal,
+    });
+  }
+
+  getPartedPets() {
+    const fbUser = authRequests.getCurrentUser();
+    userRequests.getUserByFbId(fbUser.uid).then((currentUser) => {
+      petRequests.getPetsByUserId(currentUser.id).then((partedPets) => {
+        this.setState({
+          usersPets: partedPets,
+        });
+      });
+    });
+  }
+
+  petFormSubmitEvent = (pet) => {
+    petRequests.createPet(pet);
+    this.getPartedPets();
+  }
 
   componentDidMount() {
     const fbUser = authRequests.getCurrentUser();
@@ -21,14 +45,7 @@ class Profile extends React.Component {
         fbUserObject: fbUser.providerData[0],
       });
     });
-
-    userRequests.getUserByFbId(fbUser.uid).then((currentUser) => {
-      petRequests.getPetsByUserId(currentUser.id).then((partedPets) => {
-        this.setState({
-          usersPets: partedPets,
-        });
-      });
-    });
+    this.getPartedPets();
   }
 
   render() {
@@ -56,12 +73,19 @@ class Profile extends React.Component {
                     {userObject.city} {userObject.state}, {userObject.zipcode}
                   </CardText>
                   <Button>Edit</Button>
+                  <Button className="btn addPetButton" onClick={this.toggle}>Add Pet</Button>
                 </CardBody>
               </Card>
             </div>
             <div className="col-sm-8">{pets}</div>
           </div>
         </div>
+        <PetForm 
+          isOpen={this.state.petModal}
+          toggle={this.toggle}
+          onSubmit={this.petFormSubmitEvent}
+          userObject={this.props.userObject}
+          />
       </div>
     );
   }
