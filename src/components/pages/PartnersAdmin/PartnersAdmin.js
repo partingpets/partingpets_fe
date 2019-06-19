@@ -12,7 +12,7 @@ getPartners = () => {
     partnerRequests.getAllPartners()
     .then((partners) => {
         this.setState({ partners });
-        console.log(partners.data);
+        // console.log(partners.data);
     })
     .catch((err) => {
         console.error('error in getting the partners', err)
@@ -23,14 +23,28 @@ componentDidMount() {
     this.getPartners();
 }
 
+deleteOnePartner = (partnerId) => {
+    partnerRequests.deletePartner(partnerId)
+    .then(() => {
+        partnerRequests.getAllPartners()
+        .then((partners) => {
+            this.setState({ partners });
+        });
+    })
+    .catch((err) => {
+        console.error('error in deleting the partner', err)
+    });
+};
+
 render() {
     const { partners } = this.state;
     const partnersComponents = partners.map(partner => (
-        <PartnerItems
+     <PartnerItems
         key={partner.id}
         partner={partner}
+        deleteSinglePartner={this.deleteOnePartner}
         />
-    ));
+        ));
     return (
         <div className="partners-admin-container">
             <h1>Manage The Partners</h1>
