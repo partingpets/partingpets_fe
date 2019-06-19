@@ -14,7 +14,7 @@ class Partners extends React.Component {
     userObject: {},
   };
 
-  // Get All Products *Need to refactor By Partner ID* //
+  // Get All Products By Partner ID //
 
   getProducts = () => {
     const { userObject } = this.props;
@@ -86,16 +86,16 @@ class Partners extends React.Component {
     const { userObject } = this.props;
     const { products } = this.state;
 
-    const printProduct = products.map(product => (
-      <PrintProductCard key={product.id} product={product} onSelect={this.onSelect} />
+    const printProduct = products.map((product, index) => (
+      <PrintProductCard key={product.id} index={index} product={product} onSelect={this.onSelect} />
     ));
 
     return (
       <div className="products mx-auto animated bounceInLeft w-100">
         <div className="productWrap">
-          <button className="addProductBtn" id="addProduct" onClick={this.showModal}>
+          <button className="addProductBtn" onClick={this.showModal}>
             <i className="far fa-plus-square" />
-            ADD PRODUCT
+            ADD NEW ITEM
           </button>
         </div>
 

@@ -22,7 +22,7 @@ import pets from '../AppNavbar/images/pets_small.png';
 const defaultProduct = {
   name: '',
   unitPrice: '',
-  imgUrl: '',
+  imageUrl: '',
   categoryId: 0,
   isOnSale: 'False',
   description: '',
@@ -109,6 +109,8 @@ class AddProductModal extends React.Component {
 
   nameChange = event => this.formFieldStringState('name', event);
 
+  imageUrlChange = event => this.formFieldStringState('imageUrl', event);
+
   priceChange = event => this.formFieldStringState('unitPrice', event);
 
   onSaleChange = event => this.formFieldStringState('onSale', event);
@@ -137,10 +139,7 @@ class AddProductModal extends React.Component {
 
   render() {
     const {
-      descriptionCharCount,
-      descriptionMaxLength,
-      newProduct,
-      productCategories,
+      descriptionCharCount, descriptionMaxLength, newProduct, productCategories,
     } = this.state;
     return (
       <div className="AddProductModal">
@@ -171,6 +170,22 @@ class AddProductModal extends React.Component {
                       placeholder="Enter The Name Of Your Product"
                       onChange={this.nameChange}
                       value={newProduct.name}
+                    />
+                  </FormGroup>
+                </Col>
+              </Row>
+              <Row form>
+                <Col md={12}>
+                  <FormGroup>
+                    <Label for="imageUrl">Image URL</Label>
+                    <Input
+                      className="form-input"
+                      type="text"
+                      name="imageUrl"
+                      id="imageUrl"
+                      placeholder="Enter The Image URL Of Your Product"
+                      onChange={this.imageUrlChange}
+                      value={newProduct.imageUrl}
                     />
                   </FormGroup>
                 </Col>
