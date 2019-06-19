@@ -43,7 +43,7 @@ class AddProductModal extends React.Component {
     showModal: PropTypes.bool,
     onSubmit: PropTypes.func,
     isEditing: PropTypes.bool,
-    passProductToEdit: PropTypes.object,
+    productToEdit: PropTypes.object,
     modalCloseEvent: PropTypes.func,
   };
 

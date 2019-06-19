@@ -1,7 +1,7 @@
 import React from 'react';
 import AddProductModal from '../../AddProductModal/AddProductModal';
 import productRequests from '../../../helpers/data/productRequests';
-import PrintProductCard from '../PrintProductCard/PrintProductCard';
+import PartnerItemTable from '../../PartnerItemTable/PartnerItemTable';
 import './Partners.scss';
 
 class Partners extends React.Component {
@@ -12,6 +12,7 @@ class Partners extends React.Component {
     showModal: false,
     currentUserObj: {},
     userObject: {},
+    PartnerItemTable: [],
   };
 
   // Get All Products By Partner ID //
@@ -86,12 +87,16 @@ class Partners extends React.Component {
     const { userObject } = this.props;
     const { products } = this.state;
 
+    // const printProduct = products.map((product, index) => (
+    //   <PrintProductCard key={product.id} index={index} product={product} onSelect={this.onSelect} />
+    // ));
+
     const printProduct = products.map((product, index) => (
-      <PrintProductCard key={product.id} index={index} product={product} onSelect={this.onSelect} />
+      <PartnerItemTable key={product.id} index={index} product={product} onSelect={this.onSelect} />
     ));
 
     return (
-      <div className="products mx-auto animated bounceInLeft w-100">
+      <div className="partnerItems mx-auto animated bounceInLeft w-100">
         <div className="productWrap">
           <button className="addProductBtn" onClick={this.showModal}>
             <i className="far fa-plus-square" />
@@ -105,9 +110,21 @@ class Partners extends React.Component {
           modalCloseEvent={this.modalCloseEvent}
           userObject={userObject}
         />
-
-        <div className="productWindow">
-          <div className="row justify-content-center">{printProduct}</div>
+        <div className="table-responsive">
+          <table className="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">IMAGE</th>
+                <th scope="col">NAME</th>
+                <th scope="col">DESCRIPTION</th>
+                <th scope="col">PRICE</th>
+                <th scope="col">EDIT</th>
+                <th scope="col">DELETE</th>
+              </tr>
+            </thead>
+            <tbody>{printProduct}</tbody>
+          </table>
         </div>
       </div>
     );
