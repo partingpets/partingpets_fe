@@ -35,6 +35,14 @@ class Profile extends React.Component {
     });
   }
 
+  deletePet = (petId) => {
+    petRequests.deletePet(petId)
+      .then(() => {
+        this.getPartedPets();
+      })
+      .catch(error => console.error('error with deleting this pet', error));
+  }
+
   petFormSubmitEvent = (pet) => {
     const { isEditingPet, petIdToEdit } = this.state;
     if (isEditingPet) {
@@ -72,6 +80,7 @@ class Profile extends React.Component {
                                         Pet={usersPet} 
                                         passPetToEdit={this.passPetToEdit}
                                         toggle={this.toggle}
+                                        deleteThisPet={this.deletePet}
                                         />;
 
     const pets = usersPets.map(singlePetCard);
