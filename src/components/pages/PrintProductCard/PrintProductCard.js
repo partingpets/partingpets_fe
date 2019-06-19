@@ -18,8 +18,7 @@ class PrintProductCard extends React.Component {
   };
 
   render() {
-    const { product, userObject } = this.props;
-    const uid = authRequests.getCurrentUid();
+    const { product } = this.props;
 
     return (
       <div className="productCard card2 col-2">
