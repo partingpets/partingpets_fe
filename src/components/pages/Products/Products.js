@@ -1,21 +1,21 @@
 import React from 'react';
 import SearchField from 'react-search-field';
-//import cluesData from '../../../helpers/data/cluesData';
-//import authRequests from '../../../helpers/data/authRequests';
 import PrintProductCard from '../PrintProductCard/PrintProductCard';
 import productRequests from '../../../helpers/data/productRequests';
-
+import userRequests from '../../../helpers/data/userRequests';
+import authRequests from '../../../helpers/data/authRequests';
 import './Products.scss';
 
 class Products extends React.Component {
   state = {
     products: [],
     filteredProducts: [],
-  }
+    currentUserObj: {},
+  };
 
   getProducts = () => {
-    //const uid = authRequests.getCurrentUid();
-    productRequests.getAllProducts()
+    productRequests
+      .getAllProducts()
       .then((products) => {
         this.setState({ products });
         this.setState({ filteredProducts: products });
@@ -26,28 +26,13 @@ class Products extends React.Component {
   };
 
   componentDidMount() {
+    const currentUid = authRequests.getCurrentUid();
     this.getProducts();
-  }
-
-  deleteSingleProduct = (productId) => {
-    productRequests.deleteProduct(productId)
-      .then(() => {
-        this.getproducts();
+    userRequests.getUserByFbId(currentUid).then((response) => {
+      this.setState({
+        currentUserObj: response,
       });
-  }
-
-
-  newProductView = () => {
-    this.props.history.push('/products/new');
-  }
-
-  onSelect = (productId) => {
-    this.props.history.push(`/products/${productId}`);
-  }
-
-  passProductToEdit = (productId) => {
-    this.setState({ editId: productId });
-    this.props.history.push(`/products/${productId}/edit`);
+    });
   }
 
   onChange = (value, event) => {
@@ -58,68 +43,36 @@ class Products extends React.Component {
       this.setState({ filteredProducts: products });
     } else {
       products.forEach((product) => {
-        if (product.name.toLowerCase().includes(value.toLowerCase())
-          || product.style.toLowerCase().includes(value.toLowerCase())
-          || product.location.toLowerCase().includes(value.toLowerCase())) {
+        if (
+          product.name.toLowerCase().includes(value.toLowerCase())
+          || product.description.toLowerCase().includes(value.toLowerCase())
+        ) {
           filteredProducts.push(product);
         }
         this.setState({ filteredProducts });
       });
     }
-  }
-
-  // Add Product Modal Function //
-  showModal = (e) => {
-    this.setState({
-      hidden: !this.state.hidden,
-      showModal: true,
-    });
   };
 
-  modalCloseEvent = () => {
-    this.setState({
-      hidden: !this.state.hidden,
-      passProductToEdit: {},
-      showModal: false,
-    });
-};
-
   render() {
-    const {
-      products, isEditing, passProductToEdit,filteredProducts,
-    } = this.state;
+    const { filteredProducts } = this.state;
 
     const printProduct = filteredProducts.map(product => (
-      <PrintProductCard
-        key={product.id}
-        product={product}
-        deleteSingleProduct={this.deleteSingleProduct}
-        passProductToEdit={this.passProductToEdit}
-        onSelect={this.onSelect}
-      />
+      <PrintProductCard key={product.id} product={product} onSelect={this.onSelect} />
     ));
 
-    const editFormProps = {
-      passProductToEdit,
-    };
-
-    if (!isEditing) {
-      editFormProps.disabled = true;
-}
-
     return (
-      <div className='products mx-auto animated bounceInLeft w-100'>
-        <div className='productWrap'>
+      <div className="products mx-auto animated bounceInLeft w-90">
+        <div className="productWrap">
           <SearchField
             placeholder="Search Products By Name or Category"
             onChange={this.onChange}
             searchText=""
             classNames="productSearch"
           />
-          <button className="addProductBtn" id="addProduct" onClick={this.newProductView}><i class="far fa-plus-square"></i>ADD PRODUCT</button>
         </div>
-        <div className = "productWindow">
-        <div className="row justify-content-center">{printProduct}</div>
+        <div className="productWindow">
+          <div className="row justify-content-center">{printProduct}</div>
         </div>
       </div>
     );
@@ -127,4 +80,3 @@ class Products extends React.Component {
 }
 
 export default Products;
-

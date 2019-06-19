@@ -1,39 +1,55 @@
 import axios from 'axios';
+import firebase from 'firebase/app';
 import apiKeys from '../apiKeys';
 
 const productsApiBaseUrl = apiKeys.petsApi.apiBaseUrl;
 
+const getCurrentUid = () => firebase.auth().currentUser.uid;
+
+// Get All Products For Store Page //
 const getAllProducts = () => new Promise((resolve, reject) => {
   axios
     .get(`${productsApiBaseUrl}/api/products/`)
     .then((result) => {
-      console.log(result.data);
       resolve(result.data);
     })
     .catch(error => reject(error));
 });
 
-// These below have not been updated //
-// const getSingleProduct = productId => new Promise((resolve, reject) => {
-//     axios.get(`${firebaseUrl}/products/${productId}.json`)
-//       .then((result) => {
-//         const singleProduct = result.data;
-//         singleProduct.id = productId;
-//         resolve(singleProduct);
-//       })
-//       .catch((error) => {
-//         reject(error);
-//       });
-//   });
-  
-//   const deleteProduct = productId => axios.delete(`${firebaseUrl}/products/${productId}.json`);
-//   const createProduct = productObject => axios.post(`${firebaseUrl}/products.json`, JSON.stringify(productObject));
-//   const updateProduct = (productObject, productId) => axios.put(`${firebaseUrl}/products/${productId}.json`, JSON.stringify(productObject));
-  
-  export default {
-    getAllProducts,
-    // deleteProduct,
-    // createProduct,
-    // updateProduct,
-    // getSingleProduct,
-  };
+// Get Products By Partner ID for Partner Page //
+const getAllProductsByPartnerId = partnerId => new Promise((resolve, reject) => {
+  axios
+    .get(`${productsApiBaseUrl}/api/products/partner/${partnerId}`)
+    .then((result) => {
+      resolve(result.data);
+    })
+    .catch(error => reject(error));
+});
+
+// Get All Product Categories for Product Modal //
+const getAllProductCategories = () => new Promise((resolve, reject) => {
+  axios
+    .get(`${productsApiBaseUrl}/api/products/categories`)
+    .then((result) => {
+      resolve(result.data);
+    })
+    .catch(error => reject(error));
+});
+
+// Create Product Call //
+const createProduct = newProduct => new Promise((resolve, reject) => {
+  axios
+    .post(`${productsApiBaseUrl}/api/Products/`, newProduct)
+    .then((result) => {
+      resolve(result.data);
+    })
+    .catch(error => reject(error));
+});
+
+export default {
+  getAllProducts,
+  getAllProductCategories,
+  createProduct,
+  getCurrentUid,
+  getAllProductsByPartnerId,
+};
