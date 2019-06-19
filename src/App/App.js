@@ -8,6 +8,7 @@ import AppNavbar from '../components/AppNavbar/AppNavbar';
 import Auth from '../components/pages/Auth/Auth';
 import Home from '../components/pages/Home/Home';
 import Admin from '../components/pages/Admin/Admin';
+import PartnersAdmin from '../components/pages/PartnersAdmin/PartnersAdmin';
 import Products from '../components/pages/Products/Products';
 import Profile from '../components/pages/Profile/Profile';
 import Partners from '../components/pages/Partners/Partners';
@@ -97,6 +98,7 @@ class App extends React.Component {
                   <PrivateRoute path="/profile" component={() => <Profile userObject={userObject} />} authed={authed} />
                   <PrivateRoute path="/partners" component={() => <Partners userObject={userObject} />} authed={authed} />
                   <PrivateRoute path="/admin" component={() => <Admin userObject={userObject} />} authed={authed} />
+                  <PrivateRoute path="/partnersadmin" component={() => <PartnersAdmin userObject={userObject} />} authed={authed} />
                   <PrivateRoute path="/store" component={() => <Products userObject={userObject} />} authed={authed}  />
                   <PrivateRoute path="/" component={Home} authed={authed} />
                   <PrivateRoute path="/home" component={Home} authed={authed} />

@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink as RRNavLink } from 'react-router-dom';
 import { 
 UncontrolledDropdown, 
 DropdownToggle, 
@@ -17,7 +18,7 @@ class Admin extends React.Component {
                         Manage
                     </DropdownToggle>
                     <DropdownMenu>
-                        <DropdownItem>
+                        <DropdownItem tag={RRNavLink} to="/partnersadmin">
                             Partners
                         </DropdownItem>
                         <DropdownItem>
