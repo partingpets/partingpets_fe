@@ -46,21 +46,10 @@ const createProduct = newProduct => new Promise((resolve, reject) => {
     .catch(error => reject(error));
 });
 
-// Edit Product Call //
-const editProduct = (id, product) => new Promise((resolve, reject) => {
-  axios
-    .put(`${productsApiBaseUrl}/products/${id}`, product)
-    .then((result) => {
-      resolve(result.data);
-    })
-    .catch(error => reject(error));
-});
-
 export default {
   getAllProducts,
   getAllProductCategories,
   createProduct,
-  editProduct,
   getCurrentUid,
   getAllProductsByPartnerId,
 };

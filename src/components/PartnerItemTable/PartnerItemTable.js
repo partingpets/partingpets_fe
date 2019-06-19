@@ -1,11 +1,11 @@
 import React from 'react';
 import './PartnerItemTable.scss';
 
-editEvent = (e) => {
-  e.preventDefault();
-  const { productToEdit, product } = this.props;
-  productToEdit(product.id);
-};
+// editEvent = (e) => {
+//   e.preventDefault();
+//   const { passProductToEdit, product } = this.props;
+//   passProductToEdit(product.id);
+// };
 
 // deleteEvent = (e) => {
 //   e.preventDefault();

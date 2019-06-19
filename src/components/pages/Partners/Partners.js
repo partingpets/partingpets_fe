@@ -10,9 +10,6 @@ class Partners extends React.Component {
   state = {
     products: [],
     showModal: false,
-    isEditing: false,
-    productEditId: '-1',
-    productToEdit: {},
     currentUserObj: {},
     userObject: {},
     PartnerItemTable: [],
@@ -59,29 +56,13 @@ class Partners extends React.Component {
   };
 
   productFormSubmitEvent = (newProduct) => {
-    const {isEditing, productEditId} = this.state;
-    if (isEditing) {
-      productRequests
-      .editProduct(productEditId, newProduct)
-      .then(() => {
-        this.getProducts();
-        this.setState({
-          showModal: false,
-          isEditing: false,
-          productEditId: '-1',
-        });
-      });
-    })
-    .catch(error => console.error('There Was An Error Editing Your Parting Pets Item', error));
-  } else {
-    productRequests.createProduct(newProduct)
-    .then((result) => {
+    productRequests.createProduct(newProduct).then((result) => {
       this.getProducts();
-      this.setState({ showModal: false });
-    })
-    .catch(error => console.error('There Was An Error Creating Your New Parting Pets Item'));
-  }
-};
+      this.setState({
+        showModal: false,
+      });
+    });
+  };
 
   // deleteSingleProduct = (productId) => {
   //   productRequests.deleteProduct(productId).then(() => {
@@ -97,23 +78,22 @@ class Partners extends React.Component {
   //   this.props.history.push(`/products/${productId}`);
   // };
 
+  // passProductToEdit = (productId) => {
+  //   this.setState({ productEditId: productId });
+  //   this.props.history.push(`/products/${productId}/edit`);
+  // };
+
   render() {
     const { userObject } = this.props;
-    const { products, isEditing, productToEdit, } = this.state;
+    const { products } = this.state;
+
+    // const printProduct = products.map((product, index) => (
+    //   <PrintProductCard key={product.id} index={index} product={product} onSelect={this.onSelect} />
+    // ));
 
     const printProduct = products.map((product, index) => (
-      <PartnerItemTable key={product.id} 
-                        index={index} 
-                        product={product} 
-                        onSelect={this.onSelect}
-                        editProduct={this.editProduct} />
+      <PartnerItemTable key={product.id} index={index} product={product} onSelect={this.onSelect} />
     ));
-
-    const editProductProps = { productToEdit };
-
-    if (!isEditing) {
-      editProductProps.disabled = true;
-    }
 
     return (
       <div className="partnerItems mx-auto animated bounceInLeft w-100">
@@ -127,8 +107,6 @@ class Partners extends React.Component {
         <AddProductModal
           showModal={this.state.showModal}
           onSubmit={this.productFormSubmitEvent}
-          isEditing={isEditing}
-          {...editProductProps}
           modalCloseEvent={this.modalCloseEvent}
           userObject={userObject}
         />
