@@ -1,7 +1,6 @@
 import React from 'react';
 import AddProductModal from '../../AddProductModal/AddProductModal';
 import productRequests from '../../../helpers/data/productRequests';
-import PrintProductCard from '../PrintProductCard/PrintProductCard';
 import PartnerItemTable from '../../PartnerItemTable/PartnerItemTable';
 import './Partners.scss';
 

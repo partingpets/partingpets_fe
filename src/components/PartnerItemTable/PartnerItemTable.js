@@ -1,6 +1,4 @@
 import React from 'react';
-import { Table } from 'reactstrap';
-import productShape from '../../helpers/productProps/productShape';
 import './PartnerItemTable.scss';
 
 // editEvent = (e) => {
@@ -16,11 +14,6 @@ import './PartnerItemTable.scss';
 // };
 
 class PartnerItemTable extends React.Component {
-  static propTypes = {
-    product: productShape,
-    // index: this.propTypes.number,
-  };
-
   render() {
     const { product, index } = this.props;
     const rowNumber = (index + 1).toString();
@@ -42,7 +35,7 @@ class PartnerItemTable extends React.Component {
         </td>
         <td>
           <button className="trash" onClick={this.deleteEvent}>
-            <i class="lnr lnr-trash trash" />
+            <i className="lnr lnr-trash trash" />
           </button>
         </td>
       </tr>
