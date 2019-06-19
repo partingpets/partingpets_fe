@@ -12,6 +12,7 @@ import {
   ModalHeader,
   Row,
 } from 'reactstrap';
+import petRequests from '../../helpers/data/petRequests';
 
 const defaultPet = {
   name: '',

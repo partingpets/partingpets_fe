@@ -7,6 +7,17 @@ import petRequests from '../../../helpers/data/petRequests';
 
 class Pets extends React.Component {
 
+  editEvent = (e) => {
+    e.preventDefault();
+    const {
+      passPetToEdit,
+      Pet,
+      toggle
+    } = this.props;
+    passPetToEdit(Pet.id);
+    toggle();
+  }
+
   render(){
     const { Pet } = this.props;
 
@@ -45,7 +56,7 @@ class Pets extends React.Component {
             Died:  {Pet.dateOfDeath}
           </CardText>
           {burialData()}
-          <Button>Edit</Button>
+          <Button onClick={this.editEvent}>Edit</Button>
         </CardBody>
       </div>
     </Card>

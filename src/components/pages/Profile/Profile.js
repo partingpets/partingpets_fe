@@ -71,6 +71,7 @@ class Profile extends React.Component {
                                         key={usersPet.id} 
                                         Pet={usersPet} 
                                         passPetToEdit={this.passPetToEdit}
+                                        toggle={this.toggle}
                                         />;
 
     const pets = usersPets.map(singlePetCard);
