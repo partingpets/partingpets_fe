@@ -3,11 +3,11 @@ import { Table } from 'reactstrap';
 import productShape from '../../helpers/productProps/productShape';
 import './PartnerItemTable.scss';
 
-// editEvent = (e) => {
-//   e.preventDefault();
-//   const { passProductToEdit, product } = this.props;
-//   passProductToEdit(product.id);
-// };
+editEvent = (e) => {
+  e.preventDefault();
+  const { productToEdit, product } = this.props;
+  productToEdit(product.id);
+};
 
 // deleteEvent = (e) => {
 //   e.preventDefault();
@@ -18,7 +18,7 @@ import './PartnerItemTable.scss';
 class PartnerItemTable extends React.Component {
   static propTypes = {
     product: productShape,
-    // index: this.propTypes.number,
+    index: this.propTypes.number,
   };
 
   render() {

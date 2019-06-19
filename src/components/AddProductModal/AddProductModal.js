@@ -43,7 +43,7 @@ class AddProductModal extends React.Component {
     showModal: PropTypes.bool,
     onSubmit: PropTypes.func,
     isEditing: PropTypes.bool,
-    passProductToEdit: PropTypes.object,
+    productToEdit: PropTypes.object,
     modalCloseEvent: PropTypes.func,
   };
 
@@ -58,6 +58,7 @@ class AddProductModal extends React.Component {
     modalCloseEvent();
     this.setState({
       newProduct: defaultProduct,
+      productToEdit: defaultProduct,
     });
   }
 
@@ -75,6 +76,11 @@ class AddProductModal extends React.Component {
   }
 
   componentWillReceiveProps(props) {
+    if (props.isEditing) {
+      this.setState({
+        newProduct: props.productToEdit,
+      });
+    }
     this.setState({
       modal: props.showModal,
     });
