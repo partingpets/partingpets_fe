@@ -21,7 +21,7 @@ const defaultUser = {
   firstName: '',
   lastName: '',
   email: '',
-  isPartner: 'false',
+  isPartner: false,
   partnerCode: '',
   street1: '',
   street2: '',
@@ -38,6 +38,7 @@ class RegisterForm extends React.Component {
     partnerCode: '',
     backdrop: 'static',
     isLoading: false,
+    isEditing: false,
     suggestResults: [],
     suggestedArray: [],
     usStates: [],
@@ -64,11 +65,21 @@ class RegisterForm extends React.Component {
   }
 
   componentWillReceiveProps(props) {
+    if (props.isEditing) {
+      this.setState({
+        newUser: props.userToEdit,
+      });
+    }
     this.setState({
       modal: props.showModal,
-      firebaseId: props.firebaseId,
-      newUser: props.userToEdit,
     });
+    // const tempUser = { ...this.state.newUser };
+    // this.setState({
+    //   modal: props.showModal,
+    //   firebaseId: props.firebaseId,
+    //   isEditing: props.isEditing,
+    //   newUser: props.userToEdit,
+    // });
   }
 
   formFieldStringState = (name, event) => {
@@ -90,7 +101,8 @@ class RegisterForm extends React.Component {
 
   formFieldBoolState = (name, event) => {
     const tempUser = { ...this.state.newUser };
-    tempUser[name] = event.target.selectedOptions[0].dataset.selection;
+    const boolValue = event.target.selectedOptions[0].dataset.selection === 'true';
+    tempUser[name] = boolValue;
     this.setState({
       newUser: tempUser,
     });
@@ -152,13 +164,14 @@ class RegisterForm extends React.Component {
     const myNewUser = { ...this.state.newUser };
     onSubmit(myNewUser);
     this.setState({
+      showModal: false,
       newUser: defaultUser,
     });
   };
 
   render() {
     const {
-      newUser, isLoading, suggestResults, usStates,
+      newUser, isLoading, suggestResults, usStates, isEditing,
     } = this.state;
     return (
       <div className="RegisterForm">
@@ -171,7 +184,7 @@ class RegisterForm extends React.Component {
           backdrop={this.state.backdrop}
           size="lg"
         >
-          <ModalHeader toggle={e => this.toggle(e)}>User Registration</ModalHeader>
+          <ModalHeader toggle={e => this.toggle(e)}>{isEditing ? 'Edit User' : 'User Registration'}</ModalHeader>
           <ModalBody>
             <Form>
               <Row form>
@@ -229,7 +242,7 @@ class RegisterForm extends React.Component {
                       id="partner"
                       placeholder="Are you a partner"
                       onChange={this.partnerChange}
-                      value={newUser.isPartner === 'true' ? 'Yes' : 'No'}
+                      value={newUser.isPartner === true ? 'Yes' : 'No'}
                     >
                       <option key="1" data-selection="false">
                         No
@@ -244,14 +257,14 @@ class RegisterForm extends React.Component {
                   <FormGroup>
                     <Label for="partnerCode">Partner Code</Label>
                     <Input
-                      disabled={newUser.isPartner === 'false' ? 'disabled' : ''}
+                      disabled={newUser.isPartner === false ? 'disabled' : ''}
                       className="form-input"
                       type="text"
                       name="partnerCode"
                       id="partnerCode"
                       placeholder="Registration Code"
                       onChange={this.partnerCodeChange}
-                      value={newUser.partnerCode}
+                      value={newUser.isPartner === false ? '' : newUser.partnerCode}
                     />
                   </FormGroup>
                 </Col>

@@ -16,7 +16,17 @@ const getUserByFbId = uid => new Promise((resolve, reject) => {
 
 const createUser = newUser => axios.post(`${petsApiBaseUrl}/api/Users/`, newUser);
 
+const updateUser = newUser => new Promise((resolve, reject) => {
+  axios
+    .put(`${petsApiBaseUrl}/api/Users/${newUser.id}`, newUser)
+    .then((result) => {
+      resolve(result.data);
+    })
+    .catch(error => console.error('Error updating using', error));
+});
+
 export default {
   getUserByFbId,
   createUser,
+  updateUser,
 };

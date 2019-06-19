@@ -42,6 +42,15 @@ class App extends React.Component {
     userObject: {},
   };
 
+  getCurrentUser = () => {
+    const userId = authRequests.getCurrentUid();
+    userRequests.getUserByFbId(userId).then((currentUser) => {
+      this.setState({
+        userObject: currentUser,
+      });
+    });
+  };
+
   componentDidMount() {
     connection();
 
@@ -52,12 +61,7 @@ class App extends React.Component {
           pendingUser: false,
         });
         authRequests.getCurrentUserJwt();
-        const userId = authRequests.getCurrentUid();
-        userRequests.getUserByFbId(userId).then((currentUser) => {
-          this.setState({
-            userObject: currentUser,
-          });
-        });
+        this.getCurrentUser();
       } else {
         this.setState({
           authed: false,
@@ -95,7 +99,7 @@ class App extends React.Component {
                   <PublicRoute path="/auth" component={Auth} authed={authed} />
                   <PrivateRoute
                     path="/profile"
-                    component={props => <Profile userObject={userObject} {...props} />}
+                    component={props => <Profile userObject={userObject} updateUser={this.getCurrentUser} {...props} />}
                     authed={authed}
                   />
                   <PrivateRoute

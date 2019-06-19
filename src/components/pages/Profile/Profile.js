@@ -6,6 +6,7 @@ import RegisterForm from '../../RegisterForm/RegisterForm';
 import authRequests from '../../../helpers/data/authRequests';
 import userRequests from '../../../helpers/data/userRequests';
 import petRequests from '../../../helpers/data/petRequests';
+import partnerRequests from '../../../helpers/data/partnerRequests';
 import Pets from '../Pets/Pets';
 import './Profile.scss';
 
@@ -15,6 +16,7 @@ class Profile extends React.Component {
 
   state = {
     showModal: false,
+    isEditing: false,
     userToEdit: {},
     fbUserImage: '',
     usersPets: [],
@@ -58,18 +60,56 @@ class Profile extends React.Component {
     userRequests
       .getUserByFbId(fbUserId)
       .then((currentUser) => {
-        this.setState({
-          isEditing: true,
-          userToEdit: currentUser,
-        });
+        const tempUser = currentUser;
+        if (currentUser.isPartner) {
+          partnerRequests.getPartnerById(currentUser.partnerId).then((result) => {
+            tempUser.partnerCode = result.registrationCode;
+            this.setState({
+              isEditing: true,
+              userToEdit: tempUser,
+            });
+          });
+        } else {
+          this.setState({
+            isEditing: true,
+            userToEdit: tempUser,
+          });
+        }
         this.showModal();
       })
       .catch(error => console.error(error));
   };
 
+  userFormSubmitEvent = (newUser) => {
+    const { updateUser } = this.props;
+    userRequests
+      .updateUser(newUser)
+      .then((result) => {
+        updateUser();
+        this.setState({
+          showModal: false,
+          isEditing: false,
+          userToEdit: {},
+        });
+        // userRequests
+        //   .getUserByFbId(result.fireBaseUid)
+        //   .then(() => {
+        //     this.setState({
+        //       showModal: false,
+        //       isEditing: false,
+        //       userToEdit: {},
+        //     });
+        //   })
+        // .catch(error => console.error(error, 'There was an error updating the user'));
+      })
+      .catch(error => console.error(error, 'There was an error updating the user'));
+  };
+
   render() {
     const { userObject } = this.props;
-    const { fbUserImage, usersPets, userToEdit } = this.state;
+    const {
+      fbUserImage, usersPets, userToEdit, isEditing,
+    } = this.state;
     const singlePetCard = usersPet => <Pets key={usersPet.id} Pet={usersPet} />;
 
     const pets = usersPets.map(singlePetCard);
@@ -79,7 +119,8 @@ class Profile extends React.Component {
         <RegisterForm
           showModal={this.state.showModal}
           onSubmit={this.userFormSubmitEvent}
-          userToEdit ={userToEdit}
+          isEditing={isEditing}
+          userToEdit={userToEdit}
           modalCloseEvent={this.modalCloseEvent}
           editForm={this.editUserItem}
           fireBaseId={userObject.fireBaseUid}
