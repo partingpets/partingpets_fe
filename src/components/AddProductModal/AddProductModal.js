@@ -77,7 +77,7 @@ class AddProductModal extends React.Component {
   componentWillReceiveProps(props) {
     if (props.isEditing) {
       this.setState({
-        newCampaign: props.campaignToEdit,
+        newProduct: props.productToEdit,
       });
     }
     this.setState({

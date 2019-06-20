@@ -59,7 +59,7 @@ const createProduct = newProduct => new Promise((resolve, reject) => {
 // Edit Product Call //
 const editProduct = (id, product) => new Promise((resolve, reject) => {
   axios
-    .put(`${productsApiBaseUrl}/products/${id}`, product)
+    .put(`${productsApiBaseUrl}/products/update/${id}`, product)
     .then((result) => {
       resolve(result.data);
     })
