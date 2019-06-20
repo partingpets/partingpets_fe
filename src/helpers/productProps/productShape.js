@@ -3,10 +3,11 @@ import PropTypes from 'prop-types';
 const productShape = PropTypes.shape({
   name: PropTypes.string.isRequired,
   imageUrl: PropTypes.string.isRequired,
-  location: PropTypes.string.isRequired,
-  style: PropTypes.string.isRequired,
-  notes: PropTypes.string.isRequired,
-  uid: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  isOnSale: PropTypes.bool.isRequired,
+  categoryId: PropTypes.number.isRequired,
+  unitPrice: PropTypes.number.isRequired,
+  id: PropTypes.number.isRequired,
 });
 
 const productOptionalShape = PropTypes.oneOfType([

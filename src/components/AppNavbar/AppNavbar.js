@@ -38,24 +38,25 @@ class AppNavbar extends React.Component {
           <Nav className="navBar ml-auto" navbar>
             <NavItem>
               <NavLink tag={RRNavLink} to="/home">
-                <i className="navIcon fas fa-globe fa-2x" />
+                <i className="navIcon lnr lnr-earth" />
                 Portal
-                {/* <i className="fas fa-users fa-2x" /> */}
               </NavLink>
             </NavItem>
             <NavItem>
               <NavLink tag={RRNavLink} to="/store">
-                <i className="navIcon fas fa-paw fa-2x" />
+                <i className="navIcon lnr lnr-paw" />
                 Store
               </NavLink>
             </NavItem>
             <NavItem>
-        { userObject.isPartner ? 
-        <NavLink tag={RRNavLink} to="/partners">
-            <i className="navIcon fas fa-paw fa-2x" />
-            Partners
-        </NavLink>
-        : '' } 
+              {userObject.isPartner ? (
+                <NavLink tag={RRNavLink} to="/partners">
+                  <i className="navIcon lnr lnr-layers" />
+                  My Items
+                </NavLink>
+              ) : (
+                ''
+              )}
               {/* <NavLink tag={RRNavLink} to="/partners">
                 <i className="navIcon fas fa-paw fa-2x" />
                 Partners

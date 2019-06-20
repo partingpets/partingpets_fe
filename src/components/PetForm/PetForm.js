@@ -107,9 +107,9 @@ class PetForm extends React.Component {
     const { isOpen, isEditingPet } = this.props;
     const formTitle = () => {
       if (isEditingPet) {
-        return <h2>Edit Pet Information</h2>
+        return 'Edit Pet Information'
       }
-      return <h2>Pet Registration</h2>
+      return 'Pet Registration'
     }
 
     return ( 
