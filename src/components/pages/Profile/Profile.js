@@ -19,9 +19,17 @@ class Profile extends React.Component {
   };
 
   toggle = () => {
-    this.setState({
-      petModal: !this.state.petModal,
-    });
+    if(this.state.isEditingPet){
+      this.setState({
+        petModal: !this.state.petModal,
+        isEditingPet: false,
+        petIdToEdit: '-1',    
+      })
+    } else {
+      this.setState({
+        petModal: !this.state.petModal,
+      })
+    }
   }
 
   getPartedPets() {
@@ -38,12 +46,12 @@ class Profile extends React.Component {
   petFormSubmitEvent = (pet) => {
     const { isEditingPet, petIdToEdit } = this.state;
     if (isEditingPet) {
-      petRequests.editPet(petIdToEdit, pet);
-      this.getPartedPets();
-      this.setState({ isEditingPet: false, petIdToEdit: '-1' })
+      petRequests.editPet(petIdToEdit, pet).then(
+        this.getPartedPets()).then(
+          this.setState({ isEditingPet: false, petIdToEdit: '-1' }))
     } else {
-      petRequests.createPet(pet);
-      this.getPartedPets();
+      petRequests.createPet(pet).then(
+        this.getPartedPets());
     }
   }
 

@@ -3,7 +3,6 @@ import {
   Card, CardImg, CardText, CardBody, Button, CardHeader,
 } from 'reactstrap';
 import './Pets.scss';
-import petRequests from '../../../helpers/data/petRequests';
 
 class Pets extends React.Component {
 
