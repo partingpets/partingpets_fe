@@ -21,4 +21,13 @@ const getPartnerById = partnerId => new Promise((resolve, reject) => {
     .catch(error => reject(error));
 });
 
-export default { getAllPartners, getPartnerById };
+const getPartnerByPartnerCode = partnerCode => new Promise((resolve, reject) => {
+  axios
+    .get(`${partnersApiBaseUrl}/api/Partners/Code/${partnerCode}`)
+    .then((result) => {
+      resolve(result.data);
+    })
+    .catch(error => reject(error));
+});
+
+export default { getAllPartners, getPartnerById, getPartnerByPartnerCode };

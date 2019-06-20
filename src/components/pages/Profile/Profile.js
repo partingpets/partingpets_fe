@@ -108,7 +108,7 @@ class Profile extends React.Component {
   render() {
     const { userObject } = this.props;
     const {
-      fbUserImage, usersPets, userToEdit, isEditing,
+      showModal, fbUserImage, usersPets, userToEdit, isEditing,
     } = this.state;
     const singlePetCard = usersPet => <Pets key={usersPet.id} Pet={usersPet} />;
 
@@ -117,7 +117,7 @@ class Profile extends React.Component {
     return (
       <div className="Profile">
         <RegisterForm
-          showModal={this.state.showModal}
+          showModal={showModal}
           onSubmit={this.userFormSubmitEvent}
           isEditing={isEditing}
           userToEdit={userToEdit}

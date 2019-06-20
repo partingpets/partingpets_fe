@@ -12,9 +12,11 @@ import {
   ModalFooter,
   ModalHeader,
   Row,
+  FormFeedback,
 } from 'reactstrap';
 import stateRequests from '../../helpers/data/stateRequests';
 import autoSuggest from '../../helpers/data/autoSuggest';
+import partnerRequests from '../../helpers/data/partnerRequests';
 import './RegisterForm.scss';
 
 const defaultUser = {
@@ -42,6 +44,7 @@ class RegisterForm extends React.Component {
     suggestResults: [],
     suggestedArray: [],
     usStates: [],
+    validCode: true,
   };
 
   toggle() {
@@ -67,6 +70,7 @@ class RegisterForm extends React.Component {
   componentWillReceiveProps(props) {
     if (props.isEditing) {
       this.setState({
+        isEditing: true,
         newUser: props.userToEdit,
       });
     }
@@ -169,9 +173,24 @@ class RegisterForm extends React.Component {
     });
   };
 
+  validatePartnerCode = (event) => {
+    event.preventDefault();
+    const partnerCode = event.target.value;
+    partnerRequests
+      .getPartnerByPartnerCode(partnerCode)
+      .then((results) => {
+        if (results !== partnerCode) {
+          this.setState({
+            validCode: false,
+          });
+        }
+      })
+      .catch(error => console.error('Error validating partner code', error));
+  };
+
   render() {
     const {
-      newUser, isLoading, suggestResults, usStates, isEditing,
+      newUser, isLoading, suggestResults, usStates, isEditing, validCode,
     } = this.state;
     return (
       <div className="RegisterForm">
@@ -257,6 +276,7 @@ class RegisterForm extends React.Component {
                   <FormGroup>
                     <Label for="partnerCode">Partner Code</Label>
                     <Input
+                      invalid={validCode === true ? '' : 'invalid'}
                       disabled={newUser.isPartner === false ? 'disabled' : ''}
                       className="form-input"
                       type="text"
@@ -264,8 +284,10 @@ class RegisterForm extends React.Component {
                       id="partnerCode"
                       placeholder="Registration Code"
                       onChange={this.partnerCodeChange}
+                      onBlur={this.validatePartnerCode}
                       value={newUser.isPartner === false ? '' : newUser.partnerCode}
                     />
+                    <FormFeedback tooltip>The code you have entred is not valid</FormFeedback>
                   </FormGroup>
                 </Col>
               </Row>
@@ -308,7 +330,7 @@ class RegisterForm extends React.Component {
                   id="street2"
                   placeholder="Apartment, studio, or floor"
                   onChange={this.street2Change}
-                  value={newUser.street2}
+                  value={newUser.street2 === null ? '' : newUser.street2}
                 />
               </FormGroup>
               <Row form>
