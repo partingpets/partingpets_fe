@@ -5,7 +5,7 @@ import {
 import userRequests from '../../../helpers/data/userRequests';
 import authRequests from '../../../helpers/data/authRequests';
 import petRequests from '../../../helpers/data/petRequests';
-import Pets from '../Pets/Pets';
+import Pets from '../../Pets/Pets';
 import PetForm from '../../PetForm/PetForm';
 import './Profile.scss';
 
@@ -14,12 +14,22 @@ class Profile extends React.Component {
     fbUserObject: {},
     usersPets: [],
     petModal: false,
+    isEditingPet: false,
+    petIdToEdit: '-1',
   };
 
   toggle = () => {
-    this.setState({
-      petModal: !this.state.petModal,
-    });
+    if(this.state.isEditingPet){
+      this.setState({
+        petModal: !this.state.petModal,
+        isEditingPet: false,
+        petIdToEdit: '-1',    
+      })
+    } else {
+      this.setState({
+        petModal: !this.state.petModal,
+      })
+    }
   }
 
   getPartedPets() {
@@ -34,9 +44,18 @@ class Profile extends React.Component {
   }
 
   petFormSubmitEvent = (pet) => {
-    petRequests.createPet(pet);
-    this.getPartedPets();
+    const { isEditingPet, petIdToEdit } = this.state;
+    if (isEditingPet) {
+      petRequests.editPet(petIdToEdit, pet).then(
+        this.getPartedPets()).then(
+          this.setState({ isEditingPet: false, petIdToEdit: '-1' }))
+    } else {
+      petRequests.createPet(pet).then(
+        this.getPartedPets());
+    }
   }
+
+  passPetToEdit = petId => this.setState({ isEditingPet: true, petIdToEdit: petId });
 
   componentDidMount() {
     const fbUser = authRequests.getCurrentUser();
@@ -50,8 +69,18 @@ class Profile extends React.Component {
 
   render() {
     const { userObject } = this.props;
-    const { fbUserObject, usersPets } = this.state;
-    const singlePetCard = usersPet => <Pets key={usersPet.id} Pet={usersPet} />;
+    const { 
+      fbUserObject, 
+      usersPets,
+      isEditingPet,
+      petIdToEdit,
+     } = this.state;
+    const singlePetCard = usersPet => <Pets 
+                                        key={usersPet.id} 
+                                        Pet={usersPet} 
+                                        passPetToEdit={this.passPetToEdit}
+                                        toggle={this.toggle}
+                                        />;
 
     const pets = usersPets.map(singlePetCard);
 
@@ -85,6 +114,8 @@ class Profile extends React.Component {
           toggle={this.toggle}
           onSubmit={this.petFormSubmitEvent}
           userObject={this.props.userObject}
+          isEditingPet={isEditingPet}
+          petIdToEdit={petIdToEdit}
           />
       </div>
     );

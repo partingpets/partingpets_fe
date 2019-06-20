@@ -12,6 +12,7 @@ import {
   ModalHeader,
   Row,
 } from 'reactstrap';
+import petRequests from '../../helpers/data/petRequests';
 
 const defaultPet = {
   name: '',
@@ -54,6 +55,17 @@ class PetForm extends React.Component {
     }
   }
 
+  componentDidUpdate(prevProps) {
+    const { isEditingPet, petIdToEdit } = this.props;
+    if (prevProps !== this.props && isEditingPet) {
+      petRequests.getSinglePet(petIdToEdit)
+        .then((thatPetYouJustGot) => {
+          this.setState({ newPet: thatPetYouJustGot.data });
+        })
+        .catch(error => console.error('error with geting the pet you wanted to edit', error));
+    }
+  }
+
   formFieldStringState = (name, event) => {
     event.preventDefault();
     const tempPet = { ...this.state.newPet };
@@ -92,7 +104,14 @@ class PetForm extends React.Component {
 
   render(){
     const { newPet } = this.state;
-    const { isOpen } = this.props;
+    const { isOpen, isEditingPet } = this.props;
+    const formTitle = () => {
+      if (isEditingPet) {
+        return 'Edit Pet Information'
+      }
+      return 'Pet Registration'
+    }
+
     return ( 
       <div className="PetForm">
       <Modal
@@ -102,7 +121,7 @@ class PetForm extends React.Component {
         backdrop={this.state.backdrop} 
         size="lg"
       >
-        <ModalHeader toggle={e => this.toggle(e)}>Pet Registration</ModalHeader>
+        <ModalHeader toggle={e => this.toggle(e)}>{formTitle()}</ModalHeader>
         <ModalBody>
           <Form>
             <Row form>
