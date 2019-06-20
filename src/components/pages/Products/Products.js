@@ -45,7 +45,6 @@ class Products extends React.Component {
       products.forEach((product) => {
         if (
           product.name.toLowerCase().includes(value.toLowerCase())
-          || product.productCategory.toLowerCase().includes(value.toLowerCase())
           || product.description.toLowerCase().includes(value.toLowerCase())
         ) {
           filteredProducts.push(product);
@@ -63,7 +62,7 @@ class Products extends React.Component {
     ));
 
     return (
-      <div className="products mx-auto animated bounceInLeft w-100">
+      <div className="products mx-auto animated bounceInLeft w-90">
         <div className="productWrap">
           <SearchField
             placeholder="Search Products By Name or Category"

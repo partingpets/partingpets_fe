@@ -3,9 +3,25 @@ import {
   Card, CardImg, CardText, CardBody, Button, CardHeader,
 } from 'reactstrap';
 import './Pets.scss';
-import petRequests from '../../../helpers/data/petRequests';
 
 class Pets extends React.Component {
+
+  editEvent = (e) => {
+    e.preventDefault();
+    const {
+      passPetToEdit,
+      Pet,
+      toggle
+    } = this.props;
+    passPetToEdit(Pet.id);
+    toggle();
+  }
+
+  deleteEvent = (e) => {
+    e.preventDefault();
+    const { deleteThisPet, Pet } = this.props;
+    deleteThisPet(Pet.id);
+  }
 
   render(){
     const { Pet } = this.props;
@@ -45,7 +61,8 @@ class Pets extends React.Component {
             Died:  {Pet.dateOfDeath}
           </CardText>
           {burialData()}
-          <Button>Edit</Button>
+          <Button onClick={this.editEvent}>Edit</Button>
+          <Button onClick={this.deleteEvent}>Delete</Button>
         </CardBody>
       </div>
     </Card>

@@ -6,8 +6,11 @@
 
 .productSearch {
   width: 40%;
-  margin-left: 70%;
+  margin-left: 72%;
+  padding: 0.75%;
+  padding-bottom: 3%;
   border-radius: 10px;
+  background-color: rgb(21, 21, 58);
 }
 
 #addProduct {
@@ -33,22 +36,6 @@
 }
 
 .react-search-field {
-  border-radius: 15px;
+  border-radius: 10px;
   border: none !important;
-}
-
-.fa-plus-square {
-  padding-right: 5px;
-}
-
-.addProductBtn {
-  border-radius: 5px;
-  background-color: rgb(21, 21, 58);
-  color: white;
-  margin-left: 85%;
-  width: 4%;
-  height: 6%;
-  font-size: 7pt;
-  padding: 4px;
-  text-align: center;
 }
