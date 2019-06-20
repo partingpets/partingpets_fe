@@ -61,7 +61,7 @@ class AppNavbar extends React.Component {
             <NavItem>
               {userObject.isAdmin ? (
                 <NavLink tag={RRNavLink} to="/admin">
-                  <i className="navIcon fas fa-users-cog fa-2x" />
+                  <i className="navIcon lnr lnr-cog" />
                   Admin
                 </NavLink>
               ) : (
