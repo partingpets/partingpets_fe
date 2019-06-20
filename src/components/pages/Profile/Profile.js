@@ -91,16 +91,6 @@ class Profile extends React.Component {
           isEditing: false,
           userToEdit: {},
         });
-        // userRequests
-        //   .getUserByFbId(result.fireBaseUid)
-        //   .then(() => {
-        //     this.setState({
-        //       showModal: false,
-        //       isEditing: false,
-        //       userToEdit: {},
-        //     });
-        //   })
-        // .catch(error => console.error(error, 'There was an error updating the user'));
       })
       .catch(error => console.error(error, 'There was an error updating the user'));
   };

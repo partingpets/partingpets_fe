@@ -44,7 +44,8 @@ class RegisterForm extends React.Component {
     suggestResults: [],
     suggestedArray: [],
     usStates: [],
-    validCode: true,
+    invalidCode: false,
+    validCode: false,
   };
 
   toggle() {
@@ -58,6 +59,8 @@ class RegisterForm extends React.Component {
     modalCloseEvent();
     this.setState({
       newUser: defaultUser,
+      validCode: false,
+      invalidCode: false,
     });
   }
 
@@ -77,13 +80,6 @@ class RegisterForm extends React.Component {
     this.setState({
       modal: props.showModal,
     });
-    // const tempUser = { ...this.state.newUser };
-    // this.setState({
-    //   modal: props.showModal,
-    //   firebaseId: props.firebaseId,
-    //   isEditing: props.isEditing,
-    //   newUser: props.userToEdit,
-    // });
   }
 
   formFieldStringState = (name, event) => {
@@ -112,6 +108,13 @@ class RegisterForm extends React.Component {
     });
   };
 
+  formFieldPartnerCodeState = (event) => {
+    const tempCode = event.target.value;
+    this.setState({
+      partnerCode: tempCode,
+    });
+  };
+
   firstNameChange = event => this.formFieldStringState('firstName', event);
 
   lastNameChange = event => this.formFieldStringState('lastName', event);
@@ -120,7 +123,7 @@ class RegisterForm extends React.Component {
 
   partnerChange = event => this.formFieldBoolState('isPartner', event);
 
-  partnerCodeChange = event => this.formFieldStringState('partnerCode', event);
+  partnerCodeChange = event => this.formFieldPartnerCodeState(event);
 
   street1Change = event => this.formFieldStringState('street1', event);
 
@@ -176,21 +179,34 @@ class RegisterForm extends React.Component {
   validatePartnerCode = (event) => {
     event.preventDefault();
     const partnerCode = event.target.value;
-    partnerRequests
-      .getPartnerByPartnerCode(partnerCode)
-      .then((results) => {
-        if (results !== partnerCode) {
-          this.setState({
-            validCode: false,
-          });
-        }
-      })
-      .catch(error => console.error('Error validating partner code', error));
+    if (partnerCode === '') {
+      this.setState({
+        validCode: false,
+        invalidCode: false,
+      });
+    } else {
+      const tempUser = { ...this.state.newUser };
+      partnerRequests
+        .getPartnerByPartnerCode(partnerCode)
+        .then((results) => {
+          if (results.status === 200) {
+            tempUser.partnerId = results.data.id;
+            this.setState({
+              validCode: true,
+              invalidCode: false,
+              newUser: tempUser,
+            });
+          } else {
+            this.setState({ validCode: false, invalidCode: true });
+          }
+        })
+        .catch(error => console.error('Error validating partner code', error));
+    }
   };
 
   render() {
     const {
-      newUser, isLoading, suggestResults, usStates, isEditing, validCode,
+      newUser, isLoading, suggestResults, usStates, isEditing, validCode, invalidCode, partnerCode,
     } = this.state;
     return (
       <div className="RegisterForm">
@@ -211,6 +227,7 @@ class RegisterForm extends React.Component {
                   <FormGroup>
                     <Label for="firstName">First Name</Label>
                     <Input
+                      disabled={invalidCode}
                       className="form-input"
                       type="text"
                       name="firstName"
@@ -225,6 +242,7 @@ class RegisterForm extends React.Component {
                   <FormGroup>
                     <Label for="lastName">Last Name</Label>
                     <Input
+                      disabled={invalidCode}
                       className="form-input"
                       type="text"
                       name="lastName"
@@ -241,6 +259,7 @@ class RegisterForm extends React.Component {
                   <FormGroup>
                     <Label for="email">Email Address</Label>
                     <Input
+                      disabled={invalidCode}
                       className="form-input"
                       type="email"
                       name="email"
@@ -276,7 +295,8 @@ class RegisterForm extends React.Component {
                   <FormGroup>
                     <Label for="partnerCode">Partner Code</Label>
                     <Input
-                      invalid={validCode === true ? '' : 'invalid'}
+                      invalid={invalidCode}
+                      valid={validCode}
                       disabled={newUser.isPartner === false ? 'disabled' : ''}
                       className="form-input"
                       type="text"
@@ -285,8 +305,11 @@ class RegisterForm extends React.Component {
                       placeholder="Registration Code"
                       onChange={this.partnerCodeChange}
                       onBlur={this.validatePartnerCode}
-                      value={newUser.isPartner === false ? '' : newUser.partnerCode}
+                      value={partnerCode}
                     />
+                    <FormFeedback valid tooltip>
+                      The code entered is valid
+                    </FormFeedback>
                     <FormFeedback tooltip>The code you have entred is not valid</FormFeedback>
                   </FormGroup>
                 </Col>
@@ -297,6 +320,7 @@ class RegisterForm extends React.Component {
                   Search for Address
                 </Label>
                 <AsyncTypeahead
+                  disabled={invalidCode}
                   className="form-input mb-2"
                   ref={(typeahead) => {
                     this.typeahead = typeahead;
@@ -312,6 +336,7 @@ class RegisterForm extends React.Component {
                 />
                 <Label for="street1">Address 1</Label>
                 <Input
+                  disabled={invalidCode}
                   className="form-input"
                   type="text"
                   name="street1"
@@ -324,6 +349,7 @@ class RegisterForm extends React.Component {
               <FormGroup>
                 <Label for="street2">Address 2</Label>
                 <Input
+                  disabled={invalidCode}
                   className="form-input"
                   type="text"
                   name="street2"
@@ -338,6 +364,7 @@ class RegisterForm extends React.Component {
                   <FormGroup>
                     <Label for="city">City</Label>
                     <Input
+                      disabled={invalidCode}
                       className="form-input"
                       type="text"
                       name="city"
@@ -351,6 +378,7 @@ class RegisterForm extends React.Component {
                   <FormGroup>
                     <Label for="state">State</Label>
                     <Input
+                      disabled={invalidCode}
                       className="form-input"
                       type="select"
                       name="state"
@@ -369,6 +397,7 @@ class RegisterForm extends React.Component {
                   <FormGroup>
                     <Label for="zipcode">Zip</Label>
                     <Input
+                      disabled={invalidCode}
                       className="form-input"
                       type="text"
                       name="zipcode"
@@ -382,7 +411,7 @@ class RegisterForm extends React.Component {
             </Form>
           </ModalBody>
           <ModalFooter>
-            <Button color="primary" onClick={this.formSubmit}>
+            <Button disabled={invalidCode} color="primary" onClick={this.formSubmit}>
               Submit
             </Button>{' '}
             <Button color="secondary" onClick={e => this.toggle(e)}>

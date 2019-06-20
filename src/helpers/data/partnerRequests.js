@@ -25,9 +25,16 @@ const getPartnerByPartnerCode = partnerCode => new Promise((resolve, reject) => 
   axios
     .get(`${partnersApiBaseUrl}/api/Partners/Code/${partnerCode}`)
     .then((result) => {
-      resolve(result.data);
+      resolve(result);
     })
-    .catch(error => reject(error));
+    .catch((error) => {
+      const statusResponse = error.response.status;
+      if (statusResponse === 404) {
+        resolve(statusResponse);
+      } else {
+        reject(error);
+      }
+    });
 });
 
 export default { getAllPartners, getPartnerById, getPartnerByPartnerCode };
