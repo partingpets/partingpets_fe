@@ -1,4 +1,5 @@
 import React from 'react';
+import './PartnerItems.scss';
 
 class PartnerItems extends React.Component {
     deletePartner = (e) => {
@@ -9,14 +10,35 @@ class PartnerItems extends React.Component {
 
     render() {
         const { partner } = this.props;
+
+        const adminPartnerView = () => {
+            if (!partner.isDeleted) {
+                return (
+                <div>
+                    <h1>{partner.name}</h1>
+                    <h3>{partner.street}</h3>
+                    <h3>{partner.city}</h3>
+                    <h4>{partner.state}</h4>
+                    <h6>{partner.zipcode}</h6>
+                    <button onClick={this.deletePartner}>DELETE</button>
+                </div>
+                );
+            } else {
+                return (
+                <div className="test-div">
+                    <h1>{partner.name}</h1>
+                    <h3>{partner.street}</h3>
+                    <h3>{partner.city}</h3>
+                    <h4>{partner.state}</h4>
+                    <h6>{partner.zipcode}</h6>
+                </div>
+                );
+            }
+        };
+
         return (
             <div>
-                <h1>{partner.name}</h1>
-                <h3>{partner.street}</h3>
-                <h3>{partner.city}</h3>
-                <h4>{partner.state}</h4>
-                <h6>{partner.zipcode}</h6>
-                <button onClick={this.deletePartner}>DELETE</button>
+                {adminPartnerView()}
             </div>
         );
     }

@@ -13,8 +13,14 @@ const getAllPartners = () => new Promise((resolve, reject) => {
         .catch(error => reject(error));
 });
 
-const deletePartner = partnerId => axios.delete(`${partnersApiBaseUrl}/api/partners/${partnerId}`);
-
+const deletePartner = partnerId => new Promise((resolve, reject) => {
+    axios
+        .delete(`${partnersApiBaseUrl}/api/partners/${partnerId}`)
+        .then((result) => {
+            resolve(result.data);
+        })
+        .catch(error => reject(error));
+});
 
 
 export default { 
