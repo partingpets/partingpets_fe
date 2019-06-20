@@ -57,10 +57,16 @@ class AppNavbar extends React.Component {
               ) : (
                 ''
               )}
-              {/* <NavLink tag={RRNavLink} to="/partners">
-                <i className="navIcon fas fa-paw fa-2x" />
-                Partners
-              </NavLink> */}
+            </NavItem>
+            <NavItem>
+              {userObject.isAdmin ? (
+                <NavLink tag={RRNavLink} to="/admin">
+                  <i className="navIcon lnr lnr-cog" />
+                  Admin
+                </NavLink>
+              ) : (
+                ''
+              )}
             </NavItem>
             {/* <NavItem> */}
             {/* <NavLink tag={RRNavLink} onClick={logoutClickEvent} to="/home">
