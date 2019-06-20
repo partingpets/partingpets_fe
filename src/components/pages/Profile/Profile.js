@@ -5,7 +5,7 @@ import {
 import userRequests from '../../../helpers/data/userRequests';
 import authRequests from '../../../helpers/data/authRequests';
 import petRequests from '../../../helpers/data/petRequests';
-import Pets from '../Pets/Pets';
+import Pets from '../../Pets/Pets';
 import PetForm from '../../PetForm/PetForm';
 import './Profile.scss';
 
