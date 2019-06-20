@@ -27,7 +27,7 @@ const createPet = pet => axios.post(`${petsApiBaseUrl}/api/pets`, pet);
 
 const editPet = (petId, petObject) => axios.put(`${petsApiBaseUrl}/api/pets/${petId}`, petObject);
 
-const deletePet = petId => axios.delete(`${petsApiBaseUrl}/api/pets${petId}`);
+const deletePet = petId => axios.delete(`${petsApiBaseUrl}/api/pets/${petId}`);
 
 export default { 
   getPetsByUserId,

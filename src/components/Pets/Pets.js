@@ -17,6 +17,12 @@ class Pets extends React.Component {
     toggle();
   }
 
+  deleteEvent = (e) => {
+    e.preventDefault();
+    const { deleteThisPet, Pet } = this.props;
+    deleteThisPet(Pet.id);
+  }
+
   render(){
     const { Pet } = this.props;
 
@@ -56,6 +62,7 @@ class Pets extends React.Component {
           </CardText>
           {burialData()}
           <Button onClick={this.editEvent}>Edit</Button>
+          <Button onClick={this.deleteEvent}>Delete</Button>
         </CardBody>
       </div>
     </Card>
