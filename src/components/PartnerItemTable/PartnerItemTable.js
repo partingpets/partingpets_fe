@@ -1,11 +1,7 @@
+import PropTypes from 'prop-types';
 import React from 'react';
+import productShape from '../../helpers/productProps/productShape';
 import './PartnerItemTable.scss';
-
-// editEvent = (e) => {
-//   e.preventDefault();
-//   const { productToEdit, product } = this.props;
-//   productToEdit(product.id);
-// };
 
 // deleteEvent = (e) => {
 //   e.preventDefault();
@@ -14,6 +10,28 @@ import './PartnerItemTable.scss';
 // };
 
 class PartnerItemTable extends React.Component {
+  state = {
+    showModal: false,
+  };
+
+  static propTypes = {
+    product: productShape,
+    index: PropTypes.number,
+    editForm: PropTypes.func,
+  };
+
+  showModal = () => {
+    this.setState({
+      showModal: true,
+    });
+  };
+
+  onEditForm = (e) => {
+    const productId = e.target.id;
+    const { editForm } = this.props;
+    editForm(productId);
+  };
+
   render() {
     const { product, index } = this.props;
     const rowNumber = (index + 1).toString();
@@ -29,7 +47,7 @@ class PartnerItemTable extends React.Component {
         <td className="description">{product.description}</td>
         <td className="unit-price">{product.unitPrice}</td>
         <td>
-          <button className="pencil" onClick={this.editEvent}>
+          <button className="pencil" onClick={this.onEditForm}>
             <i className="lnr lnr-pencil pencil" />
           </button>
         </td>

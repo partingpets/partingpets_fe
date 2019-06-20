@@ -83,6 +83,19 @@ class Partners extends React.Component {
     }
   };
 
+  editProduct = (productId) => {
+    productRequests
+      .getSingleProduct(productId)
+      .then((product) => {
+        this.setState({
+          isEditing: true,
+          productEditId: productId,
+          productToEdit: product.data,
+        });
+        this.showModal();
+      })
+      .catch(error => console.error('There Was An Issue Getting Your Parting Pets Item To Update', error));
+  };
   // deleteSingleProduct = (productId) => {
   //   productRequests.deleteProduct(productId).then(() => {
   //     this.getproducts();
@@ -107,14 +120,14 @@ class Partners extends React.Component {
         index={index}
         product={product}
         onSelect={this.onSelect}
-        editProduct={this.editProduct}
+        editForm={this.editProduct}
       />
     ));
 
-    const editProductProps = { productToEdit };
+    const editFormProps = { productToEdit };
 
     if (!isEditing) {
-      editProductProps.disabled = true;
+      editFormProps.disabled = true;
     }
 
     return (
@@ -130,7 +143,7 @@ class Partners extends React.Component {
           showModal={this.state.showModal}
           onSubmit={this.productFormSubmitEvent}
           isEditing={isEditing}
-          {...editProductProps}
+          {...editFormProps}
           modalCloseEvent={this.modalCloseEvent}
           userObject={userObject}
         />

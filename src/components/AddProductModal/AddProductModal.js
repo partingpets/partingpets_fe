@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-// import { AsyncTypeahead } from 'react-bootstrap-typeahead';
 import {
   Button,
   Col,
@@ -78,7 +77,7 @@ class AddProductModal extends React.Component {
   componentWillReceiveProps(props) {
     if (props.isEditing) {
       this.setState({
-        newProduct: props.productToEdit,
+        newCampaign: props.campaignToEdit,
       });
     }
     this.setState({
