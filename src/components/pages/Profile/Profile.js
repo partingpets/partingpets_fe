@@ -116,7 +116,7 @@ class Profile extends React.Component {
           userToEdit: {},
         });
       })
-      .catch(error => console.error(error, 'There was an error updating the user'));
+      .catch(error => console.error('There was an error updating the user', error));
   };
 
   deletePet = (petId) => {

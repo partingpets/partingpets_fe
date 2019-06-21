@@ -42,34 +42,16 @@ class Home extends React.Component {
   };
 
   userFormSubmitEvent = (newUser) => {
-    // const { isEditing, userEditId } = this.state;
-    userRequests.createUser(newUser);
-    this.setState({
-      showModal: false,
-    });
-    // if (isEditing) {
-    //   userRequests
-    //   .createUser(newUser)
-    //     .then(() => {
-    //       this.setState({
-    //           showModal: false,
-    //           isEditing: false,
-    //           campaignEditId: '-1',
-    //         });
-    //       });
-    //     })
-    //     .catch(error => console.error('There was an error editing the campaign', error));
-    // } else {
-    //   userRequests
-    //     .newCampaign(newCampaign)
-    //     .then((res) => {
-    //       newMarker.campaignId = res.data.name;
-    //       markerRequests.newMarker(newMarker);
-    //       this.getMyCampaigns();
-    //       this.setState({ showModal: false });
-    //     })
-    //     .catch(error => console.error('There was an error creating the new Campaign', error));
-    // }
+    const { updateUser } = this.props;
+    userRequests
+      .createUser(newUser)
+      .then((result) => {
+        updateUser();
+        this.setState({
+          showModal: false,
+        });
+      })
+      .catch(error => console.error('There was an error creating new user', error));
   };
 
   editUserItem = (userId) => {
@@ -85,9 +67,6 @@ class Home extends React.Component {
       })
       .catch(error => console.error(error));
   };
-  // if(!isEditing) {
-  //   editUserProps.dis
-  // }
 
   render() {
     const { firebaseId, isEditing } = this.state;
@@ -97,7 +76,6 @@ class Home extends React.Component {
           showModal={this.state.showModal}
           onSubmit={this.userFormSubmitEvent}
           isEditing={isEditing}
-          // {...editUserProps}
           modalCloseEvent={this.modalCloseEvent}
           editForm={this.editUserItem}
           fireBaseId={firebaseId}

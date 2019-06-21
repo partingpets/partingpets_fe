@@ -126,12 +126,12 @@ class App extends React.Component {
                   />
                   <PrivateRoute
                     path="/"
-                    component={props => <Home userObject={userObject} {...props} />}
+                    component={props => <Home userObject={userObject} updateUser={this.getCurrentUser} {...props} />}
                     authed={authed}
                   />
                   <PrivateRoute
                     path="/home"
-                    component={props => <Home userObject={userObject} {...props} />}
+                    component={props => <Home userObject={userObject} updateUser={this.getCurrentUser} {...props} />}
                     authed={authed}
                   />
                 </Switch>
