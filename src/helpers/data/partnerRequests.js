@@ -22,8 +22,17 @@ const deletePartner = partnerId => new Promise((resolve, reject) => {
         .catch(error => reject(error));
 });
 
+const createPartner = newPartner => new Promise((resolve, reject) => {
+    axios
+        .post(`${partnersApiBaseUrl}/api/partners/`, newPartner)
+        .then((result) => {
+            resolve(result.data);
+        })
+        .catch(error => reject(error));
+});
 
 export default { 
     getAllPartners, 
     deletePartner,
+    createPartner,
 };

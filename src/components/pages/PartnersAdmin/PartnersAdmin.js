@@ -6,6 +6,7 @@ import './PartnersAdmin.scss';
 class PartnersAdmin extends React.Component {
 state = {
     partners: [],
+    showModal: false,
 }
 
 componentDidMount() {
@@ -17,6 +18,35 @@ componentDidMount() {
         console.error('error in getting the partners', err)
     });
 }
+
+showModal = (e) => {
+    this.setState({
+        hidden: !this.state.hidden,
+        showModal: true,
+    });
+};
+
+modalCloseEvent = () => {
+    this.setState({
+        hidden: !this.state.hidden,
+        showModal: false,
+    });
+};
+
+partnerFormSubmitEvent = (newPartner) => {
+    partnerRequests.createPartner(newPartner)
+    .then(() => {
+        partnerRequests.getAllPartners()
+        .then((partners) => {
+            this.setState({ 
+                partners, 
+                showModal: false, 
+            });
+        });
+    }
+)};
+
+
 
 deleteOnePartner = (partnerId) => {
     partnerRequests.deletePartner(partnerId)
@@ -43,6 +73,11 @@ render() {
     return (
         <div className="partners-admin-container">
             <h1>Manage The Partners</h1>
+            <button onClick={this.showModal}>ADD NEW PARTNER</button>
+            <AddPartnerModal
+                showModal={this.state.showModal}
+                modalCloseEvent={this.state.modalCloseEvent}
+            />
             <ul>{partnersComponents}</ul>
         </div>
     );
