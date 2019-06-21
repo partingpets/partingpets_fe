@@ -1,0 +1,36 @@
+.modal-header {
+        background-color:  rgb(21, 21, 58) !important;
+        color: white;
+        font-family: 'Rubik', sans-serif;
+
+}
+
+.modal-footer {
+  background-color:  rgb(21, 21, 58) !important;
+  color: white;
+  font-family: 'Rubik', sans-serif;
+}
+
+.modal-body {
+    background-color: rgba(0, 0, 0, 0.35);
+background-image: url("./images/blueBackground.jpg");
+background-attachment: fixed;
+background-size: 80%;
+background-blend-mode: overlay 90%;
+
+  }
+
+  .petsModalLogo {
+      padding-right: 10px;
+      width: 15%;
+      height: 15%;
+  }
+
+  .form-input,
+.rbt-input {
+  background-color: rgb(0, 0, 0) !important;
+}
+
+.textArea {
+    resize: none;
+}

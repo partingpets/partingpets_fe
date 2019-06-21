@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-//import { AsyncTypeahead } from 'react-bootstrap-typeahead';
+// import { AsyncTypeahead } from 'react-bootstrap-typeahead';
 import {
   Button,
   Col,
@@ -14,21 +14,19 @@ import {
   ModalHeader,
   Row,
 } from 'reactstrap';
-import authRequests from '../../helpers/data/authRequests';
-//import autoSuggest from '../../helpers/data/autoSuggest';
 import productRequests from '../../helpers/data/productRequests';
-import stateRequests from '../../helpers/data/stateRequests';
-import titleRequests from '../../helpers/data/titleRequests';
 import './AddProductModal.scss';
+
+import pets from '../AppNavbar/images/pets_small.png';
 
 const defaultProduct = {
   name: '',
-  price: '',
-  productCategory: '',
-  imgUrl: '',
-  isOnSale: '',
+  unitPrice: '',
+  imageUrl: '',
+  categoryId: 0,
+  isOnSale: 'False',
   description: '',
-  uid: '',
+  partnerId: null,
 };
 
 class AddProductModal extends React.Component {
@@ -36,9 +34,9 @@ class AddProductModal extends React.Component {
     modal: false,
     backdrop: 'static',
     newProduct: defaultProduct,
-    descriptionMaxLength: 125,
-    descriptionCharCount: 125,
-    isLoading: false,
+    productCategories: [],
+    descriptionMaxLength: 250,
+    descriptionCharCount: 250,
   };
 
   static propTypes = {
@@ -48,12 +46,6 @@ class AddProductModal extends React.Component {
     productToEdit: PropTypes.object,
     modalCloseEvent: PropTypes.func,
   };
-
-  dropToggle() {
-    this.setState(prevState => ({
-      dropdownOpen: !prevState.dropdownOpen,
-    }));
-  }
 
   toggle() {
     this.setState({
@@ -66,33 +58,23 @@ class AddProductModal extends React.Component {
     modalCloseEvent();
     this.setState({
       newProduct: defaultProduct,
-      productToEdit: defaultProduct,
     });
   }
 
   componentDidMount() {
-    autoSuggest.getIpLocation().then((res) => {
-      this.setState({
-        position: {
-          lat: res.data.latitude,
-          lng: res.data.longitude,
-        },
+    productRequests
+      .getAllProductCategories()
+      .then((result) => {
+        this.setState({
+          productCategories: result,
+        });
+      })
+      .catch((err) => {
+        console.error('error with getting Product categories', err);
       });
-    });
-    stateRequests.getAllStates().then((usStates) => {
-      this.setState({ usStates });
-    });
-    titleRequests.getAllTitles().then((titles) => {
-      this.setState({ titles });
-    });
   }
 
   componentWillReceiveProps(props) {
-    if (props.isEditing) {
-      this.setState({
-        newProduct: props.productToEdit,
-      });
-    }
     this.setState({
       modal: props.showModal,
     });
@@ -103,7 +85,7 @@ class AddProductModal extends React.Component {
     const tempProduct = { ...this.state.newProduct };
     tempProduct[name] = event.target.value;
     this.setState({
-      newCampaign: tempCampaign,
+      newProduct: tempProduct,
     });
   };
 
@@ -112,35 +94,30 @@ class AddProductModal extends React.Component {
     tempProduct[name] = event.target.value * 1;
     this.setState({
       newProduct: tempProduct,
-      newMarker: tempMarker,
     });
   };
 
-//   formfieldTitleState = (name, url, event) => {
-//     const tempCampaign = { ...this.state.newCampaign };
-//     const tempMarker = { ...this.state.newMarker };
-//     tempCampaign.title = event.target.value;
-//     tempCampaign.imgUrl = url;
-//     tempMarker.title = event.target.value;
-//     tempMarker.imgUrl = url;
-//     this.setState({
-//       newCampaign: tempCampaign,
-//       newMarker: tempMarker,
-//     });
-//   };
-
-
-  nameChange = (event) => {
-    const { titles } = this.state;
-    const url = titles[event.target.selectedIndex].imgUrl;
-    this.formfieldNameState('name', url, event);
+  formFieldCategoryChange = (name, name2, event) => {
+    const tempProduct = { ...this.state.newProduct };
+    name2 = event.target.value;
+    tempProduct[name] = event.target.selectedOptions[0].dataset.id;
+    this.setState({
+      newProduct: tempProduct,
+      productCategoryName: name2,
+    });
   };
 
-  priceChange = event => this.formFieldNumberState('price', event);
+  nameChange = event => this.formFieldStringState('name', event);
 
-  productCategoryChange = event => this.formFieldStringState('productCategory', event);
+  imageUrlChange = event => this.formFieldStringState('imageUrl', event);
+
+  priceChange = event => this.formFieldStringState('unitPrice', event);
 
   onSaleChange = event => this.formFieldStringState('onSale', event);
+
+  productCategoryChange = (event) => {
+    this.formFieldCategoryChange('categoryId', 'categoryName', event);
+  };
 
   descriptionChange = (event) => {
     this.formFieldStringState('description', event);
@@ -149,12 +126,11 @@ class AddProductModal extends React.Component {
     });
   };
 
-
   formSubmit = (event) => {
     event.preventDefault();
-    const { onSubmit } = this.props;
+    const { onSubmit, userObject } = this.props;
     const myNewProduct = { ...this.state.newProduct };
-    myNewProduct.uid = authRequests.getCurrentUid();
+    myNewProduct.partnerId = userObject.partnerId;
     onSubmit(myNewProduct);
     this.setState({
       newProduct: defaultProduct,
@@ -163,7 +139,7 @@ class AddProductModal extends React.Component {
 
   render() {
     const {
-      descriptionCharCount, descriptionMaxLength, newProduct, isLoading, suggestResults, usStates, titles,
+      descriptionCharCount, descriptionMaxLength, newProduct, productCategories,
     } = this.state;
     return (
       <div className="AddProductModal">
@@ -177,36 +153,51 @@ class AddProductModal extends React.Component {
           size="lg"
         >
           <ModalHeader toggle={e => this.toggle(e)}>
-            {this.props.isEditing ? 'Edit Product' : 'Add New Product'}
+            <img src={pets} className="petsModalLogo" alt="pets_logo" />
+            {this.props.isEditing ? 'EDIT YOUR PARTING PETS PRODUCT' : 'ADD NEW PARTING PETS PRODUCT'}
           </ModalHeader>
           <ModalBody>
             <Form>
               <Row form>
-                <Col md={6}>
+                <Col md={12}>
                   <FormGroup>
-                    <Label for="title">Product Name</Label>
+                    <Label for="name">Product Name</Label>
                     <Input
                       className="form-input"
-                      type="select"
+                      type="text"
                       name="name"
                       id="name"
                       placeholder="Enter The Name Of Your Product"
                       onChange={this.nameChange}
                       value={newProduct.name}
-                    >
-                      {titles.map((title, i) => (
-                        <option key={i}>{title.name}</option>
-                      ))}
-                    </Input>
+                    />
                   </FormGroup>
                 </Col>
-                <Col md={6}>
+              </Row>
+              <Row form>
+                <Col md={12}>
                   <FormGroup>
-                    <Label for="price">What Is The Price Of Your Product</Label>
+                    <Label for="imageUrl">Image URL</Label>
                     <Input
                       className="form-input"
-                      type="number"
-                      name="number"
+                      type="text"
+                      name="imageUrl"
+                      id="imageUrl"
+                      placeholder="Enter The Image URL Of Your Product"
+                      onChange={this.imageUrlChange}
+                      value={newProduct.imageUrl}
+                    />
+                  </FormGroup>
+                </Col>
+              </Row>
+              <Row form>
+                <Col md={5}>
+                  <FormGroup>
+                    <Label for="price">Product Price</Label>
+                    <Input
+                      className="form-input"
+                      type="text"
+                      name="price"
                       id="price"
                       placeholder="$29.99"
                       onChange={this.priceChange}
@@ -214,54 +205,62 @@ class AddProductModal extends React.Component {
                     />
                   </FormGroup>
                 </Col>
-              </Row>
-              <Row form>
-                <Col md={6}>
+
+                <Col md={5}>
                   <FormGroup>
-                    <Label for="productCategory">Category</Label>
+                    <Label for="productCategory">Product Category</Label>
                     <Input
                       className="form-input"
-                      type="text"
+                      type="select"
                       name="productCategory"
                       id="productCategory"
                       placeholder="Pick A Category"
                       onChange={this.productCategoryChange}
-                      value={newProduct.productCategory}
-                    />
+                      value={newProduct.productCategoryName}
+                    >
+                      {productCategories.map((cat, i) => (
+                        <option key={i} data-id={cat.id}>
+                          {cat.name}
+                        </option>
+                      ))}
+                    </Input>
                   </FormGroup>
                 </Col>
-                <Col md={6}>
+                <Col md={2}>
                   <FormGroup>
-                    <Label for="onSale">Is This Product On Sale?</Label>
+                    <Label for="onSale">On Sale?</Label>
                     <Input
                       className="form-input"
-                      type="onSale"
+                      type="select"
                       name="onSale"
                       id="onSale"
-                      placeholder="yes or no?"
+                      placeholder=""
                       onChange={this.onSaleChange}
                       value={newProduct.onSale}
-                    />
+                    >
+                      <option key="1">No</option>
+                      <option key="2">Yes</option>
+                    </Input>
                   </FormGroup>
                 </Col>
               </Row>
               <FormGroup>
                 <Label for="description">Description</Label>
                 <Input
-                  className="form-input"
+                  className="form-input textArea"
                   type="textarea"
                   name="text"
                   id="description"
+                  rows="3"
+                  placeholder="Tell Us About Your Product or Service"
                   maxLength={descriptionMaxLength}
                   onChange={this.descriptionChange}
                   value={newProduct.description}
                 />
                 <Label className="float-right" for="char-count">
-                  Remaining: {notesCharCount}/{notesMaxLength}
+                  Remaining: {descriptionCharCount}/{descriptionMaxLength}
                 </Label>
               </FormGroup>
-              
-              </Row>
             </Form>
           </ModalBody>
           <ModalFooter>
