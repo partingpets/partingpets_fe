@@ -8,6 +8,13 @@ class PartnerItems extends React.Component {
         deleteSinglePartner(partner.id);
     }
 
+    editPartner = (e) => {
+        e.preventDefault();
+        const { passPartnerToEdit, partner, toggle } = this.props;
+        passPartnerToEdit(partner.id);
+        toggle();
+    }
+
     render() {
         const { partner } = this.props;
 
@@ -20,6 +27,7 @@ class PartnerItems extends React.Component {
                     <h3>{partner.city}</h3>
                     <h4>{partner.state}</h4>
                     <h6>{partner.zipcode}</h6>
+                    <button onClick={this.editPartner}>EDIT</button>
                     <button onClick={this.deletePartner}>DELETE</button>
                 </div>
                 );

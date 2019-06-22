@@ -8,6 +8,17 @@ class PartnersAdmin extends React.Component {
 state = {
     partners: [],
     showModal: false,
+    isEditingPartner: false,
+    partnerToEdit: '-1',
+}
+
+toggle = () => {
+    if(this.state.isEditingPartner){
+        this.setState({
+            showModal: !this.state.showModal,
+            isEditingPartner: false,
+        })
+    }
 }
 
 componentDidMount() {
@@ -35,7 +46,24 @@ modalCloseEvent = (e) => {
 };
 
 partnerFormSubmitEvent = (newPartner) => {
-    partnerRequests.createPartner(newPartner)
+    const { isEditingPartner, partnerToEdit } = this.state;
+    if (isEditingPartner) {
+        partnerRequests.editPartner(partnerToEdit, newPartner)
+        .then(() => {
+            partnerRequests.getAllPartners()
+            .then((partners) => {
+                this.setState({
+                    partners,
+                    showModal: false,
+                    isEditingPartner: false,
+                    partnerToEdit: '-1'
+                })
+            })
+        }
+
+        )
+    } else {
+        partnerRequests.createPartner(newPartner)
     .then(() => {
         partnerRequests.getAllPartners()
         .then((partners) => {
@@ -46,7 +74,16 @@ partnerFormSubmitEvent = (newPartner) => {
         });
     }
 )};
+};
 
+passPartnerToEdit = partnerId => {
+    partnerRequests.getSinglePartner(partnerId)
+    .then((result) => {
+        this.setState({ 
+            isEditingPartner: true, 
+            partnerToEdit: result });
+    }); 
+}
 
 
 deleteOnePartner = (partnerId) => {
@@ -63,12 +100,14 @@ deleteOnePartner = (partnerId) => {
 };
 
 render() {
-    const { partners } = this.state;
+    const { partners, isEditingPartner, partnerToEdit } = this.state;
     const partnersComponents = partners.map(partner => (
      <PartnerItems
         key={partner.id}
         partner={partner}
         deleteSinglePartner={this.deleteOnePartner}
+        passPartnerToEdit={this.passPartnerToEdit}
+        toggle={this.toggle}
         />
         ));
     return (
@@ -79,6 +118,8 @@ render() {
                 showModal={this.state.showModal}
                 onSubmit={this.partnerFormSubmitEvent}
                 modalCloseEvent={this.modalCloseEvent}
+                isEditingPartner={isEditingPartner}
+                partnerToEdit={partnerToEdit}
             />
             <ul>{partnersComponents}</ul>
         </div>

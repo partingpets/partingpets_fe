@@ -12,6 +12,8 @@ import {
     ModalHeader,
     Row,
   } from 'reactstrap';
+  import stateRequests from '../../helpers/data/stateRequests';
+import partnerRequests from '../../helpers/data/partnerRequests';
 
 const defaultPartner = {
     name: '',
@@ -27,6 +29,7 @@ class AddPartnerModal extends React.Component {
         modal: false, 
         backdrop: 'static', 
         newPartner: defaultPartner,
+        usStates: [],
         descriptionMaxLength: 250,
         descriptionCharCount: 250,
     };
@@ -45,10 +48,27 @@ class AddPartnerModal extends React.Component {
         });
     }
 
+    componentDidMount() {
+      stateRequests.getAllStates().then((usStates) => {
+        this.setState({ usStates });
+      });
+    }
+  
     componentWillReceiveProps(props) {
         this.setState({
             modal: props.showModal,
         });
+    }
+
+    componentDidUpdate(prevProps) {
+      const { isEditingPartner, partnerToEdit } = this.props;
+      if (prevProps !== this.props && isEditingPartner) {
+        partnerRequests.getSinglePartner(partnerToEdit)
+        .then((result) => {
+          this.setState({ newPartner: result.data })
+        })
+        .catch(error => console.error('error in editing the partner you chose. Sorry'));
+      }
     }
 
     formFieldStringState = (name, e) => {
@@ -81,7 +101,6 @@ formSubmit = (e) => {
     e.preventDefault();
     const { onSubmit } = this.props;
     const myNewPartner = { ...this.state.newPartner };
-    // myNewProduct.partnerId = userObject.partnerId;
     onSubmit(myNewPartner);
     this.setState({
       newPartner: defaultPartner,
@@ -90,8 +109,9 @@ formSubmit = (e) => {
 
     render() {
         const {
-            descriptionCharCount, descriptionMaxLength, newPartner,
+            descriptionCharCount, descriptionMaxLength, newPartner, usStates,
           } = this.state;
+        const { isEditingPartner } = this.props;
         return (
             <div className="AddPartnerModal">
                        <Modal
@@ -105,7 +125,7 @@ formSubmit = (e) => {
         >
           <ModalHeader toggle={e => this.toggle(e)}>
             {/*<img src={pets} className="petsModalLogo" alt="pets_logo" />*/}
-            {this.props.isEditing ? 'EDIT THE PARTNER' : 'ADD NEW PARTNER'}
+            {this.props.isEditingPartner ? 'EDIT THE PARTNER' : 'ADD NEW PARTNER'}
           </ModalHeader>
           <ModalBody>
             <Form>
@@ -180,13 +200,16 @@ formSubmit = (e) => {
                     <Label for="state">State</Label>
                     <Input
                       className="form-input"
-                      type="text"
+                      type="select"
                       name="state"
                       id="state"
                       placeholder="state"
                       onChange={this.stateChange}
                       value={newPartner.state}
                       >
+                        {usStates.map((state, i) => (
+                        <option key={i}>{state.name}</option>
+                      ))}
                     </Input>
                   </FormGroup>
                 </Col>
