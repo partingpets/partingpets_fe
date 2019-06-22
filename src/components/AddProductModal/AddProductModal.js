@@ -201,15 +201,15 @@ class AddProductModal extends React.Component {
               <Row form>
                 <Col md={5}>
                   <FormGroup>
-                    <Label for="price">Product Price</Label>
+                    <Label for="unitPrice">Product Price</Label>
                     <Input
                       className="form-input"
                       type="text"
-                      name="price"
-                      id="price"
-                      placeholder="$29.99"
+                      name="unitPrice"
+                      id="unitPrice"
+                      placeholder="$0.00"
                       onChange={this.priceChange}
-                      value={newProduct.price}
+                      value={newProduct.unitPrice}
                     />
                   </FormGroup>
                 </Col>

@@ -55,6 +55,7 @@ class Partners extends React.Component {
     this.setState({
       hidden: !this.state.hidden,
       showModal: false,
+      productToEdit: {},
     });
   };
 
