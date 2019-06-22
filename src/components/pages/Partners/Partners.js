@@ -96,11 +96,6 @@ class Partners extends React.Component {
       })
       .catch(error => console.error('There Was An Issue Getting Your Parting Pets Item To Update', error));
   };
-  // deleteSingleProduct = (productId) => {
-  //   productRequests.deleteProduct(productId).then(() => {
-  //     this.getproducts();
-  //   });
-  // };
 
   // newProductView = () => {
   //   this.props.history.push('/products/new');
@@ -129,7 +124,7 @@ class Partners extends React.Component {
     if (!isEditing) {
       editFormProps.disabled = true;
     }
-
+    
     return (
       <div className="partnerItems mx-auto animated bounceInLeft w-100">
         <div className="productWrap">

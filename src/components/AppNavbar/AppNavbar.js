@@ -57,10 +57,16 @@ class AppNavbar extends React.Component {
               ) : (
                 ''
               )}
-              {/* <NavLink tag={RRNavLink} to="/partners">
-                <i className="navIcon fas fa-paw fa-2x" />
-                Partners
-              </NavLink> */}
+            </NavItem>
+            <NavItem>
+              {userObject.isAdmin ? (
+                <NavLink tag={RRNavLink} to="/admin">
+                  <i className="navIcon lnr lnr-cog" />
+                  Admin
+                </NavLink>
+              ) : (
+                ''
+              )}
             </NavItem>
             {/* <NavItem> */}
             {/* <NavLink tag={RRNavLink} onClick={logoutClickEvent} to="/home">
@@ -75,16 +81,19 @@ class AppNavbar extends React.Component {
               </DropdownToggle>
               <DropdownMenu right className="bg-dark">
                 <DropdownItem tag={RRNavLink} className="profBtn nav-link" to="/profile">
-                  <i className="navIcon fas fa-user fa-2x" />
+                  <i className="navIcon lnr lnr-user" />
+                  {/* <i className="navIcon fas fa-user fa-2x" /> */}
                   Profile
                 </DropdownItem>
                 <DropdownItem className="profBtn nav-link" to="/orders">
-                  <i className="navIcon fas fa-file-invoice-dollar fa-2x" />
+                <i className="navIcon lnr lnr-layers" />
+                  {/* <i className="navIcon fas fa-file-invoice-dollar fa-2x" /> */}
                   Orders
                 </DropdownItem>
                 <DropdownItem divider />
                 <DropdownItem className="profBtn nav-link" onClick={logoutClickEvent} to="/home">
-                  <i className="navIcon fas fa-sign-out-alt fa-2x" />
+                  <i className="navIcon lnr lnr-chevron-right-circle" />
+                  {/* <i className="navIcon fas fa-sign-out-alt fa-2x" /> */}
                   Logout
                 </DropdownItem>
                 {/* <DropdownItem>Logout</DropdownItem> */}
