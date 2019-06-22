@@ -16,6 +16,16 @@ const getAllProducts = () => new Promise((resolve, reject) => {
     .catch(error => reject(error));
 });
 
+// Get Single Product By ID //
+const getSingleProduct = id => new Promise((resolve, reject) => {
+  axios
+    .get(`${productsApiBaseUrl}/api/products/${id}`)
+    .then((result) => {
+      resolve(result.data);
+    })
+    .catch(error => reject(error));
+});
+
 // Get Products By Partner ID for Partner Page //
 const getAllProductsByPartnerId = partnerId => new Promise((resolve, reject) => {
   axios
@@ -46,10 +56,22 @@ const createProduct = newProduct => new Promise((resolve, reject) => {
     .catch(error => reject(error));
 });
 
+// Edit Product Call //
+const editProduct = (id, product) => new Promise((resolve, reject) => {
+  axios
+    .put(`${productsApiBaseUrl}/api/products/update/${id}`, product)
+    .then((result) => {
+      resolve(result.data);
+    })
+    .catch(error => reject(error));
+});
+
 export default {
   getAllProducts,
+  getSingleProduct,
   getAllProductCategories,
   createProduct,
+  editProduct,
   getCurrentUid,
   getAllProductsByPartnerId,
 };
