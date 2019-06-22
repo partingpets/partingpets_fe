@@ -3,12 +3,6 @@ import React from 'react';
 import productShape from '../../helpers/productProps/productShape';
 import './PartnerItemTable.scss';
 
-// deleteEvent = (e) => {
-//   e.preventDefault();
-//   const { deleteSingleProduct, product } = this.props;
-//   deleteSingleProduct(product.id);
-// };
-
 class PartnerItemTable extends React.Component {
   state = {
     showModal: false,
