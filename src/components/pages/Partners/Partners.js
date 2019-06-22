@@ -135,7 +135,7 @@ class Partners extends React.Component {
     if (!isEditing) {
       editFormProps.disabled = true;
     }
-
+    
     return (
       <div className="partnerItems mx-auto animated bounceInLeft w-100">
         <div className="productWrap">

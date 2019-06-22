@@ -57,7 +57,6 @@ class AddProductModal extends React.Component {
     modalCloseEvent();
     this.setState({
       newProduct: defaultProduct,
-      productToEdit: defaultProduct,
     });
   }
 
