@@ -27,7 +27,7 @@ showModal = (e) => {
     });
 };
 
-modalCloseEvent = () => {
+modalCloseEvent = (e) => {
     this.setState({
         hidden: !this.state.hidden,
         showModal: false,
@@ -77,7 +77,8 @@ render() {
             <button onClick={this.showModal}>ADD NEW PARTNER</button>
             <AddPartnerModal
                 showModal={this.state.showModal}
-                modalCloseEvent={this.state.modalCloseEvent}
+                onSubmit={this.partnerFormSubmitEvent}
+                modalCloseEvent={this.modalCloseEvent}
             />
             <ul>{partnersComponents}</ul>
         </div>
