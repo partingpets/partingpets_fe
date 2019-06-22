@@ -138,6 +138,9 @@ formSubmit = (e) => {
                       onChange={this.descriptionChange}
                       value={newPartner.description}
                       />
+                      <Label className="float-right" for="char-count">
+                        Remaining: {descriptionCharCount}/{descriptionMaxLength}
+                      </Label>
                   </FormGroup>
                 </Col>
               </Row>
@@ -201,9 +204,6 @@ formSubmit = (e) => {
                   onChange={this.zipcodeChange}
                   value={newPartner.zipcode}
                   />
-                <Label className="float-right" for="char-count">
-                  Remaining: {descriptionCharCount}/{descriptionMaxLength}
-                </Label>
               </FormGroup>
             </Form>
           </ModalBody>
