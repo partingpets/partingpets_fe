@@ -18,7 +18,11 @@ class Home extends React.Component {
     });
     userRequests
       .getUserByFbId(currentUid)
-      .then()
+      .then((result) => {
+        if (result.isDeleted) {
+          this.showModal();
+        }
+      })
       .catch((error) => {
         // User not found so redirect to Register Modal
         if (error.response.status === 404) {
@@ -36,8 +40,14 @@ class Home extends React.Component {
   };
 
   modalCloseEvent = () => {
+    const currentUid = authRequests.getCurrentUid();
     this.setState({
       showModal: false,
+    });
+    userRequests.getUserByFbId(currentUid).then((result) => {
+      if (result.isDeleted) {
+        authRequests.logoutUser();
+      }
     });
   };
 
