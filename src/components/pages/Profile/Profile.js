@@ -76,6 +76,7 @@ class Profile extends React.Component {
   modalCloseEvent = () => {
     this.setState({
       showModal: false,
+      userToEdit: {},
     });
   };
 
@@ -126,6 +127,16 @@ class Profile extends React.Component {
         this.getPartedPets();
       })
       .catch(error => console.error('error with deleting this pet', error));
+  };
+
+  deleteUser = () => {
+    const userId = this.props.userObject.id;
+    userRequests
+      .deleteUser(userId)
+      .then((results) => {
+        authRequests.logoutUser();
+      })
+      .catch(error => console.error('Stuff blowed up'));
   };
 
   petFormSubmitEvent = (pet) => {
@@ -185,9 +196,15 @@ class Profile extends React.Component {
                   <CardText>
                     {userObject.city} {userObject.state}, {userObject.zipcode}
                   </CardText>
-                  <Button id={userObject.id} onClick={this.editUserItem}>
-                    Edit
+                  {/* <div className="row justify-content-around"> */}
+                  <Button className="usr-btn" id={userObject.id} onClick={this.editUserItem}>
+                    <i className="lnr lnr-pencil usr-btn-edit-icon" aria-hidden="true" />
                   </Button>
+                  <Button className="usr-btn" onClick={this.deleteUser}>
+                    <i className="lnr lnr-trash  usr-btn-delete-icon" aria-hidden="true" />
+                  </Button>
+                  {/* </div> */}
+                  <hr />
                   <Button className="btn addPetButton" onClick={this.toggle}>
                     Add Pet
                   </Button>
