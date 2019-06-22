@@ -58,7 +58,8 @@ class Products extends React.Component {
     const { filteredProducts } = this.state;
 
     const printProduct = filteredProducts.map(product => (
-      <PrintProductCard key={product.id} product={product} onSelect={this.onSelect} />
+      <PrintProductCard key={product.id} product={product} />
+      // <PrintProductCard key={product.id} product={product} onSelect={this.onSelect} />
     ));
 
     return (
