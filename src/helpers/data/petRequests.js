@@ -21,7 +21,7 @@ const getAllPets = () => new Promise((resolve, reject) => {
     .catch(error => reject(error));
 });
 
-const getSinglePet = petId => axios.get(`${petsApiBaseUrl}/api/pets/${petId}`)
+const getSinglePet = petId => axios.get(`${petsApiBaseUrl}/api/pets/${petId}`);
 
 const createPet = pet => axios.post(`${petsApiBaseUrl}/api/pets`, pet);
 
@@ -29,7 +29,7 @@ const editPet = (petId, petObject) => axios.put(`${petsApiBaseUrl}/api/pets/${pe
 
 const deletePet = petId => axios.delete(`${petsApiBaseUrl}/api/pets/${petId}`);
 
-export default { 
+export default {
   getPetsByUserId,
   getAllPets,
   getSinglePet,

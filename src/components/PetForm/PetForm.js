@@ -28,9 +28,9 @@ const defaultPet = {
 };
 
 class PetForm extends React.Component {
-  state= {
+  state = {
     newPet: defaultPet,
-  }
+  };
 
   toggle() {
     this.props.toggle();
@@ -44,21 +44,19 @@ class PetForm extends React.Component {
     const { onSubmit, userObject } = this.props;
     const petSubmit = { ...this.state.newPet };
     petSubmit.userId = userObject.id;
-    if (petSubmit.name && 
-        petSubmit.breed && 
-        petSubmit.dateOfBirth && 
-        petSubmit.dateOfDeath) {
+    if (petSubmit.name && petSubmit.breed && petSubmit.dateOfBirth && petSubmit.dateOfDeath) {
       onSubmit(petSubmit);
       this.toggle();
     } else {
-      alert('You Fucked Up.  Fill out the whole form, d-bag.')
+      alert('You Fucked Up.  Fill out the whole form, d-bag.');
     }
-  }
+  };
 
   componentDidUpdate(prevProps) {
     const { isEditingPet, petIdToEdit } = this.props;
     if (prevProps !== this.props && isEditingPet) {
-      petRequests.getSinglePet(petIdToEdit)
+      petRequests
+        .getSinglePet(petIdToEdit)
         .then((thatPetYouJustGot) => {
           this.setState({ newPet: thatPetYouJustGot.data });
         })
@@ -83,36 +81,35 @@ class PetForm extends React.Component {
     });
   };
 
-  nameChange = event => this.formFieldStringState('name',event);
+  nameChange = event => this.formFieldStringState('name', event);
 
-  breedChange = event => this.formFieldStringState('breed',event);
+  breedChange = event => this.formFieldStringState('breed', event);
 
-  dateOfBirthChange = event => this.formFieldStringState('dateOfBirth',event);
+  dateOfBirthChange = event => this.formFieldStringState('dateOfBirth', event);
 
-  dateOfDeathChange = event => this.formFieldStringState('dateOfDeath',event);
+  dateOfDeathChange = event => this.formFieldStringState('dateOfDeath', event);
 
-  burialStreetChange = event => this.formFieldStringState('burialStreet',event);
+  burialStreetChange = event => this.formFieldStringState('burialStreet', event);
 
-  burialCityChange = event => this.formFieldStringState('burialCity',event);
+  burialCityChange = event => this.formFieldStringState('burialCity', event);
 
-  burialStateChange = event => this.formFieldStringState('burialState',event);
+  burialStateChange = event => this.formFieldStringState('burialState', event);
 
-  burialZipCodeChange = event => this.formFieldStringState('burialZipCode',event);
+  burialZipCodeChange = event => this.formFieldStringState('burialZipCode', event);
 
-  burialPlotChange = event => this.formFieldStringState('burialPlot',event);
+  burialPlotChange = event => this.formFieldStringState('burialPlot', event);
 
-
-  render(){
+  render() {
     const { newPet } = this.state;
     const { isOpen, isEditingPet } = this.props;
     const formTitle = () => {
       if (isEditingPet) {
-        return 'Edit Pet Information'
+        return 'Edit Pet Information';
       }
-      return 'Pet Registration'
-    }
+      return 'Pet Registration';
+    };
 
-    return ( 
+    return (
       <div className="PetForm">
       <Modal
         className="petForm-modal"

@@ -12,16 +12,19 @@ import {
   ModalFooter,
   ModalHeader,
   Row,
+  FormFeedback,
 } from 'reactstrap';
 import stateRequests from '../../helpers/data/stateRequests';
 import autoSuggest from '../../helpers/data/autoSuggest';
+import partnerRequests from '../../helpers/data/partnerRequests';
 import './RegisterForm.scss';
 
 const defaultUser = {
   firstName: '',
   lastName: '',
   email: '',
-  partner: '',
+  isPartner: false,
+  partnerCode: '',
   street1: '',
   street2: '',
   city: '',
@@ -34,11 +37,15 @@ class RegisterForm extends React.Component {
     modal: false,
     firebaseId: -1,
     newUser: defaultUser,
+    partnerCode: '',
     backdrop: 'static',
     isLoading: false,
+    isEditing: false,
     suggestResults: [],
     suggestedArray: [],
     usStates: [],
+    invalidCode: false,
+    validCode: false,
   };
 
   toggle() {
@@ -52,6 +59,8 @@ class RegisterForm extends React.Component {
     modalCloseEvent();
     this.setState({
       newUser: defaultUser,
+      validCode: false,
+      invalidCode: false,
     });
   }
 
@@ -62,9 +71,14 @@ class RegisterForm extends React.Component {
   }
 
   componentWillReceiveProps(props) {
+    if (props.isEditing) {
+      this.setState({
+        isEditing: true,
+        newUser: props.userToEdit,
+      });
+    }
     this.setState({
       modal: props.showModal,
-      firebaseId: props.firebaseId,
     });
   }
 
@@ -87,9 +101,17 @@ class RegisterForm extends React.Component {
 
   formFieldBoolState = (name, event) => {
     const tempUser = { ...this.state.newUser };
-    tempUser[name] = event.target.checked;
+    const boolValue = event.target.selectedOptions[0].dataset.selection === 'true';
+    tempUser[name] = boolValue;
     this.setState({
       newUser: tempUser,
+    });
+  };
+
+  formFieldPartnerCodeState = (event) => {
+    const tempCode = event.target.value;
+    this.setState({
+      partnerCode: tempCode,
     });
   };
 
@@ -99,7 +121,9 @@ class RegisterForm extends React.Component {
 
   emailChange = event => this.formFieldStringState('email', event);
 
-  partnerChange = event => this.formFieldBoolState('partner', event);
+  partnerChange = event => this.formFieldBoolState('isPartner', event);
+
+  partnerCodeChange = event => this.formFieldPartnerCodeState(event);
 
   street1Change = event => this.formFieldStringState('street1', event);
 
@@ -147,13 +171,42 @@ class RegisterForm extends React.Component {
     const myNewUser = { ...this.state.newUser };
     onSubmit(myNewUser);
     this.setState({
+      showModal: false,
       newUser: defaultUser,
     });
   };
 
+  validatePartnerCode = (event) => {
+    event.preventDefault();
+    const partnerCode = event.target.value;
+    if (partnerCode === '') {
+      this.setState({
+        validCode: false,
+        invalidCode: false,
+      });
+    } else {
+      const tempUser = { ...this.state.newUser };
+      partnerRequests
+        .getPartnerByPartnerCode(partnerCode)
+        .then((results) => {
+          if (results.status === 200) {
+            tempUser.partnerId = results.data.id;
+            this.setState({
+              validCode: true,
+              invalidCode: false,
+              newUser: tempUser,
+            });
+          } else {
+            this.setState({ validCode: false, invalidCode: true });
+          }
+        })
+        .catch(error => console.error('Error validating partner code', error));
+    }
+  };
+
   render() {
     const {
-      newUser, isLoading, suggestResults, usStates,
+      newUser, isLoading, suggestResults, usStates, isEditing, validCode, invalidCode, partnerCode,
     } = this.state;
     return (
       <div className="RegisterForm">
@@ -166,7 +219,7 @@ class RegisterForm extends React.Component {
           backdrop={this.state.backdrop}
           size="lg"
         >
-          <ModalHeader toggle={e => this.toggle(e)}>User Registration</ModalHeader>
+          <ModalHeader toggle={e => this.toggle(e)}>{isEditing ? 'Edit User' : 'User Registration'}</ModalHeader>
           <ModalBody>
             <Form>
               <Row form>
@@ -174,6 +227,7 @@ class RegisterForm extends React.Component {
                   <FormGroup>
                     <Label for="firstName">First Name</Label>
                     <Input
+                      disabled={invalidCode}
                       className="form-input"
                       type="text"
                       name="firstName"
@@ -188,6 +242,7 @@ class RegisterForm extends React.Component {
                   <FormGroup>
                     <Label for="lastName">Last Name</Label>
                     <Input
+                      disabled={invalidCode}
                       className="form-input"
                       type="text"
                       name="lastName"
@@ -200,31 +255,62 @@ class RegisterForm extends React.Component {
                 </Col>
               </Row>
               <Row form>
-                <Col md={8}>
+                <Col md={6}>
                   <FormGroup>
                     <Label for="email">Email Address</Label>
                     <Input
+                      disabled={invalidCode}
                       className="form-input"
                       type="email"
                       name="email"
                       id="userEmail"
                       placeholder="pet_ownwer@luvmypet.com"
                       onChange={this.emailChange}
-                      value={newUser.Email}
+                      value={newUser.email}
                     />
                   </FormGroup>
                 </Col>
                 <Col md={2}>
-                  <FormGroup className="partner-check">
-                    <Label for="partner">Partner :</Label>
+                  <FormGroup>
+                    <Label for="partner">Partner</Label>
                     <Input
                       className="form-input"
-                      type="checkbox"
+                      type="select"
                       name="partner"
                       id="partner"
+                      placeholder="Are you a partner"
                       onChange={this.partnerChange}
-                      value={newUser.isPartner}
+                      value={newUser.isPartner === true ? 'Yes' : 'No'}
+                    >
+                      <option key="1" data-selection="false">
+                        No
+                      </option>
+                      <option key="2" data-selection="true">
+                        Yes
+                      </option>
+                    </Input>
+                  </FormGroup>
+                </Col>
+                <Col md={4}>
+                  <FormGroup>
+                    <Label for="partnerCode">Partner Code</Label>
+                    <Input
+                      invalid={invalidCode}
+                      valid={validCode}
+                      disabled={newUser.isPartner === false ? 'disabled' : ''}
+                      className="form-input"
+                      type="text"
+                      name="partnerCode"
+                      id="partnerCode"
+                      placeholder="Registration Code"
+                      onChange={this.partnerCodeChange}
+                      onBlur={this.validatePartnerCode}
+                      value={partnerCode}
                     />
+                    <FormFeedback valid tooltip>
+                      The code entered is valid
+                    </FormFeedback>
+                    <FormFeedback tooltip>The code you have entred is not valid</FormFeedback>
                   </FormGroup>
                 </Col>
               </Row>
@@ -234,6 +320,7 @@ class RegisterForm extends React.Component {
                   Search for Address
                 </Label>
                 <AsyncTypeahead
+                  disabled={invalidCode}
                   className="form-input mb-2"
                   ref={(typeahead) => {
                     this.typeahead = typeahead;
@@ -249,6 +336,7 @@ class RegisterForm extends React.Component {
                 />
                 <Label for="street1">Address 1</Label>
                 <Input
+                  disabled={invalidCode}
                   className="form-input"
                   type="text"
                   name="street1"
@@ -261,13 +349,14 @@ class RegisterForm extends React.Component {
               <FormGroup>
                 <Label for="street2">Address 2</Label>
                 <Input
+                  disabled={invalidCode}
                   className="form-input"
                   type="text"
                   name="street2"
                   id="street2"
                   placeholder="Apartment, studio, or floor"
                   onChange={this.street2Change}
-                  value={newUser.street2}
+                  value={newUser.street2 === null ? '' : newUser.street2}
                 />
               </FormGroup>
               <Row form>
@@ -275,6 +364,7 @@ class RegisterForm extends React.Component {
                   <FormGroup>
                     <Label for="city">City</Label>
                     <Input
+                      disabled={invalidCode}
                       className="form-input"
                       type="text"
                       name="city"
@@ -288,6 +378,7 @@ class RegisterForm extends React.Component {
                   <FormGroup>
                     <Label for="state">State</Label>
                     <Input
+                      disabled={invalidCode}
                       className="form-input"
                       type="select"
                       name="state"
@@ -306,6 +397,7 @@ class RegisterForm extends React.Component {
                   <FormGroup>
                     <Label for="zipcode">Zip</Label>
                     <Input
+                      disabled={invalidCode}
                       className="form-input"
                       type="text"
                       name="zipcode"
@@ -319,7 +411,7 @@ class RegisterForm extends React.Component {
             </Form>
           </ModalBody>
           <ModalFooter>
-            <Button color="primary" onClick={this.formSubmit}>
+            <Button disabled={invalidCode} color="primary" onClick={this.formSubmit}>
               Submit
             </Button>{' '}
             <Button color="secondary" onClick={e => this.toggle(e)}>

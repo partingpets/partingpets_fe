@@ -6,25 +6,20 @@ import './Pets.scss';
 import moment from 'moment';
 
 class Pets extends React.Component {
-
   editEvent = (e) => {
     e.preventDefault();
-    const {
-      passPetToEdit,
-      Pet,
-      toggle
-    } = this.props;
+    const { passPetToEdit, Pet, toggle } = this.props;
     passPetToEdit(Pet.id);
     toggle();
-  }
+  };
 
   deleteEvent = (e) => {
     e.preventDefault();
     const { deleteThisPet, Pet } = this.props;
     deleteThisPet(Pet.id);
-  }
+  };
 
-  render(){
+  render() {
     const { Pet } = this.props;
 
     const dateFormat = dateData => moment(dateData).format('MMMM Do, YYYY');
@@ -44,10 +39,10 @@ class Pets extends React.Component {
           </CardText>
         );
       }
-      return <CardText>Please Edit to add burial location.</CardText>
-    }
+      return <CardText>Please Edit to add burial location.</CardText>;
+    };
 
-    return(
+    return (
       <Card>
       {/* <CardImg className="profileCardImg" top width="100%" src={fbUserObject.photoURL} alt="Card image cap" /> */}
       <CardHeader>{Pet.name}</CardHeader>
