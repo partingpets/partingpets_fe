@@ -5,7 +5,7 @@ import AddPartnerModal from '../../AddPartnerModal/AddPartnerModal';
 import './PartnersAdmin.scss';
 
 class PartnersAdmin extends React.Component {
-state = {
+  state = {
     partners: [],
     showModal: false,
     isEditingPartner: false,
@@ -21,15 +21,16 @@ toggle = () => {
     }
 }
 
-componentDidMount() {
-   partnerRequests.getAllPartners()
-    .then((partners) => {
+  componentDidMount() {
+    partnerRequests
+      .getAllPartners()
+      .then((partners) => {
         this.setState({ partners });
-    })
-    .catch((err) => {
-        console.error('error in getting the partners', err)
-    });
-}
+      })
+      .catch((err) => {
+        console.error('error in getting the partners', err);
+      });
+  }
 
 showModal = (e) => {
     this.setState({
@@ -85,19 +86,18 @@ passPartnerToEdit = partnerId => {
     }); 
 }
 
-
-deleteOnePartner = (partnerId) => {
-    partnerRequests.deletePartner(partnerId)
-    .then(() => {
-        partnerRequests.getAllPartners()
-        .then((partners) => {
-            this.setState({ partners });
+  deleteOnePartner = (partnerId) => {
+    partnerRequests
+      .deletePartner(partnerId)
+      .then(() => {
+        partnerRequests.getAllPartners().then((partners) => {
+          this.setState({ partners });
         });
-    })
-    .catch((err) => {
-        console.error('error in deleting the partner', err)
-    });
-};
+      })
+      .catch((err) => {
+        console.error('error in deleting the partner', err);
+      });
+  };
 
 render() {
     const { partners, isEditingPartner, partnerToEdit } = this.state;
@@ -124,7 +124,7 @@ render() {
             <ul>{partnersComponents}</ul>
         </div>
     );
-    }
+  }
 }
 
 export default PartnersAdmin;
