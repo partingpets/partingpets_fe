@@ -1,5 +1,14 @@
 import React from 'react';
 
+const defaultPartner = {
+    name: '',
+    description: '',
+    street: '',
+    city: '',
+    state: '',
+    zipcode: '',
+};
+
 class AddPartnerModal extends React.Component {
     render() {
         return (
