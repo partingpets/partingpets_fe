@@ -32,8 +32,18 @@ const updateUser = newUser => new Promise((resolve, reject) => {
     .catch(error => console.error('Error updating user', error));
 });
 
+const deleteUser = userId => new Promise((resolve, reject) => {
+  axios
+    .delete(`${petsApiBaseUrl}/api/Users/${userId}`)
+    .then((result) => {
+      resolve(result.data);
+    })
+    .catch(error => console.error('Error deleting user'));
+});
+
 export default {
   getUserByFbId,
   createUser,
   updateUser,
+  deleteUser,
 };
