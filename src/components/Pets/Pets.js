@@ -3,7 +3,7 @@ import {
   Card, CardImg, CardText, CardBody, Button, CardHeader,
 } from 'reactstrap';
 import './Pets.scss';
-import moment from 'moment';
+import utility from '../../helpers/utils/utility';
 
 class Pets extends React.Component {
   editEvent = (e) => {
@@ -21,8 +21,6 @@ class Pets extends React.Component {
 
   render() {
     const { Pet } = this.props;
-
-    const dateFormat = dateData => moment(dateData).format('MMMM Do, YYYY');
 
     const burialData = () => {
       if (Pet.burialCity && 
@@ -59,8 +57,8 @@ class Pets extends React.Component {
         <CardBody>
           <CardText>{Pet.breed}</CardText>
           <CardText>
-            Born:  {dateFormat(Pet.dateOfBirth)}<br />
-            Died:  {dateFormat(Pet.dateOfDeath)}
+            Born:  {utility.dateFormat(Pet.dateOfBirth)}<br />
+            Died:  {utility.dateFormat(Pet.dateOfDeath)}
           </CardText>
           {burialData()}
           <Button onClick={this.editEvent}>Edit</Button>
