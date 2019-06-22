@@ -90,7 +90,7 @@ class Partners extends React.Component {
         this.setState({
           isEditing: true,
           productEditId: productId,
-          productToEdit: product.data,
+          productToEdit: product,
         });
         this.showModal();
       })

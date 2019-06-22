@@ -76,6 +76,9 @@ class AddProductModal extends React.Component {
 
   componentWillReceiveProps(props) {
     if (props.isEditing) {
+      const { productCategories, newProduct } = this.state;
+      const categoryName = productCategories.find(catName => catName.id === props.productToEdit.categoryId);
+      newProduct.productCategoryName = categoryName.name;
       this.setState({
         newProduct: props.productToEdit,
       });

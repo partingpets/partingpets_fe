@@ -17,7 +17,7 @@ const getAllProducts = () => new Promise((resolve, reject) => {
 });
 
 // Get Single Product By ID //
-const getSingleProduct = (id) => new Promise((resolve, reject) => {
+const getSingleProduct = id => new Promise((resolve, reject) => {
   axios
     .get(`${productsApiBaseUrl}/api/products/${id}`)
     .then((result) => {
@@ -59,7 +59,7 @@ const createProduct = newProduct => new Promise((resolve, reject) => {
 // Edit Product Call //
 const editProduct = (id, product) => new Promise((resolve, reject) => {
   axios
-    .put(`${productsApiBaseUrl}/products/update/${id}`, product)
+    .put(`${productsApiBaseUrl}/api/products/update/${id}`, product)
     .then((result) => {
       resolve(result.data);
     })

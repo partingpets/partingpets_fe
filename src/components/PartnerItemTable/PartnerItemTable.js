@@ -47,14 +47,10 @@ class PartnerItemTable extends React.Component {
         <td className="description">{product.description}</td>
         <td className="unit-price">{product.unitPrice}</td>
         <td>
-          <button className="pencil" onClick={this.onEditForm}>
-            <i className="lnr lnr-pencil pencil" />
-          </button>
+          <i className="lnr lnr-pencil pencil" id={product.id} onClick={this.onEditForm} />
         </td>
         <td>
-          <button className="trash" onClick={this.deleteEvent}>
-            <i className="lnr lnr-trash trash" />
-          </button>
+          <i className="lnr lnr-trash trash" id={product.id} onClick={this.deleteEvent} />
         </td>
       </tr>
     );
