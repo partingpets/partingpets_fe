@@ -160,7 +160,7 @@ class PetForm extends React.Component {
                   <Label for="dateOfBirth">Date Of Birth</Label>
                   <Input
                     className="form-input"
-                    type="text"
+                    type="date"
                     name="dateOfBirth"
                     id="dateOfBirth"
                     placeholder="yyyy-mm-dd"
@@ -174,7 +174,7 @@ class PetForm extends React.Component {
                   <Label for="dateOfDeath">Date Of Death</Label>
                   <Input
                     className="form-input"
-                    type="text"
+                    type="date"
                     name="dateOfDeath"
                     id="dateOfDeath"
                     placeholder="yyyy-mm-dd"
