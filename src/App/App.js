@@ -44,6 +44,15 @@ class App extends React.Component {
     userObject: {},
   };
 
+  getCurrentUser = () => {
+    const userId = authRequests.getCurrentUid();
+    userRequests.getUserByFbId(userId).then((currentUser) => {
+      this.setState({
+        userObject: currentUser,
+      });
+    });
+  };
+
   componentDidMount() {
     connection();
 
@@ -54,12 +63,7 @@ class App extends React.Component {
           pendingUser: false,
         });
         authRequests.getCurrentUserJwt();
-        const user = authRequests.getCurrentUser();
-        userRequests.getUserByFbId(user.uid).then((currentUser) => {
-          this.setState({
-            userObject: currentUser,
-          });
-        });
+        this.getCurrentUser();
       } else {
         this.setState({
           authed: false,
@@ -95,13 +99,41 @@ class App extends React.Component {
               <div className="justify-content-center">
                 <Switch>
                   <PublicRoute path="/auth" component={Auth} authed={authed} />
-                  <PrivateRoute path="/profile" component={() => <Profile userObject={userObject} />} authed={authed} />
-                  <PrivateRoute path="/partners" component={() => <Partners userObject={userObject} />} authed={authed} />
-                  <PrivateRoute path="/admin" component={() => <Admin userObject={userObject} />} authed={authed} />
-                  <PrivateRoute path="/partnersadmin" component={() => <PartnersAdmin userObject={userObject} />} authed={authed} />
-                  <PrivateRoute path="/store" component={() => <Products userObject={userObject} />} authed={authed}  />
-                  <PrivateRoute path="/" component={Home} authed={authed} />
-                  <PrivateRoute path="/home" component={Home} authed={authed} />
+                  <PrivateRoute
+                    path="/profile"
+                    component={props => <Profile userObject={userObject} updateUser={this.getCurrentUser} {...props} />}
+                    authed={authed}
+                  />
+                  <PrivateRoute
+                    path="/partners"
+                    component={props => <Partners userObject={userObject} {...props} />}
+                    authed={authed}
+                  />
+                  <PrivateRoute
+                    path="/admin"
+                    component={props => <Admin userObject={userObject} {...props} />}
+                    authed={authed}
+                  />
+                  <PrivateRoute
+                    path="/partnersadmin"
+                    component={props => <PartnersAdmin userObject={userObject} {...props} />}
+                    authed={authed}
+                  />
+                  <PrivateRoute
+                    path="/store"
+                    component={props => <Products userObject={userObject} {...props} />}
+                    authed={authed}
+                  />
+                  <PrivateRoute
+                    path="/"
+                    component={props => <Home userObject={userObject} updateUser={this.getCurrentUser} {...props} />}
+                    authed={authed}
+                  />
+                  <PrivateRoute
+                    path="/home"
+                    component={props => <Home userObject={userObject} updateUser={this.getCurrentUser} {...props} />}
+                    authed={authed}
+                  />
                 </Switch>
               </div>
             </div>
