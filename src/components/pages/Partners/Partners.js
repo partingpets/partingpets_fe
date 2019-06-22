@@ -55,6 +55,7 @@ class Partners extends React.Component {
     this.setState({
       hidden: !this.state.hidden,
       showModal: false,
+      productToEdit: {},
     });
   };
 
@@ -81,6 +82,15 @@ class Partners extends React.Component {
         })
         .catch(error => console.error('There Was An Error Creating Your New Parting Pets Item'));
     }
+  };
+
+  deleteProduct = (productId) => {
+    productRequests
+      .deleteProduct(productId)
+      .then(() => {
+        this.getProducts();
+      })
+      .catch(error => console.error('error with deleting this parting pets item.', error));
   };
 
   editProduct = (productId) => {
@@ -116,6 +126,7 @@ class Partners extends React.Component {
         product={product}
         onSelect={this.onSelect}
         editForm={this.editProduct}
+        deleteProduct={this.deleteProduct}
       />
     ));
 
