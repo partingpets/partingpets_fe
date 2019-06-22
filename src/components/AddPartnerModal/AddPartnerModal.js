@@ -124,7 +124,6 @@ formSubmit = (e) => {
           size="lg"
         >
           <ModalHeader toggle={e => this.toggle(e)}>
-            {/*<img src={pets} className="petsModalLogo" alt="pets_logo" />*/}
             {this.props.isEditingPartner ? 'EDIT THE PARTNER' : 'ADD NEW PARTNER'}
           </ModalHeader>
           <ModalBody>
