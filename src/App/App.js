@@ -121,6 +121,11 @@ class App extends React.Component {
                     authed={authed}
                   />
                   <PrivateRoute
+                    path="/store/:id"
+                    component={props => <ItemDetail userObject={userObject} {...props} />}
+                    authed={authed}
+                  />
+                  <PrivateRoute
                     path="/store"
                     component={props => <Products userObject={userObject} {...props} />}
                     authed={authed}

@@ -60,7 +60,7 @@ class Products extends React.Component {
   };
 
   onSelect = (id) => {
-    this.props.history.push(`/products/${id}`);
+    this.props.history.push(`/store/${id}`);
   };
 
   render() {
