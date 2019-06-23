@@ -35,6 +35,11 @@ class Products extends React.Component {
     });
   }
 
+  //   changeView = (e) => {
+  //     const view = e.currentTarget.id;
+  //     this.props.history.push(`/${view}`);
+  // }
+
   onChange = (value, event) => {
     const { products } = this.state;
     const filteredProducts = [];
@@ -54,12 +59,15 @@ class Products extends React.Component {
     }
   };
 
+  onSelect = (id) => {
+    this.props.history.push(`/products/${id}`);
+  };
+
   render() {
     const { filteredProducts } = this.state;
 
     const printProduct = filteredProducts.map(product => (
-      <PrintProductCard key={product.id} product={product} />
-      // <PrintProductCard key={product.id} product={product} onSelect={this.onSelect} />
+      <PrintProductCard key={product.id} product={product} onSelect={this.onSelect} />
     ));
 
     return (

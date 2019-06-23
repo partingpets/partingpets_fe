@@ -21,7 +21,9 @@ const getSingleProduct = id => new Promise((resolve, reject) => {
   axios
     .get(`${productsApiBaseUrl}/api/products/${id}`)
     .then((result) => {
-      resolve(result.data);
+      const singleItem = result.data;
+      singleItem.id = id;
+      resolve(singleItem);
     })
     .catch(error => reject(error));
 });
