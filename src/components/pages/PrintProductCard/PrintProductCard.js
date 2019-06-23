@@ -23,7 +23,6 @@ class PrintProductCard extends React.Component {
       <div className="productCard card2 col-2">
         <img className="productImage" src={product.imageUrl} alt={product.name} />
         <h4 className="product-card-header">{product.name}</h4>
-        {/* <div className="card-body"> */}
         <div className="card-body" onClick={this.productClick}>
           <h6 className="card-text">{product.description}</h6>
           <h5 className="card-text">$ {product.unitPrice}</h5>

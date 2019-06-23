@@ -12,7 +12,8 @@ class ItemDetail extends React.Component {
   };
 
   componentDidMount() {
-    productRequests.getSingleProduct().then((singleItem) => {
+    const { id } = this.props.match.params;
+    productRequests.getSingleProductClick(id).then((singleItem) => {
       this.setState({ singleItem });
     });
   }

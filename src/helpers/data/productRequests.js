@@ -21,6 +21,15 @@ const getSingleProduct = id => new Promise((resolve, reject) => {
   axios
     .get(`${productsApiBaseUrl}/api/products/${id}`)
     .then((result) => {
+      resolve(result.data);
+    })
+    .catch(error => reject(error));
+});
+
+const getSingleProductClick = id => new Promise((resolve, reject) => {
+  axios
+    .get(`${productsApiBaseUrl}/api/products/${id}`)
+    .then((result) => {
       const singleItem = result.data;
       singleItem.id = id;
       resolve(singleItem);
@@ -79,4 +88,5 @@ export default {
   deleteProduct,
   getCurrentUid,
   getAllProductsByPartnerId,
+  getSingleProductClick,
 };
