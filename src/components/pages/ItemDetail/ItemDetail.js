@@ -22,9 +22,9 @@ class ItemDetail extends React.Component {
     const { singleItem } = this.state;
 
     return (
-      <div className="item-Detail mx-auto w-75">
+      <div className="item-detail mx-auto w-50">
         <div className="col-9 mt-3 mx-auto">
-          <img className="productImage" src={singleItem.imageUrl} alt={singleItem.name} />
+          <img className="detailImage" src={singleItem.imageUrl} alt={singleItem.name} />
           <h4 className="product-card-header">{singleItem.name}</h4>
           <div className="card-body">
             <h6 className="card-text">{singleItem.description}</h6>
@@ -33,8 +33,10 @@ class ItemDetail extends React.Component {
               <i className="lnr lnr-cart" />
             </h5>
             <div className="backToStore">
-              <button color="primary" onClick={this.backToItemsView}>
-                <span className="spot">BACK TO STORE</span>
+              <button className="backToStore" onClick={this.backToItemsView}>
+                <span className="spot">
+                  <span class="lnr lnr-arrow-left-circle" />BACK TO STORE
+                </span>
               </button>
             </div>
           </div>
