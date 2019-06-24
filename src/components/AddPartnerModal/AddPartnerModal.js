@@ -13,7 +13,7 @@ import {
     Row,
   } from 'reactstrap';
   import stateRequests from '../../helpers/data/stateRequests';
-import partnerRequests from '../../helpers/data/partnerRequests';
+// import partnerRequests from '../../helpers/data/partnerRequests';
 
 const defaultPartner = {
     name: '',

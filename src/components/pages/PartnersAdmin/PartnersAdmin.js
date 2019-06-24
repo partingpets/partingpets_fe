@@ -9,7 +9,8 @@ class PartnersAdmin extends React.Component {
     partners: [],
     showModal: false,
     isEditingPartner: false,
-    partnerToEdit: '-1',
+    partnerToEdit: {},
+    partnerEditId: '-1',
 }
 
 // toggle = () => {
@@ -21,15 +22,27 @@ class PartnersAdmin extends React.Component {
 //     }
 // }
 
+getPartners = () => {
+  partnerRequests
+    .getAllPartners()
+    .then((partners) => {
+      this.setState({ partners });
+    })
+    .catch((err) => {
+      console.error('error with partners GET', err);
+    });
+};
+
   componentDidMount() {
-    partnerRequests
-      .getAllPartners()
-      .then((partners) => {
-        this.setState({ partners });
-      })
-      .catch((err) => {
-        console.error('error in getting the partners', err);
-      });
+    // partnerRequests
+    //   .getAllPartners()
+    //   .then((partners) => {
+    //     this.setState({ partners });
+    //   })
+    //   .catch((err) => {
+    //     console.error('error in getting the partners', err);
+    //   });
+    this.getPartners();
   }
 
 showModal = (e) => {
@@ -47,35 +60,32 @@ modalCloseEvent = (e) => {
 };
 
 partnerFormSubmitEvent = (newPartner) => {
-    const { isEditingPartner, partnerToEdit } = this.state;
+    const { isEditingPartner, partnerEditId } = this.state;
     if (isEditingPartner) {
-        partnerRequests.editPartner(partnerToEdit, newPartner)
+        partnerRequests
+        .editPartner(partnerEditId, newPartner)
         .then(() => {
-            partnerRequests.getAllPartners()
-            .then((partners) => {
+            // partnerRequests.getAllPartners()
+            // .then((partners) => {
+                this.getPartners();
                 this.setState({
-                    partners,
                     showModal: false,
                     isEditingPartner: false,
-                    partnerToEdit: '-1'
+                    partnerEditId: '-1',
                 });
             })
             .catch(error => console.error('There Was An Error Editing Your Partner', error));
-        }
-
-        )
-    } else {
-        partnerRequests.createPartner(newPartner)
-    .then(() => {
-        partnerRequests.getAllPartners()
-        .then((partners) => {
-            this.setState({ 
-                partners, 
-                showModal: false, 
-            });
-        });
+        } else {
+        partnerRequests
+        .createPartner(newPartner)
+        .then(() => {
+        // partnerRequests.getAllPartners()
+        this.getPartners();
+        // .then((partners) => {
+        this.setState({ showModal: false });
+        })
+        .catch(error => console.error('There was an error creating the partner'));
     }
-)};
 };
 
 passPartnerToEdit = partnerId => {
@@ -83,6 +93,7 @@ passPartnerToEdit = partnerId => {
     .then((result) => {
         this.setState({ 
             isEditingPartner: true, 
+            partnerEditId: partnerId,
             partnerToEdit: result 
         });
             this.showModal();

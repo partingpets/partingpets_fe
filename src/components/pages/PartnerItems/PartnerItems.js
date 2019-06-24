@@ -10,8 +10,9 @@ class PartnerItems extends React.Component {
 
     editPartner = (e) => {
         e.preventDefault();
-        const { passPartnerToEdit, partner } = this.props;
-        passPartnerToEdit(partner.id);
+        const partnerId = e.target.id;
+        const { passPartnerToEdit } = this.props;
+        passPartnerToEdit(partnerId);
         // toggle();
     }
 
