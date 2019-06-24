@@ -107,14 +107,6 @@ class Partners extends React.Component {
       .catch(error => console.error('There Was An Issue Getting Your Parting Pets Item To Update', error));
   };
 
-  // newProductView = () => {
-  //   this.props.history.push('/products/new');
-  // };
-
-  // onSelect = (productId) => {
-  //   this.props.history.push(`/products/${productId}`);
-  // };
-
   render() {
     const { userObject } = this.props;
     const { products, isEditing, productToEdit } = this.state;
@@ -135,7 +127,7 @@ class Partners extends React.Component {
     if (!isEditing) {
       editFormProps.disabled = true;
     }
-    
+
     return (
       <div className="partnerItems mx-auto animated bounceInLeft w-100">
         <div className="productWrap">

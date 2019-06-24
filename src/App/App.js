@@ -10,6 +10,7 @@ import Home from '../components/pages/Home/Home';
 import Admin from '../components/pages/Admin/Admin';
 import PartnersAdmin from '../components/pages/PartnersAdmin/PartnersAdmin';
 import Products from '../components/pages/Products/Products';
+import ItemDetail from '../components/pages/ItemDetail/ItemDetail';
 import Profile from '../components/pages/Profile/Profile';
 import Partners from '../components/pages/Partners/Partners';
 import authRequests from '../helpers/data/authRequests';
@@ -117,6 +118,11 @@ class App extends React.Component {
                   <PrivateRoute
                     path="/partnersadmin"
                     component={props => <PartnersAdmin userObject={userObject} {...props} />}
+                    authed={authed}
+                  />
+                  <PrivateRoute
+                    path="/store/:id"
+                    component={props => <ItemDetail userObject={userObject} {...props} />}
                     authed={authed}
                   />
                   <PrivateRoute
