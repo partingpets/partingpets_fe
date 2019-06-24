@@ -26,6 +26,17 @@ const getSingleProduct = id => new Promise((resolve, reject) => {
     .catch(error => reject(error));
 });
 
+const getSingleProductClick = id => new Promise((resolve, reject) => {
+  axios
+    .get(`${productsApiBaseUrl}/api/products/${id}`)
+    .then((result) => {
+      const singleItem = result.data;
+      singleItem.id = id;
+      resolve(singleItem);
+    })
+    .catch(error => reject(error));
+});
+
 // Get Products By Partner ID for Partner Page //
 const getAllProductsByPartnerId = partnerId => new Promise((resolve, reject) => {
   axios
@@ -77,4 +88,5 @@ export default {
   deleteProduct,
   getCurrentUid,
   getAllProductsByPartnerId,
+  getSingleProductClick,
 };
