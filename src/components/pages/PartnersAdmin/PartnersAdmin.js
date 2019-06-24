@@ -12,14 +12,14 @@ class PartnersAdmin extends React.Component {
     partnerToEdit: '-1',
 }
 
-toggle = () => {
-    if(this.state.isEditingPartner){
-        this.setState({
-            showModal: !this.state.showModal,
-            isEditingPartner: false,
-        })
-    }
-}
+// toggle = () => {
+//     if(this.state.isEditingPartner){
+//         this.setState({
+//             showModal: !this.state.showModal,
+//             isEditingPartner: false,
+//         })
+//     }
+// }
 
   componentDidMount() {
     partnerRequests
@@ -58,8 +58,9 @@ partnerFormSubmitEvent = (newPartner) => {
                     showModal: false,
                     isEditingPartner: false,
                     partnerToEdit: '-1'
-                })
+                });
             })
+            .catch(error => console.error('There Was An Error Editing Your Partner', error));
         }
 
         )
@@ -82,7 +83,9 @@ passPartnerToEdit = partnerId => {
     .then((result) => {
         this.setState({ 
             isEditingPartner: true, 
-            partnerToEdit: result });
+            partnerToEdit: result 
+        });
+            this.showModal();
     }); 
 }
 
@@ -107,7 +110,7 @@ render() {
         partner={partner}
         deleteSinglePartner={this.deleteOnePartner}
         passPartnerToEdit={this.passPartnerToEdit}
-        toggle={this.toggle}
+        // toggle={this.toggle}
         />
         ));
     return (

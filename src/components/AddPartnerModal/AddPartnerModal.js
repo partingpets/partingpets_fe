@@ -54,22 +54,35 @@ class AddPartnerModal extends React.Component {
       });
     }
   
-    componentWillReceiveProps(props) {
-        this.setState({
-            modal: props.showModal,
-        });
-    }
+// componentWillReceiveProps(props) {
+//         this.setState({
+//             modal: props.showModal,
+//         });
+//     }
 
-    componentDidUpdate(prevProps) {
-      const { isEditingPartner, partnerToEdit } = this.props;
-      if (prevProps !== this.props && isEditingPartner) {
-        partnerRequests.getSinglePartner(partnerToEdit)
-        .then((result) => {
-          this.setState({ newPartner: result.data })
-        })
-        .catch(error => console.error('error in editing the partner you chose. Sorry'));
-      }
-    }
+//     componentDidUpdate(prevProps) {
+//       const { isEditingPartner, partnerToEdit } = this.props;
+//       if (prevProps !== this.props && isEditingPartner) {
+//         partnerRequests.getSinglePartner(partnerToEdit)
+//         .then((result) => {
+//           this.setState({ newPartner: result.data })
+//         })
+//         .catch(error => console.error('error in editing the partner you chose. Sorry'));
+//       }
+//     } 
+
+componentWillReceiveProps(props) {
+  if (props.isEditingPartner) {
+    const { newPartner } = this.state;
+    // const { partnerToEdit } = this.props;
+    this.setState({
+      newPartner: props.partnerToEdit,
+    });
+  }
+  this.setState({
+    modal: props.showModal,
+  });
+}
 
     formFieldStringState = (name, e) => {
         e.preventDefault();
@@ -111,7 +124,7 @@ formSubmit = (e) => {
         const {
             descriptionCharCount, descriptionMaxLength, newPartner, usStates,
           } = this.state;
-        const { isEditingPartner } = this.props;
+        // const { isEditingPartner } = this.props;
         return (
             <div className="AddPartnerModal">
                        <Modal
