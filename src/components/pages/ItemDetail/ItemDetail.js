@@ -35,7 +35,8 @@ class ItemDetail extends React.Component {
             <div className="backToStore">
               <button className="backToStore" onClick={this.backToItemsView}>
                 <span className="spot">
-                  <span class="lnr lnr-arrow-left-circle" />BACK TO STORE
+                  <span className="lnr lnr-arrow-left-circle" />
+                  BACK TO STORE
                 </span>
               </button>
             </div>
