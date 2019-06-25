@@ -3,6 +3,7 @@ import {
   Card, CardImg, CardText, CardBody, Button, CardHeader,
 } from 'reactstrap';
 import './Pets.scss';
+import utility from '../../helpers/utils/utility';
 
 class Pets extends React.Component {
   editEvent = (e) => {
@@ -22,7 +23,11 @@ class Pets extends React.Component {
     const { Pet } = this.props;
 
     const burialData = () => {
-      if (Pet.burialCity && Pet.burialCity) {
+      if (Pet.burialCity && 
+          Pet.burialState &&
+          Pet.burialStreet &&
+          Pet.burialPlot &&
+          Pet.burialZipCode){
         return (
           <CardText>
             Final Resting Place: <br />
@@ -37,31 +42,30 @@ class Pets extends React.Component {
 
     return (
       <Card>
-        {/* <CardImg className="profileCardImg" top width="100%" src={fbUserObject.photoURL} alt="Card image cap" /> */}
-        <CardHeader>{Pet.name}</CardHeader>
-        <div className="col-sm-2">
-          <CardImg
-            className="petCardImg"
-            top
-            width="100%"
-            src="https://i.pinimg.com/736x/b1/d8/fc/b1d8fc33b1f9776195ad201a863bae0f.jpg"
-            alt="Card image cap"
-          />
-        </div>
-        <div className="col-sm-10">
-          <CardBody>
-            <CardText>{Pet.breed}</CardText>
-            <CardText>
-              Born: {Pet.dateOfBirth}
-              <br />
-              Died: {Pet.dateOfDeath}
-            </CardText>
-            {burialData()}
-            <Button onClick={this.editEvent}>Edit</Button>
-            <Button onClick={this.deleteEvent}>Delete</Button>
-          </CardBody>
-        </div>
-      </Card>
+      {/* <CardImg className="profileCardImg" top width="100%" src={fbUserObject.photoURL} alt="Card image cap" /> */}
+      <CardHeader>{Pet.name}</CardHeader>
+      <div className="col-sm-2">
+        <CardImg
+          className="petCardImg"
+          top
+          width="100%"
+          src="https://i.pinimg.com/736x/b1/d8/fc/b1d8fc33b1f9776195ad201a863bae0f.jpg"
+          alt="Card image cap"
+        />
+      </div>
+      <div className="col-sm-10">
+        <CardBody>
+          <CardText>{Pet.breed}</CardText>
+          <CardText>
+            Born:  {utility.dateFormat(Pet.dateOfBirth)}<br />
+            Died:  {utility.dateFormat(Pet.dateOfDeath)}
+          </CardText>
+          {burialData()}
+          <Button onClick={this.editEvent}>Edit</Button>
+          <Button onClick={this.deleteEvent}>Delete</Button>
+        </CardBody>
+      </div>
+    </Card>
     );
   }
 }

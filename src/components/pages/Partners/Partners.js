@@ -55,6 +55,7 @@ class Partners extends React.Component {
     this.setState({
       hidden: !this.state.hidden,
       showModal: false,
+      productToEdit: {},
     });
   };
 
@@ -83,6 +84,15 @@ class Partners extends React.Component {
     }
   };
 
+  deleteProduct = (productId) => {
+    productRequests
+      .deleteProduct(productId)
+      .then(() => {
+        this.getProducts();
+      })
+      .catch(error => console.error('error with deleting this parting pets item.', error));
+  };
+
   editProduct = (productId) => {
     productRequests
       .getSingleProduct(productId)
@@ -97,14 +107,6 @@ class Partners extends React.Component {
       .catch(error => console.error('There Was An Issue Getting Your Parting Pets Item To Update', error));
   };
 
-  // newProductView = () => {
-  //   this.props.history.push('/products/new');
-  // };
-
-  // onSelect = (productId) => {
-  //   this.props.history.push(`/products/${productId}`);
-  // };
-
   render() {
     const { userObject } = this.props;
     const { products, isEditing, productToEdit } = this.state;
@@ -116,6 +118,7 @@ class Partners extends React.Component {
         product={product}
         onSelect={this.onSelect}
         editForm={this.editProduct}
+        deleteProduct={this.deleteProduct}
       />
     ));
 
@@ -124,7 +127,7 @@ class Partners extends React.Component {
     if (!isEditing) {
       editFormProps.disabled = true;
     }
-    
+
     return (
       <div className="partnerItems mx-auto animated bounceInLeft w-100">
         <div className="productWrap">

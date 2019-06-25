@@ -26,6 +26,12 @@ class PartnerItemTable extends React.Component {
     editForm(productId);
   };
 
+  deleteEvent = (e) => {
+    e.preventDefault();
+    const { deleteProduct, product } = this.props;
+    deleteProduct(product.id);
+  };
+
   render() {
     const { product, index } = this.props;
     const rowNumber = (index + 1).toString();
