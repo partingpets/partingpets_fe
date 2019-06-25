@@ -1,6 +1,6 @@
 import React from 'react';
 import SearchField from 'react-search-field';
-import PrintProductCard from '../PrintProductCard/PrintProductCard';
+import PrintProductCard from '../../PrintProductCard/PrintProductCard';
 import productRequests from '../../../helpers/data/productRequests';
 import userRequests from '../../../helpers/data/userRequests';
 import authRequests from '../../../helpers/data/authRequests';
