@@ -145,11 +145,12 @@ formSubmit = (e) => {
                   <FormGroup>
                     <Label for="description">Description</Label>
                     <Input
-                      className="form-input"
-                      type="text"
+                      className="form-input textArea"
+                      type="textarea"
                       name="description"
                       id="description"
                       placeholder="Description"
+                      maxLength={descriptionMaxLength}
                       onChange={this.descriptionChange}
                       value={newPartner.description}
                       />
