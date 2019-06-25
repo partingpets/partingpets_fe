@@ -13,7 +13,7 @@ import {
     Row,
   } from 'reactstrap';
   import stateRequests from '../../helpers/data/stateRequests';
-// import partnerRequests from '../../helpers/data/partnerRequests';
+import utils from '../../../src/helpers/utils/utility';
 
 const defaultPartner = {
     name: '',
@@ -53,28 +53,10 @@ class AddPartnerModal extends React.Component {
         this.setState({ usStates });
       });
     }
-  
-// componentWillReceiveProps(props) {
-//         this.setState({
-//             modal: props.showModal,
-//         });
-//     }
-
-//     componentDidUpdate(prevProps) {
-//       const { isEditingPartner, partnerToEdit } = this.props;
-//       if (prevProps !== this.props && isEditingPartner) {
-//         partnerRequests.getSinglePartner(partnerToEdit)
-//         .then((result) => {
-//           this.setState({ newPartner: result.data })
-//         })
-//         .catch(error => console.error('error in editing the partner you chose. Sorry'));
-//       }
-//     } 
 
 componentWillReceiveProps(props) {
   if (props.isEditingPartner) {
     const { newPartner } = this.state;
-    // const { partnerToEdit } = this.props;
     this.setState({
       newPartner: props.partnerToEdit,
     });
@@ -114,6 +96,8 @@ formSubmit = (e) => {
     e.preventDefault();
     const { onSubmit } = this.props;
     const myNewPartner = { ...this.state.newPartner };
+    // TODO: Need to check if partnercode exist in database
+    myNewPartner.RegistrationCode = utils.getRandomCode();
     onSubmit(myNewPartner);
     this.setState({
       newPartner: defaultPartner,
@@ -124,7 +108,6 @@ formSubmit = (e) => {
         const {
             descriptionCharCount, descriptionMaxLength, newPartner, usStates,
           } = this.state;
-        // const { isEditingPartner } = this.props;
         return (
             <div className="AddPartnerModal">
                        <Modal

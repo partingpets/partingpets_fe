@@ -13,7 +13,6 @@ class PartnerItems extends React.Component {
         const partnerId = e.target.id;
         const { passPartnerToEdit } = this.props;
         passPartnerToEdit(partnerId);
-        // toggle();
     }
 
     render() {
@@ -28,7 +27,7 @@ class PartnerItems extends React.Component {
                     <h3>{partner.city}</h3>
                     <h4>{partner.state}</h4>
                     <h6>{partner.zipcode}</h6>
-                    <button onClick={this.editPartner}>EDIT</button>
+                    <button id={partner.id} onClick={this.editPartner}>EDIT</button>
                     <button onClick={this.deletePartner}>DELETE</button>
                 </div>
                 );

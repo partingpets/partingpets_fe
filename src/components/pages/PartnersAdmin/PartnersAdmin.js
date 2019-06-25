@@ -13,15 +13,6 @@ class PartnersAdmin extends React.Component {
     partnerEditId: '-1',
 }
 
-// toggle = () => {
-//     if(this.state.isEditingPartner){
-//         this.setState({
-//             showModal: !this.state.showModal,
-//             isEditingPartner: false,
-//         })
-//     }
-// }
-
 getPartners = () => {
   partnerRequests
     .getAllPartners()
@@ -34,14 +25,6 @@ getPartners = () => {
 };
 
   componentDidMount() {
-    // partnerRequests
-    //   .getAllPartners()
-    //   .then((partners) => {
-    //     this.setState({ partners });
-    //   })
-    //   .catch((err) => {
-    //     console.error('error in getting the partners', err);
-    //   });
     this.getPartners();
   }
 
@@ -65,8 +48,6 @@ partnerFormSubmitEvent = (newPartner) => {
         partnerRequests
         .editPartner(partnerEditId, newPartner)
         .then(() => {
-            // partnerRequests.getAllPartners()
-            // .then((partners) => {
                 this.getPartners();
                 this.setState({
                     showModal: false,
@@ -79,9 +60,7 @@ partnerFormSubmitEvent = (newPartner) => {
         partnerRequests
         .createPartner(newPartner)
         .then(() => {
-        // partnerRequests.getAllPartners()
         this.getPartners();
-        // .then((partners) => {
         this.setState({ showModal: false });
         })
         .catch(error => console.error('There was an error creating the partner'));
@@ -121,7 +100,6 @@ render() {
         partner={partner}
         deleteSinglePartner={this.deleteOnePartner}
         passPartnerToEdit={this.passPartnerToEdit}
-        // toggle={this.toggle}
         />
         ));
     return (
