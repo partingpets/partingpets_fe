@@ -36,10 +36,10 @@ class Pets extends React.Component {
     };
 
     return (
-      <Card>
+      <Card className="pet-container">
         {/* <CardImg className="profileCardImg" top width="100%" src={fbUserObject.photoURL} alt="Card image cap" /> */}
-        <CardHeader>{Pet.name}</CardHeader>
-        <div className="col-sm-2">
+        <CardHeader className="pet-name">{Pet.name}</CardHeader>
+        <div className="col-4">
           <CardImg
             className="petCardImg"
             top
@@ -48,15 +48,16 @@ class Pets extends React.Component {
             alt="Card image cap"
           />
         </div>
-        <div className="col-sm-10">
+
+        <div className="pet-card col-12">
           <CardBody>
-            <CardText>{Pet.breed}</CardText>
-            <CardText>
+            <CardText className="breed">{Pet.breed}</CardText>
+            <CardText className="dates">
               Born: {Pet.dateOfBirth}
               <br />
               Died: {Pet.dateOfDeath}
             </CardText>
-            {burialData()}
+            <div className="burial-data">{burialData()}</div>
             <Button onClick={this.editEvent}>Edit</Button>
             <Button onClick={this.deleteEvent}>Delete</Button>
           </CardBody>
