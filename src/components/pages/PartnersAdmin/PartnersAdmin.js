@@ -1,6 +1,6 @@
 import React from 'react';
 import partnerRequests from '../../../helpers/data/partnerRequests';
-import PartnerItems from '../PartnerItems/PartnerItems';
+import PartnerItems from '../../PartnerItems/PartnerItems';
 import AddPartnerModal from '../../AddPartnerModal/AddPartnerModal';
 import './PartnersAdmin.scss';
 
@@ -39,6 +39,7 @@ modalCloseEvent = (e) => {
     this.setState({
         hidden: !this.state.hidden,
         showModal: false,
+        partnerToEdit: {},
     });
 };
 
