@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 const ALPHABET = '23456789abdegjkmnpqrvwxyz';
 const ID_LENGTH = 8;
 
@@ -9,4 +11,6 @@ const getRandomCode = () => {
   return rtn;
 };
 
-export default { getRandomCode };
+const dateFormat = dateData => moment(dateData).format('MMMM Do, YYYY');
+
+export default { getRandomCode, dateFormat };

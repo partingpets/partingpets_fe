@@ -3,6 +3,7 @@ import {
   Card, CardImg, CardText, CardBody, Button, CardHeader,
 } from 'reactstrap';
 import './Pets.scss';
+import utility from '../../helpers/utils/utility';
 
 class Pets extends React.Component {
   editEvent = (e) => {
@@ -22,7 +23,7 @@ class Pets extends React.Component {
     const { Pet } = this.props;
 
     const burialData = () => {
-      if (Pet.burialCity && Pet.burialCity) {
+      if (Pet.burialCity && Pet.burialState && Pet.burialStreet && Pet.burialPlot && Pet.burialZipCode) {
         return (
           <CardText>
             Final Resting Place: <br />
@@ -36,6 +37,36 @@ class Pets extends React.Component {
     };
 
     return (
+    // <Card className="pet-container">
+    //   {/* <CardImg className="profileCardImg" top width="100%" src={fbUserObject.photoURL} alt="Card image cap" /> */}
+    //   <CardHeader className="pet-name">{Pet.name}</CardHeader>
+    //   <div className="col-4">
+    //     <CardImg
+    //       className="petCardImg"
+    //       top
+    //       width="100%"
+    //       src="https://i.pinimg.com/736x/b1/d8/fc/b1d8fc33b1f9776195ad201a863bae0f.jpg"
+    //       alt="Card image cap"
+    //     />
+    //   </div>
+
+    //   <div className="pet-card col-12">
+    //     <CardBody>
+    //       <CardText className="breed">{Pet.breed}</CardText>
+    //       <CardText className="dates">
+    //         Born: {Pet.dateOfBirth}
+    //         <br />
+    //         Died: {Pet.dateOfDeath}
+    //       </CardText>
+    //       <div className="burial-data">{burialData()}</div>
+    //       <Button onClick={this.editEvent}>Edit</Button>
+    //       <Button onClick={this.deleteEvent}>Delete</Button>
+    //     </CardBody>
+    //   </div>
+    // </Card>
+
+    // duplicate //
+
       <Card className="pet-container">
         {/* <CardImg className="profileCardImg" top width="100%" src={fbUserObject.photoURL} alt="Card image cap" /> */}
         <CardHeader className="pet-name">{Pet.name}</CardHeader>
@@ -48,14 +79,13 @@ class Pets extends React.Component {
             alt="Card image cap"
           />
         </div>
-
-        <div className="pet-card col-12">
+        <div className="col-12">
           <CardBody>
             <CardText className="breed">{Pet.breed}</CardText>
             <CardText className="dates">
-              Born: {Pet.dateOfBirth}
+              Born: {utility.dateFormat(Pet.dateOfBirth)}
               <br />
-              Died: {Pet.dateOfDeath}
+              Died: {utility.dateFormat(Pet.dateOfDeath)}
             </CardText>
             <div className="burial-data">{burialData()}</div>
             <Button onClick={this.editEvent}>Edit</Button>
