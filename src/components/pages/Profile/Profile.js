@@ -57,12 +57,10 @@ class Profile extends React.Component {
   };
 
   getPartedPets() {
-    const fbUser = authRequests.getCurrentUser();
-    userRequests.getUserByFbId(fbUser.uid).then((currentUser) => {
-      petRequests.getPetsByUserId(currentUser.id).then((partedPets) => {
-        this.setState({
-          usersPets: partedPets,
-        });
+    const userId = this.props.userObject.id
+    petRequests.getPetsByUserId(userId).then((partedPets) => {
+      this.setState({
+        usersPets: partedPets,
       });
     });
   }

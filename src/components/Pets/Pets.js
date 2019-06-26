@@ -3,6 +3,7 @@ import {
   Card, CardImg, CardText, CardBody, Button, CardHeader,
 } from 'reactstrap';
 import './Pets.scss';
+import utility from '../../helpers/utils/utility';
 
 class Pets extends React.Component {
   editEvent = (e) => {
@@ -22,7 +23,7 @@ class Pets extends React.Component {
     const { Pet } = this.props;
 
     const burialData = () => {
-      if (Pet.burialCity && Pet.burialCity) {
+      if (Pet.burialCity && Pet.burialState && Pet.burialStreet && Pet.burialPlot && Pet.burialZipCode) {
         return (
           <CardText>
             Final Resting Place: <br />
