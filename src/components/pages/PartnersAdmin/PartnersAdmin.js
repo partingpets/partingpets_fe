@@ -1,6 +1,6 @@
 import React from 'react';
 import partnerRequests from '../../../helpers/data/partnerRequests';
-import PartnerItems from '../PartnerItems/PartnerItems';
+import PartnerItems from '../../PartnerItems/PartnerItems';
 import './PartnersAdmin.scss';
 
 class PartnersAdmin extends React.Component {

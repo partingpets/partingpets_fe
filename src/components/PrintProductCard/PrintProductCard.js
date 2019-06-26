@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import productShape from '../../../helpers/productProps/productShape';
+import productShape from '../../helpers/productProps/productShape';
 
 import './PrintProductCard.scss';
 
