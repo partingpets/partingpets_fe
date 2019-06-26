@@ -1,3 +1,39 @@
-h1 {
-  color: darkgreen;
+.burial-data {
+  padding: 2%;
+}
+
+.breed {
+  padding: 2%;
+}
+
+.dates {
+  padding: 2%;
+}
+
+.pet-card {
+  margin: 2%;
+  padding: 1%;
+}
+
+.pet-name {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: white;
+  background-color: rgb(21, 21, 58);
+}
+
+.pet-container {
+  font-family: "Rubik", sans-serif;
+  text-align: center;
+  width: 45%;
+  background-color: slategray;
+  background: linear-gradient(
+    rgba(255, 255, 255, 0.5),
+    rgba(255, 255, 255, 0.5)
+  );
+}
+
+.petCardImg {
+  height: 300px;
+  width: 300px;
 }
