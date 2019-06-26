@@ -1,98 +1,97 @@
 import React from 'react';
 import {
-    Button,
-    Col,
-    Form,
-    FormGroup,
-    Input,
-    Label,
-    Modal,
-    ModalBody,
-    ModalFooter,
-    ModalHeader,
-    Row,
-  } from 'reactstrap';
-  import stateRequests from '../../helpers/data/stateRequests';
-import utils from '../../../src/helpers/utils/utility';
+  Button,
+  Col,
+  Form,
+  FormGroup,
+  Input,
+  Label,
+  Modal,
+  ModalBody,
+  ModalFooter,
+  ModalHeader,
+  Row,
+} from 'reactstrap';
+import stateRequests from '../../helpers/data/stateRequests';
+import utils from '../../helpers/utils/utility';
 
 const defaultPartner = {
-    name: '',
-    description: '',
-    street: '',
-    city: '',
-    state: '',
-    zipcode: '',
+  name: '',
+  description: '',
+  street: '',
+  city: '',
+  state: '',
+  zipcode: '',
 };
 
 class AddPartnerModal extends React.Component {
-    state = {
-        modal: false, 
-        backdrop: 'static', 
-        newPartner: defaultPartner,
-        usStates: [],
-        descriptionMaxLength: 250,
-        descriptionCharCount: 250,
-    };
+  state = {
+    modal: false,
+    backdrop: 'static',
+    newPartner: defaultPartner,
+    usStates: [],
+    descriptionMaxLength: 250,
+    descriptionCharCount: 250,
+  };
 
-    toggle() {
-        this.setState({
-            modal: !this.state,
-        });
-    }
-
-    modalClosed() {
-        const { modalCloseEvent } = this.props;
-        modalCloseEvent();
-        this.setState({
-            newPartner: defaultPartner,
-        });
-    }
-
-    componentDidMount() {
-      stateRequests.getAllStates().then((usStates) => {
-        this.setState({ usStates });
-      });
-    }
-
-componentWillReceiveProps(props) {
-  if (props.isEditingPartner) {
-    const { newPartner } = this.state;
+  toggle() {
     this.setState({
-      newPartner: props.partnerToEdit,
+      modal: !this.state,
     });
   }
-  this.setState({
-    modal: props.showModal,
-  });
-}
 
-    formFieldStringState = (name, e) => {
-        e.preventDefault();
-        const tempPartner = { ...this.state.newPartner };
-        tempPartner[name] = e.target.value;
-        this.setState({
-          newPartner: tempPartner,
-        });
-      };
+  modalClosed() {
+    const { modalCloseEvent } = this.props;
+    modalCloseEvent();
+    this.setState({
+      newPartner: defaultPartner,
+    });
+  }
 
-nameChange = e => this.formFieldStringState('name', e);
+  componentDidMount() {
+    stateRequests.getAllStates().then((usStates) => {
+      this.setState({ usStates });
+    });
+  }
 
-descriptionChange = (event) => {
+  componentWillReceiveProps(props) {
+    if (props.isEditingPartner) {
+      this.setState({
+        newPartner: props.partnerToEdit,
+      });
+    }
+    this.setState({
+      modal: props.showModal,
+    });
+  }
+
+  formFieldStringState = (name, e) => {
+    e.preventDefault();
+    const tempPartner = { ...this.state.newPartner };
+    tempPartner[name] = e.target.value;
+    this.setState({
+      newPartner: tempPartner,
+    });
+  };
+
+  nameChange = e => this.formFieldStringState('name', e);
+
+  descriptionChange = (event) => {
     this.formFieldStringState('description', event);
     this.setState({
       descriptionCharCount: this.state.descriptionMaxLength - event.target.textLength,
     });
   };
 
-streetChange = e => this.formFieldStringState('street', e);
+  streetChange = e => this.formFieldStringState('street', e);
 
-cityChange = e => this.formFieldStringState('city', e);
+  cityChange = e => this.formFieldStringState('city', e);
 
-stateChange = e => this.formFieldStringState('state', e);
+  stateChange = e => this.formFieldStringState('state', e);
 
-zipcodeChange = e => this.formFieldStringState('zipcode', e);
+  zipcodeChange = e => this.formFieldStringState('zipcode', e);
 
-formSubmit = (e) => {
+  formSubmit = (e) => {
     e.preventDefault();
     const { onSubmit } = this.props;
     const myNewPartner = { ...this.state.newPartner };
@@ -104,13 +103,13 @@ formSubmit = (e) => {
     });
   };
 
-    render() {
-        const {
-            descriptionCharCount, descriptionMaxLength, newPartner, usStates,
-          } = this.state;
-        return (
-            <div className="AddPartnerModal">
-                       <Modal
+  render() {
+    const {
+      descriptionCharCount, descriptionMaxLength, newPartner, usStates,
+    } = this.state;
+    return (
+      <div className="AddPartnerModal">
+        <Modal
           className="form-modal"
           isOpen={this.state.modal}
           toggle={e => this.toggle(e)}
@@ -136,7 +135,7 @@ formSubmit = (e) => {
                       placeholder="Partner Name"
                       onChange={this.nameChange}
                       value={newPartner.name}
-                      />
+                    />
                   </FormGroup>
                 </Col>
               </Row>
@@ -153,10 +152,10 @@ formSubmit = (e) => {
                       maxLength={descriptionMaxLength}
                       onChange={this.descriptionChange}
                       value={newPartner.description}
-                      />
-                      <Label className="float-right" for="char-count">
-                        Remaining: {descriptionCharCount}/{descriptionMaxLength}
-                      </Label>
+                    />
+                    <Label className="float-right" for="char-count">
+                      Remaining: {descriptionCharCount}/{descriptionMaxLength}
+                    </Label>
                   </FormGroup>
                 </Col>
               </Row>
@@ -172,7 +171,7 @@ formSubmit = (e) => {
                       placeholder="1234 Drive"
                       onChange={this.streetChange}
                       value={newPartner.street}
-                      />
+                    />
                   </FormGroup>
                 </Col>
 
@@ -187,8 +186,7 @@ formSubmit = (e) => {
                       placeholder="city"
                       onChange={this.cityChange}
                       value={newPartner.city}
-                      >
-                    </Input>
+                    />
                   </FormGroup>
                 </Col>
                 <Col md={2}>
@@ -202,8 +200,8 @@ formSubmit = (e) => {
                       placeholder="state"
                       onChange={this.stateChange}
                       value={newPartner.state}
-                      >
-                        {usStates.map((state, i) => (
+                    >
+                      {usStates.map((state, i) => (
                         <option key={i}>{state.name}</option>
                       ))}
                     </Input>
@@ -222,7 +220,7 @@ formSubmit = (e) => {
                   maxLength={descriptionMaxLength}
                   onChange={this.zipcodeChange}
                   value={newPartner.zipcode}
-                  />
+                />
               </FormGroup>
             </Form>
           </ModalBody>
@@ -235,9 +233,9 @@ formSubmit = (e) => {
             </Button>
           </ModalFooter>
         </Modal>
-            </div>
-        );
-    }
+      </div>
+    );
+  }
 }
 
 export default AddPartnerModal;
