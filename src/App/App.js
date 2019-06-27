@@ -13,6 +13,7 @@ import Products from '../components/pages/Products/Products';
 import ItemDetail from '../components/pages/ItemDetail/ItemDetail';
 import Profile from '../components/pages/Profile/Profile';
 import Partners from '../components/pages/Partners/Partners';
+import ShoppingCart from '../components/pages/ShoppingCart/ShoppingCart';
 import authRequests from '../helpers/data/authRequests';
 import userRequests from '../helpers/data/userRequests';
 import connection from '../helpers/data/connection';
@@ -43,6 +44,7 @@ class App extends React.Component {
     authed: false,
     pendingUser: true,
     userObject: {},
+    cartCount: 0,
   };
 
   getCurrentUser = () => {
@@ -51,6 +53,12 @@ class App extends React.Component {
       this.setState({
         userObject: currentUser,
       });
+    });
+  };
+
+  updateCartBadge = (cartCount) => {
+    this.setState({
+      cartCount,
     });
   };
 
@@ -103,6 +111,11 @@ class App extends React.Component {
                   <PrivateRoute
                     path="/profile"
                     component={props => <Profile userObject={userObject} updateUser={this.getCurrentUser} {...props} />}
+                    authed={authed}
+                  />
+                  <PrivateRoute
+                    path="/cart"
+                    component={props => <ShoppingCart userObject={userObject} {...props} />}
                     authed={authed}
                   />
                   <PrivateRoute

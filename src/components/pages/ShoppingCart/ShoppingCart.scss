@@ -1,0 +1,30 @@
+// .shoppingCart {
+//   padding: 120px 25px 0px 25px;
+// }
+
+// .cart-table {
+//   background-color: rgba(168, 202, 241, 0.75);
+//   color: black;
+// }
+
+.shoppingCart {
+  padding: 120px 25px 0px 25px;
+  // border: solid red 1px;
+}
+
+.cart-container {
+  // border: solid black 2px;
+  background-color: rgba(168, 202, 241, 0.75);
+}
+
+.cart-ul {
+  list-style: none;
+  padding-inline-start: 0px;
+}
+.cart-header-row {
+  margin-bottom: 25px;
+}
+.cart-image {
+  width: 150px;
+  height: 150px;
+}

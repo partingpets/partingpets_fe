@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink as RRNavLink } from 'react-router-dom';
 import {
+  Badge,
   Collapse,
   Nav,
   Navbar,
@@ -21,6 +22,7 @@ import pets from './images/pets_small.png';
 class AppNavbar extends React.Component {
   state = {
     isOpen: false,
+    cartCount: 0,
   };
 
   toggle() {
@@ -28,6 +30,12 @@ class AppNavbar extends React.Component {
       isOpen: !this.state.isOpen,
     });
   }
+
+  updateCartBadge = (cartCount) => {
+    this.setState({
+      cartCount,
+    });
+  };
 
   render() {
     const { isAuthed, logoutClickEvent, userObject } = this.props;
@@ -68,38 +76,35 @@ class AppNavbar extends React.Component {
                 ''
               )}
             </NavItem>
-            {/* <NavItem> */}
-            {/* <NavLink tag={RRNavLink} onClick={logoutClickEvent} to="/home">
-                <i className="navIcon fas fa-sign-out-alt fa-2x" />
-                Logout
-              </NavLink> */}
+            <NavItem>
+              <NavLink tag={RRNavLink} to="/cart">
+                <i className="navIcon lnr lnr-cart" />
+                <Badge className="cart-badge" color="warning">
+                  3
+                </Badge>
+                Cart
+              </NavLink>
+            </NavItem>
             <UncontrolledDropdown nav inNavbar>
               <DropdownToggle nav caret>
                 <img className="navIcon profIcon" src={profileImgUrl()} alt="ProfilePic" />
-                {/* <i className="navIcon fas fa-paw fa-2x" /> */}
-                {/* Profile */}
               </DropdownToggle>
               <DropdownMenu right className="bg-dark">
                 <DropdownItem tag={RRNavLink} className="profBtn nav-link" to="/profile">
                   <i className="navIcon lnr lnr-user" />
-                  {/* <i className="navIcon fas fa-user fa-2x" /> */}
                   Profile
                 </DropdownItem>
                 <DropdownItem className="profBtn nav-link" to="/orders">
-                <i className="navIcon lnr lnr-layers" />
-                  {/* <i className="navIcon fas fa-file-invoice-dollar fa-2x" /> */}
+                  <i className="navIcon lnr lnr-layers" />
                   Orders
                 </DropdownItem>
                 <DropdownItem divider />
                 <DropdownItem className="profBtn nav-link" onClick={logoutClickEvent} to="/home">
                   <i className="navIcon lnr lnr-chevron-right-circle" />
-                  {/* <i className="navIcon fas fa-sign-out-alt fa-2x" /> */}
                   Logout
                 </DropdownItem>
-                {/* <DropdownItem>Logout</DropdownItem> */}
               </DropdownMenu>
             </UncontrolledDropdown>
-            {/* </NavItem> */}
           </Nav>
         );
       }
