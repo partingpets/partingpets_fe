@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import {
   Button,
@@ -14,6 +15,8 @@ import {
 } from 'reactstrap';
 import stateRequests from '../../helpers/data/stateRequests';
 import utils from '../../helpers/utils/utility';
+
+import pets from '../AppNavbar/images/pets_small.png';
 
 const defaultPartner = {
   name: '',
@@ -34,6 +37,14 @@ class AddPartnerModal extends React.Component {
     descriptionCharCount: 250,
   };
 
+  static propTypes = {
+    showModal: PropTypes.bool,
+    onSubmit: PropTypes.func,
+    isEditing: PropTypes.bool,
+    productToEdit: PropTypes.object,
+    modalCloseEvent: PropTypes.func,
+  };
+
   toggle() {
     this.setState({
       modal: !this.state,
@@ -49,13 +60,18 @@ class AddPartnerModal extends React.Component {
   }
 
   componentDidMount() {
-    stateRequests.getAllStates().then((usStates) => {
-      this.setState({ usStates });
-    });
+    stateRequests
+      .getAllStates()
+      .then((usStates) => {
+        this.setState({ usStates });
+      })
+      .catch((err) => {
+        console.error('error with getting states', err);
+      });
   }
 
   componentWillReceiveProps(props) {
-    if (props.isEditingPartner) {
+    if (props.isEditing) {
       this.setState({
         newPartner: props.partnerToEdit,
       });
@@ -74,7 +90,13 @@ class AddPartnerModal extends React.Component {
     });
   };
 
-  nameChange = e => this.formFieldStringState('name', e);
+  formFieldNumberState = (name, event) => {
+    const tempPartner = { ...this.state.newPartner };
+    tempPartner[name] = event.target.value * 1;
+    this.setState({
+      newPartner: tempPartner,
+    });
+  };
 
   descriptionChange = (event) => {
     this.formFieldStringState('description', event);
@@ -83,16 +105,18 @@ class AddPartnerModal extends React.Component {
     });
   };
 
-  streetChange = e => this.formFieldStringState('street', e);
+  nameChange = event => this.formFieldStringState('name', event);
 
-  cityChange = e => this.formFieldStringState('city', e);
+  streetChange = event => this.formFieldStringState('street', event);
 
-  stateChange = e => this.formFieldStringState('state', e);
+  cityChange = event => this.formFieldStringState('city', event);
 
-  zipcodeChange = e => this.formFieldStringState('zipcode', e);
+  stateChange = event => this.formFieldStringState('state', event);
 
-  formSubmit = (e) => {
-    e.preventDefault();
+  zipcodeChange = event => this.formFieldStringState('zipcode', event);
+
+  formSubmit = (event) => {
+    event.preventDefault();
     const { onSubmit } = this.props;
     const myNewPartner = { ...this.state.newPartner };
     // TODO: Need to check if partnercode exist in database
@@ -119,7 +143,8 @@ class AddPartnerModal extends React.Component {
           size="lg"
         >
           <ModalHeader toggle={e => this.toggle(e)}>
-            {this.props.isEditingPartner ? 'EDIT THE PARTNER' : 'ADD NEW PARTNER'}
+            <img src={pets} className="petsModalLogo" alt="pets_logo" />
+            {this.props.isEditing ? 'EDIT THE PARTING PETS PARTNER' : 'ADD NEW PARTING PETS PARTNER'}
           </ModalHeader>
           <ModalBody>
             <Form>

@@ -1,0 +1,43 @@
+.trash {
+  color: rgb(21, 21, 58);
+}
+
+.pencil {
+  color: rgb(21, 21, 58);
+}
+
+.partner-item-img {
+  max-width: 100px;
+  max-height: 100px;
+}
+
+.partner-item {
+  font-size: 17px;
+  background: linear-gradient(
+    rgba(255, 255, 255, 0.2),
+    rgba(255, 255, 255, 0.2)
+  );
+}
+
+.name {
+  vertical-align: middle;
+  text-align: center;
+  width: 30%;
+  height: 30px;
+  padding: 10px;
+  font-size: 20px;
+}
+
+.description {
+  vertical-align: middle;
+  text-align: center;
+  width: 30%;
+  height: 50px;
+  padding: 10px;
+  font-size: 15px;
+}
+
+.header {
+  background-color: rgb(21, 21, 58);
+  color: white;
+}

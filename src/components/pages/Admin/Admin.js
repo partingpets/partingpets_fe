@@ -1,8 +1,8 @@
 import React from 'react';
-import { NavLink as RRNavLink } from 'react-router-dom';
-import {
-  UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem,
-} from 'reactstrap';
+// import { NavLink as RRNavLink } from 'react-router-dom';
+// import {
+//   UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem,
+// } from 'reactstrap';
 
 import clueBkg from '../../../images/rocks.png';
 import trophy from '../../../images/trophy.png';
