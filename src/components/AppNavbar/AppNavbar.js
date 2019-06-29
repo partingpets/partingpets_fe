@@ -31,13 +31,17 @@ class AppNavbar extends React.Component {
     });
   }
 
-  updateCartBadge = (cartCount) => {
-    this.setState({
-      cartCount,
-    });
-  };
+  componentWillReceiveProps(props) {
+    // Ask how to better dhandle this.  Seems silly
+    if (props.cartCount || props.cartCount === 0) {
+      this.setState({
+        cartCount: props.cartCount,
+      });
+    }
+  }
 
   render() {
+    const { cartCount } = this.state;
     const { isAuthed, logoutClickEvent, userObject } = this.props;
     const profileImgUrl = () => authRequests.getCurrentUser().photoURL;
     const buildNavbar = () => {
@@ -79,10 +83,9 @@ class AppNavbar extends React.Component {
             <NavItem>
               <NavLink tag={RRNavLink} to="/cart">
                 <i className="navIcon lnr lnr-cart" />
-                <Badge className="cart-badge" color="warning">
-                  3
+                <Badge className="cart-badge" color="warning" hidden={cartCount === 0}>
+                  {cartCount}
                 </Badge>
-                Cart
               </NavLink>
             </NavItem>
             <UncontrolledDropdown nav inNavbar>

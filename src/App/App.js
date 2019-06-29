@@ -14,6 +14,7 @@ import ItemDetail from '../components/pages/ItemDetail/ItemDetail';
 import Profile from '../components/pages/Profile/Profile';
 import Partners from '../components/pages/Partners/Partners';
 import ShoppingCart from '../components/pages/ShoppingCart/ShoppingCart';
+import cartRequests from '../helpers/data/cartRequests';
 import authRequests from '../helpers/data/authRequests';
 import userRequests from '../helpers/data/userRequests';
 import connection from '../helpers/data/connection';
@@ -53,6 +54,9 @@ class App extends React.Component {
       this.setState({
         userObject: currentUser,
       });
+      cartRequests.getUserCartById(currentUser.id).then((result) => {
+        this.updateCartBadge(result.length);
+      });
     });
   };
 
@@ -87,7 +91,9 @@ class App extends React.Component {
   }
 
   render() {
-    const { authed, pendingUser, userObject } = this.state;
+    const {
+      authed, pendingUser, userObject, cartCount,
+    } = this.state;
     const logoutClickEvent = () => {
       authRequests.logoutUser();
       this.setState({
@@ -103,7 +109,12 @@ class App extends React.Component {
       <div className="App">
         <BrowserRouter>
           <React.Fragment>
-            <AppNavbar isAuthed={authed} logoutClickEvent={logoutClickEvent} userObject={userObject} />
+            <AppNavbar
+              isAuthed={authed}
+              logoutClickEvent={logoutClickEvent}
+              userObject={userObject}
+              cartCount={cartCount}
+            />
             <div className="app-content container-fluid">
               <div className="justify-content-center">
                 <Switch>
@@ -115,7 +126,9 @@ class App extends React.Component {
                   />
                   <PrivateRoute
                     path="/cart"
-                    component={props => <ShoppingCart userObject={userObject} {...props} />}
+                    component={props => (
+                      <ShoppingCart userObject={userObject} updateCartBadge={this.updateCartBadge} {...props} />
+                    )}
                     authed={authed}
                   />
                   <PrivateRoute
