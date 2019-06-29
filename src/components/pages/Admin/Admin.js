@@ -4,9 +4,10 @@ import React from 'react';
 //   UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem,
 // } from 'reactstrap';
 
-import clueBkg from '../../../images/rocks.png';
-import trophy from '../../../images/trophy.png';
-import earth from '../../../images/earth.png';
+import partners from '../../../images/handshake.png';
+import users from '../../../images/users.png';
+import invoices from '../../../images/invoice.png';
+import items from '../../../images/paw.png';
 
 import './Admin.scss';
 
@@ -39,7 +40,7 @@ class Admin extends React.Component {
           <div className="card admin-card border-dark" id="partnersadmin" onClick={this.changeView}>
             <div className="card-body text-center">
               <h4 className="card-title">
-                <img src={clueBkg} alt="rocks glasses" />
+                <img src={partners} className="admin-icon" alt="partners" />
               </h4>
               <h5 className="card-subtitle mb-2 text-muted">PARTNERS</h5>
               <p className="card-text">Manage Partners</p>
@@ -48,7 +49,7 @@ class Admin extends React.Component {
           <div className="card admin-card border-dark" id="usersadmin" onClick={this.changeView}>
             <div className="card-body text-center">
               <h4 className="card-title">
-                <img src={trophy} alt="trophy" />
+                <img src={users} className="admin-icon" alt="users" />
               </h4>
               <h5 className="card-subtitle mb-2 text-muted">USERS</h5>
               <p className="card-text">Manage Users</p>
@@ -57,7 +58,7 @@ class Admin extends React.Component {
           <div className="card admin-card border-dark" id="invoicesadmin" onClick={this.changeView}>
             <div className="card-body text-center">
               <h4 className="card-title">
-                <img src={earth} alt="earth" />
+                <img src={invoices} className="admin-icon" alt="invoices" />
               </h4>
               <h5 className="card-subtitle mb-2 text-muted">INVOICES</h5>
               <p className="card-text">Manage Invoices</p>
@@ -67,7 +68,7 @@ class Admin extends React.Component {
           <div className="card admin-card border-dark" id="itemsadmin" onClick={this.changeView}>
             <div className="card-body text-center">
               <h4 className="card-title">
-                <img src={earth} alt="earth" />
+                <img src={items} className="admin-icon" alt="items" />
               </h4>
               <h5 className="card-subtitle mb-2 text-muted">ITEMS</h5>
               <p className="card-text">Manage Partner Items</p>
