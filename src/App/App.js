@@ -54,8 +54,9 @@ class App extends React.Component {
       this.setState({
         userObject: currentUser,
       });
-      cartRequests.getUserCartById(currentUser.id).then((result) => {
-        this.updateCartBadge(result.length);
+      cartRequests.getUserCartById(currentUser.id).then((results) => {
+        const filteredResults = results.filter(result => result.isDeleted === false);
+        this.updateCartBadge(filteredResults.length);
       });
     });
   };

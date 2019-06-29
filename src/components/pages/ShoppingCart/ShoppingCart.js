@@ -18,7 +18,8 @@ class ShoppingCart extends React.Component {
     const { userObject } = this.props;
     if (userObject.id) {
       cartRequests.getUserCartById(userObject.id).then((results) => {
-        this.setState({ cart: results });
+        const filteredResults = results.filter(result => result.isDeleted === false);
+        this.setState({ cart: filteredResults });
       });
     }
   }
