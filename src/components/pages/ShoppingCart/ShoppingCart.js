@@ -77,31 +77,43 @@ class ShoppingCart extends React.Component {
             </Col>
           </Row>
           {cartItemComponent(cart)}
-          <div>
+          <div className="cart-totals">
             <hr />
             <Row>
-              <Col>
-                <h5>Subtotal: ${cartSubTotal.toFixed(2)}</h5>
+              <Col xs="10">
+                <h5>Subtotal:</h5>
+              </Col>
+              <Col xs="2">
+                <h5>${cartSubTotal.toLocaleString()}</h5>
               </Col>
             </Row>
             <Row>
-              <Col>
-                <h5>Shipping: FREE</h5>
+              <Col xs="10">
+                <h5>Shipping:</h5>
+              </Col>
+              <Col xs="2">
+                <h5>FREE</h5>
               </Col>
             </Row>
             <Row>
-              <Col>
-                <h5>Tax: ${cartTax}</h5>
+              <Col xs="10">
+                <h5>Tax:</h5>
+              </Col>
+              <Col xs="2">
+                <h5>${cartTax}</h5>
               </Col>
             </Row>
             <hr />
             <Row>
-              <Col>
-                <h5>Total: ${cartTotal.toFixed(2)}</h5>
+              <Col xs="10">
+                <h5>Total:</h5>
+              </Col>
+              <Col className="cart-totals-total" xs="2">
+                <h5>${cartTotal.toLocaleString()}</h5>
               </Col>
             </Row>
           </div>
-          <div>
+          <div className="cart-checkout-btn">
             <Button color="primary">Check Out</Button>
           </div>
         </Container>

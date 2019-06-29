@@ -23,38 +23,40 @@ class CartItem extends React.Component {
               <Col xs="2">
                 <img className="cart-image" src={item.imageUrl} alt="cart" />
               </Col>
-              <Col xs="10">
+              <Col xs="6">
                 <Row>
                   <Col xs="7">
                     <h4>{item.name}</h4>
                   </Col>
-                  <Col xs="1">
-                    <Input
-                      className="cart-qty-select"
-                      type="select"
-                      id={item.id}
-                      value={item.quantity}
-                      onChange={this.updateItemQuantity}
-                    >
-                      {[...Array(5)].map((value, index) => (
-                        <option key={index}>{index + 1}</option>
-                      ))}
-                    </Input>
-                  </Col>
-                  <Col xs="4">${item.unitPrice * item.quantity}</Col>
                 </Row>
                 <Row>
-                  <Col xs="7">
+                  <Col>
                     <h6>{item.description}</h6>
                   </Col>
                 </Row>
                 <Row>
-                  <Col xs="7">
+                  <Col className="cart-col-description cart-col" xs="7">
                     <Button className="cart-del-button" color="link">
                       Delete
                     </Button>
                   </Col>
                 </Row>
+              </Col>
+              <Col className="cart-col-quantity cart-col" xs="2">
+                <Input
+                  className="cart-qty-select"
+                  type="select"
+                  id={item.id}
+                  value={item.quantity}
+                  onChange={this.updateItemQuantity}
+                >
+                  {[...Array(5)].map((value, index) => (
+                    <option key={index}>{index + 1}</option>
+                  ))}
+                </Input>
+              </Col>
+              <Col className="cart-col-unitPrice cart-col" xs="2">
+                <h5>${(item.unitPrice * item.quantity).toLocaleString()}</h5>
               </Col>
             </Row>
           </li>
