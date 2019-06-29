@@ -13,6 +13,8 @@ import Products from '../components/pages/Products/Products';
 import ItemDetail from '../components/pages/ItemDetail/ItemDetail';
 import Profile from '../components/pages/Profile/Profile';
 import Partners from '../components/pages/Partners/Partners';
+import ShoppingCart from '../components/pages/ShoppingCart/ShoppingCart';
+import cartRequests from '../helpers/data/cartRequests';
 import authRequests from '../helpers/data/authRequests';
 import userRequests from '../helpers/data/userRequests';
 import connection from '../helpers/data/connection';
@@ -43,6 +45,7 @@ class App extends React.Component {
     authed: false,
     pendingUser: true,
     userObject: {},
+    cartCount: 0,
   };
 
   getCurrentUser = () => {
@@ -51,6 +54,16 @@ class App extends React.Component {
       this.setState({
         userObject: currentUser,
       });
+      cartRequests.getUserCartById(currentUser.id).then((results) => {
+        const filteredResults = results.filter(result => result.isDeleted === false);
+        this.updateCartBadge(filteredResults.length);
+      });
+    });
+  };
+
+  updateCartBadge = (cartCount) => {
+    this.setState({
+      cartCount,
     });
   };
 
@@ -79,7 +92,9 @@ class App extends React.Component {
   }
 
   render() {
-    const { authed, pendingUser, userObject } = this.state;
+    const {
+      authed, pendingUser, userObject, cartCount,
+    } = this.state;
     const logoutClickEvent = () => {
       authRequests.logoutUser();
       this.setState({
@@ -95,7 +110,12 @@ class App extends React.Component {
       <div className="App">
         <BrowserRouter>
           <React.Fragment>
-            <AppNavbar isAuthed={authed} logoutClickEvent={logoutClickEvent} userObject={userObject} />
+            <AppNavbar
+              isAuthed={authed}
+              logoutClickEvent={logoutClickEvent}
+              userObject={userObject}
+              cartCount={cartCount}
+            />
             <div className="app-content container-fluid">
               <div className="justify-content-center">
                 <Switch>
@@ -103,6 +123,13 @@ class App extends React.Component {
                   <PrivateRoute
                     path="/profile"
                     component={props => <Profile userObject={userObject} updateUser={this.getCurrentUser} {...props} />}
+                    authed={authed}
+                  />
+                  <PrivateRoute
+                    path="/cart"
+                    component={props => (
+                      <ShoppingCart userObject={userObject} updateCartBadge={this.updateCartBadge} {...props} />
+                    )}
                     authed={authed}
                   />
                   <PrivateRoute
