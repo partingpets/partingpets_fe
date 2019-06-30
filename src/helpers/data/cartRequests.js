@@ -14,4 +14,15 @@ const getUserCartById = userId => new Promise((resolve, reject) => {
     });
 });
 
-export default { getUserCartById };
+const deleteUserCartItemByItemId = (userId, ItemId) => new Promise((resolve, reject) => {
+  axios
+    .delete(`${petsApiBaseUrl}/api/carts/${userId}/${ItemId}`)
+    .then((results) => {
+      resolve(results.data);
+    })
+    .catch((error) => {
+      reject(error);
+    });
+});
+
+export default { getUserCartById, deleteUserCartItemByItemId };

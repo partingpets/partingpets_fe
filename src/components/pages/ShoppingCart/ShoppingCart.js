@@ -16,11 +16,9 @@ class ShoppingCart extends React.Component {
 
   componentDidMount() {
     const { userObject } = this.props;
-    if (userObject.id) {
-      cartRequests.getUserCartById(userObject.id).then((results) => {
-        const filteredResults = results.filter(result => result.isDeleted === false);
-        this.setState({ cart: filteredResults });
-      });
+    const userId = userObject.id;
+    if (userId) {
+      this.getCart(userId);
     }
   }
 
@@ -42,6 +40,18 @@ class ShoppingCart extends React.Component {
     }
   }
 
+  getCart = userId => new Promise((resolve, reject) => {
+    cartRequests
+      .getUserCartById(userId)
+      .then((results) => {
+        const filteredResults = results.filter(result => result.isDeleted === false);
+        this.setState({ cart: filteredResults });
+        resolve(filteredResults);
+      })
+      .then()
+      .catch(error => console.log('Something broke here', error));
+  });
+
   // https://www.robinwieruch.de/react-state-array-add-update-remove/
   // Holy Balls was this much harder than I thought
   updateItemQuantity = (key, quantity) => {
@@ -60,13 +70,30 @@ class ShoppingCart extends React.Component {
     });
   };
 
+  deleteCartItem = (itemId) => {
+    const { userObject, updateCartBadge } = this.props;
+    cartRequests
+      .deleteUserCartItemByItemId(userObject.id, itemId)
+      .then((result) => {
+        this.getCart(userObject.id).then((results) => {
+          updateCartBadge(results.length);
+        });
+      })
+      .catch(error => console.error('There was an error deleteing the selected cart item', error));
+  };
+
   render() {
     const {
       cart, cartSubTotal, cartTotal, cartTax,
     } = this.state;
 
     const cartItemComponent = cartArr => cartArr.map((cartItem, index) => (
-        <CartItem key={cartItem.id} item={cartItem} itemQuantityFn={this.updateItemQuantity} />
+        <CartItem
+          key={cartItem.productId}
+          item={cartItem}
+          itemQuantityFn={this.updateItemQuantity}
+          deleteCartItemFn={this.deleteCartItem}
+        />
     ));
     return (
       <div className="shoppingCart">
