@@ -9,7 +9,7 @@ class ManagePartnersTable extends React.Component {
   };
 
   static propTypes = {
-    partner: partnerShape,
+    // partner: partnerShape,
     index: PropTypes.number,
     editForm: PropTypes.func,
   };
@@ -36,7 +36,7 @@ class ManagePartnersTable extends React.Component {
     const { partner, index } = this.props;
     const rowNumber = (index + 1).toString();
     return (
-      <tr className="partner-item ml-auto">
+      <tr className={`partner-item ${partner.isDeleted ? 'deleted-partner' : ''} ml-auto`}>
         <th className="header" scope="row">
           {rowNumber}
         </th>
