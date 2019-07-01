@@ -12,6 +12,13 @@ class CartItem extends React.Component {
     itemQuantityFn(itemId, newQty);
   };
 
+  deleteCartItem = (event) => {
+    event.preventDefault();
+    const itemId = event.target.attributes['data-itemid'].nodeValue;
+    const { deleteCartItemFn } = this.props;
+    deleteCartItemFn(itemId);
+  };
+
   render() {
     const { item } = this.props;
     return (
@@ -36,7 +43,12 @@ class CartItem extends React.Component {
                 </Row>
                 <Row>
                   <Col className="cart-col-description cart-col" xs="7">
-                    <Button className="cart-del-button" color="link">
+                    <Button
+                      className="cart-del-button"
+                      color="link"
+                      data-itemid={item.cartId}
+                      onClick={this.deleteCartItem}
+                    >
                       Delete
                     </Button>
                   </Col>
