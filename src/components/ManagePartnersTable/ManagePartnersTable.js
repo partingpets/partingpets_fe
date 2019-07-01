@@ -47,10 +47,10 @@ class ManagePartnersTable extends React.Component {
         <td className="state">{partner.state}</td>
         <td className="zip-code">{partner.zipcode}</td>
         <td>
-          <i className="lnr lnr-pencil pencil" id={partner.id} onClick={this.onEditForm} />
+          <i className="edit-partner lnr lnr-pencil pencil" id={partner.id} onClick={this.onEditForm} />
         </td>
         <td>
-          <i className="lnr lnr-trash trash" id={partner.id} onClick={this.deleteEvent} />
+          <i className="delete-partner lnr lnr-trash trash" id={partner.id} onClick={this.deleteEvent} />
         </td>
       </tr>
     );
