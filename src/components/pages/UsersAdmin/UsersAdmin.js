@@ -1,11 +1,11 @@
 import React from 'react';
-import AddPartnerModal from '../../AddPartnerModal/AddPartnerModal';
-import partnerRequests from '../../../helpers/data/partnerRequests';
+import RegisterForm from '../../RegisterForm/RegisterForm';
+import userRequests from '../../../helpers/data/userRequests';
 import ManageUsersTable from '../../ManageUsersTable/ManageUsersTable';
 import './UsersAdmin.scss';
 
 class UsersAdmin extends React.Component {
-  partnerMounted = false;
+  userMounted = false;
 
   changeView = (e) => {
     const view = e.currentTarget.id;
@@ -13,26 +13,26 @@ class UsersAdmin extends React.Component {
   };
 
   state = {
-    partners: [],
+    users: [],
     showModal: false,
     isEditing: false,
-    partnerEditId: '-1',
-    partnerToEdit: {},
+    userEditId: '-1',
+    userToEdit: {},
     currentUserObj: {},
     userObject: {},
-    ManagePartnersTable: [],
+    ManageUsersTable: [],
   };
 
-  // Get All Partners //
+  // Get All Users //
 
-  getPartners = () => {
+  getUsers = () => {
     // const { userObject } = this.props;
-    partnerRequests
-      .getAllPartners()
+    userRequests
+      .getAllUsers()
       // .getAllPartners(userObject.partnerId)
-      .then((partners) => {
-        const sortedPartners = partners.sort((a, b) => a.isDeleted - b.isDeleted);
-        this.setState({ partners: sortedPartners });
+      .then((users) => {
+        const sortedUsers = users.sort((a, b) => a.isDeleted - b.isDeleted);
+        this.setState({ users: sortedUsers });
       })
       .catch((err) => {
         console.error('error with products GET', err);
@@ -40,14 +40,14 @@ class UsersAdmin extends React.Component {
   };
 
   componentDidMount() {
-    this.partnerMounted = !!this.props.userObject.id;
-    if (this.partnerMounted) {
-      this.getPartners();
+    this.userMounted = !!this.props.userObject.id;
+    if (this.userMounted) {
+      this.getUsers();
     }
   }
 
   componentWillUnmount() {
-    this.partnerMounted = false;
+    this.userMounted = false;
   }
 
   // Add Product Modal Function //
@@ -63,31 +63,31 @@ class UsersAdmin extends React.Component {
     this.setState({
       hidden: !this.state.hidden,
       showModal: false,
-      partnerToEdit: {},
+      userToEdit: {},
       isEditing: false,
     });
   };
 
-  // Partner Form Submit Event //
-  partnerFormSubmitEvent = (newPartner) => {
-    const { isEditing, partnerEditId } = this.state;
+  // User Form Submit Event //
+  userFormSubmitEvent = (newUser) => {
+    const { isEditing, userEditId } = this.state;
     if (isEditing) {
-      partnerRequests
-        .editPartner(partnerEditId, newPartner)
+      userRequests
+        .editUser(userEditId, newUser)
         .then(() => {
-          this.getPartners();
+          this.getUsers();
           this.setState({
             showModal: false,
             isEditing: false,
-            partnerEditId: '-1',
+            userEditId: '-1',
           });
         })
         .catch(error => console.error('There Was An Error Editing Your Parting Pets Partner', error));
     } else {
-      partnerRequests
-        .createPartner(newPartner)
+      userRequests
+        .createUser(newUser)
         .then((result) => {
-          this.getPartners();
+          this.getUsers();
           this.setState({ showModal: false });
         })
         .catch(error => console.error('There Was An Error Creating Your New Parting Pets Partner'));
@@ -95,24 +95,24 @@ class UsersAdmin extends React.Component {
   };
 
   // Delete Partner Request //
-  deletePartner = (partnerId) => {
-    partnerRequests
-      .deletePartner(partnerId)
+  deleteUser = (userId) => {
+    userRequests
+      .deleteUser(userId)
       .then(() => {
-        this.getPartners();
+        this.getUsers();
       })
       .catch(error => console.error('error with deleting this parting pets partner.', error));
   };
 
-  // Edit Partner Request //
-  editPartner = (partnerId) => {
-    partnerRequests
-      .getSinglePartner(partnerId)
-      .then((partner) => {
+  // Edit User Request //
+  editUser = (userId) => {
+    userRequests
+      .getSingleUser(userId)
+      .then((user) => {
         this.setState({
           isEditing: true,
-          partnerEditId: partnerId,
-          partnerToEdit: partner,
+          userEditId: userId,
+          userToEdit: user,
         });
         this.showModal();
       })
@@ -121,20 +121,20 @@ class UsersAdmin extends React.Component {
 
   render() {
     const { userObject } = this.props;
-    const { partners, isEditing, partnerToEdit } = this.state;
+    const { users, isEditing, userToEdit } = this.state;
 
-    const printPartner = partners.map((partner, index) => (
+    const printUser = users.map((user, index) => (
       <ManageUsersTable
-        key={partner.id}
+        key={user.id}
         index={index}
-        partner={partner}
+        user={user}
         onSelect={this.onSelect}
-        editForm={this.editPartner}
-        deletePartner={this.deletePartner}
+        editForm={this.editUser}
+        deleteUser={this.deleteUser}
       />
     ));
 
-    const editFormProps = { partnerToEdit };
+    const editFormProps = { userToEdit };
 
     if (!isEditing) {
       editFormProps.disabled = true;
@@ -155,9 +155,9 @@ class UsersAdmin extends React.Component {
             BACK TO ADMIN PORTAL
           </button>
         </div>
-        <AddPartnerModal
+        <RegisterForm
           showModal={this.state.showModal}
-          onSubmit={this.partnerFormSubmitEvent}
+          onSubmit={this.userFormSubmitEvent}
           isEditing={isEditing}
           {...editFormProps}
           modalCloseEvent={this.modalCloseEvent}
@@ -179,7 +179,7 @@ class UsersAdmin extends React.Component {
                 <th scope="col">DELETE</th>
               </tr>
             </thead>
-            <tbody>{printPartner}</tbody>
+            <tbody>{printUser}</tbody>
           </table>
         </div>
       </div>
