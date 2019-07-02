@@ -87,8 +87,8 @@ class ShoppingCart extends React.Component {
     myNewOrder.paymentTypeId = 4;
     tempCart.forEach((cartOrder) => {
       let tempObject = {};
+      tempObject.productID = cartOrder.productId;
       tempObject.quantity = cartOrder.quantity;
-      tempObject.productID = cartOrder.id;
       myNewOrder.orderLines.push(tempObject);
     });
     orderRequests.createOrder(myNewOrder)
