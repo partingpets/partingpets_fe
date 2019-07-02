@@ -40,13 +40,13 @@ class ManageUsersTable extends React.Component {
         <th className="header" scope="row">
           {rowNumber}
         </th>
-        <td className="name">{user.lastName}</td>
-        <td className="name">{user.firstName}</td>
+        <td className="last-name">{user.lastName}</td>
+        <td className="first-name">{user.firstName}</td>
         <td className="street">{user.street1}</td>
         <td className="city">{user.city}</td>
         <td className="state">{user.state}</td>
         <td className="zip-code">{user.zipcode}</td>
-        <td className="zip-code">{user.email}</td>
+        <td className="email">{user.email}</td>
         <td>
           <i className="edit-user lnr lnr-pencil pencil" id={user.id} onClick={this.onEditForm} />
         </td>
