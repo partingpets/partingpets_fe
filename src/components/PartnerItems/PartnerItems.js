@@ -46,7 +46,7 @@ class PartnerItems extends React.Component {
     };
 
     return <div>{adminPartnerView()}</div>;
-  }
+  } 
 }
 
 export default PartnerItems;

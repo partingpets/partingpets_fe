@@ -35,11 +35,6 @@ class Products extends React.Component {
     });
   }
 
-  //   changeView = (e) => {
-  //     const view = e.currentTarget.id;
-  //     this.props.history.push(`/${view}`);
-  // }
-
   onChange = (value, event) => {
     const { products } = this.state;
     const filteredProducts = [];

@@ -22,12 +22,12 @@ const getPartnerById = partnerId => new Promise((resolve, reject) => {
 });
 
 const getSinglePartner = partnerId => new Promise((resolve, reject) => {
-    axios
-        .get(`${partnersApiBaseUrl}/api/partners/${partnerId}`)
-        .then((result) => {
-            resolve(result.data)
-        })
-        .catch(error => reject(error));
+  axios
+    .get(`${partnersApiBaseUrl}/api/partners/${partnerId}`)
+    .then((result) => {
+      resolve(result.data);
+    })
+    .catch(error => reject(error));
 });
 
 const deletePartner = partnerId => new Promise((resolve, reject) => {
@@ -39,22 +39,24 @@ const deletePartner = partnerId => new Promise((resolve, reject) => {
     .catch(error => reject(error));
 });
 
+// const deletePartner = partnerId => axios.delete(`${partnersApiBaseUrl}/api/partners/${partnerId}`);
+
 const createPartner = newPartner => new Promise((resolve, reject) => {
-    axios
-        .post(`${partnersApiBaseUrl}/api/partners/`, newPartner)
-        .then((result) => {
-            resolve(result.data);
-        })
-        .catch(error => reject(error));
+  axios
+    .post(`${partnersApiBaseUrl}/api/partners/`, newPartner)
+    .then((result) => {
+      resolve(result.data);
+    })
+    .catch(error => reject(error));
 });
 
 const editPartner = (partnerId, partnerObject) => new Promise((resolve, reject) => {
-    axios
-        .put(`${partnersApiBaseUrl}/api/partners/${partnerId}`, partnerObject)
-        .then((result) => {
-            resolve(result.data);
-        })
-        .catch(error => reject(error));
+  axios
+    .put(`${partnersApiBaseUrl}/api/partners/${partnerId}`, partnerObject)
+    .then((result) => {
+      resolve(result.data);
+    })
+    .catch(error => reject(error));
 });
 
 const getPartnerByPartnerCode = partnerCode => new Promise((resolve, reject) => {
@@ -82,4 +84,3 @@ export default {
   getPartnerById,
   getPartnerByPartnerCode,
 };
-
