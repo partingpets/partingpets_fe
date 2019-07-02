@@ -9,7 +9,7 @@ class PartnerItemTable extends React.Component {
   };
 
   static propTypes = {
-    product: productShape,
+    // product: productShape,
     index: PropTypes.number,
     editForm: PropTypes.func,
   };
