@@ -94,6 +94,7 @@ class ShoppingCart extends React.Component {
     orderRequests.createOrder(myNewOrder)
     .then((result) => {
       if(result.status === 201) {
+        alert("We're sorry for your loss, but congratulations on your purchase!");
         this.state.cart.forEach((item) => {
           this.deleteCartItem(item.cartId);
         })
