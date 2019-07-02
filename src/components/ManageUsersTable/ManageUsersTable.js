@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 // import partnerShape from '../../helpers/partnerProps/partnerShape';
-import './ManagePartnersTable.scss';
+import './ManageUsersTable.scss';
 
-class ManagePartnersTable extends React.Component {
+class ManageUsersTable extends React.Component {
   state = {
     showModal: false,
   };
@@ -36,7 +36,7 @@ class ManagePartnersTable extends React.Component {
     const { partner, index } = this.props;
     const rowNumber = (index + 1).toString();
     return (
-      <tr className={`partner-item ${partner.isDeleted ? 'deleted-partner' : ''} ml-auto`}>
+      <tr className={`user-item ${partner.isDeleted ? 'deleted-user' : ''} ml-auto`}>
         <th className="header" scope="row">
           {rowNumber}
         </th>
@@ -47,14 +47,14 @@ class ManagePartnersTable extends React.Component {
         <td className="state">{partner.state}</td>
         <td className="zip-code">{partner.zipcode}</td>
         <td>
-          <i className="edit-partner lnr lnr-pencil pencil" id={partner.id} onClick={this.onEditForm} />
+          <i className="edit-user lnr lnr-pencil pencil" id={partner.id} onClick={this.onEditForm} />
         </td>
         <td>
-          <i className="delete-partner lnr lnr-trash trash" id={partner.id} onClick={this.deleteEvent} />
+          <i className="delete-user lnr lnr-trash trash" id={partner.id} onClick={this.deleteEvent} />
         </td>
       </tr>
     );
   }
 }
 
-export default ManagePartnersTable;
+export default ManageUsersTable;
