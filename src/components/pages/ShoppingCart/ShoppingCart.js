@@ -80,8 +80,6 @@ class ShoppingCart extends React.Component {
       tempObject.quantity = cartOrder.quantity;
       tempObject.productID = cartOrder.id;
       myNewOrder.orderLines.push(tempObject);
-      //myNewOrder.orderLines.productID = cartOrder.id;
-      //myNewOrder.orderLines.quantity = cartOrder.quantity;
     });
     orderRequests.createOrder(myNewOrder)
     .then((result) => {
