@@ -31,7 +31,8 @@ class PartnersAdmin extends React.Component {
       .getAllPartners()
       // .getAllPartners(userObject.partnerId)
       .then((partners) => {
-        this.setState({ partners });
+        const sortedPartners = partners.sort((a, b) => a.isDeleted - b.isDeleted);
+        this.setState({ partners: sortedPartners });
       })
       .catch((err) => {
         console.error('error with products GET', err);
@@ -150,7 +151,7 @@ class PartnersAdmin extends React.Component {
 
         <div className="back-button">
           <button className="backBtn" id="admin" onClick={this.changeView}>
-            <i className="far fa-plus-square" />
+            <i className="lnr lnr-arrow-left-circle" />
             BACK TO ADMIN PORTAL
           </button>
         </div>
