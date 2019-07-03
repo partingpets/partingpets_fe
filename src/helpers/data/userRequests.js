@@ -28,9 +28,9 @@ const getAllUsers = uid => new Promise((resolve, reject) => {
 });
 
 // Get Single User For User Admin Portal //
-const getSingleUser = userId => new Promise((resolve, reject) => {
+const getSingleUser = id => new Promise((resolve, reject) => {
   axios
-    .get(`${petsApiBaseUrl}/api/users/${userId}`)
+    .get(`${petsApiBaseUrl}/api/users/${id}`)
     .then((result) => {
       resolve(result.data);
     })

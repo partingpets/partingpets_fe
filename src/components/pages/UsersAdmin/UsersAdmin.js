@@ -94,7 +94,7 @@ class UsersAdmin extends React.Component {
     }
   };
 
-  // Delete Partner Request //
+  // Delete User Request //
   deleteUser = (userId) => {
     userRequests
       .deleteUser(userId)
