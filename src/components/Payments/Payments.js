@@ -1,5 +1,7 @@
 import React from 'react';
 import './Payments.scss';
+import paymentRequests from '../../helpers/data/paymentRequests';
+import PaymentOptions from './PaymentOptions';
 
 class Payments extends React.Component {
 
@@ -19,17 +21,21 @@ class Payments extends React.Component {
   render(){
     const { isProfilePage } = this.props;
 
-    const profilePayments = () => {
-      if (isProfilePage) {
-        return(
-          <h5>Profile payment options go here</h5>
-        )
-      } else return (
-        <h5>Payment options go here</h5>
-      )
-    }
+    const { usersPaymentOptions } = this.state;
+
+
+    const paymentOptions = paymentOption => (
+      <PaymentOptions 
+        key={paymentOption.id}
+        paymentOption={paymentOption}
+        isProfilePage={isProfilePage}
+      />
+    )
+
+    const listedPaymentOptions = usersPaymentOptions.map(paymentOptions)
+
     return(
-      profilePayments()
+      {listedPaymentOptions}
     );
   }
 }
