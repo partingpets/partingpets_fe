@@ -7,6 +7,7 @@ import authRequests from '../../../helpers/data/authRequests';
 import userRequests from '../../../helpers/data/userRequests';
 import petRequests from '../../../helpers/data/petRequests';
 import partnerRequests from '../../../helpers/data/partnerRequests';
+import Payments from '../../Payments/Payments';
 import Pets from '../../Pets/Pets';
 import PetForm from '../../PetForm/PetForm';
 import './Profile.scss';
@@ -24,6 +25,7 @@ class Profile extends React.Component {
     petModal: false,
     isEditingPet: false,
     petIdToEdit: '-1',
+    isProfilePage: true,
   };
 
   componentDidMount() {
@@ -154,7 +156,14 @@ class Profile extends React.Component {
   render() {
     const { userObject } = this.props;
     const {
-      showModal, fbUserImage, usersPets, userToEdit, isEditing, isEditingPet, petIdToEdit,
+      showModal, 
+      fbUserImage, 
+      usersPets, 
+      userToEdit, 
+      isEditing, 
+      isEditingPet, 
+      petIdToEdit,
+      isProfilePage,
     } = this.state;
     const singlePetCard = usersPet => (
       <Pets
@@ -202,6 +211,8 @@ class Profile extends React.Component {
                     <i className="lnr lnr-trash  usr-btn-delete-icon" aria-hidden="true" />
                   </Button>
                   {/* </div> */}
+                  <hr />
+                  <Payments isProfilePage={isProfilePage}/>
                   <hr />
                   <Button className="btn addPetButton" onClick={this.toggle}>
                     Add Pet
