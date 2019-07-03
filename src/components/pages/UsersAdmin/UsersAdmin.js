@@ -105,13 +105,13 @@ class UsersAdmin extends React.Component {
   };
 
   // Edit User Request //
-  editUser = (userId) => {
+  editUser = (id) => {
     userRequests
-      .getSingleUser(userId)
+      .getSingleUser(id)
       .then((user) => {
         this.setState({
           isEditing: true,
-          userEditId: userId,
+          userEditId: user.id,
           userToEdit: user,
         });
         this.showModal();

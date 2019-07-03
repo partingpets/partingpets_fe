@@ -28,8 +28,8 @@ class ManageUsersTable extends React.Component {
 
   deleteEvent = (e) => {
     e.preventDefault();
-    const { deleteUser, userId } = this.props;
-    deleteUser(userId);
+    const { deleteUser, user } = this.props;
+    deleteUser(user.id);
   };
 
   render() {
