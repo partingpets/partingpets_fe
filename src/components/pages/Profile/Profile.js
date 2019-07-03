@@ -212,7 +212,7 @@ class Profile extends React.Component {
                   </Button>
                   {/* </div> */}
                   <hr />
-                  <Payments isProfilePage={isProfilePage}/>
+                  <Payments isProfilePage={isProfilePage} userId={userObject.id}/>
                   <hr />
                   <Button className="btn addPetButton" onClick={this.toggle}>
                     Add Pet
