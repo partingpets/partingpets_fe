@@ -73,7 +73,7 @@ class UsersAdmin extends React.Component {
     const { isEditing, userEditId } = this.state;
     if (isEditing) {
       userRequests
-        .updateUser(userEditId, newUser)
+        .updateUser(newUser)
         .then(() => {
           this.getUsers();
           this.setState({
