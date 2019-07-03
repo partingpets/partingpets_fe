@@ -4,10 +4,7 @@
 
 .item-detail {
   background-color: slategray;
-  background: linear-gradient(
-    rgba(255, 255, 255, 0.5),
-    rgba(255, 255, 255, 0.5)
-  );
+  background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5));
   border: 5px solid rgb(21, 21, 58);
   margin-top: 10%;
   margin-bottom: 5%;
@@ -34,6 +31,6 @@
   text-align: center;
 }
 
-.card-body {
-  cursor: pointer;
-}
+// .card-body {
+//   cursor: pointer;
+// }

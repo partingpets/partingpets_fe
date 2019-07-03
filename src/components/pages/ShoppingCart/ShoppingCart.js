@@ -55,7 +55,7 @@ class ShoppingCart extends React.Component {
   // https://www.robinwieruch.de/react-state-array-add-update-remove/
   // Holy Balls was this much harder than I thought
   updateItemQuantity = (key, quantity) => {
-    const itemIndex = this.state.cart.findIndex(item => item.id === key);
+    const itemIndex = this.state.cart.findIndex(item => item.productId === key);
     this.setState((state) => {
       const cart = state.cart.map((item, j) => {
         if (j === itemIndex) {
