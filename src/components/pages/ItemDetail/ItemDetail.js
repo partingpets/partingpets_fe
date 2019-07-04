@@ -1,4 +1,5 @@
 import React from 'react';
+import SweetAlert from 'react-bootstrap-sweetalert';
 import productRequests from '../../../helpers/data/productRequests';
 import cartRequests from '../../../helpers/data/cartRequests';
 import './ItemDetail.scss';
@@ -6,6 +7,7 @@ import './ItemDetail.scss';
 class ItemDetail extends React.Component {
   state = {
     singleItem: {},
+    showAlert: false,
   };
 
   backToItemsView = (e) => {
@@ -32,7 +34,9 @@ class ItemDetail extends React.Component {
       .getUserCartById(userId)
       .then((currentCartItems) => {
         if (currentCartItems.find(element => element.productId === parseInt(productId, 10))) {
-          alert('This item is already in your cart');
+          this.setState({
+            showAlert: true,
+          });
         } else {
           cartRequests.addUserCartItem(newCartItem).then((result) => {
             cartRequests.getUserCartById(userId).then((cartResult) => {
@@ -47,10 +51,18 @@ class ItemDetail extends React.Component {
   };
 
   render() {
-    const { singleItem } = this.state;
+    const { singleItem, showAlert } = this.state;
 
     return (
       <div className="item-detail mx-auto w-50">
+        <SweetAlert
+          show={showAlert}
+          warning
+          title="Item is already in your cart"
+          onConfirm={() => {
+            this.setState({ showAlert: false });
+          }}
+        />
         <div className="col-9 mt-3 mx-auto">
           <img className="detailImage" src={singleItem.imageUrl} alt={singleItem.name} />
           <h4 className="product-card-header">{singleItem.name}</h4>
@@ -63,7 +75,6 @@ class ItemDetail extends React.Component {
                 <span className="lnr lnr-cart" />
                 ADD TO CART
               </button>
-
               <button className="backToStore" onClick={this.backToItemsView}>
                 <span className="lnr lnr-arrow-left-circle" />
                 BACK TO STORE
