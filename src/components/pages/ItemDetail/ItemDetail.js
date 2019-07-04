@@ -29,13 +29,19 @@ class ItemDetail extends React.Component {
     newCartItem.productId = productId;
     newCartItem.quantity = 1;
     cartRequests
-      .addUserCartItem(newCartItem)
-      .then((result) => {
-        cartRequests.getUserCartById(userId).then((cartResult) => {
-          const filteredResults = cartResult.filter(item => item.isDeleted === false);
-          updateCartBadge(filteredResults.length);
-          this.backToItemsView();
-        });
+      .getUserCartById(userId)
+      .then((currentCartItems) => {
+        if (currentCartItems.find(element => element.productId === parseInt(productId, 10))) {
+          alert('This item is already in your cart');
+        } else {
+          cartRequests.addUserCartItem(newCartItem).then((result) => {
+            cartRequests.getUserCartById(userId).then((cartResult) => {
+              const filteredResults = cartResult.filter(item => item.isDeleted === false);
+              updateCartBadge(filteredResults.length);
+              this.backToItemsView();
+            });
+          });
+        }
       })
       .catch(error => console.error('An error occured adding item to cart', error));
   };
@@ -52,20 +58,17 @@ class ItemDetail extends React.Component {
             <h6 className="card-text">{singleItem.description}</h6>
             <h5 className="card-text">$ {singleItem.unitPrice}</h5>
             <h5 className="card-text">{/* <i className="lnr lnr-cart" /> */}</h5>
-            <div className="backToStore">
+            <div>
               <button className="backToStore" data-productid={singleItem.id} onClick={this.addToCartFn}>
                 <span className="lnr lnr-cart" />
-                Add to Cart
+                ADD TO CART
+              </button>
+
+              <button className="backToStore" onClick={this.backToItemsView}>
+                <span className="lnr lnr-arrow-left-circle" />
+                BACK TO STORE
               </button>
             </div>
-            {/* <div className="backToStore">
-              <button className="backToStore" onClick={this.backToItemsView}>
-                <span className="spot">
-                  <span className="lnr lnr-arrow-left-circle" />
-                  BACK TO STORE
-                </span>
-              </button>
-            </div> */}
           </div>
         </div>
       </div>
