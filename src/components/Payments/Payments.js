@@ -9,6 +9,10 @@ class Payments extends React.Component {
     usersPaymentOptions: []
   }
 
+  componentDidMount(){
+    this.getPaymentOptions();
+  }
+
   getPaymentOptions() {
     const userId = this.props.userId;
     paymentRequests.getPaymentOptions(userId).then((paymentOptions) => {
@@ -23,7 +27,6 @@ class Payments extends React.Component {
 
     const { usersPaymentOptions } = this.state;
 
-
     const paymentOptions = paymentOption => (
       <PaymentOptions 
         key={paymentOption.id}
@@ -35,7 +38,9 @@ class Payments extends React.Component {
     const listedPaymentOptions = usersPaymentOptions.map(paymentOptions)
 
     return(
-      {listedPaymentOptions}
+      <div>
+        {listedPaymentOptions}
+      </div>
     );
   }
 }
