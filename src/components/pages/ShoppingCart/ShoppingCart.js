@@ -49,7 +49,7 @@ class ShoppingCart extends React.Component {
         resolve(filteredResults);
       })
       .then()
-      .catch(error => console.log('Something broke here', error));
+      .catch(error => console.error('Something broke here', error));
   });
 
   // https://www.robinwieruch.de/react-state-array-add-update-remove/
@@ -68,6 +68,7 @@ class ShoppingCart extends React.Component {
         this.setState((state) => {
           const cart = state.cart.map((item, j) => {
             if (j === itemIndex) {
+              // eslint-disable-next-line no-param-reassign
               item.quantity = quantity;
               return item;
             }
