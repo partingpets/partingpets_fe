@@ -132,7 +132,7 @@ class ShoppingCart extends React.Component {
         />
     ));
     return (
-      <div className="shoppingCart">
+      <div className="shoppingCart animated bounceInLeft">
         <Container className="cart-container">
           <Row className="cart-header-row">
             <img src={pets} className="petsCartLogo" alt="pets_logo" />
