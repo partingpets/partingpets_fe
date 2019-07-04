@@ -56,18 +56,29 @@ class ShoppingCart extends React.Component {
   // Holy Balls was this much harder than I thought
   updateItemQuantity = (key, quantity) => {
     const itemIndex = this.state.cart.findIndex(item => item.productId === key);
-    this.setState((state) => {
-      const cart = state.cart.map((item, j) => {
-        if (j === itemIndex) {
-          item.quantity = quantity;
-          return item;
-        }
-        return item;
-      });
-      return {
-        cart,
-      };
-    });
+    const { cartId, userId } = this.state.cart[itemIndex];
+    const cartToUpdate = {
+      cartId,
+      quantity,
+      userId,
+    };
+    cartRequests
+      .editUserCartItem(cartToUpdate)
+      .then(() => {
+        this.setState((state) => {
+          const cart = state.cart.map((item, j) => {
+            if (j === itemIndex) {
+              item.quantity = quantity;
+              return item;
+            }
+            return item;
+          });
+          return {
+            cart,
+          };
+        });
+      })
+      .catch(error => console.error('Error updating cart item'));
   };
 
   deleteCartItem = (itemId) => {
