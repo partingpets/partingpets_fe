@@ -12,4 +12,26 @@ const createOrder = newOrder => new Promise((resolve, reject) => {
         .catch(error => reject(error));
 });
 
-export default { createOrder };
+const getAllOrders = () => new Promise((resolve, reject) => {
+    axios
+        .get(`${ordersApiBaseUrl}/api/orders`)
+        .then((result) => {
+            resolve(result.data);
+        })
+        .catch(error => reject(error));
+});
+
+const getOrderById = orderId => new Promise((resolve, reject) => {
+    axios
+    .get(`${ordersApiBaseUrl}/api/orders/${orderId}`)
+    .then((result) => {
+        resolve(result.data);
+    })
+    .catch(error => reject(error));
+});
+
+export default { 
+    createOrder, 
+    getAllOrders, 
+    getOrderById, 
+};
