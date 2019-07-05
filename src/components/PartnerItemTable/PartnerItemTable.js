@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import productShape from '../../helpers/productProps/productShape';
 import './PartnerItemTable.scss';
 
 class PartnerItemTable extends React.Component {
