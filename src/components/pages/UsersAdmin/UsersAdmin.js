@@ -70,7 +70,7 @@ class UsersAdmin extends React.Component {
 
   // User Form Submit Event //
   userFormSubmitEvent = (newUser) => {
-    const { isEditing, userEditId } = this.state;
+    const { isEditing } = this.state;
     if (isEditing) {
       userRequests
         .updateUser(newUser)
