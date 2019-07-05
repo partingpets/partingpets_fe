@@ -14,6 +14,29 @@ const getUserByFbId = uid => new Promise((resolve, reject) => {
     });
 });
 
+// Get all Users for User Admin Portal //
+
+const getAllUsers = uid => new Promise((resolve, reject) => {
+  axios
+    .get(`${petsApiBaseUrl}/api/Users/`)
+    .then((result) => {
+      resolve(result.data);
+    })
+    .catch((error) => {
+      reject(error);
+    });
+});
+
+// Get Single User For User Admin Portal //
+const getSingleUser = userId => new Promise((resolve, reject) => {
+  axios
+    .get(`${petsApiBaseUrl}/api/users/${userId}`)
+    .then((result) => {
+      resolve(result.data);
+    })
+    .catch(error => reject(error));
+});
+
 const createUser = newUser => new Promise((resolve, reject) => {
   axios
     .post(`${petsApiBaseUrl}/api/Users/`, newUser)
@@ -46,4 +69,6 @@ export default {
   createUser,
   updateUser,
   deleteUser,
+  getAllUsers,
+  getSingleUser,
 };
