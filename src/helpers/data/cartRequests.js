@@ -25,4 +25,32 @@ const deleteUserCartItemByItemId = (userId, ItemId) => new Promise((resolve, rej
     });
 });
 
-export default { getUserCartById, deleteUserCartItemByItemId };
+const addUserCartItem = newCartItem => new Promise((resolve, reject) => {
+  axios
+    .post(`${petsApiBaseUrl}/api/carts`, newCartItem)
+    .then((results) => {
+      resolve(results.data);
+    })
+    .catch((error) => {
+      reject(error);
+    });
+});
+
+const editUserCartItem = cartItem => new Promise((resolve, reject) => {
+  const { cartId } = cartItem;
+  axios
+    .put(`${petsApiBaseUrl}/api/carts/${cartId}`, cartItem)
+    .then((result) => {
+      resolve(result.data);
+    })
+    .catch((error) => {
+      reject(error);
+    });
+});
+
+export default {
+  getUserCartById,
+  deleteUserCartItemByItemId,
+  addUserCartItem,
+  editUserCartItem,
+};

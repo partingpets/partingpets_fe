@@ -3,8 +3,15 @@ import {
   Container, Row, Col, Button,
 } from 'reactstrap';
 import cartRequests from '../../../helpers/data/cartRequests';
+import orderRequests from '../../../helpers/data/orderRequests';
 import CartItem from '../../CartItem/CartItem';
 import './ShoppingCart.scss';
+
+const defaultOrder = {
+  userId: 0,
+  paymentTypeId: 0, 
+  orderLines: [],
+};
 
 class ShoppingCart extends React.Component {
   state = {
@@ -12,6 +19,7 @@ class ShoppingCart extends React.Component {
     cartSubTotal: 0,
     cartTax: 0,
     cartTotal: 0,
+    newOrder: defaultOrder,
   };
 
   componentDidMount() {
@@ -49,26 +57,65 @@ class ShoppingCart extends React.Component {
         resolve(filteredResults);
       })
       .then()
-      .catch(error => console.log('Something broke here', error));
+      .catch(error => console.error('Something broke here', error));
   });
 
   // https://www.robinwieruch.de/react-state-array-add-update-remove/
   // Holy Balls was this much harder than I thought
   updateItemQuantity = (key, quantity) => {
-    const itemIndex = this.state.cart.findIndex(item => item.id === key);
-    this.setState((state) => {
-      const cart = state.cart.map((item, j) => {
-        if (j === itemIndex) {
-          item.quantity = quantity;
-          return item;
-        }
-        return item;
-      });
-      return {
-        cart,
-      };
-    });
+    const itemIndex = this.state.cart.findIndex(item => item.productId === key);
+    const { cartId, userId } = this.state.cart[itemIndex];
+    const cartToUpdate = {
+      cartId,
+      quantity,
+      userId,
+    };
+    cartRequests
+      .editUserCartItem(cartToUpdate)
+      .then(() => {
+        this.setState((state) => {
+          const cart = state.cart.map((item, j) => {
+            if (j === itemIndex) {
+              // eslint-disable-next-line no-param-reassign
+              item.quantity = quantity;
+              return item;
+            }
+            return item;
+          });
+          return {
+            cart,
+          };
+        });
+      })
+      .catch(error => console.error('Error updating cart item'));
   };
+
+  formSubmit = (e) => {
+    e.preventDefault();
+    const { userObject } = this.props;
+    const tempCart = this.state.cart 
+    const myNewOrder = { ...this.state.newOrder };
+    myNewOrder.userId = userObject.id;
+    myNewOrder.paymentTypeId = 4;
+    tempCart.forEach((cartOrder) => {
+      let tempObject = {};
+      tempObject.productID = cartOrder.productId;
+      tempObject.quantity = cartOrder.quantity;
+      myNewOrder.orderLines.push(tempObject);
+    });
+    orderRequests.createOrder(myNewOrder)
+    .then((result) => {
+      if(result.status === 201) {
+        alert("We're sorry for your loss, but congratulations on your purchase!");
+        this.state.cart.forEach((item) => {
+          this.deleteCartItem(item.cartId);
+        })
+      }
+    });
+    this.setState({
+      newOrder: defaultOrder,
+    });
+  }
 
   deleteCartItem = (itemId) => {
     const { userObject, updateCartBadge } = this.props;
@@ -142,7 +189,7 @@ class ShoppingCart extends React.Component {
             </Row>
           </div>
           <div className="cart-checkout-btn">
-            <Button color="primary">Check Out</Button>
+            <Button color="primary" onClick={this.formSubmit}>Check Out</Button>
           </div>
         </Container>
       </div>

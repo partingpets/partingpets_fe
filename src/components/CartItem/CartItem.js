@@ -58,7 +58,7 @@ class CartItem extends React.Component {
                 <Input
                   className="cart-qty-select"
                   type="select"
-                  id={item.id}
+                  id={item.productId}
                   value={item.quantity}
                   onChange={this.updateItemQuantity}
                 >
