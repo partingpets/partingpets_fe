@@ -155,7 +155,9 @@ class App extends React.Component {
                   />
                   <PrivateRoute
                     path="/store/:id"
-                    component={props => <ItemDetail userObject={userObject} {...props} />}
+                    component={props => (
+                      <ItemDetail userObject={userObject} updateCartBadge={this.updateCartBadge} {...props} />
+                    )}
                     authed={authed}
                   />
                   <PrivateRoute
