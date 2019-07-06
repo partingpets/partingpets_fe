@@ -9,7 +9,7 @@ class OrderItems extends React.Component
         return (
             <div className="order-item-div">
                 <h1>Hello again</h1>
-                <h3>{order.name}</h3>
+                <h3>{order.firstName}</h3>
             </div>
         );
     }
