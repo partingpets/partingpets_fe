@@ -97,7 +97,7 @@ class AppNavbar extends React.Component {
                   <i className="navIcon lnr lnr-user" />
                   Profile
                 </DropdownItem>
-                <DropdownItem className="profBtn nav-link" to="/orders">
+                <DropdownItem tag={RRNavLink} className="profBtn nav-link" to="/orders">
                   <i className="navIcon lnr lnr-layers" />
                   Orders
                 </DropdownItem>
