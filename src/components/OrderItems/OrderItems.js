@@ -1,5 +1,5 @@
 import React from 'react';
-import './OrderItems.js';
+import './OrderItems.scss';
 
 class OrderItems extends React.Component
 {
@@ -7,8 +7,9 @@ class OrderItems extends React.Component
         const { order } = this.props;
 
         return (
-            <div className="Please">
+            <div className="order-item-div">
                 <h1>Hello again</h1>
+                <h3>{order.name}</h3>
             </div>
         );
     }

@@ -24,12 +24,13 @@ class Orders extends React.Component {
   render() {
     const { orders } = this.state;
     
-    const printOrder = orders.map(order => {
-        <OrderItems
-        key={order.id}
-        order={order}
-        />
-    });
+     const printOrder = orders.map(order => (
+
+         <OrderItems
+         key={order.id}
+         order={order}
+         />
+   ));
 
       return (
         <div className="Order">
