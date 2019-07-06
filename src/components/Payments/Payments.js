@@ -2,11 +2,12 @@ import React from 'react';
 import './Payments.scss';
 import paymentRequests from '../../helpers/data/paymentRequests';
 import PaymentOptions from './PaymentOptions';
+import {Button} from 'reactstrap';
 
 class Payments extends React.Component {
 
   state = {
-    usersPaymentOptions: []
+    calledPaymentOptionsInState: []
   }
 
   componentDidMount(){
@@ -17,7 +18,7 @@ class Payments extends React.Component {
     const userId = this.props.userId;
     paymentRequests.getPaymentOptions(userId).then((paymentOptions) => {
       this.setState({
-        usersPaymentOptions: paymentOptions,
+        calledPaymentOptionsInState: paymentOptions,
       });
     });
   }
@@ -25,7 +26,7 @@ class Payments extends React.Component {
   render(){
     const { isProfilePage } = this.props;
 
-    const { usersPaymentOptions } = this.state;
+    const { calledPaymentOptionsInState } = this.state;
 
     const paymentOptions = paymentOption => (
       <PaymentOptions 
@@ -35,11 +36,14 @@ class Payments extends React.Component {
       />
     )
 
-    const listedPaymentOptions = usersPaymentOptions.map(paymentOptions)
+    const listedPaymentOptions = calledPaymentOptionsInState.map(paymentOptions)
 
     return(
       <div>
         {listedPaymentOptions}
+        <Button outline size="sm">
+          Add a new payment option
+        </Button>
       </div>
     );
   }
