@@ -29,6 +29,7 @@ class Orders extends React.Component {
          <OrderItems
          key={order.id}
          order={order}
+         // orderItems={order.orderItems[0]}
          />
    ));
 
