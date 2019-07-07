@@ -2,12 +2,14 @@ import React from 'react';
 import './Payments.scss';
 import paymentRequests from '../../helpers/data/paymentRequests';
 import PaymentOptions from './PaymentOptions';
+import PaymentModal from './PaymentModal';
 import {Button} from 'reactstrap';
 
 class Payments extends React.Component {
 
   state = {
-    calledPaymentOptionsInState: []
+    calledPaymentOptionsInState: [],
+    paymentModal: false,
   }
 
   componentDidMount(){
@@ -22,6 +24,20 @@ class Payments extends React.Component {
       });
     });
   }
+
+  toggle = () => {
+    if (this.state.isEditingPayment) {
+      this.setState({
+        paymentModal: !this.state.paymentModal,
+        isEditingPayment: false,
+        paymentIdToEdit: '-1',
+      });
+    } else {
+      this.setState({
+        paymentModal: !this.state.paymentModal,
+      });
+    }
+  };
 
   render(){
     const { isProfilePage } = this.props;
@@ -41,7 +57,11 @@ class Payments extends React.Component {
     return(
       <div>
         {listedPaymentOptions}
-        <Button outline size="sm">
+        <PaymentModal 
+          isOpen={this.state.paymentModal}
+          toggle={this.toggle}
+        />
+        <Button outline size="sm" onClick={this.toggle}>
           Add a new payment option
         </Button>
       </div>
