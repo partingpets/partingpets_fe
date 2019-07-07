@@ -41,7 +41,10 @@ class PaymentOptions extends React.Component {
           </div>
         )
       } else return (
-        <h5>Payment options go here</h5>
+        <div>
+          <h5>Payment options go here</h5>
+          <p>{paymentOption.name}</p>
+        </div>
       )
     }
 

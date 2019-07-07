@@ -46,6 +46,11 @@ class PaymentModal extends React.Component {
   };
 
   nameChange = event => this.formFieldStringState('name', event);
+  accountNumberChange = event => this.formFieldStringState('accountNumber', event);
+  cvvChange = event => this.formFieldStringState('cvv', event);
+  typeChange = event => this.formFieldStringState('type', event);
+  expDateChange = event => this.formFieldStringState('expDate', event);
+
 
   render() {
     const { newPayment } = this.state;
@@ -86,6 +91,7 @@ class PaymentModal extends React.Component {
                     name="accountNumber"
                     id="accountNumber"
                     placeholder="•••• •••• •••• ••••"
+                    maxLength="16"
                     onChange={this.accountNumberChange}
                     value={newPayment.accountNumber}
                   />
@@ -100,6 +106,7 @@ class PaymentModal extends React.Component {
                     name="cvv"
                     id="cvv"
                     placeholder="•••"
+                    maxLength="3"
                     onChange={this.cvvChange}
                     value={newPayment.cvv}
                   />
@@ -134,12 +141,12 @@ class PaymentModal extends React.Component {
                     name="expDate"
                     id="expDate"
                     placeholder="MM/YYYY"
+                    maxLength="7"
                     onChange={this.expDateChange}
                     value={newPayment.expDate}                    
                   />
                 </FormGroup>
               </Col>
-              
             </Row>
           </Form>
         </ModalBody>
