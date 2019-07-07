@@ -7,6 +7,11 @@ import './ItemsAdmin.scss';
 class ItemsAdmin extends React.Component {
   partnerMounted = false;
 
+  changeView = (e) => {
+    const view = e.currentTarget.id;
+    this.props.history.push(`/${view}`);
+  };
+
   state = {
     products: [],
     showModal: false,
@@ -135,6 +140,13 @@ class ItemsAdmin extends React.Component {
           <button className="addProductBtn" onClick={this.showModal}>
             <i className="far fa-plus-square" />
             ADD NEW ITEM
+          </button>
+        </div>
+
+        <div className="back-button">
+          <button className="backBtn" id="admin" onClick={this.changeView}>
+            <i className="lnr lnr-arrow-left-circle" />
+            BACK TO ADMIN PORTAL
           </button>
         </div>
 
