@@ -7,19 +7,15 @@ class OrderItems extends React.Component
         const { order } = this.props;
 
         return (
-            <div className="order-item-div">
-                <h1>Hello again</h1>
-                <h3>{order.firstName}</h3>
+            <div className="orderCard card2 col-6">
+                <h1>Details for Order #{order.id}</h1>
+                <h3>{order.firstName} {order.lastName}</h3>
                 {order.orderItems.map((orderitem, i) => (
-                    <div>
+                    //<div>
                     <h3 key={i}>{orderitem.name}</h3>
-                    <h3>{orderitem.quantity}</h3>
-                    </div>
+                    //<h3>{orderitem.quantity}</h3>
+                    // </div>
                 ))}
-                {/* <h3>{orderitem.name}</h3> */}
-                {/* <h3>{orderItems.name}</h3>
-                <h4>{orderItems.quantity}</h4>
-                <h5>{orderItems.unitPrice}</h5> */}
             </div>
         );
     }

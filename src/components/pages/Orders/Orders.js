@@ -12,7 +12,6 @@ class Orders extends React.Component {
       const userid = this.props.userObject.id;
       orderRequests.getOrderById(userid)
       .then((result) => {
-        console.log(result);
           this.setState({ orders: result });
       });
   }
@@ -24,19 +23,18 @@ class Orders extends React.Component {
   render() {
     const { orders } = this.state;
 
-     const printOrder = orders.map(order => (
+     const printOrders = orders.map(order => (
       
          <OrderItems
          key={order.id}
          order={order}
-         // orderItems={order.orderItems[0]}
          />
    ));
 
       return (
-        <div className="Order">
-            <h1>Hello</h1>
-            <h3>{printOrder}</h3>
+        <div className="orders-container">
+            <h1 className="orders-page-title">Your Orders</h1>
+            <h3 className="row justify-content-center">{printOrders}</h3>
         </div>
       );
     }
