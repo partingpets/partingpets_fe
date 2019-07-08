@@ -47,7 +47,7 @@ class ManageUsersTable extends React.Component {
         <td className="state">{user.state}</td>
         <td className="zip-code">{user.zipcode}</td>
         <td className="email">{user.email}</td>
-        <td>
+        <td className="icons">
           <i className="edit-user lnr lnr-pencil pencil" id={user.id} onClick={this.onEditForm} />
         </td>
         <td>

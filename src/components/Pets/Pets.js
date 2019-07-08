@@ -26,7 +26,7 @@ class Pets extends React.Component {
       if (Pet.burialCity && Pet.burialState && Pet.burialStreet && Pet.burialPlot && Pet.burialZipCode) {
         return (
           <CardText>
-            Final Resting Place: <br />
+            <b>Final Resting Place:</b> <br />
             {Pet.burialStreet} <br />
             Plot {Pet.burialPlot} <br />
             {Pet.burialCity}, {Pet.burialState} {Pet.burialZipCode}
@@ -37,40 +37,13 @@ class Pets extends React.Component {
     };
 
     return (
-    // <Card className="pet-container">
-    //   {/* <CardImg className="profileCardImg" top width="100%" src={fbUserObject.photoURL} alt="Card image cap" /> */}
-    //   <CardHeader className="pet-name">{Pet.name}</CardHeader>
-    //   <div className="col-4">
-    //     <CardImg
-    //       className="petCardImg"
-    //       top
-    //       width="100%"
-    //       src="https://i.pinimg.com/736x/b1/d8/fc/b1d8fc33b1f9776195ad201a863bae0f.jpg"
-    //       alt="Card image cap"
-    //     />
-    //   </div>
-
-    //   <div className="pet-card col-12">
-    //     <CardBody>
-    //       <CardText className="breed">{Pet.breed}</CardText>
-    //       <CardText className="dates">
-    //         Born: {Pet.dateOfBirth}
-    //         <br />
-    //         Died: {Pet.dateOfDeath}
-    //       </CardText>
-    //       <div className="burial-data">{burialData()}</div>
-    //       <Button onClick={this.editEvent}>Edit</Button>
-    //       <Button onClick={this.deleteEvent}>Delete</Button>
-    //     </CardBody>
-    //   </div>
-    // </Card>
-
-      // duplicate //
       <div className="pet-box">
         <Card className="pet-container">
           {/* <CardImg className="profileCardImg" top width="100%" src={fbUserObject.photoURL} alt="Card image cap" /> */}
-          <CardHeader className="pet-name">{Pet.name}</CardHeader>
-          <div className="col-4">
+          <CardHeader className="pet-name">
+            {Pet.name} : {Pet.breed}
+          </CardHeader>
+          <div className="col-12">
             <CardImg
               className="petCardImg"
               top
@@ -79,17 +52,17 @@ class Pets extends React.Component {
               alt="Pet Image"
             />
           </div>
-          <div className="col-12">
+          <div className="pet-data col-12">
             <CardBody>
-              <CardText className="breed">{Pet.breed}</CardText>
+              {/* <CardText className="breed">{Pet.breed}</CardText> */}
               <CardText className="dates">
-                Born: {utility.dateFormat(Pet.dateOfBirth)}
+                <b>Born:</b> {utility.dateFormat(Pet.dateOfBirth)}
                 <br />
-                Died: {utility.dateFormat(Pet.dateOfDeath)}
+                <b>Died:</b> {utility.dateFormat(Pet.dateOfDeath)}
               </CardText>
               <div className="burial-data">{burialData()}</div>
-              <i className="lnr lnr-pencil pencil edit-pet" onClick={this.editEvent} />
-              <i className="lnr lnr-trash trash delete-pet" onClick={this.deleteEvent} />
+              <i className="lnr lnr-pencil edit-pet" onClick={this.editEvent} />
+              <i className="lnr lnr-trash delete-pet" onClick={this.deleteEvent} />
             </CardBody>
           </div>
         </Card>
