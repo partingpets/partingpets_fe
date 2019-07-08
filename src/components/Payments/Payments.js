@@ -3,7 +3,7 @@ import './Payments.scss';
 import paymentRequests from '../../helpers/data/paymentRequests';
 import PaymentOptions from './PaymentOptions';
 import PaymentModal from './PaymentModal';
-import {Button, Form, FormGroup, Label, Input} from 'reactstrap';
+import {Button, Form, FormGroup, Label, Input, Row, Col} from 'reactstrap';
 
 class Payments extends React.Component {
 
@@ -53,7 +53,7 @@ class Payments extends React.Component {
     )
 
     const paymentSelector = paymentOption => (
-      <option key={paymentOption.id} paymentOption={paymentOption}>{paymentOption.name}</option>
+      <option key={paymentOption.id} paymentoption={paymentOption}>{paymentOption.name}</option>
     )
 
     const listedPaymentOptions = calledPaymentOptionsInState.map(paymentOptions)
@@ -69,12 +69,16 @@ class Payments extends React.Component {
         )
       } else return(
           <Form>
-            <FormGroup>
-              <Label for="paymentSelect">Select Payment Method</Label>
-              <Input type="select" name="select" id="select">
-                {selectorPaymentOptions}
-              </Input>
-            </FormGroup>
+            <Row>
+              <Col md={3}>
+                <FormGroup>
+                  <Label for="paymentSelect">Select Payment Method</Label>
+                  <Input type="select" name="select" id="select">
+                    {selectorPaymentOptions}
+                  </Input>
+                </FormGroup>
+              </Col>
+            </Row>
           </Form>
         )
     }
