@@ -17,7 +17,7 @@ const emptyPaymentObject = {
   userId: '',
   name: '',
   accountNumber: '',
-  type: '',
+  type: 'Visa',
   cvv: '',
   expDate: '',
   isDeleted: false,
