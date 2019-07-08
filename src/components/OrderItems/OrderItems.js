@@ -10,7 +10,7 @@ class OrderItems extends React.Component
 
         return (
             <div className="orderCard card2 col-6">
-                <h2>Details for Order #{order.id}</h2>
+                <h2 className="order-details-header">Details for Order #{order.id}</h2>
                 <h3>Ordered on {utility.dateFormat(order.purchaseDate)}</h3>
 
                 <div className="billing-ordersummary">
@@ -28,16 +28,11 @@ class OrderItems extends React.Component
                 <h6>Item(s) Subtotal: ${order.subtotal}</h6>
                 <h6>Shipping & Handling: $0.00</h6>
                 <h6>Sales Tax: ${order.tax}</h6>
-                <h6>Grand Total: ${order.total}</h6>
+                <h6 className="grand-total">Grand Total: ${order.total}</h6>
                 <Button color="primary">More Details</Button>
                 </div>
 
                 </div>
-                {/* <h5>Payment Method: VISA</h5> */}
-
-                {/* {order.orderItems.map((orderitem, i) => (
-                    <h3 key={i}>{orderitem.name}</h3>
-                ))} */}
             </div>
         );
     }

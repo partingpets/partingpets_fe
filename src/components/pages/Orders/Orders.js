@@ -12,7 +12,10 @@ class Orders extends React.Component {
       const userid = this.props.userObject.id;
       orderRequests.getOrderById(userid)
       .then((result) => {
-          this.setState({ orders: result });
+          const sortedArray = [...result].sort(function (a, b) {
+              return b.id - a.id;
+          });
+          this.setState({ orders: sortedArray });
       });
   }
 
