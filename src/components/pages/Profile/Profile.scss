@@ -1,5 +1,6 @@
 .Profile {
   margin-top: 150px;
+  font-family: "Rubik", sans-serif;
 }
 
 .profileCardImg {
@@ -9,19 +10,38 @@
 
 .usr-btn {
   margin: 0 5px;
+  color: rgb(21, 21, 58);
 }
 
-.usr-btn-edit-icon {
-  color: greenyellow;
-}
+// .usr-btn-edit-icon {
+//   background-color: rgb(21, 21, 58);
+// }
 
-.usr-btn-delete-icon {
-  color: tomato;
-}
+// .usr-btn-delete-icon {
+//   background-color: rgb(21, 21, 58);
+// }
 
 .card-header {
   font-size: 1.25rem;
   font-weight: bold;
   color: white;
   background-color: rgb(21, 21, 58);
+}
+
+.addPetButton {
+  border-radius: 5px;
+  background-color: rgb(21, 21, 58);
+  color: white;
+  margin-right: 90%;
+  margin-bottom: 2%;
+  margin-top: 10px;
+  width: 30%;
+  height: 40px;
+  font-size: 7pt;
+  padding: 4px;
+  text-align: center;
+}
+
+.add-pet-icon {
+  margin-right: 5%;
 }

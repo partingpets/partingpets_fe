@@ -22,6 +22,11 @@
   background-color: rgb(21, 21, 58);
 }
 
+.breed {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
 .pet-container {
   font-family: "Rubik", sans-serif;
   text-align: center;
@@ -36,4 +41,22 @@
 .petCardImg {
   height: 300px;
   width: 300px;
+  padding-top: 10%;
+  border-radius: 10px;
+}
+
+.pet-box {
+  display: flex;
+  flex-wrap: wrap;
+  padding-bottom: 2%;
+}
+
+.edit-pet {
+  padding-right: 42%;
+  color: rgb(21, 21, 58);
+}
+
+.delete-pet {
+  padding-left: 42%;
+  color: rgb(21, 21, 58);
 }
