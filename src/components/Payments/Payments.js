@@ -5,11 +5,13 @@ import PaymentOptions from './PaymentOptions';
 import PaymentModal from './PaymentModal';
 import {Button, Form, FormGroup, Label, Input, Row, Col} from 'reactstrap';
 
+
 class Payments extends React.Component {
 
   state = {
     calledPaymentOptionsInState: [],
     paymentModal: false,
+    selectedPaymentId: -1,
   }
 
   componentDidMount(){
@@ -39,6 +41,19 @@ class Payments extends React.Component {
     }
   };
 
+  formFieldStringState = (event) => {
+    event.preventDefault();
+    const {paymentIdCallBack} = this.props;
+    let tempPayment = this.state.selectedPaymentId;
+    tempPayment = event.target.value;
+    paymentIdCallBack(tempPayment)
+    this.setState({
+      selectedPaymentId: tempPayment,
+    });
+  };
+
+  selectedPaymentChange = event => this.formFieldStringState(event);
+
   paymentFormSubmitEvent = (payment) => {
     paymentRequests.createPaymentOption(payment).then(this.getPaymentOptions());
   }
@@ -46,13 +61,12 @@ class Payments extends React.Component {
   render(){
     const { isProfilePage } = this.props;
 
-    const { calledPaymentOptionsInState } = this.state;
+    const { calledPaymentOptionsInState, selectedPaymentId } = this.state;
 
     const paymentOptions = paymentOption => (
       <PaymentOptions 
         key={paymentOption.id}
         paymentOption={paymentOption}
-        isProfilePage={isProfilePage}
       />
     )
 
@@ -77,7 +91,8 @@ class Payments extends React.Component {
               <Col md={3}>
                 <FormGroup>
                   <Label for="paymentSelect">Select Payment Method</Label>
-                  <Input type="select" name="select" id="select">
+                  <Input onChange={this.selectedPaymentChange} type="select" name="select" id="select" value={selectedPaymentId}>
+                    <option>Your Credit Cards</option>
                     {selectorPaymentOptions}
                   </Input>
                 </FormGroup>
