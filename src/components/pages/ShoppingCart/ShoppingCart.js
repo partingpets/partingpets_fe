@@ -5,6 +5,7 @@ import {
 import cartRequests from '../../../helpers/data/cartRequests';
 import orderRequests from '../../../helpers/data/orderRequests';
 import CartItem from '../../CartItem/CartItem';
+import Payments from '../../Payments/Payments';
 import './ShoppingCart.scss';
 
 const defaultOrder = {
@@ -131,8 +132,10 @@ class ShoppingCart extends React.Component {
 
   render() {
     const {
-      cart, cartSubTotal, cartTotal, cartTax,
+      cart, cartSubTotal, cartTotal, cartTax, dropdownOpen
     } = this.state;
+
+    const { userObject } = this.props;
 
     const cartItemComponent = cartArr => cartArr.map((cartItem, index) => (
         <CartItem
@@ -188,6 +191,10 @@ class ShoppingCart extends React.Component {
               </Col>
             </Row>
           </div>
+          <div>
+            <Payments userId={userObject.id}/>
+          </div>
+          <hr />
           <div className="cart-checkout-btn">
             <Button color="primary" onClick={this.formSubmit}>Check Out</Button>
           </div>

@@ -3,7 +3,7 @@ import './Payments.scss';
 import paymentRequests from '../../helpers/data/paymentRequests';
 import PaymentOptions from './PaymentOptions';
 import PaymentModal from './PaymentModal';
-import {Button} from 'reactstrap';
+import {Button, Form, FormGroup, Label, Input} from 'reactstrap';
 
 class Payments extends React.Component {
 
@@ -52,11 +52,36 @@ class Payments extends React.Component {
       />
     )
 
+    const paymentSelector = paymentOption => (
+      <option key={paymentOption.id} paymentOption={paymentOption}>{paymentOption.name}</option>
+    )
+
     const listedPaymentOptions = calledPaymentOptionsInState.map(paymentOptions)
+
+    const selectorPaymentOptions = calledPaymentOptionsInState.map(paymentSelector)
+
+    const listOrSelector = () => {
+      if (isProfilePage) {
+        return( 
+          <div>
+            {listedPaymentOptions}
+          </div>
+        )
+      } else return(
+          <Form>
+            <FormGroup>
+              <Label for="paymentSelect">Select Payment Method</Label>
+              <Input type="select" name="select" id="select">
+                {selectorPaymentOptions}
+              </Input>
+            </FormGroup>
+          </Form>
+        )
+    }
 
     return(
       <div>
-        {listedPaymentOptions}
+        {listOrSelector()}
         <PaymentModal 
           isOpen={this.state.paymentModal}
           toggle={this.toggle}
