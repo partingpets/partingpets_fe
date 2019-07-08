@@ -225,7 +225,7 @@ class Profile extends React.Component {
 
                   <button className="btn addPetButton" onClick={this.toggle}>
                     <span className="spot">
-                      <span className="add-pet-icon lnr lnr-file-add" />
+                      <span className="add-pet-icon lnr lnr-plus-circle" />
                       ADD PET
                     </span>
                   </button>

@@ -90,8 +90,9 @@ class Payments extends React.Component {
           isOpen={this.state.paymentModal}
           toggle={this.toggle}
         />
-        <Button outline size="sm" onClick={this.toggle}>
-          Add a new payment option
+        <Button outline size="sm" className="addPaymentButton" onClick={this.toggle}>
+          <i className="add-payment-icon lnr lnr-plus-circle" />
+          Add a new payment method
         </Button>
       </div>
     );
