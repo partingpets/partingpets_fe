@@ -12,7 +12,6 @@ import {
   ModalHeader,
   Row,
 } from 'reactstrap';
-import paymentRequests from '../../helpers/data/paymentRequests';
 
 const emptyPaymentObject = {
   userId: '',
@@ -34,6 +33,22 @@ class PaymentModal extends React.Component {
     this.setState({
       newPayment: emptyPaymentObject,
     });
+  }
+
+  formSubmit = (e) => {
+    e.preventDefault();
+    const { onSubmit, userId } = this.props;
+    const paymentSubmit = { ...this.state.newPayment };
+    paymentSubmit.userId = userId;
+    if (paymentSubmit.name && 
+      paymentSubmit.accountNumber &&
+      paymentSubmit.cvv &&
+      paymentSubmit.type &&
+      paymentSubmit.expDate) {
+        onSubmit(paymentSubmit);
+      } else {
+        alert('You Fucked Up.  Fill out the whole form, d-bag.')
+      }
   }
 
   formFieldStringState = (name, event) => {
@@ -125,7 +140,7 @@ class PaymentModal extends React.Component {
                     onChange={this.typeChange}
                     value={newPayment.type}
                   >
-                    <option>Visa</option>
+                    <option /*value="Visa"*/>Visa</option>
                     <option>MasterCard</option>
                     <option>American Express</option>
                     <option>Discover</option>

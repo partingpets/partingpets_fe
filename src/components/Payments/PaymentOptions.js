@@ -6,7 +6,7 @@ import {Button} from 'reactstrap';
 class PaymentOptions extends React.Component {
 
   render(){
-    const { isProfilePage, paymentOption } = this.props;
+    const { paymentOption } = this.props;
 
     const hideAccountNumber = (aNumber) => {
       const stringNumber = aNumber.toString();

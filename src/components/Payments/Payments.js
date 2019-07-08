@@ -39,6 +39,10 @@ class Payments extends React.Component {
     }
   };
 
+  paymentFormSubmitEvent = (payment) => {
+    paymentRequests.createPaymentOption(payment).then(this.getPaymentOptions());
+  }
+
   render(){
     const { isProfilePage } = this.props;
 
@@ -53,7 +57,7 @@ class Payments extends React.Component {
     )
 
     const paymentSelector = paymentOption => (
-      <option key={paymentOption.id} paymentoption={paymentOption}>{paymentOption.name}</option>
+      <option key={paymentOption.id} paymentoption={paymentOption} value={paymentOption.id}>{paymentOption.name}</option>
     )
 
     const listedPaymentOptions = calledPaymentOptionsInState.map(paymentOptions)
@@ -89,6 +93,8 @@ class Payments extends React.Component {
         <PaymentModal 
           isOpen={this.state.paymentModal}
           toggle={this.toggle}
+          onSubmit={this.paymentFormSubmitEvent}
+          userId={this.props.userId}
         />
         <Button outline size="sm" className="addPaymentButton" onClick={this.toggle}>
           <i className="add-payment-icon lnr lnr-plus-circle" />

@@ -131,7 +131,7 @@ class ShoppingCart extends React.Component {
 
   render() {
     const {
-      cart, cartSubTotal, cartTotal, cartTax, dropdownOpen
+      cart, cartSubTotal, cartTotal, cartTax,
     } = this.state;
 
     const { userObject } = this.props;
