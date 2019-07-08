@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import partnerShape from '../../helpers/partnerProps/partnerShape';
+// import partnerShape from '../../helpers/partnerProps/partnerShape';
 import './ManagePartnersTable.scss';
 
 class ManagePartnersTable extends React.Component {

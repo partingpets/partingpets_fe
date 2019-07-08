@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Card, CardText, CardBody, Button, CardHeader,
+  Card, CardText, CardBody, CardHeader,
 } from 'reactstrap';
 import RegisterForm from '../../RegisterForm/RegisterForm';
 import authRequests from '../../../helpers/data/authRequests';
@@ -57,7 +57,7 @@ class Profile extends React.Component {
   };
 
   getPartedPets() {
-    const userId = this.props.userObject.id
+    const userId = this.props.userObject.id;
     petRequests.getPetsByUserId(userId).then((partedPets) => {
       this.setState({
         usersPets: partedPets,
@@ -169,7 +169,7 @@ class Profile extends React.Component {
     const pets = usersPets.map(singlePetCard);
 
     return (
-      <div className="Profile">
+      <div className="Profile animated bounceInLeft">
         <RegisterForm
           showModal={showModal}
           onSubmit={this.userFormSubmitEvent}
@@ -195,17 +195,29 @@ class Profile extends React.Component {
                     {userObject.city} {userObject.state}, {userObject.zipcode}
                   </CardText>
                   {/* <div className="row justify-content-around"> */}
-                  <Button className="usr-btn" id={userObject.id} onClick={this.editUserItem}>
-                    <i className="lnr lnr-pencil usr-btn-edit-icon" aria-hidden="true" />
-                  </Button>
-                  <Button className="usr-btn" onClick={this.deleteUser}>
-                    <i className="lnr lnr-trash  usr-btn-delete-icon" aria-hidden="true" />
-                  </Button>
+                  <i
+                    className="usr-btn lnr lnr-pencil usr-btn-edit-icon"
+                    aria-hidden="true"
+                    id={userObject.id}
+                    onClick={this.editUserItem}
+                  />
+
+                  <i
+                    className="usr-btn lnr lnr-trash usr-btn-delete-icon"
+                    aria-hidden="true"
+                    onClick={this.deleteUser}
+                  />
+
                   {/* </div> */}
+
                   <hr />
-                  <Button className="btn addPetButton" onClick={this.toggle}>
-                    Add Pet
-                  </Button>
+
+                  <button className="btn addPetButton" onClick={this.toggle}>
+                    <span className="spot">
+                      <span className="add-pet-icon lnr lnr-file-add" />
+                      ADD PET
+                    </span>
+                  </button>
                 </CardBody>
               </Card>
             </div>
