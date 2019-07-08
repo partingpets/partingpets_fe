@@ -10,6 +10,7 @@ import Home from '../components/pages/Home/Home';
 import Admin from '../components/pages/Admin/Admin';
 import PartnersAdmin from '../components/pages/PartnersAdmin/PartnersAdmin';
 import UsersAdmin from '../components/pages/UsersAdmin/UsersAdmin';
+import ItemsAdmin from '../components/pages/ItemsAdmin/ItemsAdmin';
 import Products from '../components/pages/Products/Products';
 import ItemDetail from '../components/pages/ItemDetail/ItemDetail';
 import Profile from '../components/pages/Profile/Profile';
@@ -151,6 +152,11 @@ class App extends React.Component {
                   <PrivateRoute
                     path="/usersadmin"
                     component={props => <UsersAdmin userObject={userObject} {...props} />}
+                    authed={authed}
+                  />
+                  <PrivateRoute
+                    path="/itemsadmin"
+                    component={props => <ItemsAdmin userObject={userObject} {...props} />}
                     authed={authed}
                   />
                   <PrivateRoute
