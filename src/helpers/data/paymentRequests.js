@@ -16,7 +16,7 @@ const createPaymentOption = newPaymentOption => axios.post(`${petsApiBaseUrl}/ap
 
 const editPaymentOption = (paymentId, paymentObject) => axios.put(`${petsApiBaseUrl}/api/paymentTypes/${paymentId}`, paymentObject);
 
-const deletePaymentOption = paymentId => axios.put(`${petsApiBaseUrl}/api/paymentTypes/${paymentId}`);
+const deletePaymentOption = paymentId => axios.put(`${petsApiBaseUrl}/api/paymentTypes/delete-pt/${paymentId}`);
 
 export default {
   getPaymentOptions,

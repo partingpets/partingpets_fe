@@ -58,6 +58,15 @@ class Payments extends React.Component {
     paymentRequests.createPaymentOption(payment).then(this.getPaymentOptions());
   }
 
+  deletePayment = (paymentId) => {
+    paymentRequests
+      .deletePaymentOption(paymentId)
+      .then(() => {
+        this.getPaymentOptions();
+      })
+      .catch(error => console.error('error with deleting this payment option', error));
+  }
+
   render(){
     const { isProfilePage } = this.props;
 
@@ -67,6 +76,7 @@ class Payments extends React.Component {
       <PaymentOptions 
         key={paymentOption.id}
         paymentOption={paymentOption}
+        deleteThisPayment={this.deletePayment}
       />
     )
 
@@ -92,7 +102,7 @@ class Payments extends React.Component {
                 <FormGroup>
                   <Label for="paymentSelect">Select Payment Method</Label>
                   <Input onChange={this.selectedPaymentChange} type="select" name="select" id="select" value={selectedPaymentId}>
-                    <option>Your Credit Cards</option>
+                    <option>Payment Methods</option>
                     {selectorPaymentOptions}
                   </Input>
                 </FormGroup>

@@ -5,6 +5,12 @@ import {Button} from 'reactstrap';
 
 class PaymentOptions extends React.Component {
 
+  deleteEvent = (e) => {
+    e.preventDefault();
+    const { deleteThisPayment, paymentOption } = this.props;
+    deleteThisPayment(paymentOption.id)
+  }
+
   render(){
     const { paymentOption } = this.props;
 
@@ -26,7 +32,7 @@ class PaymentOptions extends React.Component {
                 <i className="lnr lnr-pencil pay-btn-edit-icon" aria-hidden="true" />
               </Button>
               <Button outline size="sm" className="pay-btn">
-                <i className="lnr lnr-trash  pay-btn-delete-icon" aria-hidden="true" />
+                <i className="lnr lnr-trash  pay-btn-delete-icon" aria-hidden="true" onClick={this.deleteEvent} />
               </Button>
             </div>
           </div>
