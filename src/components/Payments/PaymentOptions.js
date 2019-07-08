@@ -32,7 +32,7 @@ class PaymentOptions extends React.Component {
           </div>
         </div>
         <div>
-          {hideAccountNumber(paymentOption.accountNumber)} <small> - expires</small> {moment(paymentOption.expDate).format("MM/YY")}
+          {hideAccountNumber(paymentOption.accountNumber)} <small className="expires">expires</small> {moment(paymentOption.expDate).format("MM/YY")}
         </div>
         <br />
       </div>
