@@ -20,7 +20,7 @@ const emptyPaymentObject = {
   type: '',
   cvv: '',
   expDate: '',
-  isDeleted: '',
+  isDeleted: false,
 };
 
 class PaymentModal extends React.Component {
@@ -46,6 +46,7 @@ class PaymentModal extends React.Component {
       paymentSubmit.type &&
       paymentSubmit.expDate) {
         onSubmit(paymentSubmit);
+        this.toggle();
       } else {
         alert('You Fucked Up.  Fill out the whole form, d-bag.')
       }
@@ -140,7 +141,7 @@ class PaymentModal extends React.Component {
                     onChange={this.typeChange}
                     value={newPayment.type}
                   >
-                    <option /*value="Visa"*/>Visa</option>
+                    <option>Visa</option>
                     <option>MasterCard</option>
                     <option>American Express</option>
                     <option>Discover</option>
