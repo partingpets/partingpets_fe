@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Card, CardImg, CardText, CardBody, Button, CardHeader,
+  Card, CardImg, CardText, CardBody, CardHeader,
 } from 'reactstrap';
 import './Pets.scss';
 import utility from '../../helpers/utils/utility';
