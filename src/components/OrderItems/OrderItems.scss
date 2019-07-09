@@ -1,28 +1,48 @@
 .orderCard {
-    border: 2px solid;
-    border-radius: 5px;
-    margin: 1%;
-    padding: 1%;
-    background-color:  rgba(168, 202, 241, 0.75);
+  border: 2px solid;
+  border-radius: 10px;
+  margin: 1%;
+  padding: 1%;
+  background-color: white;
+  font-family: "Rubik", sans-serif;
 }
 
 .billing-address {
-    float: left;
+  float: left;
+  padding-top: 1%;
+  margin-top: 1%;
+  padding: 1%;
 }
 
 .order-summary {
-    float:right;
+  float: right;
+  padding: 2%;
+  margin-left: 15%;
+}
+
+.order-header {
+  background-color: rgb(21, 21, 58);
+  color: white;
+  padding: 1%;
+  margin: 1%;
 }
 
 h4 {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .payment-method {
-    margin-top: 30px;
-    font-weight: bold;
+  margin-top: 30px;
+  font-weight: bold;
 }
 
-.grand-total, .order-details-header {
-    font-weight: bold;
+.grand-total,
+.order-details-header {
+  font-weight: bold;
+}
+
+.petsOrderLogo {
+  float: right;
+  width: 10%;
+  height: 10%;
 }

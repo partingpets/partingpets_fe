@@ -4,21 +4,18 @@ import OrderItems from '../../OrderItems/OrderItems';
 import './Orders.scss';
 
 class Orders extends React.Component {
-    orderseMounted = false;
+  orderseMounted = false;
 
-   state = { 
+  state = {
     orders: [],
-   };
-   
+  };
+
   getOrderById() {
-      const userid = this.props.userObject.id;
-      orderRequests.getOrderById(userid)
-      .then((result) => {
-          const sortedArray = [...result].sort(function (a, b) {
-              return b.id - a.id;
-          });
-          this.setState({ orders: sortedArray });
-      });
+    const userid = this.props.userObject.id;
+    orderRequests.getOrderById(userid).then((result) => {
+      const sortedArray = [...result].sort((a, b) => b.id - a.id);
+      this.setState({ orders: sortedArray });
+    });
   }
 
   componentDidMount() {
@@ -35,22 +32,15 @@ class Orders extends React.Component {
   render() {
     const { orders } = this.state;
 
-     const printOrders = orders.map(order => (
-      
-         <OrderItems
-         key={order.id}
-         order={order}
-         />
-   ));
+    const printOrders = orders.map(order => <OrderItems key={order.id} order={order} />);
 
-      return (
-        <div className="orders-container">
-            <h1 className="orders-page-title">Your Orders</h1>
-            <h3 className="row justify-content-center">{printOrders}</h3>
-        </div>
-      );
-    }
-   
+    return (
+      <div className="orders-container animated bounceInLeft">
+        <h1 className="orders-page-title">Your Parting Pets Orders</h1>
+        <h3 className="row justify-content-center">{printOrders}</h3>
+      </div>
+    );
+  }
 }
 
 export default Orders;
