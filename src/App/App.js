@@ -14,6 +14,7 @@ import ItemsAdmin from '../components/pages/ItemsAdmin/ItemsAdmin';
 import Products from '../components/pages/Products/Products';
 import ItemDetail from '../components/pages/ItemDetail/ItemDetail';
 import Profile from '../components/pages/Profile/Profile';
+import Orders from '../components/pages/Orders/Orders';
 import Partners from '../components/pages/Partners/Partners';
 import ShoppingCart from '../components/pages/ShoppingCart/ShoppingCart';
 import cartRequests from '../helpers/data/cartRequests';
@@ -125,6 +126,11 @@ class App extends React.Component {
                   <PrivateRoute
                     path="/profile"
                     component={props => <Profile userObject={userObject} updateUser={this.getCurrentUser} {...props} />}
+                    authed={authed}
+                  />
+                  <PrivateRoute
+                    path="/orders"
+                    component={props => <Orders userObject={userObject} updateUser={this.getCurrentUser} {...props} />}
                     authed={authed}
                   />
                   <PrivateRoute
