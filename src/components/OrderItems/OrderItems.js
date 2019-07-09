@@ -5,6 +5,13 @@ import utility from '../../helpers/utils/utility';
 
 class OrderItems extends React.Component
 {
+
+    orderClick = () => {
+        const { order, onSelect } = this.props;
+        onSelect(order.id);
+        console.log(order.id);
+    }
+
     render() {
         const { order } = this.props;
 
@@ -29,7 +36,7 @@ class OrderItems extends React.Component
                 <h6>Shipping & Handling: $0.00</h6>
                 <h6>Sales Tax: ${order.tax}</h6>
                 <h6 className="grand-total">Grand Total: ${order.total}</h6>
-                <Button color="primary">More Details</Button>
+                <Button color="primary" onClick={this.orderClick}>More Details</Button>
                 </div>
 
                 </div>
