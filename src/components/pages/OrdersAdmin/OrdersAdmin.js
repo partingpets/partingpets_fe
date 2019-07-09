@@ -4,7 +4,7 @@ import ManageOrdersTable from '../../ManageOrdersTable/ManageOrdersTable';
 import './OrdersAdmin.scss';
 
 class OrdersAdmin extends React.Component {
-  partnerMounted = false;
+  ordersMounted = false;
 
   changeView = (e) => {
     const view = e.currentTarget.id;
@@ -18,7 +18,7 @@ class OrdersAdmin extends React.Component {
     ManageOrdersTable: [],
   };
 
-  // Get All Products //
+  // Get All Orders //
 
   getAllOrders = () => {
     // const { userObject } = this.props;
@@ -33,14 +33,14 @@ class OrdersAdmin extends React.Component {
   };
 
   componentDidMount() {
-    this.partnerMounted = !!this.props.userObject.id;
-    if (this.partnerMounted) {
+    this.orderMounted = !!this.props.userObject.id;
+    if (this.orderMounted) {
       this.getAllOrders();
     }
   }
 
   componentWillUnmount() {
-    this.partnerMounted = false;
+    this.orderMounted = false;
   }
 
   render() {
