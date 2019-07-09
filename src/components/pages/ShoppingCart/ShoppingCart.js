@@ -105,7 +105,7 @@ class ShoppingCart extends React.Component {
       tempObject.quantity = cartOrder.quantity;
       myNewOrder.orderLines.push(tempObject);
     });
-    if (this.state.selectedPaymentId !== -1) {
+    if (this.state.selectedPaymentId !== -1 ) {
       orderRequests.createOrder(myNewOrder).then((result) => {
         if (result.status === 201) {
           alert("We're sorry for your loss, but congratulations on your purchase!");

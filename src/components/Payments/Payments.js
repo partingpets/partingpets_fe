@@ -47,7 +47,7 @@ class Payments extends React.Component {
     event.preventDefault();
     const {paymentIdCallBack} = this.props;
     let tempPayment = this.state.selectedPaymentId;
-    tempPayment = event.target.value;
+    tempPayment = event.target.value === 'Payment Methods' ? -1 : event.target.value;
     paymentIdCallBack(tempPayment)
     this.setState({
       selectedPaymentId: tempPayment,
