@@ -12,6 +12,8 @@ const getPaymentOptions = uid => new Promise((resolve, reject) => {
     .catch(error => reject(error));
 });
 
+const getSinglePaymentOption = paymentId => axios.get(`${petsApiBaseUrl}/api/paymentTypes/${paymentId}`);
+
 const createPaymentOption = newPaymentOption => axios.post(`${petsApiBaseUrl}/api/paymentTypes`, newPaymentOption);
 
 const editPaymentOption = (paymentId, paymentObject) => axios.put(`${petsApiBaseUrl}/api/paymentTypes/${paymentId}`, paymentObject);
@@ -20,6 +22,7 @@ const deletePaymentOption = paymentId => axios.put(`${petsApiBaseUrl}/api/paymen
 
 export default {
   getPaymentOptions,
+  getSinglePaymentOption,
   createPaymentOption,
   editPaymentOption,
   deletePaymentOption,

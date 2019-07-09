@@ -11,6 +11,13 @@ class PaymentOptions extends React.Component {
     deleteThisPayment(paymentOption.id)
   }
 
+  editEvent = (e) => {
+    e.preventDefault();
+    const { passPaymentToEdit, paymentOption, toggle } = this.props;
+    passPaymentToEdit(paymentOption.id);
+    toggle();
+  }
+
   render(){
     const { paymentOption } = this.props;
 
@@ -29,7 +36,7 @@ class PaymentOptions extends React.Component {
             </div>
             <div className="col-sm-6">
               <Button outline size="sm" className="pay-btn" id={paymentOption.id}>
-                <i className="lnr lnr-pencil pay-btn-edit-icon" aria-hidden="true" />
+                <i className="lnr lnr-pencil pay-btn-edit-icon" aria-hidden="true" onClick={this.editEvent} />
               </Button>
               <Button outline size="sm" className="pay-btn">
                 <i className="lnr lnr-trash  pay-btn-delete-icon" aria-hidden="true" onClick={this.deleteEvent} />

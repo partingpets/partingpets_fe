@@ -12,6 +12,7 @@ import {
   ModalHeader,
   Row,
 } from 'reactstrap';
+import paymentRequests from '../../helpers/data/paymentRequests';
 
 const emptyPaymentObject = {
   userId: '',
@@ -50,6 +51,18 @@ class PaymentModal extends React.Component {
       } else {
         alert('You Fucked Up.  Fill out the whole form, d-bag.')
       }
+  }
+
+  componentDidUpdate(prevProps) {
+    const { isEditingPayment, paymentIdToEdit } = this.props;
+    if (prevProps !== this.props && isEditingPayment) {
+      paymentRequests
+        .getSinglePaymentOption(paymentIdToEdit)
+        .then((thatPaymentYouJustGot) => {
+          this.setState({ newPayment: thatPaymentYouJustGot.data });
+        })
+        .catch(error => console.error('error with getting the payment you want to edit', error));
+    }
   }
 
   formFieldStringState = (name, event) => {

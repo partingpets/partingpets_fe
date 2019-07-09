@@ -12,6 +12,8 @@ class Payments extends React.Component {
     calledPaymentOptionsInState: [],
     paymentModal: false,
     selectedPaymentId: -1,
+    isEditingPayment: false,
+    paymentIdToEdit: -1,
   }
 
   componentDidMount(){
@@ -55,8 +57,18 @@ class Payments extends React.Component {
   selectedPaymentChange = event => this.formFieldStringState(event);
 
   paymentFormSubmitEvent = (payment) => {
-    paymentRequests.createPaymentOption(payment).then(this.getPaymentOptions());
-  }
+    const { isEditingPayment, paymentIdToEdit } = this.state;
+    if (isEditingPayment){
+      paymentRequests
+        .editPaymentOption(paymentIdToEdit, payment)
+        .then(this.getPaymentOptions())
+        .then(this.setState({ isEditingPayment: false, paymentIdToEdit: -1 }))
+    } else {
+      paymentRequests.createPaymentOption(payment).then(this.getPaymentOptions());
+    }
+  };
+
+  passPaymentToEdit = paymentId => this.setState({ isEditingPayment: true, paymentIdToEdit: paymentId });
 
   deletePayment = (paymentId) => {
     paymentRequests
@@ -70,13 +82,20 @@ class Payments extends React.Component {
   render(){
     const { isProfilePage } = this.props;
 
-    const { calledPaymentOptionsInState, selectedPaymentId } = this.state;
+    const { 
+      calledPaymentOptionsInState, 
+      selectedPaymentId, 
+      isEditingPayment, 
+      paymentIdToEdit,
+    } = this.state;
 
     const paymentOptions = paymentOption => (
       <PaymentOptions 
         key={paymentOption.id}
         paymentOption={paymentOption}
         deleteThisPayment={this.deletePayment}
+        passPaymentToEdit={this.passPaymentToEdit}
+        toggle={this.toggle}
       />
     )
 
@@ -120,6 +139,8 @@ class Payments extends React.Component {
           toggle={this.toggle}
           onSubmit={this.paymentFormSubmitEvent}
           userId={this.props.userId}
+          isEditingPayment={isEditingPayment}
+          paymentIdToEdit={paymentIdToEdit}
         />
         <Button outline size="sm" className="addPaymentButton" onClick={this.toggle}>
           <i className="add-payment-icon lnr lnr-plus-circle" />
