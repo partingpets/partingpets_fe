@@ -50,7 +50,7 @@ class ManageUsersTable extends React.Component {
         <td className="icons">
           <i className="edit-user lnr lnr-pencil pencil" id={user.id} onClick={this.onEditForm} />
         </td>
-        <td>
+        <td className="icons">
           <i className="delete-user lnr lnr-trash trash" id={user.id} onClick={this.deleteEvent} />
         </td>
       </tr>
