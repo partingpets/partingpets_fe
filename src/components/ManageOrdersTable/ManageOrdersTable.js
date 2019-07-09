@@ -3,10 +3,9 @@ import React from 'react';
 import './ManageOrdersTable.scss';
 
 class ManageOrdersTable extends React.Component {
-  state = { order };
+  state = {};
 
   static propTypes = {
-    order,
     index: PropTypes.number,
   };
 

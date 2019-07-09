@@ -39,8 +39,6 @@ const deletePartner = partnerId => new Promise((resolve, reject) => {
     .catch(error => reject(error));
 });
 
-// const deletePartner = partnerId => axios.delete(`${partnersApiBaseUrl}/api/partners/${partnerId}`);
-
 const createPartner = newPartner => new Promise((resolve, reject) => {
   axios
     .post(`${partnersApiBaseUrl}/api/partners/`, newPartner)
