@@ -37,38 +37,8 @@ class Pets extends React.Component {
     };
 
     return (
-    // <Card className="pet-container">
-    //   {/* <CardImg className="profileCardImg" top width="100%" src={fbUserObject.photoURL} alt="Card image cap" /> */}
-    //   <CardHeader className="pet-name">{Pet.name}</CardHeader>
-    //   <div className="col-4">
-    //     <CardImg
-    //       className="petCardImg"
-    //       top
-    //       width="100%"
-    //       src="https://i.pinimg.com/736x/b1/d8/fc/b1d8fc33b1f9776195ad201a863bae0f.jpg"
-    //       alt="Card image cap"
-    //     />
-    //   </div>
-
-    //   <div className="pet-card col-12">
-    //     <CardBody>
-    //       <CardText className="breed">{Pet.breed}</CardText>
-    //       <CardText className="dates">
-    //         Born: {Pet.dateOfBirth}
-    //         <br />
-    //         Died: {Pet.dateOfDeath}
-    //       </CardText>
-    //       <div className="burial-data">{burialData()}</div>
-    //       <Button onClick={this.editEvent}>Edit</Button>
-    //       <Button onClick={this.deleteEvent}>Delete</Button>
-    //     </CardBody>
-    //   </div>
-    // </Card>
-
-      // duplicate //
       <div className="pet-box">
         <Card className="pet-container">
-          {/* <CardImg className="profileCardImg" top width="100%" src={fbUserObject.photoURL} alt="Card image cap" /> */}
           <CardHeader className="pet-name">{Pet.name}</CardHeader>
           <div className="col-4">
             <CardImg
