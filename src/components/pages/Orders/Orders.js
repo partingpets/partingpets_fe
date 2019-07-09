@@ -4,6 +4,8 @@ import OrderItems from '../../OrderItems/OrderItems';
 import './Orders.scss';
 
 class Orders extends React.Component {
+    orderseMounted = false;
+
    state = { 
     orders: [],
    };
@@ -20,7 +22,14 @@ class Orders extends React.Component {
   }
 
   componentDidMount() {
+    this.orderseMounted = !!this.props.userObject.id;
+    if (this.orderseMounted) {
       this.getOrderById();
+    }
+  }
+
+  componentWillUnmount() {
+    this.orderseMounted = false;
   }
 
   render() {
