@@ -1,5 +1,5 @@
 .login {
-  margin-top: 8%;
+  margin-top: 1%;
 }
 
 body {
@@ -13,4 +13,9 @@ body {
   background-position: center;
   background-size: cover;
   min-height: 100%;
+}
+
+.homeLogo {
+  margin-left: 35%;
+  filter: drop-shadow(0 0 0.75rem blue);
 }
