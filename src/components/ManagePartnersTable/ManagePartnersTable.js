@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-// import partnerShape from '../../helpers/partnerProps/partnerShape';
 import './ManagePartnersTable.scss';
 
 class ManagePartnersTable extends React.Component {
@@ -46,10 +45,10 @@ class ManagePartnersTable extends React.Component {
         <td className="city">{partner.city}</td>
         <td className="state">{partner.state}</td>
         <td className="zip-code">{partner.zipcode}</td>
-        <td>
+        <td className="icons">
           <i className="edit-partner lnr lnr-pencil pencil" id={partner.id} onClick={this.onEditForm} />
         </td>
-        <td>
+        <td className="icons">
           <i className="delete-partner lnr lnr-trash trash" id={partner.id} onClick={this.deleteEvent} />
         </td>
       </tr>

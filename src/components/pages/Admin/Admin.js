@@ -1,8 +1,4 @@
 import React from 'react';
-// import { NavLink as RRNavLink } from 'react-router-dom';
-// import {
-//   UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem,
-// } from 'reactstrap';
 
 import partners from '../../../images/handshake.png';
 import users from '../../../images/users.png';
@@ -21,19 +17,6 @@ class Admin extends React.Component {
 
   render() {
     return (
-    // <div className="admin-container">
-    //   <h1>Admin</h1>
-    //   <UncontrolledDropdown>
-    //     <DropdownToggle>Manage</DropdownToggle>
-    //     <DropdownMenu>
-    //       <DropdownItem tag={RRNavLink} to="/partnersadmin">
-    //         Partners
-    //       </DropdownItem>
-    //       <DropdownItem>Users</DropdownItem>
-    //     </DropdownMenu>
-    //   </UncontrolledDropdown>
-    // </div>
-
       <div className="admin-home mx-auto animated bounceInLeft">
         <h2>Welcome Parting Pets Admin. Manage Your Users, Partners, Items & Invoices</h2>
         <div className="deck card-deck mt-5">
@@ -55,7 +38,7 @@ class Admin extends React.Component {
               <p className="card-text">Manage Users</p>
             </div>
           </div>
-          <div className="card admin-card border-dark" id="invoicesadmin" onClick={this.changeView}>
+          <div className="card admin-card border-dark" id="ordersadmin" onClick={this.changeView}>
             <div className="card-body text-center">
               <h4 className="card-title">
                 <img src={invoices} className="admin-icon" alt="invoices" />

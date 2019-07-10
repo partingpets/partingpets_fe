@@ -39,16 +39,16 @@ class PartnerItemTable extends React.Component {
         <th className="header" scope="row">
           {rowNumber}
         </th>
-        <td>
+        <td className="product-image">
           <img className="partner-item-img" src={product.imageUrl} alt="product" />
         </td>
         <td className="name">{product.name}</td>
         <td className="description">{product.description}</td>
         <td className="unit-price">{product.unitPrice}</td>
-        <td>
+        <td className="icons">
           <i className="lnr lnr-pencil pencil" id={product.id} onClick={this.onEditForm} />
         </td>
-        <td>
+        <td className="icons">
           <i className="lnr lnr-trash trash" id={product.id} onClick={this.deleteEvent} />
         </td>
       </tr>
