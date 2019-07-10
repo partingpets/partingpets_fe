@@ -1,5 +1,5 @@
 import React from 'react';
-import { GoogleLoginButton, createButton } from 'react-social-login-buttons';
+import { createButton } from 'react-social-login-buttons';
 import authRequests from '../../../helpers/data/authRequests';
 import './Auth.scss';
 

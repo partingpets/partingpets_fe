@@ -1,5 +1,16 @@
 #homePage {
-background-image: url("./images/parting_pets_bkg.png");
-background-attachment: fixed;
-background-size: 105%;
+  background-image: url("./images/parting_pets_bkg.png");
+  background-attachment: fixed;
+  background-size: 105%;
+}
+
+.home-info {
+  margin-top: 10%;
+  margin-left: 37%;
+  font-family: "Rubik", sans-serif;
+}
+
+.card-home {
+  width: 80%;
+  margin: 0 auto;
 }
