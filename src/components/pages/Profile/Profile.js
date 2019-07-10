@@ -7,6 +7,7 @@ import authRequests from '../../../helpers/data/authRequests';
 import userRequests from '../../../helpers/data/userRequests';
 import petRequests from '../../../helpers/data/petRequests';
 import partnerRequests from '../../../helpers/data/partnerRequests';
+import Payments from '../../Payments/Payments';
 import Pets from '../../Pets/Pets';
 import PetForm from '../../PetForm/PetForm';
 import './Profile.scss';
@@ -24,6 +25,7 @@ class Profile extends React.Component {
     petModal: false,
     isEditingPet: false,
     petIdToEdit: '-1',
+    isProfilePage: true,
   };
 
   componentDidMount() {
@@ -154,7 +156,14 @@ class Profile extends React.Component {
   render() {
     const { userObject } = this.props;
     const {
-      showModal, fbUserImage, usersPets, userToEdit, isEditing, isEditingPet, petIdToEdit,
+      showModal, 
+      fbUserImage, 
+      usersPets, 
+      userToEdit, 
+      isEditing, 
+      isEditingPet, 
+      petIdToEdit,
+      isProfilePage,
     } = this.state;
     const singlePetCard = usersPet => (
       <Pets
@@ -211,10 +220,12 @@ class Profile extends React.Component {
                   {/* </div> */}
 
                   <hr />
+                  <Payments isProfilePage={isProfilePage} userId={userObject.id}/>
+                  <hr />
 
                   <button className="btn addPetButton" onClick={this.toggle}>
                     <span className="spot">
-                      <span className="add-pet-icon lnr lnr-file-add" />
+                      <span className="add-pet-icon lnr lnr-plus-circle" />
                       ADD PET
                     </span>
                   </button>
