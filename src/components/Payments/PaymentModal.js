@@ -55,16 +55,13 @@ class PaymentModal extends React.Component {
       }
   }
 
-  expDateFormat = (dateData) => {
-      return(utility.expDateFormat(dateData))
-  };
-
   componentDidUpdate(prevProps) {
     const { isEditingPayment, paymentIdToEdit } = this.props;
     if (prevProps !== this.props && isEditingPayment) {
       paymentRequests
         .getSinglePaymentOption(paymentIdToEdit)
         .then((thatPaymentYouJustGot) => {
+          thatPaymentYouJustGot.data.expDate = moment(thatPaymentYouJustGot.data.expDate).format("MM/YYYY")
           this.setState({ newPayment: thatPaymentYouJustGot.data });
         })
         .catch(error => console.error('error with getting the payment you want to edit', error));
