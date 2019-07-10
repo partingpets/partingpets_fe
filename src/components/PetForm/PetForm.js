@@ -75,14 +75,6 @@ class PetForm extends React.Component {
     });
   };
 
-  formFieldNumberState = (name, event) => {
-    const tempPet = { ...this.state.newPet };
-    tempPet[name] = event.target.value * 1;
-    this.setState({
-      newPet: tempPet,
-    });
-  };
-
   nameChange = event => this.formFieldStringState('name', event);
 
   breedChange = event => this.formFieldStringState('breed', event);

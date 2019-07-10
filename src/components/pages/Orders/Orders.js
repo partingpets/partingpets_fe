@@ -32,6 +32,10 @@ class Orders extends React.Component {
     this.orderseMounted = false;
   }
 
+  onSelect = (id) => {
+      this.props.history.push(`/orders/${id}`);
+  }
+
   render() {
     const { orders } = this.state;
 
@@ -40,6 +44,7 @@ class Orders extends React.Component {
          <OrderItems
          key={order.id}
          order={order}
+         onSelect={this.onSelect}
          />
    ));
 

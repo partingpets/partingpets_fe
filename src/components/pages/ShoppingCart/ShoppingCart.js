@@ -3,6 +3,7 @@ import { Container, Row, Col } from 'reactstrap';
 import cartRequests from '../../../helpers/data/cartRequests';
 import orderRequests from '../../../helpers/data/orderRequests';
 import CartItem from '../../CartItem/CartItem';
+import Payments from '../../Payments/Payments';
 import './ShoppingCart.scss';
 
 import pets from '../../AppNavbar/images/pets_small.png';
@@ -20,6 +21,7 @@ class ShoppingCart extends React.Component {
     cartTax: 0,
     cartTotal: 0,
     newOrder: defaultOrder,
+    selectedPaymentId: -1,
   };
 
   componentDidMount() {
@@ -96,24 +98,26 @@ class ShoppingCart extends React.Component {
     const tempCart = this.state.cart;
     const myNewOrder = { ...this.state.newOrder };
     myNewOrder.userId = userObject.id;
-    myNewOrder.paymentTypeId = 4;
+    myNewOrder.paymentTypeId = this.state.selectedPaymentId;
     tempCart.forEach((cartOrder) => {
       const tempObject = {};
       tempObject.productID = cartOrder.productId;
       tempObject.quantity = cartOrder.quantity;
       myNewOrder.orderLines.push(tempObject);
     });
-    orderRequests.createOrder(myNewOrder).then((result) => {
-      if (result.status === 201) {
-        alert("We're sorry for your loss, but congratulations on your purchase!");
-        this.state.cart.forEach((item) => {
-          this.deleteCartItem(item.cartId);
-        });
-      }
-    });
-    this.setState({
-      newOrder: defaultOrder,
-    });
+    if (this.state.selectedPaymentId !== -1 ) {
+      orderRequests.createOrder(myNewOrder).then((result) => {
+        if (result.status === 201) {
+          alert("We're sorry for your loss, but congratulations on your purchase!");
+          this.state.cart.forEach((item) => {
+            this.deleteCartItem(item.cartId);
+          });
+        }
+      });
+      this.setState({
+        newOrder: defaultOrder,
+      });
+    } else alert("Please select a payment method")
   };
 
   deleteCartItem = (itemId) => {
@@ -128,10 +132,16 @@ class ShoppingCart extends React.Component {
       .catch(error => console.error('There was an error deleteing the selected cart item', error));
   };
 
+  selectedPaymentId = (data) =>{
+    this.setState({ selectedPaymentId: data});
+  }
+
   render() {
     const {
       cart, cartSubTotal, cartTotal, cartTax,
     } = this.state;
+
+    const { userObject } = this.props;
 
     const cartItemComponent = cartArr => cartArr.map((cartItem, index) => (
         <CartItem
@@ -188,6 +198,10 @@ class ShoppingCart extends React.Component {
               </Col>
             </Row>
           </div>
+          <div>
+            <Payments userId={userObject.id} paymentIdCallBack={this.selectedPaymentId} />
+          </div>
+          <hr />
           <div className="checkout cart-checkout-btn2">
             <button className="cart-checkout-btn" onClick={this.formSubmit}>
               <span className="spot">
