@@ -27,7 +27,7 @@ class OrderItems extends React.Component
                 <h6>{order.firstName} {order.lastName}</h6>
                 <h6>{order.street1}</h6>
                 <h6>{order.city}, {order.state} {order.zipCode}</h6>
-                <h5 className="payment-method">Payment Method: VISA</h5>
+                <h5 className="payment-method">Payment Method: {order.payment}</h5>
                 </div>
             
                 <div className="order-summary">
