@@ -12,6 +12,8 @@ import {
   ModalHeader,
   Row,
 } from 'reactstrap';
+import moment from 'moment';
+import utility from '../../helpers/utils/utility';
 import paymentRequests from '../../helpers/data/paymentRequests';
 
 const emptyPaymentObject = {
@@ -52,6 +54,10 @@ class PaymentModal extends React.Component {
         alert('You Fucked Up.  Fill out the whole form, d-bag.')
       }
   }
+
+  expDateFormat = (dateData) => {
+      return(utility.expDateFormat(dateData))
+  };
 
   componentDidUpdate(prevProps) {
     const { isEditingPayment, paymentIdToEdit } = this.props;
@@ -172,7 +178,7 @@ class PaymentModal extends React.Component {
                     placeholder="MM/YYYY"
                     maxLength="7"
                     onChange={this.expDateChange}
-                    value={newPayment.expDate}                    
+                    value={newPayment.expDate}    
                   />
                 </FormGroup>
               </Col>

@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Card, CardText, CardBody, CardHeader,
+  Card, CardText, CardBody, CardHeader, Button,
 } from 'reactstrap';
 import RegisterForm from '../../RegisterForm/RegisterForm';
 import authRequests from '../../../helpers/data/authRequests';
@@ -204,19 +204,18 @@ class Profile extends React.Component {
                     {userObject.city} {userObject.state}, {userObject.zipcode}
                   </CardText>
                   {/* <div className="row justify-content-around"> */}
-                  <i
-                    className="usr-btn lnr lnr-pencil usr-btn-edit-icon"
-                    aria-hidden="true"
-                    id={userObject.id}
-                    onClick={this.editUserItem}
-                  />
-
-                  <i
-                    className="usr-btn lnr lnr-trash usr-btn-delete-icon"
-                    aria-hidden="true"
-                    onClick={this.deleteUser}
-                  />
-
+                  <Button outline size="sm" className="usr-btn" id={userObject.id} onClick={this.editUserItem}>
+                    <i
+                      className="lnr lnr-pencil usr-btn-edit-icon"
+                      aria-hidden="true"
+                    />
+                  </Button>
+                  <Button outline size="sm" className="usr-btn" onClick={this.deleteUser}>
+                    <i
+                      className="lnr lnr-trash usr-btn-delete-icon"
+                      aria-hidden="true"
+                    />
+                  </Button>
                   {/* </div> */}
 
                   <hr />

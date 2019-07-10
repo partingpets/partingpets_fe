@@ -12,5 +12,6 @@ const getRandomCode = () => {
 };
 
 const dateFormat = dateData => moment(dateData).format('MMMM Do, YYYY');
+const expDateFormat = dateData => moment(dateData).format('MM/YYYY');
 
-export default { getRandomCode, dateFormat };
+export default { getRandomCode, dateFormat, expDateFormat };
