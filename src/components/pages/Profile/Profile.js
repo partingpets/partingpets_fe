@@ -204,26 +204,24 @@ class Profile extends React.Component {
                     {userObject.city} {userObject.state}, {userObject.zipcode}
                   </CardText>
                   {/* <div className="row justify-content-around"> */}
-                  <Button outline size="sm" className="usr-btn" id={userObject.id} onClick={this.editUserItem}>
-                    <i
-                      className="lnr lnr-pencil usr-btn-edit-icon"
-                      aria-hidden="true"
-                    />
-                  </Button>
-                  <Button outline size="sm" className="usr-btn" onClick={this.deleteUser}>
-                    <i
-                      className="lnr lnr-trash usr-btn-delete-icon"
-                      aria-hidden="true"
-                    />
-                  </Button>
-
-                  <Button className="btn addPetButton" onClick={this.toggle}>
-                    <span className="spot">
-                      <span className="add-pet-icon lnr lnr-plus-circle" />
-                      ADD PET
-                    </span>
-                  </Button>
-
+                  <div className="profileButtonDiv">
+                    <Button outline size="sm" className="usr-btn" id={userObject.id} onClick={this.editUserItem}>
+                      <i
+                        className="lnr lnr-pencil usr-btn-edit-icon"
+                        aria-hidden="true"
+                      />
+                    </Button>
+                    <Button outline size="sm" className="usr-btn" onClick={this.deleteUser}>
+                      <i
+                        className="lnr lnr-trash usr-btn-delete-icon"
+                        aria-hidden="true"
+                      />
+                    </Button>
+                    <Button className="btn addPetButton" onClick={this.toggle}>
+                        <i className="add-pet-icon lnr lnr-plus-circle" />
+                        ADD PET
+                    </Button>
+                  </div>
                   <hr />
                   <div>
                     <h5 className="paymentHeader">Your Payment Options</h5>

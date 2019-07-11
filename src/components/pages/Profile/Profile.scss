@@ -8,8 +8,10 @@
   float: right;
 }
 
-.usr-btn {
+.usr-btn {  
   margin: 0 5px;
+  margin-bottom: 2%;
+  margin-top: 10px;
   border: 0px;
   color: rgb(21, 21, 58);
 }
@@ -33,7 +35,7 @@
   border-radius: 5px;
   background-color: rgb(21, 21, 58);
   color: white;
-  margin-right: 90%;
+  margin-left: 40%;
   margin-bottom: 2%;
   margin-top: 10px;
   width: 30%;
@@ -55,4 +57,8 @@
 .paymentHeader {
   text-align: center;
   background: rgb(241, 243, 243);
+}
+
+.profileButtonDiv {
+  display: flex;
 }
