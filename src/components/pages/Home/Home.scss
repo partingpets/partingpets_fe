@@ -1,20 +1,12 @@
-#homePage {
-  background-image: url("./images/parting_pets_bkg.png");
-  background-attachment: fixed;
-  background-size: 105%;
-}
-
 .home-info {
   margin-top: 10%;
-  margin-left: 37%;
   font-family: "Rubik", sans-serif;
-  text-align: center;
   width: 80%;
 }
 
 .card-home {
   width: 85%;
-  margin: 0 auto;
+  margin: 7%;
   font-family: "Rubik", sans-serif;
   padding: 2%;
   border-style: solid 2px;
@@ -31,7 +23,6 @@
 .who-we-are-container {
   display: flex;
   flex-wrap: wrap;
-  padding: 1%;
   width: 100%;
 }
 
@@ -66,6 +57,6 @@
   border-radius: 10px;
   border: 3px solid;
   border-color: rgb(21, 21, 58);
-  max-width: 250px;
+  max-width: 225px;
   max-height: 400px;
 }

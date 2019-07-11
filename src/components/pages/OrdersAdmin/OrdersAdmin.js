@@ -52,7 +52,7 @@ class OrdersAdmin extends React.Component {
     ));
 
     return (
-      <div className="partnerItems mx-auto animated bounceInLeft w-100">
+      <div className="partnerItems mx-auto animated fadeIn w-100">
         <div className="back-button">
           <button className="backBtn" id="admin" onClick={this.changeView}>
             <i className="lnr lnr-arrow-left-circle" />

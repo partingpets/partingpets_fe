@@ -92,58 +92,72 @@ class Home extends React.Component {
         <div className="card-home home-page">
           <div className="card-body-home">
             <img src={petsLogo} className="pets-home-logo ml-auto" alt="pets_logo" />
-            <h4 className="card-title">ABOUT PARTING PETS</h4>
+            <hr />
+            <h1 className="card-title">WHO IS PARTING PETS?</h1>
             <h5 className="card-text-home">
-              With more than 50 years of service to pet parents, Petco is a leading pet specialty retailer that obsesses
-              about delivering health and happy experiences for pets and the people who love them. We do this by
-              providing the products, services, advice and experiences that keep pets physically fit, mentally alert,
-              socially engaged and emotionally happy. Everything we do is guided by our vision: Healthier Pets. Happier
-              People. Better World. We employ more than 26,000 partners and operate more than 1,500 Petco locations
-              across the U.S., Mexico and Puerto Rico, including more than 65 Unleashed by Petco locations, a smaller
-              format neighborhood shop; complete pet care services and veterinary advice through PetCoach; and
-              petco.com. The Petco Foundation, an independent nonprofit organization, has invested more than $250
-              million since it was created in 1999 to help promote and improve the welfare of companion animals. In
-              conjunction with the Foundation, we work with and support thousands of local animal welfare groups across
-              the country and, through in-store adoption events, help find homes for more than 400,000 animals every
-              year.{' '}
+              With more than 250 years of service to pet owners, Parting Pets is a leading pet specialty retailer that
+              obsesses about delivering only the finest products for pets and the people who love them. Oh, we forgot to
+              mention. We specialize in pet funerals, urns, caskets, etc. If you're looking for dog toys and crap like
+              that, we ain't selling that kinda stuff. Capeech?? Anyway...We do this by providing the products,
+              services, advice and experiences that keep us making them benjamins. We aim to remain socially wealthy and
+              emotionally rich AF. Everything we do is guided by our razor sharp vision: Dead Pets + Sad Owners =
+              $$$Dollar Dollar Bills Yall$$$ Parting Pets employees more than 26,000 partners and operates more than
+              1,500 Parting Pets locations across the U.S., Mexico and Puerto Rico. The Parting Pets Foundation, an
+              independent nonprofit organization that we aren't afiliated with at all because they are a shell company
+              for a money laundering scheme, has invested more than $250 trillion since it was created in 2019 to help
+              promote and improve the quality of pet funerals. In conjunction with the Foundation, we work with and
+              support thousands of local animal welfare groups across the country and, through in-store adoption events,
+              help find homes for more than 400,000 animals every year, but mostly just a lot of fish.{' '}
             </h5>
             <hr />
-            <h4 className="card-title">WHO IS PARTING PETS?</h4>
+            <h2 className="card-title">MEET THE BRAVE, BOLD MEN BEHIND PARTING PETS SUCCESS</h2>
             <div className="who-we-are-wrap">
               <div className="who-we-are-container">
                 <div className="card-who-we-are">
                   <div className="card-body-home">
                     <img src={marco} className="pets-home-staff " alt="pets_staff" />
-                    <h5 className="card-text-who">Marco Clank </h5>
-                    <h5 className="card-text-who">Marco serves as our CEO. </h5>
-                    <h6 className="github-link">Visit his Github</h6>
+                    <h4 className="card-text-who">Money Marco </h4>
+                    <h5 className="card-text-who">PRESIDENT/CEO </h5>
+                    <h6 className="card-text-who">
+                      Marco serves as our CEO. He also likes to surf the web late at night in search of the finest deals
+                      across the land.{' '}
+                    </h6>
                   </div>
                 </div>
 
                 <div className="card-who-we-are">
                   <div className="card-body-home">
                     <img src={colin} className="pets-home-staff ml-auto" alt="pets_staff" />
-                    <h5 className="card-text-who">Colin White </h5>
-                    <h5 className="card-text-who">Marco serves as our CEO. </h5>
-                    <h6 className="github-link">Visit his Github</h6>
+                    <h4 className="card-text-who">CW Bucks </h4>
+                    <h5 className="card-text-who">CASKETS & URNS </h5>
+                    <h6 className="card-text-who">
+                      Marco serves as our CEO. He also likes to surf the web late at night in search of the finest deals
+                      across the land.{' '}
+                    </h6>
                   </div>
                 </div>
 
                 <div className="card-who-we-are">
                   <div className="card-body-home">
                     <img src={tim} className="pets-home-staff ml-auto" alt="pets_staff" />
-                    <h5 className="card-text-who">Tim Harley </h5>
-                    <h5 className="card-text-who">Marco serves as our CEO. </h5>
-                    <h6 className="github-link">Visit his Github</h6>
+                    <h4 className="card-text-who">Tim Dogg </h4>
+                    <h5 className="card-text-who">PET FUNERALS </h5>
+                    <h6 className="card-text-who">
+                      Marco serves as our CEO. He also likes to surf the web late at night in search of the finest deals
+                      across the land.{' '}
+                    </h6>
                   </div>
                 </div>
 
                 <div className="card-who-we-are">
                   <div className="card-body-home">
                     <img src={jonathan} className="pets-home-staff ml-auto" alt="pets_staff" />
-                    <h5 className="card-text-who">Jonathan Mohan </h5>
-                    <h5 className="card-text-who">Marco serves as our CEO. </h5>
-                    <h6 className="github-link">Visit his Github</h6>
+                    <h4 className="card-text-who">Jon E. Banks </h4>
+                    <h5 className="card-text-who">REVENGE 4 HIRE </h5>
+                    <h6 className="card-text-who">
+                      Marco serves as our CEO. He also likes to surf the web late at night in search of the finest deals
+                      across the land.{' '}
+                    </h6>
                   </div>
                 </div>
               </div>

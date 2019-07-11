@@ -54,7 +54,7 @@ class ItemDetail extends React.Component {
     const { singleItem, showAlert } = this.state;
 
     return (
-      <div className="item-detail mx-auto w-50">
+      <div className="item-detail mx-auto w-50 animated fadeIn">
         <SweetAlert
           show={showAlert}
           warning
