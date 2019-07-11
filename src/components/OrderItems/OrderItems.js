@@ -14,10 +14,6 @@ class OrderItems extends React.Component {
   //     console.log(order.id);
   // }
 
-  // toggle = () => {
-  //     this.setState({ collapse: !collapse });
-  // }
-
   toggle = () => {
     this.setState({
       collapse: !this.state.collapse
@@ -98,13 +94,19 @@ class OrderItems extends React.Component {
               <hr/>
             <Card>
               <CardBody>
+              <Row>
+                        <Col className="col-md-1 quantity-header"><h5 className="column-headers">#</h5></Col>
+                        <Col className="col-md-6 name-header"><h5 className="column-headers">Name</h5></Col>
+                        <Col className="col-md-2"><h5 className="column-headers">Price</h5></Col>
+                        <Col className="col-md-3"><h5 className="column-headers">Total</h5></Col>
+                    </Row>
                 {order.orderItems.map((orderitem, i) => (
                     <div>
                       <Row>
                         <Col className="col-md-1"><h5>{orderitem.quantity}</h5></Col>
-                        <Col className="col-md-7"><h5 key={i}>{orderitem.name}</h5></Col>
+                        <Col className="col-md-6"><h5 key={i}>{orderitem.name}</h5></Col>
                         <Col className="col-md-2"><h5>${orderitem.unitPrice}</h5></Col>
-                        <Col className="col-md-2"><h5>${orderitem.lineTotal}</h5></Col>
+                        <Col className="col-md-3"><h5>${orderitem.lineTotal}</h5></Col>
                     </Row>
                   </div>
                 ))}

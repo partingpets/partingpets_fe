@@ -14,15 +14,27 @@ h4 {
     font-weight: bold;
 }
 
-.grand-total, .order-details-header {
+.grand-total, .order-details-header, .column-headers {
     font-weight: bold;
 }
 
 .order-sum {
     align-self: flex-end;
     justify-content: end;
+    padding-right: 5%;
 }
 
 .collapse-div {
-    width: 99%;
+    width: 100%;
+    padding: 0 1% 0 1%;
 }
+
+.name-header {
+    text-align: center;
+}
+
+.col-sm-8 {
+    padding-left: 5%;
+}
+
+
