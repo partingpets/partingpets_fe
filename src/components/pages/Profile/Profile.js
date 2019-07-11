@@ -216,21 +216,19 @@ class Profile extends React.Component {
                       aria-hidden="true"
                     />
                   </Button>
-                  {/* </div> */}
+
+                  <Button className="btn addPetButton" onClick={this.toggle}>
+                    <span className="spot">
+                      <span className="add-pet-icon lnr lnr-plus-circle" />
+                      ADD PET
+                    </span>
+                  </Button>
 
                   <hr />
                   <div>
                     <h5 className="paymentHeader">Your Payment Options</h5>
                     <Payments isProfilePage={isProfilePage} userId={userObject.id}/>
                   </div>
-                  <hr />
-
-                  <button className="btn addPetButton" onClick={this.toggle}>
-                    <span className="spot">
-                      <span className="add-pet-icon lnr lnr-plus-circle" />
-                      ADD PET
-                    </span>
-                  </button>
                 </CardBody>
               </Card>
             </div>
