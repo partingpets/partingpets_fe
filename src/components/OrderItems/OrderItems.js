@@ -82,7 +82,7 @@ class OrderItems extends React.Component {
                   onClick={this.toggle}
                   style={{ marginBottom: "1rem" }}
                 >
-                  More Details
+                  {!this.state.collapse ? 'More Details' : 'Close Details'}
                 </Button>
               </Row>
             </div>
