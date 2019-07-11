@@ -46,3 +46,8 @@
 .add-pet-icon {
   margin-right: 5%;
 }
+
+.pets-container {
+  display: flex;
+  flex-wrap: wrap;
+}

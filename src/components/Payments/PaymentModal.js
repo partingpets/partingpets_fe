@@ -13,7 +13,6 @@ import {
   Row,
 } from 'reactstrap';
 import moment from 'moment';
-import utility from '../../helpers/utils/utility';
 import paymentRequests from '../../helpers/data/paymentRequests';
 
 const emptyPaymentObject = {

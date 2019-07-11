@@ -27,11 +27,17 @@
   font-weight: bold;
 }
 
+// .pet-box {
+//   flex-wrap: wrap;
+// }
+
 .pet-container {
   font-family: "Rubik", sans-serif;
   text-align: center;
-  width: 45%;
   background-color: slategray;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 20px;
   background: linear-gradient(
     rgba(255, 255, 255, 0.5),
     rgba(255, 255, 255, 0.5)
@@ -43,12 +49,6 @@
   width: 300px;
   padding-top: 10%;
   border-radius: 10px;
-}
-
-.pet-box {
-  display: flex;
-  flex-wrap: wrap;
-  padding-bottom: 2%;
 }
 
 .edit-pet {

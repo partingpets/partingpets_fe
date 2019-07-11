@@ -231,7 +231,9 @@ class Profile extends React.Component {
                 </CardBody>
               </Card>
             </div>
-            <div className="col-sm-8">{pets}</div>
+            <div className="col-sm-8 pets-container">
+              {pets}
+            </div>
           </div>
         </div>
         <PetForm

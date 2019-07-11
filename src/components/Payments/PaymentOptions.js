@@ -28,7 +28,7 @@ class PaymentOptions extends React.Component {
     }
 
     return(
-      <div>
+      <div className="listedPT">
         <div className="container">
           <div className="row">
             <div className="col-sm-6">
