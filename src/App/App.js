@@ -11,10 +11,12 @@ import Admin from '../components/pages/Admin/Admin';
 import PartnersAdmin from '../components/pages/PartnersAdmin/PartnersAdmin';
 import UsersAdmin from '../components/pages/UsersAdmin/UsersAdmin';
 import ItemsAdmin from '../components/pages/ItemsAdmin/ItemsAdmin';
+import OrdersAdmin from '../components/pages/OrdersAdmin/OrdersAdmin';
 import Products from '../components/pages/Products/Products';
 import ItemDetail from '../components/pages/ItemDetail/ItemDetail';
 import Profile from '../components/pages/Profile/Profile';
 import Orders from '../components/pages/Orders/Orders';
+import OrderDetail from '../components/pages/OrderDetail/OrderDetail';
 import Partners from '../components/pages/Partners/Partners';
 import ShoppingCart from '../components/pages/ShoppingCart/ShoppingCart';
 import cartRequests from '../helpers/data/cartRequests';
@@ -129,6 +131,11 @@ class App extends React.Component {
                     authed={authed}
                   />
                   <PrivateRoute
+                    path="/orders/:id"
+                    component={props => <OrderDetail userObject={userObject} updateUser={this.getCurrentUser} {...props} />}
+                    authed={authed}
+                  />
+                  <PrivateRoute
                     path="/orders"
                     component={props => <Orders userObject={userObject} updateUser={this.getCurrentUser} {...props} />}
                     authed={authed}
@@ -163,6 +170,11 @@ class App extends React.Component {
                   <PrivateRoute
                     path="/itemsadmin"
                     component={props => <ItemsAdmin userObject={userObject} {...props} />}
+                    authed={authed}
+                  />
+                  <PrivateRoute
+                    path="/ordersadmin"
+                    component={props => <OrdersAdmin userObject={userObject} {...props} />}
                     authed={authed}
                   />
                   <PrivateRoute

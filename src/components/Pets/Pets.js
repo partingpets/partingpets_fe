@@ -26,7 +26,7 @@ class Pets extends React.Component {
       if (Pet.burialCity && Pet.burialState && Pet.burialStreet && Pet.burialPlot && Pet.burialZipCode) {
         return (
           <CardText>
-            Final Resting Place: <br />
+            <b>Final Resting Place:</b> <br />
             {Pet.burialStreet} <br />
             Plot {Pet.burialPlot} <br />
             {Pet.burialCity}, {Pet.burialState} {Pet.burialZipCode}
@@ -39,8 +39,11 @@ class Pets extends React.Component {
     return (
       <div className="pet-box">
         <Card className="pet-container">
-          <CardHeader className="pet-name">{Pet.name}</CardHeader>
-          <div className="col-4">
+          {/* <CardImg className="profileCardImg" top width="100%" src={fbUserObject.photoURL} alt="Card image cap" /> */}
+          <CardHeader className="pet-name">
+            {Pet.name} : {Pet.breed}
+          </CardHeader>
+          <div className="col-12">
             <CardImg
               className="petCardImg"
               top
@@ -49,13 +52,13 @@ class Pets extends React.Component {
               alt="Pet Image"
             />
           </div>
-          <div className="col-12">
+          <div className="pet-data col-12">
             <CardBody>
-              <CardText className="breed">{Pet.breed}</CardText>
+              {/* <CardText className="breed">{Pet.breed}</CardText> */}
               <CardText className="dates">
-                Born: {utility.dateFormat(Pet.dateOfBirth)}
+                <b>Born:</b> {utility.dateFormat(Pet.dateOfBirth)}
                 <br />
-                Died: {utility.dateFormat(Pet.dateOfDeath)}
+                <b>Died:</b> {utility.dateFormat(Pet.dateOfDeath)}
               </CardText>
               <div className="burial-data">{burialData()}</div>
                 <Button outline size="sm" className="edit-pet" onClick={this.editEvent}>

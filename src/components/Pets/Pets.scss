@@ -16,10 +16,11 @@
 }
 
 .pet-name {
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   font-weight: bold;
   color: white;
   background-color: rgb(21, 21, 58);
+  padding: 2%;
 }
 
 .breed {
@@ -45,10 +46,14 @@
 }
 
 .petCardImg {
-  height: 300px;
-  width: 300px;
+  height: 225px;
+  width: 225px;
   padding-top: 10%;
   border-radius: 10px;
+}
+
+.pet-box {
+  padding-bottom: 2%;
 }
 
 .edit-pet {

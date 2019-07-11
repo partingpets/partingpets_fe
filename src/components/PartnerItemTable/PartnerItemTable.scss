@@ -1,11 +1,12 @@
 .trash {
-  color: rgb(21, 21, 58);
+  color: white;
   cursor: pointer;
 }
 
 .pencil {
-  color: rgb(21, 21, 58);
+  color: white;
   cursor: pointer;
+  background-color: rgb(21, 21, 58);
 }
 
 .partner-item-img {
@@ -15,10 +16,8 @@
 
 .partner-item {
   font-size: 17px;
-  background: linear-gradient(
-    rgba(255, 255, 255, 0.2),
-    rgba(255, 255, 255, 0.2)
-  );
+  background-color: rgb(21, 21, 58);
+  color: white;
 }
 
 .name {
@@ -28,6 +27,28 @@
   height: 50px;
   padding: 10px;
   font-size: 20px;
+  background-color: rgb(21, 21, 58);
+  color: white;
+}
+
+.unit-price {
+  vertical-align: middle;
+  text-align: center;
+  width: 30%;
+  height: 50px;
+  padding: 10px;
+  font-size: 20px;
+  background-color: rgb(21, 21, 58);
+}
+
+.icons {
+  vertical-align: middle;
+  text-align: center;
+  width: 30%;
+  height: 50px;
+  padding: 10px;
+  font-size: 20px;
+  background-color: rgb(21, 21, 58);
 }
 
 .description {
@@ -37,9 +58,14 @@
   height: 50px;
   padding: 10px;
   font-size: 15px;
+  background-color: rgb(21, 21, 58);
 }
 
 .header {
-  background-color: rgb(21, 21, 58);
-  color: white;
+  background-color: slategray;
+  color: rgb(21, 21, 58);
+}
+
+.product-image {
+  background: none;
 }
