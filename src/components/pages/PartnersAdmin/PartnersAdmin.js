@@ -141,7 +141,7 @@ class PartnersAdmin extends React.Component {
     }
 
     return (
-      <div className="partnerItems mx-auto animated bounceInLeft w-100">
+      <div className="partnerItems mx-auto animated fadeIn w-100">
         <div className="productWrap">
           <button className="addProductBtn" onClick={this.showModal}>
             <i className="far fa-plus-square" />
