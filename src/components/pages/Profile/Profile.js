@@ -219,7 +219,10 @@ class Profile extends React.Component {
                   {/* </div> */}
 
                   <hr />
-                  <Payments isProfilePage={isProfilePage} userId={userObject.id}/>
+                  <div>
+                    <h5 className="paymentHeader">Your Payment Options</h5>
+                    <Payments isProfilePage={isProfilePage} userId={userObject.id}/>
+                  </div>
                   <hr />
 
                   <button className="btn addPetButton" onClick={this.toggle}>
