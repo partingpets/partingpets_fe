@@ -4,7 +4,11 @@ import userRequests from '../../../helpers/data/userRequests';
 import authRequests from '../../../helpers/data/authRequests';
 import './Home.scss';
 
-import petsLogo from '../../../images/pets.png';
+import petsLogo from '../../../images/pets_new.png';
+import marco from '../../../images/marco_pets.png';
+import jonathan from '../../../images/jon_pets.png';
+import colin from '../../../images/colin_pets.png';
+import tim from '../../../images/Tim_pets.png';
 
 class Home extends React.Component {
   state = {
@@ -85,11 +89,11 @@ class Home extends React.Component {
     return (
       <div className="home-page animated fadeIn">
         <div className="home-info justify-content-center" />
-        <div class="card-home">
-          <div class="card-body">
+        <div className="card-home home-page">
+          <div className="card-body-home">
             <img src={petsLogo} className="pets-home-logo ml-auto" alt="pets_logo" />
-            <h4 class="card-title">About Parting Pets</h4>
-            <h5 class="card-text">
+            <h4 className="card-title">ABOUT PARTING PETS</h4>
+            <h5 className="card-text-home">
               With more than 50 years of service to pet parents, Petco is a leading pet specialty retailer that obsesses
               about delivering health and happy experiences for pets and the people who love them. We do this by
               providing the products, services, advice and experiences that keep pets physically fit, mentally alert,
@@ -103,16 +107,57 @@ class Home extends React.Component {
               the country and, through in-store adoption events, help find homes for more than 400,000 animals every
               year.{' '}
             </h5>
+            <hr />
+            <h4 className="card-title">WHO IS PARTING PETS?</h4>
+            <div className="who-we-are-wrap">
+              <div className="who-we-are-container">
+                <div className="card-who-we-are">
+                  <div className="card-body-home">
+                    <img src={marco} className="pets-home-staff " alt="pets_staff" />
+                    <h5 className="card-text-who">Marco Clank </h5>
+                    <h5 className="card-text-who">Marco serves as our CEO. </h5>
+                    <h6 className="github-link">Visit his Github</h6>
+                  </div>
+                </div>
+
+                <div className="card-who-we-are">
+                  <div className="card-body-home">
+                    <img src={colin} className="pets-home-staff ml-auto" alt="pets_staff" />
+                    <h5 className="card-text-who">Colin White </h5>
+                    <h5 className="card-text-who">Marco serves as our CEO. </h5>
+                    <h6 className="github-link">Visit his Github</h6>
+                  </div>
+                </div>
+
+                <div className="card-who-we-are">
+                  <div className="card-body-home">
+                    <img src={tim} className="pets-home-staff ml-auto" alt="pets_staff" />
+                    <h5 className="card-text-who">Tim Harley </h5>
+                    <h5 className="card-text-who">Marco serves as our CEO. </h5>
+                    <h6 className="github-link">Visit his Github</h6>
+                  </div>
+                </div>
+
+                <div className="card-who-we-are">
+                  <div className="card-body-home">
+                    <img src={jonathan} className="pets-home-staff ml-auto" alt="pets_staff" />
+                    <h5 className="card-text-who">Jonathan Mohan </h5>
+                    <h5 className="card-text-who">Marco serves as our CEO. </h5>
+                    <h6 className="github-link">Visit his Github</h6>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
+          <RegisterForm
+            showModal={this.state.showModal}
+            onSubmit={this.userFormSubmitEvent}
+            isEditing={isEditing}
+            modalCloseEvent={this.modalCloseEvent}
+            editForm={this.editUserItem}
+            fireBaseId={firebaseId}
+          />
         </div>
-        <RegisterForm
-          showModal={this.state.showModal}
-          onSubmit={this.userFormSubmitEvent}
-          isEditing={isEditing}
-          modalCloseEvent={this.modalCloseEvent}
-          editForm={this.editUserItem}
-          fireBaseId={firebaseId}
-        />
       </div>
     );
   }

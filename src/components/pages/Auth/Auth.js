@@ -3,7 +3,7 @@ import { createButton } from 'react-social-login-buttons';
 import authRequests from '../../../helpers/data/authRequests';
 import './Auth.scss';
 
-import petsLogo from '../../../images/pets.png';
+import petsLogo from '../../../images/pets_new.png';
 
 const btnConfig = {
   text: 'Google Login',
