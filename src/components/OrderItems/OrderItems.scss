@@ -6,29 +6,23 @@
     background-color:  rgba(168, 202, 241, 0.75);
 }
 
-// .billing-address {
-//     float: left;
-// }
+h4 {
+    font-weight: bold;
+}
 
-// .order-summary {
-//     float:right;
-//align-self: end;
- // }
+.payment-method {
+    font-weight: bold;
+}
 
-// h4 {
-//     font-weight: bold;
-// }
-
-// .payment-method {
-//     margin-top: 30px;
-//     font-weight: bold;
-// }
-
-// .grand-total, .order-details-header {
-//     font-weight: bold;
-// }
+.grand-total, .order-details-header {
+    font-weight: bold;
+}
 
 .order-sum {
     align-self: flex-end;
     justify-content: end;
+}
+
+.collapse-div {
+    width: 99%;
 }

@@ -94,15 +94,18 @@ class OrderItems extends React.Component {
         </Row>
 
         <Row>
-          <Collapse isOpen={this.state.collapse}>
+          <Collapse className="collapse-div" isOpen={this.state.collapse}>
               <hr/>
             <Card>
               <CardBody>
                 {order.orderItems.map((orderitem, i) => (
                     <div>
-                    <h4>{orderitem.quantity}</h4>
-                    <h4 key={i}>{orderitem.name}</h4>
-                    <h4>{orderitem.unitPrice}</h4>
+                      <Row>
+                        <Col className="col-md-1"><h5>{orderitem.quantity}</h5></Col>
+                        <Col className="col-md-7"><h5 key={i}>{orderitem.name}</h5></Col>
+                        <Col className="col-md-2"><h5>${orderitem.unitPrice}</h5></Col>
+                        <Col className="col-md-2"><h5>${orderitem.lineTotal}</h5></Col>
+                    </Row>
                   </div>
                 ))}
               </CardBody>
