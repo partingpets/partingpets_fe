@@ -12,6 +12,7 @@ import {
   ModalHeader,
   Row,
 } from 'reactstrap';
+import moment from 'moment';
 import paymentRequests from '../../helpers/data/paymentRequests';
 
 const emptyPaymentObject = {
@@ -59,6 +60,7 @@ class PaymentModal extends React.Component {
       paymentRequests
         .getSinglePaymentOption(paymentIdToEdit)
         .then((thatPaymentYouJustGot) => {
+          thatPaymentYouJustGot.data.expDate = moment(thatPaymentYouJustGot.data.expDate).format("MM/YYYY")
           this.setState({ newPayment: thatPaymentYouJustGot.data });
         })
         .catch(error => console.error('error with getting the payment you want to edit', error));
@@ -172,7 +174,7 @@ class PaymentModal extends React.Component {
                     placeholder="MM/YYYY"
                     maxLength="7"
                     onChange={this.expDateChange}
-                    value={newPayment.expDate}                    
+                    value={newPayment.expDate}    
                   />
                 </FormGroup>
               </Col>

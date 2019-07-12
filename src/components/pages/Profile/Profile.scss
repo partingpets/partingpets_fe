@@ -1,16 +1,19 @@
 .Profile {
   margin-top: 150px;
   font-family: "Rubik", sans-serif;
-  margin-left: -20%;
+  //margin-left: -20%;
 }
 
 .profileCardImg {
-  height: 35px;
+  height: 81px;
   float: right;
 }
 
-.usr-btn {
+.usr-btn {  
   margin: 0 5px;
+  margin-bottom: 2%;
+  margin-top: 10px;
+  border: 0px;
   color: rgb(21, 21, 58);
 }
 
@@ -33,7 +36,7 @@
   border-radius: 5px;
   background-color: rgb(21, 21, 58);
   color: white;
-  margin-right: 90%;
+  margin-left: 40%;
   margin-bottom: 2%;
   margin-top: 10px;
   width: 30%;
@@ -45,4 +48,18 @@
 
 .add-pet-icon {
   margin-right: 5%;
+}
+
+.pets-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.paymentHeader {
+  text-align: center;
+  background: rgb(241, 243, 243);
+}
+
+.profileButtonDiv {
+  display: flex;
 }
