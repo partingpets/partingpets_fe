@@ -11,6 +11,7 @@ import colin from '../../../images/colin_pets.png';
 import tim from '../../../images/Tim_pets.png';
 import petco from '../../../images/petco_logo.png';
 import petsmart from '../../../images/pet_smart.png';
+import petcompany from '../../../images/pet_company.png';
 
 class Home extends React.Component {
   state = {
@@ -165,14 +166,14 @@ class Home extends React.Component {
                   </div>
                 </div>
                 <hr />
+                <h1 className="partner-title">MEET A FEW OF OUR PARTING PETS PARTNERS</h1>
                 <div className="partners-wrap">
-                  <h1 className="partner-title">MEET A FEW OF OUR PARTING PETS PARTNERS</h1>
                   <div className="who-we-are-container">
                     <img src={petco} className="pets-partner-logo " alt="petco_logo" />
-
+                    <hr />
                     <img src={petsmart} className="pets-partner-logo " alt="petco_logo" />
-
-                    <img src={petco} className="pets-partner-logo " alt="petco_logo" />
+                    <hr />
+                    <img src={petcompany} className="pets-partner-logo " alt="petco_logo" />
                   </div>
                 </div>
               </div>
