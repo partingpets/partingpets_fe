@@ -33,6 +33,7 @@
 // }
 
 .pet-container {
+  max-width: 261px;
   font-family: "Rubik", sans-serif;
   text-align: center;
   background-color: slategray;
@@ -63,7 +64,7 @@
 }
 
 .delete-pet {
-  margin-left: 37%;
+  margin-left: 25%;
   border: 0px;
   color: rgb(21, 21, 58);
 }

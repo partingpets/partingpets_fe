@@ -194,14 +194,15 @@ class Profile extends React.Component {
               <Card data-uid={userObject.id}>
                 <CardHeader>
                   {`${userObject.firstName} ${userObject.lastName}`}
-                  <img className="profileCardImg" src={fbUserImage} alt="profile" />
+                  {/* <img className="profileCardImg" src={fbUserImage} alt="profile" /> */}
                 </CardHeader>
                 <CardBody>
-                  <CardText>{`E-mail: ${userObject.email}`}</CardText>
+                  <img className="profileCardImg" src={fbUserImage} alt="profile" />
+                  <CardText>{userObject.email}</CardText>
                   <CardText>{userObject.street1}</CardText>
                   <CardText>{userObject.street2}</CardText>
                   <CardText>
-                    {userObject.city} {userObject.state}, {userObject.zipcode}
+                    {userObject.city}, {userObject.state} {userObject.zipcode}
                   </CardText>
                   {/* <div className="row justify-content-around"> */}
                   <div className="profileButtonDiv">
