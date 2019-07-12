@@ -1,5 +1,8 @@
 import React from 'react';
-import { Container, Row, Col } from 'reactstrap';
+import {
+  Container, Row, Col, Button,
+} from 'reactstrap';
+import SweetAlert from 'react-bootstrap-sweetalert';
 import cartRequests from '../../../helpers/data/cartRequests';
 import orderRequests from '../../../helpers/data/orderRequests';
 import CartItem from '../../CartItem/CartItem';
@@ -22,6 +25,7 @@ class ShoppingCart extends React.Component {
     cartTotal: 0,
     newOrder: defaultOrder,
     selectedPaymentId: -1,
+    selectPaymentAlert: false,
   };
 
   componentDidMount() {
@@ -105,19 +109,19 @@ class ShoppingCart extends React.Component {
       tempObject.quantity = cartOrder.quantity;
       myNewOrder.orderLines.push(tempObject);
     });
-    if (this.state.selectedPaymentId !== -1 ) {
+    if (this.state.selectedPaymentId !== -1) {
       orderRequests.createOrder(myNewOrder).then((result) => {
         if (result.status === 201) {
           alert("We're sorry for your loss, but congratulations on your purchase!");
           this.state.cart.forEach((item) => {
             this.deleteCartItem(item.cartId);
           });
+          this.setState({
+            newOrder: defaultOrder,
+          });
         }
       });
-      this.setState({
-        newOrder: defaultOrder,
-      });
-    } else alert("Please select a payment method")
+    } else this.setState({ selectPaymentAlert: true });
   };
 
   deleteCartItem = (itemId) => {
@@ -132,13 +136,13 @@ class ShoppingCart extends React.Component {
       .catch(error => console.error('There was an error deleteing the selected cart item', error));
   };
 
-  selectedPaymentId = (data) =>{
-    this.setState({ selectedPaymentId: data});
-  }
+  selectedPaymentId = (data) => {
+    this.setState({ selectedPaymentId: data });
+  };
 
   render() {
     const {
-      cart, cartSubTotal, cartTotal, cartTax,
+      cart, cartSubTotal, cartTotal, cartTax, selectPaymentAlert,
     } = this.state;
 
     const { userObject } = this.props;
@@ -151,15 +155,30 @@ class ShoppingCart extends React.Component {
           deleteCartItemFn={this.deleteCartItem}
         />
     ));
+    // animated bounceInLeft
     return (
-      <div className="shoppingCart animated bounceInLeft">
+      <div className="shoppingCart">
+        <SweetAlert
+          show={selectPaymentAlert}
+          warning
+          title="Please select a payment method"
+          onConfirm={() => {
+            this.setState({ selectPaymentAlert: false });
+          }}
+        />
         <Container className="cart-container">
           <Row className="cart-header-row">
             <img src={pets} className="petsCartLogo" alt="pets_logo" />
-            <Col>
-              <h1>Here's what's in your Parting Pets Shopping cart</h1>
-              <h5>Get free shipping on all Parting Pets orders.</h5>
-            </Col>
+            {cart.length === 0 ? (
+              <Col>
+                <h1>YOUR CART! IT EMPTY!</h1>
+              </Col>
+            ) : (
+              <Col>
+                <h1>Here's what's in your Parting Pets Shopping cart</h1>
+                <h5>Get free shipping on all Parting Pets orders.</h5>
+              </Col>
+            )}
           </Row>
           {cartItemComponent(cart)}
           <div className="cart-totals">
@@ -203,12 +222,12 @@ class ShoppingCart extends React.Component {
           </div>
           <hr />
           <div className="checkout cart-checkout-btn2">
-            <button className="cart-checkout-btn" onClick={this.formSubmit}>
+            <Button className="cart-checkout-btn" onClick={this.formSubmit} disabled={cart.length === 0}>
               <span className="spot">
                 <span className="right-arrow lnr lnr-arrow-right-circle" />
                 CHECK OUT
               </span>
-            </button>
+            </Button>
           </div>
         </Container>
       </div>

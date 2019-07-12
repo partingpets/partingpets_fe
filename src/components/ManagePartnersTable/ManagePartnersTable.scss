@@ -38,12 +38,36 @@
 }
 
 .header {
+  background-color: slategray;
+  color: rgb(21, 21, 58);
+}
+
+.street {
   background-color: rgb(21, 21, 58);
   color: white;
 }
 
+.city {
+  background-color: rgb(21, 21, 58);
+  color: white;
+}
+
+.state {
+  background-color: rgb(21, 21, 58);
+  color: white;
+}
+
+.zip-code {
+  background-color: rgb(21, 21, 58);
+  color: white;
+}
 .edit-partner {
   cursor: pointer;
+}
+
+.icons {
+  background-color: rgb(21, 21, 58);
+  color: white;
 }
 
 .delete-partner {

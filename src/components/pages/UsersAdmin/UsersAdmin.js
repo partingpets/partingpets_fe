@@ -166,7 +166,7 @@ class UsersAdmin extends React.Component {
         <div className="table-responsive">
           <table className="table table-striped">
             <thead>
-              <tr>
+              <tr className="header-table">
                 <th scope="col">#</th>
                 <th scope="col">LAST</th>
                 <th scope="col">FIRST</th>

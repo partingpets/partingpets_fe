@@ -161,7 +161,7 @@ class ItemsAdmin extends React.Component {
         <div className="table-responsive">
           <table className="table table-striped">
             <thead>
-              <tr>
+              <tr className="header-table">
                 <th scope="col">#</th>
                 <th scope="col">IMAGE</th>
                 <th scope="col">NAME</th>
