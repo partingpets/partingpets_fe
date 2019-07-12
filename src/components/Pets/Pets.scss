@@ -28,11 +28,18 @@
   font-weight: bold;
 }
 
+// .pet-box {
+//   flex-wrap: wrap;
+// }
+
 .pet-container {
+  max-width: 261px;
   font-family: "Rubik", sans-serif;
   text-align: center;
-  width: 45%;
   background-color: slategray;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 20px;
   background: linear-gradient(
     rgba(255, 255, 255, 0.5),
     rgba(255, 255, 255, 0.5)
@@ -51,11 +58,14 @@
 }
 
 .edit-pet {
-  padding-right: 42%;
+  margin-right: 37%;
+  border: 0px;
   color: rgb(21, 21, 58);
 }
 
 .delete-pet {
-  padding-left: 42%;
+  margin-left: 25%;
+  border: 0px;
   color: rgb(21, 21, 58);
 }
+

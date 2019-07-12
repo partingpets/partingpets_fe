@@ -28,18 +28,18 @@ class PaymentOptions extends React.Component {
     }
 
     return(
-      <div>
+      <div className="listedPT">
         <div className="container">
           <div className="row">
             <div className="col-sm-6">
               <h6>{paymentOption.name}</h6>
             </div>
             <div className="col-sm-6">
-              <Button outline size="sm" className="pay-btn" id={paymentOption.id}>
-                <i className="lnr lnr-pencil pay-btn-edit-icon" aria-hidden="true" onClick={this.editEvent} />
+              <Button outline size="sm" className="pay-btn" id={paymentOption.id} onClick={this.editEvent}>
+                <i className="lnr lnr-pencil pay-btn-edit-icon" aria-hidden="true" />
               </Button>
-              <Button outline size="sm" className="pay-btn">
-                <i className="lnr lnr-trash  pay-btn-delete-icon" aria-hidden="true" onClick={this.deleteEvent} />
+              <Button outline size="sm" className="pay-btn" onClick={this.deleteEvent}>
+                <i className="lnr lnr-trash  pay-btn-delete-icon" aria-hidden="true" />
               </Button>
             </div>
           </div>

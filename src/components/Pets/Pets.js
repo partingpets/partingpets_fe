@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Card, CardImg, CardText, CardBody, CardHeader,
+  Card, CardImg, CardText, CardBody, CardHeader, Button,
 } from 'reactstrap';
 import './Pets.scss';
 import utility from '../../helpers/utils/utility';
@@ -61,8 +61,12 @@ class Pets extends React.Component {
                 <b>Died:</b> {utility.dateFormat(Pet.dateOfDeath)}
               </CardText>
               <div className="burial-data">{burialData()}</div>
-              <i className="lnr lnr-pencil edit-pet" onClick={this.editEvent} />
-              <i className="lnr lnr-trash delete-pet" onClick={this.deleteEvent} />
+                <Button outline size="sm" className="edit-pet" onClick={this.editEvent}>
+                  <i className="lnr lnr-pencil" />
+                </Button>
+                <Button outline size="sm" className="delete-pet" onClick={this.deleteEvent}>
+                  <i className="lnr lnr-trash" />
+                </Button>
             </CardBody>
           </div>
         </Card>
