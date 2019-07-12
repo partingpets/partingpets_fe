@@ -43,7 +43,7 @@ class Pets extends React.Component {
           <CardHeader className="pet-name">
             {Pet.name} : {Pet.breed}
           </CardHeader>
-          <div className="col-8">
+          <div className="col-12">
             <CardImg
               className="petCardImg"
               top
