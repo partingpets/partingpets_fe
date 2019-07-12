@@ -101,7 +101,7 @@ class OrderItems extends React.Component {
                         <Col className="col-md-3"><h5 className="column-headers">Total</h5></Col>
                     </Row>
                 {order.orderItems.map((orderitem, i) => (
-                    <div>
+                    <div key={i}>
                       <Row>
                         <Col className="col-md-1"><h5>{orderitem.quantity}</h5></Col>
                         <Col className="col-md-6"><h5 key={i}>{orderitem.name}</h5></Col>
