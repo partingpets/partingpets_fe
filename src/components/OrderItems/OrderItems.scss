@@ -6,23 +6,34 @@
     background-color:  rgba(168, 202, 241, 0.75);
 }
 
-.billing-address {
-    float: left;
-}
-
-.order-summary {
-    float:right;
-}
-
 h4 {
     font-weight: bold;
 }
 
 .payment-method {
-    margin-top: 30px;
     font-weight: bold;
 }
 
-.grand-total, .order-details-header {
+.grand-total, .order-details-header, .column-headers {
     font-weight: bold;
 }
+
+.order-sum {
+    align-self: flex-end;
+    justify-content: end;
+}
+
+.collapse-div {
+    width: 100%;
+    padding: 0 1% 0 1%;
+}
+
+.col-sm-8 {
+    padding-left: 5%;
+}
+
+.line-total {
+    padding-right: 0%;
+}
+
+
