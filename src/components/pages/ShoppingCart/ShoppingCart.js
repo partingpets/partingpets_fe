@@ -101,6 +101,7 @@ class ShoppingCart extends React.Component {
     const { userObject } = this.props;
     const tempCart = this.state.cart;
     const myNewOrder = { ...this.state.newOrder };
+    myNewOrder.orderLines = [];
     myNewOrder.userId = userObject.id;
     myNewOrder.paymentTypeId = this.state.selectedPaymentId;
     tempCart.forEach((cartOrder) => {
