@@ -1,5 +1,6 @@
-.lnr-arrow-left-circle {
-  padding-right: 5px;
+.lnr-arrow-left-circle,
+.lnr-cart {
+  margin-right: 10px;
 }
 
 .item-detail {
@@ -28,13 +29,8 @@
   color: white;
   margin-left: 25%;
   margin-right: 25%;
-  // height: 10%;
-  // font-size: 7pt;
-  padding: 4px;
+  padding: 6px;
   text-align: center;
   margin: 0px 25px;
+  width: 50%;
 }
-
-// .card-body {
-//   cursor: pointer;
-// }
