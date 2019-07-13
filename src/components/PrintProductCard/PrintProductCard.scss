@@ -1,10 +1,12 @@
 .productImage {
-  height: 150px;
-  width: 150x;
+  height: 200px;
+  width: 200px;
+  border-radius: 10px;
+  padding-bottom: 2%;
 }
 
 .productCard {
-  border: 2px solid;
+  border: 3px solid;
   border-radius: 5px;
   margin: 1%;
   padding: 1%;
@@ -23,4 +25,19 @@
 
 .card-body {
   cursor: pointer;
+}
+
+.product-details {
+  border-radius: 5px;
+  background-color: rgb(21, 21, 58);
+  color: white;
+  padding: 6px;
+  text-align: center;
+  width: 50%;
+  font-size: 14pt;
+}
+
+.lnr-list {
+  padding: 2%;
+  padding-left: 8%;
 }

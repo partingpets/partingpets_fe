@@ -1,22 +1,28 @@
-.lnr-arrow-left-circle {
-  padding-right: 5px;
+.lnr-arrow-left-circle,
+.lnr-cart {
+  margin-right: 10px;
 }
 
 .item-detail {
   background-color: slategray;
-  background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5));
+  background: linear-gradient(
+    rgba(255, 255, 255, 0.5),
+    rgba(255, 255, 255, 0.5)
+  );
   border: 5px solid rgb(21, 21, 58);
   margin-top: 10%;
   margin-bottom: 5%;
   padding: 4%;
   text-align: center;
+  font-family: "Rubik", sans-serif;
+  text-align: center;
 }
 
 .detailImage {
-  max-height: 400px;
-  max-width: 400px;
+  width: 90%;
   padding-top: 1%;
   padding-bottom: 3%;
+  border-radius: 10px;
 }
 
 .backToStore {
@@ -25,13 +31,8 @@
   color: white;
   margin-left: 25%;
   margin-right: 25%;
-  // height: 10%;
-  // font-size: 7pt;
-  padding: 4px;
+  padding: 6px;
   text-align: center;
   margin: 0px 25px;
+  width: 50%;
 }
-
-// .card-body {
-//   cursor: pointer;
-// }

@@ -1,7 +1,19 @@
 import React from 'react';
-import { GoogleLoginButton } from 'react-social-login-buttons';
+import { createButton } from 'react-social-login-buttons';
 import authRequests from '../../../helpers/data/authRequests';
 import './Auth.scss';
+
+import petsLogo from '../../../images/pets_new.png';
+
+const btnConfig = {
+  text: 'Google Login',
+  icon: 'paw',
+  iconFormat: name => 'fas fa-paw',
+  style: { background: '#15153a' },
+  activeStyle: { background: '#293e69' },
+};
+/** My Google login button. */
+const MyGoogleLoginButton = createButton(btnConfig);
 
 class Auth extends React.Component {
   state = {
@@ -20,8 +32,11 @@ class Auth extends React.Component {
   render() {
     return (
       <div className="Auth mt-5">
+        <div className="homeLogo justify-content-center" />
+        <img src={petsLogo} className="petsHomeLogo" alt="pets_logo" />
         <div className="login d-flex justify-content-center">
-          <GoogleLoginButton id="googleBtn" onClick={this.googleAuthenticateUser} />
+          {/* <GoogleLoginButton id="googleBtn" onClick={this.googleAuthenticateUser} /> */}
+          <MyGoogleLoginButton id="googleBtn" onClick={this.googleAuthenticateUser} />
         </div>
       </div>
     );

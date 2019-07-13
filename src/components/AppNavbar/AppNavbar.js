@@ -47,7 +47,7 @@ class AppNavbar extends React.Component {
     const buildNavbar = () => {
       if (isAuthed) {
         return (
-          <Nav className="navBar ml-auto" navbar>
+          <Nav className="navBar ml-auto animated fadeIn" navbar>
             <NavItem>
               <NavLink tag={RRNavLink} to="/home">
                 <i className="navIcon lnr lnr-earth" />
@@ -116,7 +116,7 @@ class AppNavbar extends React.Component {
 
     return (
       <div className="AppNavbar">
-        <Navbar color="dark" dark expand="md" fixed={'top'}>
+        <Navbar style={{ display: isAuthed ? '' : 'none' }} color="dark" dark expand="md" fixed={'top'}>
           <NavbarBrand tag={RRNavLink} to="/home">
             <img src={pets} className="petsNavLogo" alt="pets_logo" />
           </NavbarBrand>
