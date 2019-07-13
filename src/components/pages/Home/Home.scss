@@ -23,54 +23,55 @@
 .who-we-are-container {
   display: flex;
   flex-wrap: wrap;
-  width: 90%;
+  // width: 90%;
   margin-top: -2%;
   text-align: center;
 }
 
 .card-who-we-are {
-  width: 45%;
+  display: flex;
+  // width: 45%;
   text-align: center;
   margin: 1%;
   padding: 1%;
 }
 
-.pets-home-logo {
-  margin-left: 50%;
-}
+// .pets-home-logo {
+//   margin-left: 50%;
+// }
 
-.pets-partner-logo {
-  margin-bottom: -4%;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 60%;
-}
+// .pets-partner-logo {
+//   margin-bottom: -4%;
+//   display: block;
+//   margin-left: auto;
+//   margin-right: auto;
+//   width: 60%;
+// }
 
-.card-body-home {
-  text-align: center;
-}
+// .card-body-home {
+//   text-align: center;
+// }
 
-.who-we-are-wrap {
-  width: 100%;
-  // margin: 6%;
-  padding: 2%;
-  margin-top: -20px;
-}
+// .who-we-are-wrap {
+//   width: 100%;
+//   // margin: 6%;
+//   padding: 2%;
+//   margin-top: -20px;
+// }
 
-.partners-wrap {
-  width: 100%;
-  margin-left: 20%;
-  padding: 2%;
-}
+// .partners-wrap {
+//   width: 100%;
+//   margin-left: 20%;
+//   padding: 2%;
+// }
 
-.card-text-home {
-  padding: 2%;
-}
+// .card-text-home {
+//   padding: 2%;
+// }
 
-.card-text-who {
-  padding: 1%;
-}
+// .card-text-who {
+//   padding: 1%;
+// }
 
 .pets-home-staff {
   margin-left: 1%;
@@ -88,15 +89,19 @@
   max-height: 300px;
 }
 
-.card-meet-partner {
-  width: 30%;
-  margin: 2%;
-}
+// .card-meet-partner {
+//   width: 30%;
+//   margin: 2%;
+// }
 
-.partner-title {
-  padding: 2%;
-}
+// .partner-title {
+//   padding: 2%;
+// }
 
-.our-partner-container {
-  width: 100%;
+// .our-partner-container {
+//   width: 100%;
+// }
+
+.card-body-home {
+  padding: 15px;
 }

@@ -4,7 +4,10 @@
 
 .item-detail {
   background-color: slategray;
-  background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5));
+  background: linear-gradient(
+    rgba(255, 255, 255, 0.5),
+    rgba(255, 255, 255, 0.5)
+  );
   border: 5px solid rgb(21, 21, 58);
   margin-top: 10%;
   margin-bottom: 5%;
@@ -13,10 +16,10 @@
 }
 
 .detailImage {
-  max-height: 400px;
-  max-width: 400px;
+  width: 90%;
   padding-top: 1%;
   padding-bottom: 3%;
+  border-radius: 10px;
 }
 
 .backToStore {

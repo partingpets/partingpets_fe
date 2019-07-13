@@ -12,7 +12,6 @@ import tim from '../../../images/Tim_pets.png';
 import petco from '../../../images/petco_logo.png';
 import petsmart from '../../../images/pet_smart.png';
 
-
 class Home extends React.Component {
   state = {
     showModal: false,
@@ -128,9 +127,7 @@ class Home extends React.Component {
                       the finest "deals" across the land.{' '}
                     </h6>
                   </div>
-                </div>
 
-                <div className="card-who-we-are">
                   <div className="card-body-home">
                     <img src={colin} className="pets-home-staff ml-auto" alt="pets_staff" />
                     <h4 className="card-text-who">CW Bucks </h4>
@@ -140,9 +137,7 @@ class Home extends React.Component {
                       knows how to stack that cash.{' '}
                     </h6>
                   </div>
-                </div>
 
-                <div className="card-who-we-are">
                   <div className="card-body-home">
                     <img src={tim} className="pets-home-staff ml-auto" alt="pets_staff" />
                     <h4 className="card-text-who">Tim Dogg </h4>
@@ -152,9 +147,7 @@ class Home extends React.Component {
                       palbearer? Call Tim Dogg.{' '}
                     </h6>
                   </div>
-                </div>
 
-                <div className="card-who-we-are">
                   <div className="card-body-home">
                     <img src={jonathan} className="pets-home-staff ml-auto" alt="pets_staff" />
                     <h4 className="card-text-who">Jon E. Banks </h4>
@@ -165,16 +158,53 @@ class Home extends React.Component {
                     </h6>
                   </div>
                 </div>
+
+                {/* <div className="card-who-we-are">
+                  <div className="card-body-home">
+                    <img src={colin} className="pets-home-staff ml-auto" alt="pets_staff" />
+                    <h4 className="card-text-who">CW Bucks </h4>
+                    <h5 className="card-text-who">CASKETS & URNS </h5>
+                    <h6 className="card-text-who">
+                      CW Bucks is our casket man. This dude knows caskets and urns like the back of his wallet. He also
+                      knows how to stack that cash.{' '}
+                    </h6>
+                  </div>
+                </div> */}
+
+                {/* <div className="card-who-we-are">
+                  <div className="card-body-home">
+                    <img src={tim} className="pets-home-staff ml-auto" alt="pets_staff" />
+                    <h4 className="card-text-who">Tim Dogg </h4>
+                    <h5 className="card-text-who">PET FUNERALS </h5>
+                    <h6 className="card-text-who">
+                      You want Spuds McKenzie at Rovers funeral, Tim's your man. Looking to land the Taco Bell dog as a
+                      palbearer? Call Tim Dogg.{' '}
+                    </h6>
+                  </div>
+                </div> */}
+
+                {/* <div className="card-who-we-are">
+                  <div className="card-body-home">
+                    <img src={jonathan} className="pets-home-staff ml-auto" alt="pets_staff" />
+                    <h4 className="card-text-who">Jon E. Banks </h4>
+                    <h5 className="card-text-who">REVENGE 4 HIRE </h5>
+                    <h6 className="card-text-who">
+                      Neighbor poison your pet because it keep pooping on his lawn? Call Jon. E. Banks. Revenge for hire
+                      has never been cleaner or cheaper.{' '}
+                    </h6>
+                  </div>
+                </div> */}
                 <hr />
-                <h1 className="partner-title">MEET A FEW OF OUR PARTING PETS PARTNERS</h1>
-                <div className="partners-wrap">
-                  <div className="who-we-are-container">
-                    <img src={petco} className="pets-partner-logo " alt="petco_logo" />
-                    <hr />
-                    <img src={petsmart} className="pets-partner-logo " alt="petco_logo" />
-                    <hr />
-                    <img src={petco} className="pets-partner-logo " alt="petco_logo" />
-                    
+                <div className="partner-div">
+                  <h1 className="partner-title">MEET A FEW OF OUR PARTING PETS PARTNERS</h1>
+                  <div className="partners-wrap">
+                    <div className="who-we-are-container">
+                      <img src={petco} className="pets-partner-logo " alt="petco_logo" />
+                      <hr />
+                      <img src={petsmart} className="pets-partner-logo " alt="petco_logo" />
+                      <hr />
+                      <img src={petco} className="pets-partner-logo " alt="petco_logo" />
+                    </div>
                   </div>
                 </div>
               </div>
