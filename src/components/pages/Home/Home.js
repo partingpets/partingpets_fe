@@ -90,7 +90,7 @@ class Home extends React.Component {
   render() {
     const { firebaseId, isEditing } = this.state;
     return (
-      <div className="home-page animated fadeIn">
+      <div className="home-page">
         <div className="home-info justify-content-center" />
         <div className="card-home home-page ml-auto">
           <div className="card-body-home">
@@ -173,7 +173,8 @@ class Home extends React.Component {
                     <hr />
                     <img src={petsmart} className="pets-partner-logo " alt="petco_logo" />
                     <hr />
-                    <img src={petcompany} className="pets-partner-logo " alt="petco_logo" />
+                    <img src={petco} className="pets-partner-logo " alt="petco_logo" />
+                    
                   </div>
                 </div>
               </div>

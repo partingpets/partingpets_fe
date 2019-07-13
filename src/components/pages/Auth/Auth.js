@@ -32,9 +32,8 @@ class Auth extends React.Component {
   render() {
     return (
       <div className="Auth mt-5">
-        <div className="homeLogo">
-          <img src={petsLogo} className="petsHomeLogo ml-auto" alt="pets_logo" />
-        </div>
+        <div className="homeLogo justify-content-center" />
+        <img src={petsLogo} className="petsHomeLogo" alt="pets_logo" />
         <div className="login d-flex justify-content-center">
           {/* <GoogleLoginButton id="googleBtn" onClick={this.googleAuthenticateUser} /> */}
           <MyGoogleLoginButton id="googleBtn" onClick={this.googleAuthenticateUser} />

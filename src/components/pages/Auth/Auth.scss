@@ -15,7 +15,9 @@ body {
   min-height: 100%;
 }
 
-.homeLogo {
-  margin-left: 35%;
-  filter: drop-shadow(0 0 0.75rem grey);
+.petsHomeLogo {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 35%;
 }
