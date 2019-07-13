@@ -65,22 +65,19 @@ class ItemDetail extends React.Component {
         />
         <div className="col-9 mt-3 mx-auto">
           <img className="detailImage" src={singleItem.imageUrl} alt={singleItem.name} />
-          <h2 className="product-card-header">{singleItem.name}</h2>
-          <div className="card-body">
-            <h5 className="card-text">{singleItem.description}</h5>
-            <h3 className="card-text">$ {singleItem.unitPrice}</h3>
-            <h5 className="card-text">{/* <i className="lnr lnr-cart" /> */}</h5>
-            <div>
-              <button className="backToStore" data-productid={singleItem.id} onClick={this.addToCartFn}>
-                <span className="lnr lnr-cart cart" />
-                ADD TO CART
-              </button>
-              <button className="backToStore" onClick={this.backToItemsView}>
-                <span className="lnr lnr-arrow-left-circle back" />
-                BACK TO STORE
-              </button>
-            </div>
-          </div>
+          <h1 className="product-card-header">{singleItem.name}</h1>
+
+          <h4 className="card-text">{singleItem.description}</h4>
+          <h3 className="card-text">$ {singleItem.unitPrice}</h3>
+
+          <button className="backToStore" data-productid={singleItem.id} onClick={this.addToCartFn}>
+            <span className="lnr lnr-cart cart" />
+            ADD TO CART
+          </button>
+          <button className="backToStore" onClick={this.backToItemsView}>
+            <span className="lnr lnr-arrow-left-circle back" />
+            BACK TO STORE
+          </button>
         </div>
       </div>
     );
