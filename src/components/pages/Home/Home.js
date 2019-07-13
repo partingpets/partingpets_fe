@@ -11,7 +11,7 @@ import colin from '../../../images/colin_pets.png';
 import tim from '../../../images/Tim_pets.png';
 import petco from '../../../images/petco_logo.png';
 import petsmart from '../../../images/pet_smart.png';
-import petcompany from '../../../images/pet_company.png';
+
 
 class Home extends React.Component {
   state = {
