@@ -82,7 +82,7 @@ class OrderItems extends React.Component {
                   onClick={this.toggle}
                   style={{ marginBottom: "1rem" }}
                 >
-                  {!this.state.collapse ? 'More Details' : 'Close Details'}
+                  {!this.state.collapse ? "More Details" : "Close Details"}
                 </Button>
               </Row>
             </div>
@@ -91,22 +91,38 @@ class OrderItems extends React.Component {
 
         <Row>
           <Collapse className="collapse-div" isOpen={this.state.collapse}>
-              <hr/>
+            <hr />
             <Card>
               <CardBody>
-              <Row>
-                        <Col className="col-md-2 quantity-header"><h5 className="column-headers">Qty</h5></Col>
-                        <Col className="col-md-6"><h5 className="column-headers">Name</h5></Col>
-                        <Col className="col-md-2"><h5 className="column-headers">Price</h5></Col>
-                        <Col className="col-md-2"><h5 className="column-headers">Total</h5></Col>
-                    </Row>
+                <Row>
+                  <Col className="col-md-2 quantity-header">
+                    <h5 className="column-headers">Qty</h5>
+                  </Col>
+                  <Col className="col-md-6">
+                    <h5 className="column-headers">Name</h5>
+                  </Col>
+                  <Col className="col-md-2">
+                    <h5 className="column-headers">Price</h5>
+                  </Col>
+                  <Col className="col-md-2">
+                    <h5 className="column-headers">Total</h5>
+                  </Col>
+                </Row>
                 {order.orderItems.map((orderitem, i) => (
-                    <div key={i}>
-                      <Row>
-                        <Col className="col-md-2"><h5>{orderitem.quantity}</h5></Col>
-                        <Col className="col-md-6"><h5 key={i}>{orderitem.name}</h5></Col>
-                        <Col className="col-md-2"><h5>${orderitem.unitPrice}</h5></Col>
-                        <Col className="col-md-2 line-total"><h5>${orderitem.lineTotal}</h5></Col>
+                  <div key={i}>
+                    <Row>
+                      <Col className="col-md-2">
+                        <h5>{orderitem.quantity}</h5>
+                      </Col>
+                      <Col className="col-md-6">
+                        <h5 key={i}>{orderitem.name}</h5>
+                      </Col>
+                      <Col className="col-md-2">
+                        <h5>${orderitem.unitPrice}</h5>
+                      </Col>
+                      <Col className="col-md-2 line-total">
+                        <h5>${orderitem.lineTotal}</h5>
+                      </Col>
                     </Row>
                   </div>
                 ))}
