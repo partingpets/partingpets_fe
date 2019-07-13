@@ -47,7 +47,7 @@ class AppNavbar extends React.Component {
     const buildNavbar = () => {
       if (isAuthed) {
         return (
-          <Nav className="navBar ml-auto animated bounceInLeft" navbar>
+          <Nav className="navBar ml-auto animated fadeIn" navbar>
             <NavItem>
               <NavLink tag={RRNavLink} to="/home">
                 <i className="navIcon lnr lnr-earth" />
