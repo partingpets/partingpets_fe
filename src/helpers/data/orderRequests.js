@@ -30,8 +30,19 @@ const getOrderById = orderId => new Promise((resolve, reject) => {
     .catch(error => reject(error));
 });
 
-export default {
-  createOrder,
-  getAllOrders,
-  getOrderById,
+const getOrderByOrderId = orderId => new Promise((resolve, reject) => {
+    axios
+    .get(`${ordersApiBaseUrl}/api/orders/order/${orderId}`)
+    .then((result) => {
+        resolve(result.data);
+        console.log(result.data);
+    })
+    .catch(error => reject(error));
+});
+
+export default { 
+    createOrder, 
+    getAllOrders, 
+    getOrderById, 
+    getOrderByOrderId
 };

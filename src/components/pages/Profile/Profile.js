@@ -1,12 +1,13 @@
 import React from 'react';
 import {
-  Card, CardText, CardBody, CardHeader,
+  Card, CardText, CardBody, CardHeader, Button,
 } from 'reactstrap';
 import RegisterForm from '../../RegisterForm/RegisterForm';
 import authRequests from '../../../helpers/data/authRequests';
 import userRequests from '../../../helpers/data/userRequests';
 import petRequests from '../../../helpers/data/petRequests';
 import partnerRequests from '../../../helpers/data/partnerRequests';
+import Payments from '../../Payments/Payments';
 import Pets from '../../Pets/Pets';
 import PetForm from '../../PetForm/PetForm';
 import './Profile.scss';
@@ -24,6 +25,7 @@ class Profile extends React.Component {
     petModal: false,
     isEditingPet: false,
     petIdToEdit: '-1',
+    isProfilePage: true,
   };
 
   componentDidMount() {
@@ -154,7 +156,14 @@ class Profile extends React.Component {
   render() {
     const { userObject } = this.props;
     const {
-      showModal, fbUserImage, usersPets, userToEdit, isEditing, isEditingPet, petIdToEdit,
+      showModal, 
+      fbUserImage, 
+      usersPets, 
+      userToEdit, 
+      isEditing, 
+      isEditingPet, 
+      petIdToEdit,
+      isProfilePage,
     } = this.state;
     const singlePetCard = usersPet => (
       <Pets
@@ -185,43 +194,46 @@ class Profile extends React.Component {
               <Card data-uid={userObject.id}>
                 <CardHeader>
                   {`${userObject.firstName} ${userObject.lastName}`}
-                  <img className="profileCardImg" src={fbUserImage} alt="profile" />
+                  {/* <img className="profileCardImg" src={fbUserImage} alt="profile" /> */}
                 </CardHeader>
                 <CardBody>
-                  <CardText>{`E-mail: ${userObject.email}`}</CardText>
+                  <img className="profileCardImg" src={fbUserImage} alt="profile" />
+                  <CardText>{userObject.email}</CardText>
                   <CardText>{userObject.street1}</CardText>
                   <CardText>{userObject.street2}</CardText>
                   <CardText>
-                    {userObject.city} {userObject.state}, {userObject.zipcode}
+                    {userObject.city}, {userObject.state} {userObject.zipcode}
                   </CardText>
                   {/* <div className="row justify-content-around"> */}
-                  <i
-                    className="usr-btn lnr lnr-pencil usr-btn-edit-icon"
-                    aria-hidden="true"
-                    id={userObject.id}
-                    onClick={this.editUserItem}
-                  />
-
-                  <i
-                    className="usr-btn lnr lnr-trash usr-btn-delete-icon"
-                    aria-hidden="true"
-                    onClick={this.deleteUser}
-                  />
-
-                  {/* </div> */}
-
+                  <div className="profileButtonDiv">
+                    <Button outline size="sm" className="usr-btn" id={userObject.id} onClick={this.editUserItem}>
+                      <i
+                        className="lnr lnr-pencil usr-btn-edit-icon"
+                        aria-hidden="true"
+                      />
+                    </Button>
+                    <Button outline size="sm" className="usr-btn" onClick={this.deleteUser}>
+                      <i
+                        className="lnr lnr-trash usr-btn-delete-icon"
+                        aria-hidden="true"
+                      />
+                    </Button>
+                    <Button className="btn addPetButton" onClick={this.toggle}>
+                        <i className="add-pet-icon lnr lnr-plus-circle" />
+                        ADD PET
+                    </Button>
+                  </div>
                   <hr />
-
-                  <button className="btn addPetButton" onClick={this.toggle}>
-                    <span className="spot">
-                      <span className="add-pet-icon lnr lnr-file-add" />
-                      ADD PET
-                    </span>
-                  </button>
+                  <div>
+                    <h5 className="paymentHeader">Your Payment Options</h5>
+                    <Payments isProfilePage={isProfilePage} userId={userObject.id}/>
+                  </div>
                 </CardBody>
               </Card>
             </div>
-            <div className="col-sm-8">{pets}</div>
+            <div className="col-sm-8 pets-container">
+              {pets}
+            </div>
           </div>
         </div>
         <PetForm

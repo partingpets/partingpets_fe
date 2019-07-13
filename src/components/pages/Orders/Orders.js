@@ -29,10 +29,14 @@ class Orders extends React.Component {
     this.orderseMounted = false;
   }
 
+  onSelect = (id) => {
+    this.props.history.push(`/orders/${id}`);
+  };
+
   render() {
     const { orders } = this.state;
 
-    const printOrders = orders.map(order => <OrderItems key={order.id} order={order} />);
+    const printOrders = orders.map(order => <OrderItems key={order.id} order={order} onSelect={this.onSelect} />);
 
     return (
       <div className="orders-container animated bounceInLeft">
