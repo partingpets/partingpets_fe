@@ -1,22 +1,20 @@
-import React from "react";
-import { Collapse, Button, CardBody, Card, Row, Col } from "reactstrap";
-import "./OrderItems.scss";
-import utility from "../../helpers/utils/utility";
+import React from 'react';
+import {
+  Collapse, Button, CardBody, Card, Row, Col,
+} from 'reactstrap';
+import './OrderItems.scss';
+import utility from '../../helpers/utils/utility';
+
+import pets from '../AppNavbar/images/pets_small.png';
 
 class OrderItems extends React.Component {
   state = {
-    collapse: false
+    collapse: false,
   };
-
-  // orderClick = () => {
-  //     const { order, onSelect } = this.props;
-  //     onSelect(order.id);
-  //     console.log(order.id);
-  // }
 
   toggle = () => {
     this.setState({
-      collapse: !this.state.collapse
+      collapse: !this.state.collapse,
     });
   };
 
@@ -24,17 +22,14 @@ class OrderItems extends React.Component {
     const { order } = this.props;
 
     return (
-      <div className="orderCard card2 col-6">
-        <Row>
+      <div className="orderCard col-6">
+        <div className="order-header">
+          <img src={pets} className="petsOrderLogo" alt="pets_logo" />
+          <h4 className="order-details-header">Details for Order #{order.id}</h4>
+          <h5>Ordered on {utility.dateFormat(order.purchaseDate)}</h5>
+        </div>
+        <Row className="order-body">
           <Col className="col-sm-8">
-            <Row>
-              <h2 className="order-details-header">
-                Details for Order #{order.id}
-              </h2>
-            </Row>
-            <Row>
-              <h3>Ordered on {utility.dateFormat(order.purchaseDate)}</h3>
-            </Row>
             <div className="billing-address">
               <Row>
                 <h4>Billing Address</h4>
@@ -53,9 +48,7 @@ class OrderItems extends React.Component {
                 </h6>
               </Row>
               <Row>
-                <h5 className="payment-method">
-                  Payment Method: {order.payment}
-                </h5>
+                <h5 className="payment-method">Payment Method: {order.payment}</h5>
               </Row>
             </div>
           </Col>
@@ -77,12 +70,8 @@ class OrderItems extends React.Component {
                 <h6 className="grand-total">Grand Total: ${order.total}</h6>
               </Row>
               <Row>
-                <Button
-                  color="primary"
-                  onClick={this.toggle}
-                  style={{ marginBottom: "1rem" }}
-                >
-                  {!this.state.collapse ? "More Details" : "Close Details"}
+                <Button color="primary" onClick={this.toggle} style={{ marginBottom: '1rem' }}>
+                  {!this.state.collapse ? 'More Details' : 'Close Details'}
                 </Button>
               </Row>
             </div>

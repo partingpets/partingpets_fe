@@ -27,8 +27,10 @@ class PrintProductCard extends React.Component {
           <h6 className="card-text">{product.description}</h6>
           <h5 className="card-text">$ {product.unitPrice}</h5>
           <h5 className="card-text">
-            <i className="lnr lnr-cart" />
-            {product.isOnSale}
+            <button className="product-details" onClick={this.productClick}>
+              INFO
+              <span className="lnr lnr-list" />
+            </button>
           </h5>
         </div>
       </div>

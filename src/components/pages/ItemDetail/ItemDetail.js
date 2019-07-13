@@ -54,7 +54,7 @@ class ItemDetail extends React.Component {
     const { singleItem, showAlert } = this.state;
 
     return (
-      <div className="item-detail mx-auto w-50">
+      <div className="item-detail mx-auto w-50 animated fadeIn">
         <SweetAlert
           show={showAlert}
           warning
@@ -65,22 +65,19 @@ class ItemDetail extends React.Component {
         />
         <div className="col-9 mt-3 mx-auto">
           <img className="detailImage" src={singleItem.imageUrl} alt={singleItem.name} />
-          <h4 className="product-card-header">{singleItem.name}</h4>
-          <div className="card-body">
-            <h6 className="card-text">{singleItem.description}</h6>
-            <h5 className="card-text">$ {singleItem.unitPrice}</h5>
-            <h5 className="card-text">{/* <i className="lnr lnr-cart" /> */}</h5>
-            <div>
-              <button className="backToStore" data-productid={singleItem.id} onClick={this.addToCartFn}>
-                <span className="lnr lnr-cart" />
-                ADD TO CART
-              </button>
-              <button className="backToStore" onClick={this.backToItemsView}>
-                <span className="lnr lnr-arrow-left-circle" />
-                BACK TO STORE
-              </button>
-            </div>
-          </div>
+          <h1 className="product-card-header">{singleItem.name}</h1>
+
+          <h4 className="card-text">{singleItem.description}</h4>
+          <h3 className="card-text">$ {singleItem.unitPrice}</h3>
+
+          <button className="backToStore" data-productid={singleItem.id} onClick={this.addToCartFn}>
+            <span className="lnr lnr-cart cart" />
+            ADD TO CART
+          </button>
+          <button className="backToStore" onClick={this.backToItemsView}>
+            <span className="lnr lnr-arrow-left-circle back" />
+            BACK TO STORE
+          </button>
         </div>
       </div>
     );
